@@ -1,0 +1,30 @@
+.header {
+    position: relative;
+    background-color: $color-black;
+    background-image: url('https://res.cloudinary.com/cjcon90/image/upload/v1621523920/codeinstitute/the_rhythm_box/hero.jpg');
+    background-size: 85vh 85vh;
+    background-position: left top;
+    background-repeat: no-repeat;
+    height: 70vh;
+
+    &__heading {
+        color: white;
+        padding: 15vh 0 0 1rem;
+        &--main {
+            color: $color-primary;
+        }
+        &--sub {
+            max-width: 21ch;
+            color: white;
+            margin-top: 1rem;
+        }
+    }
+
+    &__link {
+        position: absolute;
+        bottom: 5vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
