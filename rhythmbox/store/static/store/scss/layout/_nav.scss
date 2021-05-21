@@ -80,9 +80,8 @@
 
         &--cart {
 
-            svg {
-                fill: white;
-                height: 4rem;
+            i {
+                color: white;
                 @include absCenter;
             }
         }

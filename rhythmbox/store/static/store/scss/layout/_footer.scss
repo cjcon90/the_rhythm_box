@@ -1,0 +1,95 @@
+.footer {
+    background-color: $color-black;
+    display: grid;
+    gap: 2rem;
+    padding: 2rem;
+
+    .connect {
+        &__heading {
+            text-align: center;
+            &--main {
+                color: $color-primary;
+                letter-spacing: .2rem;
+            }
+
+            &--sub {
+                padding-top: .5rem;
+                color: white;
+            }
+        }
+
+        &__newsletter {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 1rem;
+            padding: 2rem 0 1rem 0;
+
+            & * {
+                height: 4.5rem;
+            }
+
+            &--input {
+                width: 100%;
+            }
+            &--button {
+                width: 30%;
+            }
+        }
+
+        &__social {
+            margin: 1.5rem auto;
+            display: flex;
+            justify-content: space-between;
+
+            &--icon {
+                color: $color-primary;
+                font-size: 5rem;
+            }
+        }
+    }
+
+    .navigate {
+      
+        &__heading {
+            color: $color-primary;
+            text-align: center;
+            letter-spacing: .2rem;
+            padding-bottom: 2rem;
+        }
+
+        &__sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        &__section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            &--heading {
+                color: $color-primary;
+            }
+            &--text {
+                display: flex;
+                align-items: flex-end;
+                gap: 2rem;
+                color: white;
+            }
+        }
+    }
+
+    .contact {
+        display: flex;
+        flex-direction: column;
+        color: white;
+        letter-spacing: .2rem;
+        gap: 1rem;
+        padding: 2rem 0;
+        text-align: center;
+        &__heading {
+            color: $color-primary;
+        }
+    }
+}

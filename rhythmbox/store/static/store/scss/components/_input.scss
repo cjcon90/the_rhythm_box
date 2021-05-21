@@ -1,0 +1,15 @@
+.input-text {
+    border-radius: 0px;
+    border: solid $color-black .1rem;
+    outline: none;
+    padding: .5rem;
+
+    &::placeholder {
+        color: rgb(100, 100, 100);
+    }
+
+    &:focus, &:active {
+        border-color: $color-primary;
+        outline: solid .1rem $color-primary;
+    }
+}

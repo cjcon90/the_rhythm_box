@@ -1,6 +1,15 @@
 .btn-landing {
     color: white;
-    background-color: rgba(0,0,0,0.7);
+    background-color: $color-black-semi;
     padding: 1.5rem 2.5rem;
     border: .15rem solid $color-primary;
+}
+
+.btn {
+    border-radius: 0px;
+    border: solid 1px transparent;
+
+    &--primary {
+        background-color: $color-primary;
+    }
 }
