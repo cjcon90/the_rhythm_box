@@ -4,3 +4,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+@mixin not-last-child($selector) {
+    // credit: https://stackoverflow.com/a/30687519
+    & #{$selector}:not(:last-child) {
+      @content;
+    }
+  }

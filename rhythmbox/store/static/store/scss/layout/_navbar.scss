@@ -1,5 +1,4 @@
 .nav {
-    z-index: 99;
     height: 6rem;
     background-color: $color-black;
     padding: .75rem 2rem;
@@ -8,8 +7,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 90;
+
+    @include not-last-child('div') {
+        // keep nav bar items visible over menu
+        z-index: 100;
+      }
 
     &__hamburger {
+        z-index: 100;
         width: 4rem;
         height: 3rem;
         position: relative;
@@ -99,5 +105,9 @@
             align-items: center;
             text-align: center;
         }
+    }
+
+    &:not(:last-child) {
+        z-index: 100;
     }
 }
