@@ -8,6 +8,7 @@
     justify-content: space-between;
     align-items: center;
     z-index: 90;
+    display: none;
 
     @include not-last-child('div') {
         // keep nav bar items visible over menu

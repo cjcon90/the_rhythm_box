@@ -11,6 +11,10 @@ html {
     margin: 0;
     padding: 0;
   }
+
+  main {
+    padding-top: 6rem; // off-set navbar height
+  }
   
   ol, ul {
     list-style: none;
@@ -20,7 +24,3 @@ html {
     max-width: 100%;
     height: auto;
   }
-
-#test {
-    color: blue;
-}
