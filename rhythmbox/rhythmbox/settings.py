@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # My Apps
     'accounts',
     'store',
+    'products',
 
     # 3rd Party
     'widget_tweaks',
