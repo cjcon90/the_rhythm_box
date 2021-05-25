@@ -34,6 +34,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Cart
+
+SESSION_COOKIE_AGE = 86400
+CART_SESSION_ID = 'cart'
 
 # Application definition
 
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'products',
+    'cart',
 
     # 3rd Party
     'widget_tweaks',
@@ -136,6 +141,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# where media image will be located
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# how image will be accessed in the browser
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

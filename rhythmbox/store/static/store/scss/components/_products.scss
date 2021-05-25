@@ -1,0 +1,66 @@
+.product {
+    border: solid .1rem $color-black-light;
+    margin: auto;
+    width: 35rem;
+    max-width: 95vw;
+
+    &__images {
+        padding: 0 2rem;
+        &--product {
+            height: 20rem;
+            width: auto;
+            display: block;
+            margin: auto;
+        }
+        &--brand {
+            height: 4rem;
+        }
+    }
+
+    &__title {
+        padding: 2rem 2rem 0rem 2rem;
+        color: $color-black-semi;
+    }
+
+    &__reviews {
+        padding: 0 2rem;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        &--count {
+            padding: .5rem;
+            color: $color-black-semi;
+        }
+    }
+
+    &__nums {
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & > * {
+            padding: 1rem .5rem;
+        }
+
+        &--price {
+            letter-spacing: .2rem;
+        }
+
+        &--stock {
+            color: $color-black-semi;
+        }
+    }
+
+    &__buttons {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+
+        & > * {
+            padding: 1rem 0;
+            text-align: center;
+        }
+    }
+}

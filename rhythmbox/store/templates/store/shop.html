@@ -8,7 +8,7 @@
 {% for product in products %}
     <div class="product">
         <div class="product__images">
-            <img src="{{ product.image }}" alt="" class="product__images--product">
+            <img src="{{ product.thumbnail.url }}" alt="" class="product__images--product">
             <img src="{{ product.brand_image }}" alt="" class="product__images--brand">
         </div>
         <div class="product__title">
@@ -34,7 +34,7 @@
             <div class="product__reviews--count regular t9"><p>{{ product.num_ratings }} Reviews</p></div>
         </div>
         <div class="product__nums">
-            <h3 class="product__nums--price t3 bold">€{{ product.price }}</h3>
+            <h3 class="product__nums--price t3 bold">€{{ product.price|floatformat:"-2" }}</h3>
             <p class="product__nums--stock t7 bold">12 in stock</p>
         </div>
         <div class="product__buttons">

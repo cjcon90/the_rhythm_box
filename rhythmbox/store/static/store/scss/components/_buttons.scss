@@ -18,7 +18,7 @@
         background-color: $color-black;
         color: white;
 
-        &:hover, &:focus {
+        &:hover, &:focus{
             border: .3rem solid $color-primary;
             color: $color-primary;
         }
