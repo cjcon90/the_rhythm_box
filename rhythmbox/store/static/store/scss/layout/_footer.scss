@@ -4,7 +4,13 @@
     gap: 2rem;
     padding: 2rem 3.5rem;
 
+    // NEWSLETTER SIGN UP AND SOCIAL MEDIA ICONS
     .connect {
+        @include respond(md) {
+            display: grid;
+            grid-template-columns: 55% 1fr;
+            gap: 2rem 5rem;
+        }
         &__heading {
             text-align: center;
             &--main {
@@ -15,6 +21,9 @@
             &--sub {
                 padding-top: .5rem;
                 color: white;
+            }
+            @include respond(md){
+                grid-column: 1 / 3;
             }
         }
 
@@ -29,8 +38,21 @@
                 height: 4rem;
             }
 
-            &--input {
+            &--input{
                 width: 100%;
+                border-radius: 0px;
+                border: solid $color-black .1rem;
+                outline: none;
+                padding: .5rem;
+
+                &::placeholder {
+                    color: rgb(100, 100, 100);
+                }
+
+                &:focus, &:active {
+                    border-color: $color-primary;
+                    outline: solid .1rem $color-primary;
+                }
             }
             &--button {
                 width: 30%;
@@ -38,9 +60,13 @@
         }
 
         &__social {
-            margin: 1.5rem auto;
+            margin: 1.5rem 0;
             display: flex;
             justify-content: space-between;
+            @include respond(md){
+                justify-content: space-between;
+                align-items: center;
+            }
 
             &--icon {
                 color: $color-primary;
@@ -49,6 +75,7 @@
         }
     }
 
+    // SITEMAP NAVIGATION LINKS
     .navigate {
       
         &__heading {
@@ -62,6 +89,10 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
+            @include respond(md){
+                display: flex;
+                justify-content: space-between;
+            }
         }
 
         &__section {
@@ -80,6 +111,7 @@
         }
     }
 
+    // ADDRESS EMAIL AND PHONE NUMBER
     .contact {
         display: flex;
         flex-direction: column;

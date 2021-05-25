@@ -29,29 +29,29 @@
             </div>
             <div class="nav-menu hidden">
                 <ul class="nav-menu__list">
-                    <li class="nav-menu__list--category t2 upper regular"><a href="#">Shop</a></li>
+                    <li class="nav-menu__list--category  upper regular"><a href="#">Shop</a></li>
                     <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Acoustic</a></li>
-                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Electric</a></li>
-                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Cymbals</a></li>
-                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Accessories</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="#">Acoustic</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="#">Electric</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="#">Cymbals</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="#">Accessories</a></li>
                     </ul>
                     {% if request.user.is_authenticated %}
-                    <li class="nav-menu__list--category t2 upper regular"><a href="#">Account</a></li>
+                    <li class="nav-menu__list--category  upper regular"><a href="#">Account</a></li>
                     <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">My Details</a></li>
-                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">My Orders</a></li>
-                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Change Password</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="#">My Details</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="#">My Orders</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="#">Change Password</a></li>
                     </ul>
                     {% else %}
-                    <li class="nav-menu__list--category t2 upper regular"><a href="{% url 'register' %}">Register</a></li>
-                    <li class="nav-menu__list--category t2 upper regular"><a href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-menu__list--category  upper regular"><a href="{% url 'register' %}">Register</a></li>
+                    <li class="nav-menu__list--category  upper regular"><a href="{% url 'login' %}">Login</a></li>
                     
                     {% endif %}
                 
-                    <li class="nav-menu__list--category t2 upper regular"><a href="#">Contact Us</a></li>
+                    <li class="nav-menu__list--category  upper regular"><a href="#">Contact Us</a></li>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-menu__list--category t2 upper regular"><a href="{% url 'logout' %}">Logout</a></li>                    
+                        <li class="nav-menu__list--category  upper regular"><a href="{% url 'logout' %}">Logout</a></li>                    
                     {% endif %}
                 </ul>
             </div>
@@ -67,8 +67,8 @@
                 <h4 class="connect__heading--sub regular upper t7">Sign Up To Our Newsletter</h4>
             </div>
             <div class="connect__newsletter">
-            <input type="text" class="connect__newsletter--input input-text t7" placeholder="Enter your email">
-            <button type="submit" class="connect__newsletter--button btn btn--primary t6 upper bold">Sign Up</button>
+                <input type="text" class="connect__newsletter--input input-text t7" placeholder="Enter your email">
+                <button type="submit" class="connect__newsletter--button btn btn--primary t6 upper bold">Sign Up</button>
             </div>
             <div class="connect__social">
                 <i class="connect__social--icon fab fa-facebook-square"></i>

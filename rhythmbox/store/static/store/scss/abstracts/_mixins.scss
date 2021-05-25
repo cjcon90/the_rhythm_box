@@ -1,13 +1,30 @@
 @mixin absCenter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @mixin not-last-child($selector) {
-    // credit: https://stackoverflow.com/a/30687519
-    & #{$selector}:not(:last-child) {
-      @content;
-    }
+  // credit: https://stackoverflow.com/a/30687519
+  & #{$selector}:not(:last-child) {
+    @content;
   }
+}
+
+// Media Queries
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == md {
+      @media only screen and (min-width: 43.75em) { @content };    //700px
+  }
+  // @if $breakpoint == md {
+  //     @media only screen and (max-width: 56.25em) { @content };     //900px
+  // }
+  // @if $breakpoint == lg {
+  //     @media only screen and (max-width: 75em) { @content };    //1200px
+  // }
+  // @if $breakpoint == xl {
+  //     @media only screen and (min-width: 112.5em) { @content };    //1800
+  // }
+}
