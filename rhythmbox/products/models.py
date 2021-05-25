@@ -6,11 +6,22 @@ from PIL import Image
 class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
-    ordering = models.IntegerField(default=0)
 
     class Meta:
         verbose_name_plural = 'Categories'
-        ordering = ('ordering',)
+        ordering = ('title',)
+    
+    def __str__(self):
+        return self.title
+
+class Subcategory(models.Model):
+    parent = models.ForeignKey(Category, related_name='subcategories', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
+
+    class Meta:
+        verbose_name_plural = 'Subcategories'
+        ordering = ('parent','title')
     
     def __str__(self):
         return self.title
@@ -29,6 +40,7 @@ class Brand(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    subcategories = models.ManyToManyField(Subcategory, related_name='items')
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=50)
     brand = models.ForeignKey('Brand', null=True, blank=True, on_delete=models.SET_NULL)
@@ -36,7 +48,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     date_added = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="products/", blank=True, null=True)
-    thumbnail = models.ImageField(upload_to="products/", null=False)
+    thumbnail = models.ImageField(upload_to="products/", blank=True, null=True)
 
     class Meta:
         ordering = ('-date_added',)
