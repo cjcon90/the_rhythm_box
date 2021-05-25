@@ -1,21 +1,26 @@
 {% extends 'store/base.html' %}
 
+{% load widget_tweaks %}
+
 {% block title %}Login{% endblock title %}
 
 {% block content %} 
-    <h2>Login</h2>
-    <form method="post">{% csrf_token %}
-        {% for field in login_form %}
-            <p>
-                {{field.label_tag}}
-                {{field}}
+    <h2 class="section__heading t1 upper bold">Login</h2>
+    <form method="post" class="form" novalidate>
+        {% csrf_token %}
 
-                {% for error in field.errors %}
-                    <p style="color: red;">{{error}}</p>
-                {% endfor %}
-            </p>
+        {% for field in login_form %}
+        <fieldset class="form__group">
+            <label for="{{ field.id_for_label }}" class="form__label t6 bold">{{ field.label }}</label>
+            {{ field|add_class:'form__input t5 regular' }}
+            {% for error in field.errors %}
+            <span class="form__error t7 bold">{{ error }}</span>
+            {% endfor %}
+        </fieldset>
         {% endfor %}
-        <button type="submit">Login</button>
-        
+
+        <fieldset class="form__group">
+            <button type="submit" class="form__submit btn btn--black t3 upper bold">Login</button>
+        </fieldset>
     </form>
 {% endblock content %}

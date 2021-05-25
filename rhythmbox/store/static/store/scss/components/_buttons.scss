@@ -7,9 +7,21 @@
 
 .btn {
     border-radius: 0px;
-    border: solid 1px transparent;
+    border: solid .3rem transparent;
+    outline: none;
 
     &--primary {
         background-color: $color-primary;
+    }
+
+    &--black {
+
+        background-color: $color-black;
+        color: white;
+
+        &:hover, &:focus {
+            border: .3rem solid $color-primary;
+            color: $color-primary;
+        }
     }
 }

@@ -10,16 +10,26 @@
     &__list {
         @include absCenter;
         text-align: center;
+        white-space: nowrap;
         
         &--category {
-            color: $color-primary;
             padding: 2rem 0 .5rem 0;
             letter-spacing: .1rem;
+            & > a {
+                &:link, &:visited {
+                    color: $color-primary;
+                }
+            }
         }
 
         &--subcategory {
             color: white;
-            padding: .4rem;
+            padding: .6rem;
+            & > a {
+                &:link, &:visited {
+                    color: white;
+                }
+            }
         }
 
         &--inner {

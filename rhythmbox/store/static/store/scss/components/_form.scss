@@ -1,0 +1,41 @@
+.form {
+    &__group {
+        display: flex;
+        flex-direction: column;
+        border: none;
+        padding: 0 1.5rem 3rem 1.5rem;
+        gap: .5rem;
+    }
+    &__label {
+        letter-spacing: 1.5px;
+        &--radio {
+            // text-align: center;
+            color: $color-black-semi;
+        }
+    }
+    &__input {
+        border: solid $color-black-semi .1rem;
+        padding: 1rem;
+        outline: none;
+        &:active, &:focus {
+            border-color: $color-black;
+        }
+        &--radio {
+            border: solid $color-black-semi .1rem;
+            padding: .5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+            margin-top: .5rem;
+        }
+    }
+    &__error {
+        color: red;
+    }
+
+    &__submit {
+        padding: 1rem;
+        margin: 2rem 0;
+    }
+}

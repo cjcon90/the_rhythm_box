@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'store/css/main.css' %}">
     <title>The RhythmBox - {% block title %}{% endblock title %}</title>
 </head>
@@ -30,22 +29,30 @@
             </div>
             <div class="nav-menu hidden">
                 <ul class="nav-menu__list">
-                    <li class="nav-menu__list--category t3 upper regular">Shop</li>
+                    <li class="nav-menu__list--category t2 upper regular"><a href="#">Shop</a></li>
                     <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory t6 regular">Acoustic</li>
-                        <li class="nav-menu__list--subcategory t6 regular">Electric</li>
-                        <li class="nav-menu__list--subcategory t6 regular">Cymbals</li>
-                        <li class="nav-menu__list--subcategory t6 regular">Accessories</li>
+                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Acoustic</a></li>
+                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Electric</a></li>
+                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Cymbals</a></li>
+                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Accessories</a></li>
                     </ul>
-                    <li class="nav-menu__list--category t3 upper regular">Account</li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-menu__list--category t2 upper regular"><a href="#">Account</a></li>
                     <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory t6 regular">My Details</li>
-                        <li class="nav-menu__list--subcategory t6 regular">My Orders</li>
-                        <li class="nav-menu__list--subcategory t6 regular">Payment Info</li>
-                        <li class="nav-menu__list--subcategory t6 regular">Change Password</li>
+                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">My Details</a></li>
+                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">My Orders</a></li>
+                        <li class="nav-menu__list--subcategory t5 regular"><a href="#">Change Password</a></li>
                     </ul>
-                    <li class="nav-menu__list--category t3 upper regular">Contact Us</li>
-                    <li class="nav-menu__list--category t3 upper regular">Logout</li>
+                    {% else %}
+                    <li class="nav-menu__list--category t2 upper regular"><a href="{% url 'register' %}">Register</a></li>
+                    <li class="nav-menu__list--category t2 upper regular"><a href="{% url 'login' %}">Login</a></li>
+                    
+                    {% endif %}
+                
+                    <li class="nav-menu__list--category t2 upper regular"><a href="#">Contact Us</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-menu__list--category t2 upper regular"><a href="{% url 'logout' %}">Logout</a></li>                    
+                    {% endif %}
                 </ul>
             </div>
         </nav>

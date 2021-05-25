@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'accounts',
     'store',
 
+    # 3rd Party
+    'widget_tweaks',
+
     # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',

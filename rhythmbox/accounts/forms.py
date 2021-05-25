@@ -6,13 +6,18 @@ from .models import Account
 
 class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(max_length=60)
+	newsletter = forms.TypedChoiceField(
+                   coerce=lambda x: x == 'True',
+                   choices=((True, 'Yes, subscribe me to the list'),(False, 'No thank you')),
+                   widget=forms.RadioSelect,
+				   initial=False
+                )
 
 	class Meta:
 		model = Account
-		fields = ("email", "username", "password1", "password2")
+		fields = ("email", "first_name", "last_name", "newsletter", "password1", "password2")
 
 class AccountAuthenticationForm(forms.ModelForm):
-
 	password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
 	class Meta:

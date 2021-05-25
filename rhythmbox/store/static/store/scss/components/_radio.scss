@@ -1,0 +1,58 @@
+.radio-btn {
+  --size: 2.5rem;
+  min-width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  padding-left: 3rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+
+  & input {
+    display: none;
+
+    &:checked ~ .checkmark {
+        /* changes from the video  */
+      
+        /*  content box origin will make sure the bg-image only stays inside content area in between padding  */
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        background-image: radial-gradient(
+          circle at center, 
+          $color-black 
+           /* the size of the check mark is determined by subtracting from the size of the circle
+           the border(both sides) and the gap(both sides) than dividing it by 2 to get the radius of the circle        */
+             calc((var(--size) - (var(--border) * 2) - (var(--gap) * 2)) / 2), 
+          rgba(255, 255, 255, 0) 0);
+      }
+  }
+
+  &__label {
+    margin-left: 5px;
+  }
+
+  &[aria-label]::after {
+    content: attr(aria-label);
+    display: inline-block;
+    margin-left: 5px;
+  }
+
+  & .checkmark {
+    --gap: .3rem;
+    --border: .2rem;
+    --check-color: $color-black;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: inline-block;
+    transition: opacity 0.3s ease;
+    /* changes from the video  */
+    
+    border: var(--border) solid $color-black-semi;
+    padding: var(--gap);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
