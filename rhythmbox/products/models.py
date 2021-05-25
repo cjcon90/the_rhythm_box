@@ -17,8 +17,8 @@ class Category(models.Model):
 
 class Brand(models.Model):
     name = models.CharField(max_length=254)
-    logo = models.ImageField(null=False)
-    
+    slug = models.SlugField(max_length=50)
+    logo = models.ImageField(upload_to="brands/", blank=False, null=False)
 
     class Meta:
         verbose_name_plural = 'Brands'
@@ -30,12 +30,13 @@ class Brand(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=50)
+    brand = models.ForeignKey('Brand', null=True, blank=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     date_added = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to="uploads/", blank=True, null=True)
-    thumbnail = models.ImageField(upload_to="uploads/", null=False)
+    image = models.ImageField(upload_to="products/", blank=True, null=True)
+    thumbnail = models.ImageField(upload_to="products/", null=False)
 
     class Meta:
         ordering = ('-date_added',)
