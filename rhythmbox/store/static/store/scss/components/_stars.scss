@@ -1,0 +1,29 @@
+// Source: https://gist.github.com/NullDev/464b08135138f1c1a135053a898b1a79
+.star-rating {
+    display: inline-block;
+    unicode-bidi: bidi-override;
+    color: $color-black-light;
+    font-size: 3.5rem;
+    height: 3.5rem;
+    width: auto;
+    margin: 0;
+    position: relative;
+    padding: 0;
+
+    &__upper {
+        color: $color-primary;
+        padding: 0;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+
+    &__lower {
+        padding: 0;
+        display: flex;
+        z-index: 0;
+    }
+}

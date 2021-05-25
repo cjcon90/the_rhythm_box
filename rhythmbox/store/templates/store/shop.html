@@ -4,11 +4,48 @@
 
 {% block content %}
 
+<div class="products">
 {% for product in products %}
-    <h2>{{ product.title }}</h2>
-    <p>{{ product.description }}</p>
-    <h3>€{{ product.price }}</h3>
+    <div class="product">
+        <div class="product__images">
+            <img src="{{ product.image }}" alt="" class="product__images--product">
+            <img src="{{ product.brand_image }}" alt="" class="product__images--brand">
+        </div>
+        <div class="product__title">
+            <h2 class="product__title--text bold t3">{{ product.title }}</h2>
+        </div>
+        <div class="product__reviews">
+            <div class="star-rating">
+                <div class="star-rating__upper" style="width: {{product.rating}}%">
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                </div>
+                <div class="star-rating__lower">
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                    <span>★</span>
+                </div>
+            </div>
+            <div class="product__reviews--count regular t9"><p>{{ product.num_ratings }} Reviews</p></div>
+        </div>
+        <div class="product__nums">
+            <h3 class="product__nums--price t3 bold">€{{ product.price }}</h3>
+            <p class="product__nums--stock t7 bold">12 in stock</p>
+        </div>
+        <div class="product__buttons">
+            <a href="" class="product__buttons--info btn btn--white t5 bold">More Info</a>
+            <a href="" class="product__buttons--cart btn btn--black t5 regular">Add to Cart</a>
+        </div>
+    </div>
 {% endfor %}
+
+</div>
+
 
 
 {% endblock content %}

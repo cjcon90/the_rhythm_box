@@ -15,13 +15,24 @@
     }
 
     &--black {
-
         background-color: $color-black;
         color: white;
 
         &:hover, &:focus {
             border: .3rem solid $color-primary;
             color: $color-primary;
+        }
+    }
+    &--white {
+        color: $color-black-semi;
+        border-width: .1rem 0 0 0;
+        border-color: $color-black-light;
+
+        &:hover, &:focus {
+            color: $color-black;
+        }
+        &:active {
+            box-shadow: inset 0 0 .5rem $color-black;
         }
     }
 }
