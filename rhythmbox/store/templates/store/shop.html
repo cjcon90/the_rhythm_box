@@ -1,8 +1,29 @@
 {% extends 'store/base.html' %}
 
+{% load store_tags %}
+
 {% block title %}Shop{% endblock title %}
 
 {% block content %}
+
+<div class="filters">
+    <form class="filters__search">
+        <input type="text" class="filters__search--input form__input t6 regular" placeholder="Search products...">
+        <button class="filters__search--button btn btn--black t6 regular">Search</button>
+    </form>
+
+    <button class="filters__button btn btn--black t6 regular">Filter</button>
+    <div class="filters__sort dropdown">
+        <button id="product-sort-button" class="filters__sort--button btn btn--white t6 regular dropdown__button">Sort Products<i class="fas fa-chevron-down"></i></button>
+        <div id="product-sort-list" class="filters__sort--list dropdown__list">
+            <a href="#" class="dropdown__list--link regular t7">Highest Rated</a>
+            <a href="?{% url_replace request 'order_by' 'price' %}" class="dropdown__list--link regular t7">Price (Low to High)</a>
+            <a href="?{% url_replace request 'order_by' '-price' %}" class="dropdown__list--link regular t7">Price (High to Low)</a>
+            <a href="?{% url_replace request 'order_by' '-date_added' %}" class="dropdown__list--link regular t7">Newest Items</a>
+        </div>
+    </div>
+
+</div>
 
 <div class="products">
 {% for product in products %}
