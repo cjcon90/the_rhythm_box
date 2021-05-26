@@ -37,14 +37,14 @@ class Subcategory(models.Model):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
-class Feature(models.Model):
-    parent = models.ForeignKey(Subcategory, related_name='features', on_delete=models.CASCADE)
+class Type(models.Model):
+    parent = models.ForeignKey(Subcategory, related_name='types', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, blank=True)
     ordering = models.IntegerField(default=0)
 
     class Meta:
-        verbose_name_plural = 'Features'
+        verbose_name_plural = 'Types'
         ordering = ('parent', 'ordering','title')
     
     def __str__(self):
@@ -55,8 +55,8 @@ class Feature(models.Model):
         super().save(*args, **kwargs)
 
 class Brand(models.Model):
-    name = models.CharField(max_length=254)
-    slug = models.SlugField(max_length=50)
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, blank=True)
     logo = models.ImageField(upload_to="brands/", blank=False, null=False)
 
     class Meta:
@@ -67,15 +67,15 @@ class Brand(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    subcategories = models.ManyToManyField(Subcategory, related_name='subcategory_items', blank=True)
-    features = models.ManyToManyField(Feature, related_name='feature_items', blank=True)
+    subcategory = models.ForeignKey(Subcategory, related_name='subcategory', blank=True, on_delete=models.CASCADE)
+    type = models.ForeignKey(Type, related_name='type', null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, blank=True)
     brand = models.ForeignKey('Brand', null=True, blank=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)

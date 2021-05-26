@@ -16,7 +16,7 @@
         </div>
         <div class="product__reviews">
             <div class="star-rating">
-                <div class="star-rating__upper" style="width: {{product.rating}}%">
+                <div class="star-rating__upper" style="width: 73%">
                     <span>★</span>
                     <span>★</span>
                     <span>★</span>
@@ -38,7 +38,11 @@
             <p class="product__nums--stock t7 bold">12 in stock</p>
         </div>
         <div class="product__buttons">
-            <a href="{% url 'product_detail' product.slug %}" class="product__buttons--info btn btn--white t5 bold">More Info</a>
+        {% if product.type %}
+            <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.type.slug product.slug %}" class="product__buttons--info btn btn--white t5 bold">More Info</a>
+        {% else %}
+            <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}" class="product__buttons--info btn btn--white t5 bold">More Info</a>
+        {% endif %}
             <a href="" class="product__buttons--cart btn btn--black t5 regular">Add to Cart</a>
         </div>
     </div>
@@ -53,8 +57,8 @@
         <ul>
             {% for subcategory in category.subcategories.all %}
                 <li style="margin-left: 1rem">{{ subcategory.title }}</li>
-                {% for feature in subcategory.features.all %}
-                    <li style="margin-left: 2rem">{{ feature.title }}</li>
+                {% for type in subcategory.types.all %}
+                    <li style="margin-left: 2rem">{{ type.title }}</li>
                 {% endfor %}
             {% endfor %}
         </ul>
@@ -67,7 +71,6 @@
     <p>{{item.title}}</p>
     <div class="" style="margin: 0 2rem">
         <p>{{ item.category }}</p>
-        <p>{{ item.subcategories }}</p>
     </div>
 {% endfor %}
 </div>
