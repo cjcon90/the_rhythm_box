@@ -38,7 +38,7 @@
             <p class="product__nums--stock t7 bold">12 in stock</p>
         </div>
         <div class="product__buttons">
-            <a href="" class="product__buttons--info btn btn--white t5 bold">More Info</a>
+            <a href="{% url 'product_detail' product.slug %}" class="product__buttons--info btn btn--white t5 bold">More Info</a>
             <a href="" class="product__buttons--cart btn btn--black t5 regular">Add to Cart</a>
         </div>
     </div>
@@ -46,6 +46,32 @@
 
 </div>
 
+<div class="" style="padding: 3rem 1rem;">
+<ul>
+{% for category in categories %}
+    <li>{{ category.title }}</li>
+        <ul>
+            {% for subcategory in category.subcategories.all %}
+                <li style="margin-left: 1rem">{{ subcategory.title }}</li>
+                {% for feature in subcategory.features.all %}
+                    <li style="margin-left: 2rem">{{ feature.title }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+{% endfor %}
+</ul>
+<hr>
+<div class="" style="margin: 2rem auto;">
+
+{% for item in products %}
+    <p>{{item.title}}</p>
+    <div class="" style="margin: 0 2rem">
+        <p>{{ item.category }}</p>
+        <p>{{ item.subcategories }}</p>
+    </div>
+{% endfor %}
+</div>
+</div>
 
 
 {% endblock content %}

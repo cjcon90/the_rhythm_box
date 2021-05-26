@@ -1,4 +1,4 @@
-from products.models import Product
+from products.models import Product, Category
 from django.shortcuts import render
 
 def index(request):
@@ -9,7 +9,10 @@ def index(request):
 
 
 def shop(request):
-    products = Product.objects.all()
     context = {}
-    context['products'] = products
+    lookup = {'category__in': range(0, 100)}
+    # lookup = {'subcategories': True}
+    context['products'] = Product.objects.filter(**lookup).all()
+    context['categories'] = Category.objects.all()
+    context['test'] = Product.objects.filter(**lookup)
     return render(request, 'store/shop.html' , context)

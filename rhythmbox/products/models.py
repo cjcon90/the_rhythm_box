@@ -2,29 +2,57 @@ from io import BytesIO
 from django.core.files import File
 from django.db import models
 from PIL import Image
+from django.template.defaultfilters import slugify
 
 class Category(models.Model):
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, blank=True)
+    ordering = models.IntegerField(default=0)
 
     class Meta:
         verbose_name_plural = 'Categories'
-        ordering = ('title',)
+        ordering = ('ordering','title')
     
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 class Subcategory(models.Model):
     parent = models.ForeignKey(Category, related_name='subcategories', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, blank=True)
+    ordering = models.IntegerField(default=0)
 
     class Meta:
         verbose_name_plural = 'Subcategories'
-        ordering = ('parent','title')
+        ordering = ('parent', 'ordering','title')
     
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+class Feature(models.Model):
+    parent = models.ForeignKey(Subcategory, related_name='features', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, blank=True)
+    ordering = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = 'Features'
+        ordering = ('parent', 'ordering','title')
+    
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 class Brand(models.Model):
     name = models.CharField(max_length=254)
@@ -38,11 +66,16 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    subcategories = models.ManyToManyField(Subcategory, related_name='items')
+    subcategories = models.ManyToManyField(Subcategory, related_name='subcategory_items', blank=True)
+    features = models.ManyToManyField(Feature, related_name='feature_items', blank=True)
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=50)
+    slug = models.SlugField(max_length=255)
     brand = models.ForeignKey('Brand', null=True, blank=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
@@ -58,6 +91,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         self.thumbnail = self.make_thumbnail(self.image)
+        self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def make_thumbnail(self, image, size=(300,200)):

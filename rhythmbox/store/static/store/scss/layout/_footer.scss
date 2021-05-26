@@ -2,7 +2,7 @@
     background-color: $color-black;
     display: grid;
     gap: 2rem;
-    padding: 2rem 3.5rem;
+    padding: 2.5rem;
 
     // NEWSLETTER SIGN UP AND SOCIAL MEDIA ICONS
     .connect {
@@ -55,7 +55,7 @@
                 }
             }
             &--button {
-                width: 30%;
+                min-width: max-content;
             }
         }
 
