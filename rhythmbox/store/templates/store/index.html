@@ -9,7 +9,7 @@
             <h1 class="header__heading--sub subtitle t2 light upper">Professional Drums For Studio and Stage</h1>
         </div>
         <div class="header__link">
-            <a href="#" class="btn-landing t6 upper regular">Shop All Products</a>
+            <a href="{% url 'shop' %}" class="header__link--text t6 upper regular">Shop All Products</a>
         </div>
     </header>
 {% endblock header %}
@@ -17,16 +17,16 @@
 {% block content %}
     <div class="categories">
         <div class="category category--acoustic">
-            <h3 class="category__text t2 bold upper">Acoustic</h3>
+            <a href="{% url 'shop' 'acoustic-drums' %}" class="category__text t2 bold upper">Acoustic</a>
         </div>
         <div class="category category--electric">
-            <h3 class="category__text t2 bold upper">Electric</h3>
+            <a href="{% url 'shop' 'electronic-drums' %}" class="category__text t2 bold upper">Electric</a>
         </div>
         <div class="category category--cymbals">
-            <h3 class="category__text t2 bold upper">Cymbals</h3>
+            <a href="{% url 'shop' 'cymbals' %}" class="category__text t2 bold upper">Cymbals</a>
         </div>
         <div class="category category--accessories">
-            <h3 class="category__text t2 bold upper">Accessories</h3>
+            <a href="{% url 'shop' 'accessories' %}" class="category__text t2 bold upper">Accessories</a>
         </div>
     </div>
 {% endblock content %}

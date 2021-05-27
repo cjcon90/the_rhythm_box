@@ -38,6 +38,10 @@
         width: 100%;
         display: flex;
         justify-content: center;
+
+        &--text {
+            padding: 1.5rem 2.5rem;
+        }
     }
 }
 
@@ -85,13 +89,25 @@
 
 
         &__text {
-            color: white;
-            background-color: $color-black-semi;
             width: 80%;
             padding: 3rem;
             text-align: center;
-            letter-spacing: .4rem;
-
+            letter-spacing: .5rem;
         }
+    }
+}
+
+.header__link--text, .category__text {
+
+    &:link, &:visited {
+        color: white;
+        background-color: $color-black-semi;
+    }
+    &:hover {
+        background-color: $color-black;
+        color: $color-primary;
+    }
+    &:active, &:focus {
+        border: .1rem solid $color-primary;
     }
 }
