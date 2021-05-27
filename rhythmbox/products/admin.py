@@ -12,11 +12,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class SubcategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'parent', 'ordering')
-    search_fields = ('title', 'parent', 'ordering')
+    search_fields = ('title', 'parent__title', 'ordering')
 
 class TypeAdmin(admin.ModelAdmin):
     list_display = ('title', 'parent', 'ordering')
-    search_fields = ('title', 'parent', 'ordering')
+    search_fields = ('title', 'parent__title', 'ordering')
 
 
 admin.site.register(Category, CategoryAdmin)

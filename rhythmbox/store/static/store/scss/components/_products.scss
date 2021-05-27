@@ -41,6 +41,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        color: $color-black-semi;
 
         & > * {
             padding: 1rem .5rem;
@@ -50,9 +51,6 @@
             letter-spacing: .2rem;
         }
 
-        &--stock {
-            color: $color-black-semi;
-        }
     }
 
     &__buttons {

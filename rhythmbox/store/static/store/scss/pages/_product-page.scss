@@ -37,14 +37,13 @@
     }
 
     &__nums {
-        padding: 0 2rem;
-        display: flex;
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 1fr .5fr;
+        grid-template-rows: repeat(2, min-content);
+        width: 25rem;
         align-items: center;
-        justify-content: space-between;
-
-        & > * {
-            padding: 1rem .5rem;
-        }
+        gap: 1rem 0;
 
         &--price {
             letter-spacing: .2rem;
@@ -52,6 +51,11 @@
 
         &--stock {
             color: $color-black-semi;
+        }
+
+        &--submit {
+            grid-column: 1 / 3;
+            padding: .7rem 0;
         }
     }
 }

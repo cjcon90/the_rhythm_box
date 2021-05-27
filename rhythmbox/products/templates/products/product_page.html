@@ -1,5 +1,7 @@
 {% extends 'store/base.html' %}
 
+{% load static %}
+
 {% block title %}{{ product.title }}{% endblock title %}
 
 {% block content %}
@@ -31,9 +33,19 @@
             </div>
             <div class="product-info__reviews--count regular t6"><p>{{ product.num_ratings }} Reviews</p></div>
         </div>
-        <div class="product-info__nums">
+        <form class="product-info__nums">
+            <div class="product-info__nums--quantity">
+                <span class="input-number-decrement">–</span>
+                <input class="input-number" type="text" value="1" max="12">
+                <span class="input-number-increment">+</span>
+            </div>
             <p class="product-info__nums--stock t7 bold">12 in stock</p>
-        </div>
+            <button type="submit" class="product-info__nums--submit btn btn--black bold t6">Add to Cart</button>
+        </form>
     </div>
 
 {% endblock content %}
+
+{% block js %}
+<script src="{% static 'store/scripts/productPage.js' %}"></script>
+{% endblock js %}

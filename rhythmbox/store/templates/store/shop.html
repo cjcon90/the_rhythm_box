@@ -2,6 +2,7 @@
 
 {% load store_tags %}
 {% load humanize %}
+{% load static %}
 
 {% block title %}Shop{% endblock title %}
 
@@ -18,12 +19,16 @@
     {% comment %} FILTER BUTTON - MOBILE {% endcomment %}
     <button class="filters__button btn btn--black t6 regular">Filter</button>
 
+    {% comment %} FILTER MENU {% endcomment %}
+
     <div class="filters__menu closed">
-        <h2 class="filters__menu--heading t1 bold upper">Filter</h2>
+        <h2 class="filters__menu--heading t2 bold upper">Filter</h2>
+        <hr>
+        <a class="filters__list--link regular t5 bold" href="{% url 'shop' %}">All Products</a>
         {% for category in categories %}
             <ul class="filters__list level-1">
             <hr>
-                <li><a class="filters__list--link regular t5" href="{% url 'shop' category.slug %}">{{ category.title }}</a></li>
+                <li><a class="filters__list--link regular t5 bold" href="{% url 'shop' category.slug %}">{{ category.title }}</a></li>
                 {% for subcategory in category.subcategories.all %}
                 <ul class="filters__list level-2">
                     <li><a class="filters__list--link regular t6" href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a></li>
@@ -105,3 +110,7 @@
 {% endfor %}
 </div>
 {% endblock content %}
+
+{% block js %}
+<script src="{% static 'store/scripts/shop.js' %}"></script>
+{% endblock js %}
