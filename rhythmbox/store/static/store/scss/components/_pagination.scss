@@ -1,0 +1,38 @@
+.pagination {
+    display: flex;
+    gap: 1rem;
+    margin: 3rem auto;
+    justify-content: center;
+    align-items: center;
+
+    &__link {
+        border: solid $color-black-light .1rem;
+        padding: .5rem 1rem;
+        font-size: 2rem;
+        font-family: 'Roboto', sans-serif;
+        color: $color-black;
+
+            &:link, &:visited {
+                color: $color-black-semi;
+            }
+            &:hover, &:focus {
+                background-color: $color-black;
+                color: $color-primary;
+            }
+
+            &--chevron {
+                padding: .5rem 2rem;
+            }
+    
+            &--disabled {
+                display: none;
+            }
+    
+            &--current {
+                background-color: $color-black;
+                color: $color-primary;
+                font-weight: 700;
+            }
+
+        }
+    }
