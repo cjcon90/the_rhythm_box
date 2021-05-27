@@ -1,0 +1,51 @@
+.filters {
+    &__menu {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        max-width: 25rem;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-left: solid .2rem $color-black-semi;
+        z-index: 5;
+        transition: all .5s;
+        overflow-y: scroll;
+        padding: 8rem 1rem;
+
+        @for $i from 1 through 4 {
+            ul.level-#{$i} .filters__list--link {
+                padding-left: 3rem * $i;
+            }
+        }
+
+        &--heading {
+            text-align: center;
+            letter-spacing: .1rem;
+            color: $color-black-semi;
+            padding: 1rem 0;
+        }
+    }
+
+    .closed {
+        transform: translateX(200%);
+    }
+
+    &__list {
+
+        &--link {
+            margin-left: -3rem;
+            padding: 1rem 0;
+    
+            &:link, &:visited {
+                display: block;
+                color: $color-black-semi;
+                text-decoration: none;
+            }
+    
+            &:hover {
+                color: $color-black;
+            }
+        }   
+    }
+}

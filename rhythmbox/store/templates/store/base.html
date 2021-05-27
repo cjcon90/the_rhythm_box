@@ -17,7 +17,7 @@
                 <span></span>
             </div>
             <div class="nav__logo">
-                <img src="https://res.cloudinary.com/cjcon90/image/upload/v1621514847/codeinstitute/the_rhythm_box/logo.webp" alt="The Rhythm Box logo" class="nav__logo--img">
+                <a href="{% url 'home' %}"><img src="https://res.cloudinary.com/cjcon90/image/upload/v1621514847/codeinstitute/the_rhythm_box/logo.webp" alt="The Rhythm Box logo" class="nav__logo--img"></a>
             </div>
             <div class="nav__cart">
                 <div class="nav__cart--cart">
@@ -31,10 +31,10 @@
                 <ul class="nav-menu__list">
                     <li class="nav-menu__list--category  upper regular"><a href="{% url 'shop' %}">Shop</a></li>
                     <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory  regular"><a href="#">Acoustic</a></li>
-                        <li class="nav-menu__list--subcategory  regular"><a href="#">Electric</a></li>
-                        <li class="nav-menu__list--subcategory  regular"><a href="#">Cymbals</a></li>
-                        <li class="nav-menu__list--subcategory  regular"><a href="#">Accessories</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="{% url 'shop' 'acoustic-drums' %}">Acoustic</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="{% url 'shop' 'electronic-drums' %}">Electric</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="{% url 'shop' 'cymbals' %}">Cymbals</a></li>
+                        <li class="nav-menu__list--subcategory  regular"><a href="{% url 'shop' 'accessories' %}">Accessories</a></li>
                     </ul>
                     {% if request.user.is_authenticated %}
                     <li class="nav-menu__list--category  upper regular"><a href="#">Account</a></li>

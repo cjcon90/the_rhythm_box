@@ -27,6 +27,7 @@ def shop(request, category=None, subcategory=None, type=None):
     order = request.GET.get('order_by') or '-date_added' # '?order_by=*param'
     
     context['products'] = Product.objects.filter(q).order_by(order)
+    context['categories'] = Category.objects.all()
     return render(request, 'store/shop.html' , context)
 
 

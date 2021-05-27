@@ -1,18 +1,44 @@
 {% extends 'store/base.html' %}
 
 {% load store_tags %}
+{% load humanize %}
 
 {% block title %}Shop{% endblock title %}
 
 {% block content %}
 
+{% comment %} PRODUCT SEARCH, SORT & FILTER {% endcomment %}
 <div class="filters">
+    {% comment %} SEARCH BAR {% endcomment %}
     <form class="filters__search">
         <input type="text" class="filters__search--input form__input t6 regular" placeholder="Search products...">
         <button class="filters__search--button btn btn--black t6 regular">Search</button>
     </form>
 
+    {% comment %} FILTER BUTTON - MOBILE {% endcomment %}
     <button class="filters__button btn btn--black t6 regular">Filter</button>
+
+    <div class="filters__menu closed">
+        <h2 class="filters__menu--heading t1 bold upper">Filter</h2>
+        {% for category in categories %}
+            <ul class="filters__list level-1">
+            <hr>
+                <li><a class="filters__list--link regular t5" href="{% url 'shop' category.slug %}">{{ category.title }}</a></li>
+                {% for subcategory in category.subcategories.all %}
+                <ul class="filters__list level-2">
+                    <li><a class="filters__list--link regular t6" href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a></li>
+                    {% for type in subcategory.types.all %}
+                        <ul class="filters__list level-3">
+                            <li><a class="filters__list--link regular t7" href="{% url 'shop' category.slug subcategory.slug type.slug %}">{{ type.title }}</a></li>
+                        </ul>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+
+    {% comment %} SORT SELECT OPTION {% endcomment %}
     <div class="filters__sort dropdown">
         <button id="product-sort-button" class="filters__sort--button btn btn--white t6 regular dropdown__button">Sort Products<i class="fas fa-chevron-down"></i></button>
         <div id="product-sort-list" class="filters__sort--list dropdown__list">
@@ -22,8 +48,9 @@
             <a href="?{% url_replace request 'order_by' '-date_added' %}" class="dropdown__list--link regular t7">Newest Items</a>
         </div>
     </div>
-
 </div>
+
+{% comment %} DISPLAYED PRODUCTS {% endcomment %}
 
 <div class="products">
 {% for product in products %}
@@ -55,47 +82,26 @@
             <div class="product__reviews--count regular t9"><p>{{ product.num_ratings }} Reviews</p></div>
         </div>
         <div class="product__nums">
-            <h3 class="product__nums--price t3 bold">€{{ product.price|floatformat:"-2" }}</h3>
+            <h3 class="product__nums--price t3 bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
             <p class="product__nums--stock t7 bold">12 in stock</p>
         </div>
         <div class="product__buttons">
+
         {% if product.type %}
-            <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.type.slug product.slug %}" class="product__buttons--info btn btn--white t5 bold">More Info</a>
+        {% comment %} PRODUCT LINK (for items without a type) {% endcomment %}
+            <a href=
+            "{% url 'product_page' product.category.slug product.subcategory.slug product.type.slug product.slug %}"
+            class="product__buttons--info btn btn--white t5 bold">More Info</a>
+
         {% else %}
-            <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}" class="product__buttons--info btn btn--white t5 bold">More Info</a>
+        {% comment %} PRODUCT LINK (for items with a type) {% endcomment %}
+            <a href=
+            "{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
+            class="product__buttons--info btn btn--white t5 bold">More Info</a>
         {% endif %}
             <a href="" class="product__buttons--cart btn btn--black t5 regular">Add to Cart</a>
         </div>
     </div>
 {% endfor %}
-
 </div>
-
-<div class="" style="padding: 3rem 1rem;">
-<ul>
-{% for category in categories %}
-    <li>{{ category.title }}</li>
-        <ul>
-            {% for subcategory in category.subcategories.all %}
-                <li style="margin-left: 1rem">{{ subcategory.title }}</li>
-                {% for type in subcategory.types.all %}
-                    <li style="margin-left: 2rem">{{ type.title }}</li>
-                {% endfor %}
-            {% endfor %}
-        </ul>
-{% endfor %}
-</ul>
-<hr>
-<div class="" style="margin: 2rem auto;">
-
-{% for item in products %}
-    <p>{{item.title}}</p>
-    <div class="" style="margin: 0 2rem">
-        <p>{{ item.category }}</p>
-    </div>
-{% endfor %}
-</div>
-</div>
-
-
 {% endblock content %}
