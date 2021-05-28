@@ -39,11 +39,11 @@
     &__nums {
         padding: 2rem;
         display: grid;
-        grid-template-columns: 1fr .5fr;
+        grid-template-columns: repeat(2, max-content);
         grid-template-rows: repeat(2, min-content);
         width: 25rem;
         align-items: center;
-        gap: 1.5rem 0;
+        gap: 1.5rem 1.5rem;
 
         &--price {
             letter-spacing: .2rem;

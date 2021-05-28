@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Product, Category, Brand, Subcategory, Type
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'subcategory', 'type', 'brand', 'price', 'date_added')
+    list_display = ('title', 'category', 'subcategory', 'type', 'brand', 'price', 'stock', 'date_added')
     search_fields = ('title', 'category__title','subcategory__title', 'type__title', 'brand__name', 'description')
     readonly_fields = ('date_added',)
 

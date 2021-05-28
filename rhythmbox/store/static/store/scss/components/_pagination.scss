@@ -1,13 +1,15 @@
 .pagination {
     display: flex;
-    gap: 1rem;
-    margin: 3rem auto;
+    margin: 4rem auto;
     justify-content: center;
     align-items: center;
 
     &__link {
+        display: inline-block;
         border: solid $color-black-light .1rem;
-        padding: .5rem 1rem;
+        padding: .5rem 0;
+        width: 4rem;
+        text-align: center;
         font-size: 2rem;
         font-family: 'Roboto', sans-serif;
         color: $color-black;
@@ -22,11 +24,9 @@
 
             &--chevron {
                 padding: .5rem 2rem;
+                width: 6rem;
             }
-    
-            &--disabled {
-                display: none;
-            }
+
     
             &--current {
                 background-color: $color-black;
@@ -35,4 +35,9 @@
             }
 
         }
+    }
+
+    .disabled {
+        color: $color-black-light;
+        pointer-events: none;
     }

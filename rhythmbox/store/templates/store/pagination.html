@@ -1,0 +1,52 @@
+{% load store_tags %}
+
+<ul class="pagination">
+
+    {% comment %} PREVIOUS PAGE ARROW {% endcomment %}
+    {% if page_obj.has_previous %}
+        <li><a  class="pagination__link pagination__link--chevron" href="?{% url_replace request 'page' page_obj.previous_page_number %}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
+    {% else %}
+        <li class="pagination__link pagination__link--chevron disabled"><span><i class="fa fa-chevron-left" aria-hidden="true"></i></span></li>
+    {% endif %}
+
+    {% comment %} FIRST PAGE {% endcomment %}
+    {% if 1 < page_obj.number|add:'-1' %}
+        <li><a class="pagination__link" href="?{% url_replace request 'page' 1 %}">1</a></li>
+    {% endif %}
+
+    {% comment %} PREVIOUS PAGES ELLIPSE {% endcomment %}
+    {% comment %} {% if 1 < page_obj.number|add:'-2' %}
+        <li><a class="pagination__link" href="?{% url_replace request 'page' page_obj.number|add:'-2' %}">...</a></li>
+    {% endif %} {% endcomment %}
+
+    {% comment %} PREVIOUS PAGE {% endcomment %}
+    {% if page_obj.has_previous %}
+        <li><a class="pagination__link" href="?{% url_replace request 'page' page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a></li>
+    {% endif %}
+
+    {% comment %} CURRENT PAGE {% endcomment %}
+    <li><span class="pagination__link pagination__link--current">{{ page_obj.number }}</span></li>
+
+    {% comment %} NEXT PAGE {% endcomment %}
+    {% if page_obj.has_next %}
+        <li><a class="pagination__link" href="?{% url_replace request 'page' page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a></li>
+    {% endif %}
+
+    {% comment %} FUTURE PAGES ELLIPSE {% endcomment %}
+    {% comment %} {% if page_obj.paginator.num_pages > page_obj.number|add:'2' %}
+        <li><a class="pagination__link" href="?{% url_replace request 'page' page_obj.number|add:'2' %}">...</a></li>
+    {% endif %} {% endcomment %}
+
+    {% comment %} LAST PAGE {% endcomment %}
+    {% if page_obj.paginator.num_pages > page_obj.number|add:'1' %}
+        <li><a class="pagination__link" href="?{% url_replace request 'page' page_obj.paginator.num_pages %}">{{page_obj.paginator.num_pages}}</a></li>
+    {% endif %}
+
+    {% comment %} NEXT PAGE ARROW {% endcomment %}
+    {% if page_obj.has_next %}
+        <li><a  class="pagination__link pagination__link--chevron" href="?{% url_replace request 'page' page_obj.next_page_number %}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+    {% else %}
+        <li class="pagination__link pagination__link--chevron disabled"><span><i class="fa fa-chevron-right" aria-hidden="true"></i></span></li>
+    {% endif %} 
+
+</ul>

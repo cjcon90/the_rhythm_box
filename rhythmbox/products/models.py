@@ -79,6 +79,7 @@ class Product(models.Model):
     brand = models.ForeignKey('Brand', null=True, blank=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
+    stock = models.IntegerField(default=15)
     date_added = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="products/", blank=True, null=True)
     thumbnail = models.ImageField(upload_to="products/", blank=True, null=True)

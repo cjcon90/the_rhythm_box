@@ -30,14 +30,14 @@
             <hr>
                 <li><a class="filters__list--link regular t5 bold" href="{% url 'shop' category.slug %}">{{ category.title }}</a></li>
                 {% for subcategory in category.subcategories.all %}
-                <ul class="filters__list level-2">
-                    <li><a class="filters__list--link regular t6" href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a></li>
-                    {% for type in subcategory.types.all %}
-                        <ul class="filters__list level-3">
-                            <li><a class="filters__list--link regular t7" href="{% url 'shop' category.slug subcategory.slug type.slug %}">{{ type.title }}</a></li>
-                        </ul>
-                    {% endfor %}
-                </ul>
+                    <ul class="filters__list level-2">
+                        <li><a class="filters__list--link regular t6" href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a></li>
+                        {% for type in subcategory.types.all %}
+                            <ul class="filters__list level-3">
+                                <li><a class="filters__list--link regular t7" href="{% url 'shop' category.slug subcategory.slug type.slug %}">{{ type.title }}</a></li>
+                            </ul>
+                        {% endfor %}
+                    </ul>
                 {% endfor %}
             </ul>
         {% endfor %}
@@ -88,7 +88,11 @@
             </div>
             <div class="product__nums">
                 <h3 class="product__nums--price t3 bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
-                <p class="product__nums--stock t7 bold">12 in stock</p>
+                {% if product.stock %}
+                <p class="product__nums--stock t7 bold">{{product.stock}} in stock</p>
+                {% else %}
+                <p class="product__nums--stock--out t7 bold upper">Out of stock</p>
+                {% endif %}
             </div>
             <div class="product__buttons">
 
@@ -110,37 +114,9 @@
     {% endfor %}
 </div>
 
-<ul class="pagination">
-
-    {% if page_obj.has_previous %}
-        <li><a  class="pagination__link pagination__link--chevron" href="?{% url_replace request 'page' page_obj.previous_page_number %}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a></li>
-    {% else %}
-        <li class="pagination__link--disabled"><span><i class="fa fa-chevron-left" aria-hidden="true"></i></span></li>
-    {% endif %}
-
-    {% if page_obj.number|add:'-4' > 1 %}
-        <li><a class="pagination__link pagination__link--ellipse" href="?{% url_replace request 'page' page_obj.number|add:'-5' %}">&hellip;</a></li>
-    {% endif %}
-
-    {% for i in page_obj.paginator.page_range %}
-        {% if page_obj.number == i %}
-            <li><span class="pagination__link pagination__link--current">{{ i }}</span></li>
-        {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
-            <li><a class="pagination__link pagination__link--other" href="?{% url_replace request 'page' i %}">{{ i }}</a></li>
-        {% endif %}
-    {% endfor %}
-
-    {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
-        <li><a class="pagination__link pagination__link--ellipse" href="?{% url_replace request 'page' page_obj.number|add:'5' %}">&hellip;</a></li>
-    {% endif %}
-
-    {% if page_obj.has_next %}
-        <li><a  class="pagination__link pagination__link--chevron" href="?{% url_replace request 'page' page_obj.next_page_number %}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
-    {% else %}
-        <li class="pagination__link--disabled"><span><i class="fa fa-chevron-right" aria-hidden="true"></i></span></li>
-    {% endif %}
-
-</ul>
+{% block pagination %}
+    {% include 'store/pagination.html' %}
+{% endblock pagination %}
 
 {% endblock content %}
 

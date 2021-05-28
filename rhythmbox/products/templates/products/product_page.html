@@ -36,14 +36,18 @@
         <form class="product-info__nums">
             <div class="product-info__nums--quantity">
                 <span class="input-number-decrement">–</span>
-                <input class="input-number" type="text" value="1" max="12">
+                <input class="input-number" type="text" value="1" max="{{product.stock}}">
                 <span class="input-number-increment">+</span>
             </div>
-            <p class="product-info__nums--stock t7 bold">12 in stock</p>
+            {% if product.stock %}
+            <p class="product__nums--stock t7 bold">{{product.stock}} in stock</p>
+            {% else %}
+            <p class="product__nums--stock--out t7 bold upper">Out of stock</p>
+            {% endif %}
             <button type="submit" class="product-info__nums--submit btn btn--black bold t6">Add to Cart</button>
         </form>
     </div>
-
+    <hr>
 {% endblock content %}
 
 {% block js %}

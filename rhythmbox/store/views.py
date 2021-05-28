@@ -27,7 +27,7 @@ def shop(request, category=None, subcategory=None, type=None):
 
     order = request.GET.get('order_by') or '-date_added' # '?order_by=*param'
     products = Product.objects.filter(q).order_by(order)
-    paginator = Paginator(products, 3)
+    paginator = Paginator(products, 9)
     page_num = request.GET.get('page')
     context['page_obj'] = paginator.get_page(page_num)
 

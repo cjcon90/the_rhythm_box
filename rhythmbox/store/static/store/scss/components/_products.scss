@@ -51,6 +51,13 @@
             letter-spacing: .2rem;
         }
 
+        &--stock {
+
+            &--out {
+                color: $color-warning-dark;
+            }
+        }
+
     }
 
     &__buttons {
