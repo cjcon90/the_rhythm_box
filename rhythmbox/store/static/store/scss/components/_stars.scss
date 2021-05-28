@@ -10,6 +10,10 @@
     position: relative;
     padding: 0;
 
+    &--small {
+        font-size: 2.5rem;
+    }
+
     &__upper {
         color: $color-primary;
         padding: 0;

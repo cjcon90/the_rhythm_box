@@ -20,7 +20,6 @@
     <button class="filters__button btn btn--black t6 regular">Filter</button>
 
     {% comment %} FILTER MENU {% endcomment %}
-
     <div class="filters__menu closed">
         <h2 class="filters__menu--heading t2 bold upper">Filter</h2>
         <hr>
@@ -43,7 +42,7 @@
         {% endfor %}
     </div>
 
-    {% comment %} SORT SELECT OPTION {% endcomment %}
+    {% comment %} SORT OPTION {% endcomment %}
     <div class="filters__sort dropdown">
         <button id="product-sort-button" class="filters__sort--button btn btn--white t6 regular dropdown__button">Sort Products<i class="fas fa-chevron-down"></i></button>
         <div id="product-sort-list" class="filters__sort--list dropdown__list">
@@ -68,25 +67,13 @@
                 <h2 class="product__title--text bold t3">{{ product.title }}</h2>
             </div>
             <div class="product__reviews">
-                <div class="star-rating">
-                    <div class="star-rating__upper" style="width: 73%">
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                    </div>
-                    <div class="star-rating__lower">
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                    </div>
-                </div>
+                {% comment %} STAR RATING {% endcomment %}
+                {% include 'products/_star-rating.html' %}
+                {% comment %} REVIEW COUNT {% endcomment %}
                 <div class="product__reviews--count regular t9"><p>{{ product.num_ratings }} Reviews</p></div>
             </div>
             <div class="product__nums">
+                {% comment %} PRODUCT PRICE AND STOCK {% endcomment %}
                 <h3 class="product__nums--price t3 bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
                 {% if product.stock %}
                 <p class="product__nums--stock t7 bold">{{product.stock}} in stock</p>
@@ -94,8 +81,9 @@
                 <p class="product__nums--stock--out t7 bold upper">Out of stock</p>
                 {% endif %}
             </div>
-            <div class="product__buttons">
 
+            {% comment %} PRODUCT INFO & ADD TO CART BUTTONS {% endcomment %}
+            <div class="product__buttons">
             {% if product.type %}
             {% comment %} PRODUCT LINK (for items without a type) {% endcomment %}
                 <a href=
@@ -114,6 +102,7 @@
     {% endfor %}
 </div>
 
+{% comment %} PAGINATION {% endcomment %}
 {% block pagination %}
     {% include 'store/pagination.html' %}
 {% endblock pagination %}
@@ -121,5 +110,5 @@
 {% endblock content %}
 
 {% block js %}
-<script src="{% static 'store/scripts/shop.js' %}"></script>
+<script type="module" src="{% static 'store/scripts/shop.js' %}"></script>
 {% endblock js %}

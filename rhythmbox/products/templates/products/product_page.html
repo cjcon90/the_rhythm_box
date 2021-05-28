@@ -1,37 +1,25 @@
 {% extends 'store/base.html' %}
 
+{% load humanize %}
 {% load static %}
 
 {% block title %}{{ product.title }}{% endblock title %}
 
 {% block content %}
+
+    {% comment %} PRODUCT INFO SECTION (images, price, description, stock, reviews & add to cart) {% endcomment %}
     <div class="product-info">
         <div class="product-info__images">
             <img src="{{ product.brand.logo.url }}" alt="" class="product-info__images--brand">
             <img src="{{ product.image.url }}" alt="" class="product-info__images--product">
         </div>
         <div class="product-info__title">
-            <h3 class="product-info__nums--price t1 bold">€{{ product.price|floatformat:"-2" }}</h3>
+            <h3 class="product-info__title--price t2 bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
             <h2 class="product-info__title--text bold t2">{{ product.title }}</h2>
         </div>
         <div class="product-info__reviews">
-            <div class="star-rating">
-                <div class="star-rating__upper" style="width: 73%">
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                </div>
-                <div class="star-rating__lower">
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                    <span>★</span>
-                </div>
-            </div>
-            <div class="product-info__reviews--count regular t6"><p>{{ product.num_ratings }} Reviews</p></div>
+            {% include 'products/_star-rating.html' %}
+            <div class="product-info__reviews--count regular t6"><p>15 Reviews</p></div>
         </div>
         <form class="product-info__nums">
             <div class="product-info__nums--quantity">
@@ -48,8 +36,76 @@
         </form>
     </div>
     <hr>
+
+    {% comment %} PRODUCT REVIEW SECTION {% endcomment %}
+    <div class="reviews">
+        <div class="reviews-nums">
+            <h2 class="reviews-nums__average t1 bold">4.8</h2>
+            {% include 'products/_star-rating.html' %}
+        </div>
+    </div>
+    <div class="reviews-buttons">
+        <div class="reviews-buttons__write">
+            <a href="" class="btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
+        </div>
+
+        <div class="reviews-buttons__filter dropdown">
+            <button id="reviews-filter-button" class="btn btn--white t6 regular dropdown__button">Filter by rating<i class="fas fa-chevron-down"></i></button>
+            <div id="reviews-filter-list" class="filters__sort--list dropdown__list">
+                <a href="#" class="dropdown__list--link regular t7">Highest Rated</a>
+                <a href="#" class="dropdown__list--link regular t7">Price (Low to High)</a>
+                <a href="#" class="dropdown__list--link regular t7">Price (High to Low)</a>
+                <a href="#" class="dropdown__list--link regular t7">Newest Items</a>
+            </div>
+        </div>
+        <div class="reviews-buttons__sort dropdown">
+            <button id="reviews-sort-button" class="btn btn--white t6 regular dropdown__button">Sort Reviews<i class="fas fa-chevron-down"></i></button>
+            <div id="reviews-sort-list" class="filters__sort--list dropdown__list">
+                <a href="#" class="dropdown__list--link regular t7">Highest Rated</a>
+                <a href="#" class="dropdown__list--link regular t7">Price (Low to High)</a>
+                <a href="#" class="dropdown__list--link regular t7">Price (High to Low)</a>
+                <a href="#" class="dropdown__list--link regular t7">Newest Items</a>
+            </div>
+        </div>
+    </div>
+    <div class="reviews-section">
+        <h2 class="reviews-section__heading t5 bold">15 Reviews</h2>
+        <hr>
+        <div class="review">
+            <p class="review-author bold t7">User Person</p>
+            <p class="review-date light t7">02/05/2021</p>
+            {% include 'products/_star-rating-sm.html' %}
+            <p class="review-headline bold t7">Review Headline</p>
+            <p class="review-text regular t7">This is a fantastic piece of equipment! Very easy to assemble and it sounds great. I bought with Evans EC2 heads and I couldn’t be happier </p>
+        </div>
+        <hr>
+        <div class="review">
+            <p class="review-author bold t7">User Person</p>
+            <p class="review-date light t7">02/05/2021</p>
+            {% include 'products/_star-rating-sm.html' %}
+            <p class="review-headline bold t7">Review Headline</p>
+            <p class="review-text regular t7">This is a fantastic piece of equipment! Very easy to assemble and it sounds great. I bought with Evans EC2 heads and I couldn’t be happier </p>
+        </div>
+        <hr>
+        <div class="review">
+            <p class="review-author bold t7">User Person</p>
+            <p class="review-date light t7">02/05/2021</p>
+            {% include 'products/_star-rating-sm.html' %}
+            <p class="review-headline bold t7">Review Headline</p>
+            <p class="review-text regular t7">This is a fantastic piece of equipment! Very easy to assemble and it sounds great. I bought with Evans EC2 heads and I couldn’t be happier </p>
+        </div>
+        <hr>
+        <div class="review">
+            <p class="review-author bold t7">User Person</p>
+            <p class="review-date light t7">02/05/2021</p>
+            {% include 'products/_star-rating-sm.html' %}
+            <p class="review-headline bold t7">Review Headline</p>
+            <p class="review-text regular t7">This is a fantastic piece of equipment! Very easy to assemble and it sounds great. I bought with Evans EC2 heads and I couldn’t be happier </p>
+        </div>
+    </div>
+
 {% endblock content %}
 
 {% block js %}
-<script src="{% static 'store/scripts/productPage.js' %}"></script>
+<script type="module" src="{% static 'store/scripts/productPage.js' %}"></script>
 {% endblock js %}

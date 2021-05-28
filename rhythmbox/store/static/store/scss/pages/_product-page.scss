@@ -1,14 +1,15 @@
 .product-info {
     margin: auto;
     &__images {
-        padding: 6rem 2rem 0 2rem;
+        padding-top: 6rem;
         position: relative;
         &--product {
-            height: 30rem;
+            max-height: 30rem;
             width: auto;
             display: block;
             margin: -1rem auto 0 auto;
             z-index: 0;
+            object-fit: cover;
         }
         &--brand {
             position: absolute;
@@ -21,8 +22,8 @@
     }
 
     &__title {
-        padding: 2rem 2rem 0rem 2rem;
-        color: $color-black-semi;
+        margin: 2rem 2rem 0rem 2rem;
+        color: $color-black;
     }
 
     &__reviews {
@@ -56,6 +57,50 @@
         &--submit {
             grid-column: 1 / 3;
             padding: .7rem 0;
+        }
+    }
+}
+
+.reviews {
+    &-nums {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        margin: 2rem auto;
+        gap: 1rem;
+
+        &__average {
+            color: $color-black-semi;
+        }
+    }
+
+    &-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(2, min-content);
+        place-items: center;
+        gap: 1.75rem 0;
+
+        &__write {
+            grid-column: 1 / 3;
+
+
+            & > a > i {
+                padding-right: .75rem;
+            }
+        }
+
+        & > div > button > i {
+            padding-left: .75rem;
+        }
+
+    }
+    &-section {
+        padding: 3rem 2rem;
+        &__heading {
+            text-align: center;
+            color: $color-black-semi;
+            padding-bottom: 2rem;
         }
     }
 }
