@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'store',
     'products',
     'cart',
+    'reviews',
 
     # 3rd Party
     'widget_tweaks',

@@ -1,5 +1,6 @@
 .review {
     padding: 3rem 0;
+    border-top: dashed .1rem $color-black-light;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, min-content);
@@ -20,7 +21,8 @@
     }
     & > .star-rating {
         grid-area: stars;
-        margin: -.3rem 0 -.7rem 0;
+        margin-bottom: -.7rem;
+        width: min-content;
     }
     &-headline {
         grid-area: headline;

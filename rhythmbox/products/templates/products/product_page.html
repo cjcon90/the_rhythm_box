@@ -70,38 +70,19 @@
     </div>
     <div class="reviews-section">
         <h2 class="reviews-section__heading t5 bold">15 Reviews</h2>
-        <hr>
+        {% if product.reviews.count > 0 %}
+        {% for review in product.reviews.all %}
         <div class="review">
-            <p class="review-author bold t7">User Person</p>
-            <p class="review-date light t7">02/05/2021</p>
-            {% include 'products/_star-rating-sm.html' %}
-            <p class="review-headline bold t7">Review Headline</p>
-            <p class="review-text regular t7">This is a fantastic piece of equipment! Very easy to assemble and it sounds great. I bought with Evans EC2 heads and I couldn’t be happier </p>
+            <p class="review-author regular t8">{{review.author.first_name}} {{ review.author.last_name|first }}.</p>
+            <p class="review-date light t7">{{review.date_added|date:'d.m.Y'}}</p>
+            {% include 'products/_star-rating-sm.html' with rating=review.rating%}
+            <p class="review-headline bold t7">{{review.headline}}</p>
+            <p class="review-text regular t7">{{review.content}}</p>
         </div>
-        <hr>
-        <div class="review">
-            <p class="review-author bold t7">User Person</p>
-            <p class="review-date light t7">02/05/2021</p>
-            {% include 'products/_star-rating-sm.html' %}
-            <p class="review-headline bold t7">Review Headline</p>
-            <p class="review-text regular t7">This is a fantastic piece of equipment! Very easy to assemble and it sounds great. I bought with Evans EC2 heads and I couldn’t be happier </p>
-        </div>
-        <hr>
-        <div class="review">
-            <p class="review-author bold t7">User Person</p>
-            <p class="review-date light t7">02/05/2021</p>
-            {% include 'products/_star-rating-sm.html' %}
-            <p class="review-headline bold t7">Review Headline</p>
-            <p class="review-text regular t7">This is a fantastic piece of equipment! Very easy to assemble and it sounds great. I bought with Evans EC2 heads and I couldn’t be happier </p>
-        </div>
-        <hr>
-        <div class="review">
-            <p class="review-author bold t7">User Person</p>
-            <p class="review-date light t7">02/05/2021</p>
-            {% include 'products/_star-rating-sm.html' %}
-            <p class="review-headline bold t7">Review Headline</p>
-            <p class="review-text regular t7">This is a fantastic piece of equipment! Very easy to assemble and it sounds great. I bought with Evans EC2 heads and I couldn’t be happier </p>
-        </div>
+        {% endfor %}
+        {% else %}
+        <p>no reviews yet!</p>
+        {% endif %}
     </div>
 
 {% endblock content %}
