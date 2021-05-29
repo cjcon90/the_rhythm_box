@@ -134,9 +134,14 @@ class Product(models.Model):
 class Rating(models.Model):
     user_id = models.ForeignKey(Account, related_name='ratings', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='ratings', on_delete=models.CASCADE)
-    rating = models.IntegerField(validators=[
-        MinValueValidator(1),
-        MaxValueValidator(5)])
+
+    class Stars(models.IntegerChoices):
+        one_star = 20
+        two_star = 40
+        three_star = 60
+        four_star = 80
+        five_star = 100
+    rating = models.IntegerField(choices=Stars.choices)
     date_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)
 
     class Meta:
@@ -147,7 +152,6 @@ class Rating(models.Model):
         return f"{self.user_id}: {self.product}"
 
     def save(self, *args, **kwargs):
-        self.rating = self.rating * 20
         super().save(*args, **kwargs)
 
 
