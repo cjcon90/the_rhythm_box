@@ -141,6 +141,7 @@ class Rating(models.Model):
         three_star = 60
         four_star = 80
         five_star = 100
+        
     rating = models.IntegerField(choices=Stars.choices)
     date_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)
 

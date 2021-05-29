@@ -7,47 +7,56 @@
 
 {% block content %}
 
-    {% comment %} PRODUCT INFO SECTION (images, price, description, stock, reviews & add to cart) {% endcomment %}
+    {% comment %} ============ PRODUCT INFO SECTION ========== {% endcomment %}
+
     <div class="product-info">
+
         <div class="product-info__images">
             <img src="{{ product.brand.logo.url }}" alt="" class="product-info__images--brand">
             <img src="{{ product.image.url }}" alt="" class="product-info__images--product">
         </div>
+
         <div class="product-info__title">
             <h3 class="product-info__title--price t2 bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
             <h2 class="product-info__title--text bold t2">{{ product.title }}</h2>
         </div>
+
         <div class="product-info__reviews">
             {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
-            <h2 class="product-info__reviews--average t3 bold">{{product.get_average_rating_decimal|floatformat:-1}}</h2>
+            <h2 class="product-info__reviews--average t3 bold">{{product.get_average_rating_decimal|floatformat:-1}} / 5</h2>
             <p class="product-info__reviews--number t7 regular">{{product.get_rating_count}}</p>
         </div>
+
         <form class="product-info__nums">
             <div class="product-info__nums--quantity">
                 <span class="input-number-decrement">–</span>
                 <input class="input-number" type="text" value="1" max="{{product.stock}}">
                 <span class="input-number-increment">+</span>
             </div>
+
             {% if product.stock %}
             <p class="product__nums--stock t7 bold">{{product.stock}} in stock</p>
             {% else %}
             <p class="product__nums--stock--out t7 bold upper">Out of stock</p>
             {% endif %}
+
             <button type="submit" class="product-info__nums--submit btn btn--black bold t6">Add to Cart</button>
         </form>
+
         <div class="product-info__description">
             <h3 class="product-info__description--heading t2 bold">Description</h3>
             <p class="product-info__description--text regular t6">{{ product.description }}</p>
-
         </div>
+
     </div>
     <hr>
 
-    {% comment %} PRODUCT REVIEW SECTION {% endcomment %}
+    {% comment %} ============ PRODUCT REVIEW SECTION ========== {% endcomment %}
 
-    {% comment %} WRITE, FILTER & SORT BUTTONS {% endcomment %}
+    {% comment %} STAR RATING BUTTONS {% endcomment %}
     <div class="reviews-buttons">
-        <form class="reviews-buttons__rate star-rate">
+        <form action="{% url 'rate_product' product.pk %}?next={{ request.path }}" class="reviews-buttons__rate star-rate" method='POST'>
+        {% csrf_token %}
             <fieldset class="rating-group">
                 <input disabled class="rating__input rating__input--none" name="star-rating" id="star-rating-none" value="0" type="radio" {% if not user_rating %}checked{% endif %}>
                     {% for i in rating_options %}
@@ -58,6 +67,7 @@
             <button type="submit" class="btn btn--white t6 regular dropdown__button"><i class="fas fa-star-half-alt"></i> Submit rating</button>
         </form>
 
+        {% comment %} SORT & FILTER REVIEWS {% endcomment %}
         <div class="reviews-buttons__filter dropdown">
             <button id="reviews-filter-button" class="btn btn--white t6 regular dropdown__button">Filter by rating<i class="fas fa-chevron-down"></i></button>
             <div id="reviews-filter-list" class="filters__sort--list dropdown__list">
@@ -67,6 +77,7 @@
                 <a href="#" class="dropdown__list--link regular t7">Newest Items</a>
             </div>
         </div>
+
         <div class="reviews-buttons__sort dropdown">
             <button id="reviews-sort-button" class="btn btn--white t6 regular dropdown__button">Sort Reviews<i class="fas fa-chevron-down"></i></button>
             <div id="reviews-sort-list" class="filters__sort--list dropdown__list">
@@ -81,8 +92,9 @@
     {% comment %} PRODUCT REVIEWS {% endcomment %}
     <div class="reviews-section">
         <h2 class="reviews-section__heading t5 bold">{{product.get_review_count}}</h2>
-        {% comment %} DISPLAY EACH REVIEW (IF EXISTS) {% endcomment %}
+        
         {% if reviews.count > 0 %}
+        {% comment %} DISPLAY EACH REVIEW (IF EXISTS) {% endcomment %}
             {% for review in reviews %}
                 <div class="review">
                     <p class="review-author regular t8">{{ review.rating.user_id.first_name }} {{ review.rating.user_id.last_name|first }}.</p>
@@ -91,17 +103,21 @@
                     <p class="review-headline bold t7">{{review.headline}}</p>
                     <p class="review-text regular t7">{{review.content}}</p>
                 </div>
+
                 {% if review.rating.user_id == request.user %}
+                {% comment %} ADD AN EDIT REVIEW BUTTON IF REVIEW BELONGS TO USER {% endcomment %}
                     <a href="" class="reviews-section__button btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Edit review</a>
                 {% endif %}
             {% endfor %}
         {% endif %}
-        {% if not my_review %}
+
+        {% if not user_review %}
+        {% comment %} ADD REVIEW BUTTON IF NONE BY USER {% endcomment %}
             <a href="" class="reviews-section__button btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
         {% endif %}
     </div>
-
 {% endblock content %}
+
 
 {% block js %}
 <script type="module" src="{% static 'store/scripts/productPage.js' %}"></script>
