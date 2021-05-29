@@ -40,10 +40,13 @@
     {% comment %} PRODUCT REVIEW SECTION {% endcomment %}
     <div class="reviews">
         <div class="reviews-nums">
+            {% comment %} AVERAGE RATING {% endcomment %}
             <h2 class="reviews-nums__average t1 bold">4.8</h2>
             {% include 'products/_star-rating.html' %}
         </div>
     </div>
+
+    {% comment %} WRITE, FILTER & SORT BUTTONS {% endcomment %}
     <div class="reviews-buttons">
         <div class="reviews-buttons__write">
             <a href="" class="btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
@@ -68,20 +71,28 @@
             </div>
         </div>
     </div>
+
+    {% comment %} PRODUCT REVIEWS {% endcomment %}
     <div class="reviews-section">
-        <h2 class="reviews-section__heading t5 bold">15 Reviews</h2>
+        {% comment %} CORRECTLY FORMAT REVIEW SECTION HEADING {% endcomment %}
+        {% if product.reviews.count == 0 %}
+            <h2 class="reviews-section__heading t5 bold">No Reviews Yet!</h2>
+            {% elif product.reviews.count == 1 %}
+            <h2 class="reviews-section__heading t5 bold">{{product.reviews.count}} Review</h2>
+            {% else %}
+            <h2 class="reviews-section__heading t5 bold">{{product.reviews.count}} Reviews</h2>
+        {% endif %}
+        {% comment %} DISPLAY EACH REVIEW (IF EXISTS) {% endcomment %}
         {% if product.reviews.count > 0 %}
-        {% for review in product.reviews.all %}
-        <div class="review">
-            <p class="review-author regular t8">{{review.author.first_name}} {{ review.author.last_name|first }}.</p>
-            <p class="review-date light t7">{{review.date_added|date:'d.m.Y'}}</p>
-            {% include 'products/_star-rating-sm.html' with rating=review.rating%}
-            <p class="review-headline bold t7">{{review.headline}}</p>
-            <p class="review-text regular t7">{{review.content}}</p>
-        </div>
-        {% endfor %}
-        {% else %}
-        <p>no reviews yet!</p>
+            {% for review in product.reviews.all %}
+                <div class="review">
+                    <p class="review-author regular t8">{{review.author.first_name}} {{ review.author.last_name|first }}.</p>
+                    <p class="review-date light t7">{{review.date_added|date:'d.m.Y'}}</p>
+                    {% include 'products/_star-rating-sm.html' with rating=review.rating%}
+                    <p class="review-headline bold t7">{{review.headline}}</p>
+                    <p class="review-text regular t7">{{review.content}}</p>
+                </div>
+            {% endfor %}
         {% endif %}
     </div>
 

@@ -1,8 +1,11 @@
 from io import BytesIO
 from django.core.files import File
 from django.db import models
+from django.db.models import Avg
 from PIL import Image
 from django.template.defaultfilters import slugify
+from django.core.validators import MinValueValidator, MaxValueValidator
+from accounts.models import Account
 
 class Category(models.Model):
     title = models.CharField(max_length=255)
@@ -70,6 +73,7 @@ class Brand(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     subcategory = models.ForeignKey(Subcategory, related_name='subcategory', blank=True, on_delete=models.CASCADE)
@@ -106,3 +110,28 @@ class Product(models.Model):
         thumbnail = File(thumb_io, name=image.name)
         return thumbnail
 
+    def average_rating(self):
+        reviews = Review.objects.filter(product=self).aggregate(rating_avg=Avg('rating'))
+        return (reviews['rating_avg'])
+
+
+class Review(models.Model):
+    author = models.ForeignKey(Account, related_name='reviews', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    date_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)
+    rating = models.IntegerField(validators=[
+        MinValueValidator(1),
+        MaxValueValidator(5)])
+    headline = models.CharField(max_length=50, blank=False)
+    content = models.TextField()
+
+    class Meta:
+        verbose_name_plural = 'Reviews'
+        ordering = ('date_added','author')
+    
+    def __str__(self):
+        return f"{self.author}: {self.product}"
+
+    def save(self, *args, **kwargs):
+        self.rating = self.rating * 20
+        super().save(*args, **kwargs)
