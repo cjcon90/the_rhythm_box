@@ -5,8 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'store/css/main.css' %}">
+    <!-- Primary Meta Tags -->
     <title>The RhythmBox - {% block title %}{% endblock title %}</title>
+    <meta name="title" content="The RhythmBox">
+    <meta name="description" content="The RhythmBox is an ecommerce store for professional-grade drums, cymbals and drumming equipment">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    {% comment %} <meta property="og:url" content="https://www.cjcon90.dev/"> {% endcomment %}
+    <meta property="og:title" content="The RhythmBox">
+    <meta property="og:description" content="The RhythmBox is an ecommerce store for professional-grade drums, cymbals and drumming equipment">
+    {% comment %} <meta property="og:image" content="https://res.cloudinary.com/cjcon90/image/upload/v1616015377/hot_dogz/og_preview_image.png"> {% endcomment %}
+
+    <!-- Twitter -->
+    {% comment %} <meta property="twitter:card" content="summary_large_image"> {% endcomment %}
+    {% comment %} <meta property="twitter:url" content="https://hot-dogz.herokuapp.com/"> {% endcomment %}
+    <meta property="twitter:title" content="The RhythmBox">
+    <meta property="twitter:description" content="The RhythmBox is an ecommerce store for professional-grade drums, cymbals and drumming equipment">
+    {% comment %} <meta property="twitter:image" content="https://res.cloudinary.com/cjcon90/image/upload/v1616015377/hot_dogz/og_preview_image.png"> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'store/css/main.css' %}">
 </head>
 <body>
         <nav class="nav">
@@ -82,7 +99,7 @@
             <h3 class="navigate__heading bold upper t4">Navigate</h3>
             <div class="navigate__sections">
                 <div class="navigate__section">
-                    <h5 class="navigate__section--heading t6 regular">Department</h5>
+                    <p class="navigate__section--heading t6 regular">Department</p>
                     <div class="navigate__section--text t7 regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
@@ -100,7 +117,7 @@
                     </div>
                 </div>
                 <div class="navigate__section">
-                    <h5 class="navigate__section--heading t6 regular">Department</h5>
+                    <p class="navigate__section--heading t6 regular">Department</p>
                     <div class="navigate__section--text t7 regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
@@ -118,7 +135,7 @@
                     </div>
                 </div>
                 <div class="navigate__section">
-                    <h5 class="navigate__section--heading t6 regular">Department</h5>
+                    <p class="navigate__section--heading t6 regular">Department</p>
                     <div class="navigate__section--text t7 regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
@@ -136,7 +153,7 @@
                     </div>
                 </div>
                 <div class="navigate__section">
-                    <h5 class="navigate__section--heading t6 regular">Department</h5>
+                    <p class="navigate__section--heading t6 regular">Department</p>
                     <div class="navigate__section--text t7 regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
@@ -156,7 +173,7 @@
             </div>
         </div>
         <div class="contact regular t8">
-            <h5 class="contact__heading upper t7">Rhythmbox Stores</h5>
+            <p class="contact__heading upper t7">Rhythmbox Stores</p>
             <p class="contact__address">14 South Dock Avenue, Grand Canal Dock, Dublin 4, Ireland</p>
             <p class="contact__number">+353 01 1234 567</p>
             <p class="contact__email">therhythmbox@gmail.com</p>

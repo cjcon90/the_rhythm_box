@@ -88,15 +88,15 @@
             {% comment %} PRODUCT LINK (for items without a type) {% endcomment %}
                 <a href=
                 "{% url 'product_page' product.category.slug product.subcategory.slug product.type.slug product.slug %}"
-                class="product__buttons--info btn btn--white t5 bold">More Info</a>
+                class="product__buttons--info btn btn--white t5 bold">Product Info</a>
 
             {% else %}
             {% comment %} PRODUCT LINK (for items with a type) {% endcomment %}
                 <a href=
                 "{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
-                class="product__buttons--info btn btn--white t5 bold">More Info</a>
+                class="product__buttons--info btn btn--white t5 bold">Product Info</a>
             {% endif %}
-                <a href="" class="product__buttons--cart btn btn--black t5 regular">Add to Cart</a>
+                <a href="#" class="product__buttons--cart btn btn--black t5 regular">Add to Cart</a>
             </div>
         </div>
     {% endfor %}
