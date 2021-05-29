@@ -1177,10 +1177,10 @@ readers do not read off random characters that represent icons */
 // .#{$fa-css-prefix}-stack-overflow:before { content: fa-content($fa-var-stack-overflow); }
 // .#{$fa-css-prefix}-stackpath:before { content: fa-content($fa-var-stackpath); }
 // .#{$fa-css-prefix}-stamp:before { content: fa-content($fa-var-stamp); }
-// .#{$fa-css-prefix}-star:before { content: fa-content($fa-var-star); }
+.#{$fa-css-prefix}-star:before { content: fa-content($fa-var-star); }
 // .#{$fa-css-prefix}-star-and-crescent:before { content: fa-content($fa-var-star-and-crescent); }
 // .#{$fa-css-prefix}-star-half:before { content: fa-content($fa-var-star-half); }
-// .#{$fa-css-prefix}-star-half-alt:before { content: fa-content($fa-var-star-half-alt); }
+.#{$fa-css-prefix}-star-half-alt:before { content: fa-content($fa-var-star-half-alt); }
 // .#{$fa-css-prefix}-star-of-david:before { content: fa-content($fa-var-star-of-david); }
 // .#{$fa-css-prefix}-star-of-life:before { content: fa-content($fa-var-star-of-life); }
 // .#{$fa-css-prefix}-staylinked:before { content: fa-content($fa-var-staylinked); }

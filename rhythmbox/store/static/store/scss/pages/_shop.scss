@@ -37,6 +37,8 @@
             width: calc(100% - 2rem);
         }
         &--button {
+            display: flex;
+            justify-content: space-between;
             height: 100%;
         }
     }

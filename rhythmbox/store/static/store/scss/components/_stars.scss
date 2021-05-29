@@ -31,3 +31,62 @@
         z-index: 0;
     }
 }
+
+// source: https://codepen.io/andreacrawford/pen/NvqJXW
+.star-rate {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+
+    .rating-group {
+        display: inline-flex;
+        border: none;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    /* make hover effect work properly in IE */
+    .rating__icon {
+        pointer-events: none;
+    }
+
+    /* hide radio inputs */
+    .rating__input {
+        display: none;
+    }
+
+    /* hide 'none' input from screenreaders */
+    .rating__input--none {
+        display: none
+    }
+
+    /* set icon padding and size */
+    .rating__label {
+        cursor: pointer;
+        padding: 0 0.1em;
+        font-size: 2.5rem;
+    }
+
+    /* set default star color */
+    .rating__icon--star {
+        color: $color-primary;
+    }
+
+    /* if any input is checked, make its following siblings grey */
+    .rating__input:checked ~ .rating__label .rating__icon--star {
+        color: $color-black-light;
+    }
+
+    /* make all stars orange on rating group hover */
+    .rating-group:hover .rating__label .rating__icon--star {
+        color: $color-primary;
+    }
+
+    /* make hovered input's following siblings grey on hover */
+    .rating__input:hover ~ .rating__label .rating__icon--star {
+        color: $color-black-light;
+    }
+}

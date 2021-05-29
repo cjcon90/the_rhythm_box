@@ -1,10 +1,7 @@
-from products.models import Product, Category, Subcategory, Type, Brand
+from products.models import Product, Category, Brand
 from django.db.models import Q
 from django.shortcuts import render
-from urllib.parse import urlparse, urlunparse
-from django.http import QueryDict
 from django.core.paginator import Paginator
-from django.db.models import Avg
 
 
 
@@ -27,12 +24,11 @@ def shop(request, category=None, subcategory=None, type=None):
     elif category:
         q &= Q(category__slug=category)
 
-    order = request.GET.get('order_by') or '-date_added' # '?order_by=*param'
-    # if order == 'rating':
-    #     products = sorted(Product.objects.filter(q), key= lambda p: p.get_average_rating(), reverse=True)
-    # else:
-    #     products = Product.objects.filter(q).order_by(order)
-    products = Product.objects.filter(q).order_by(order)
+    order = request.GET.get('order_by') or 'rating' # '?order_by=*param'
+    if order == 'rating':
+        products = sorted(Product.objects.filter(q), key=lambda p: p.get_average_rating(), reverse=True)
+    else:
+        products = Product.objects.filter(q).order_by(order)
     paginator = Paginator(products, 9)
     page_num = request.GET.get('page')
     context['page_obj'] = paginator.get_page(page_num)

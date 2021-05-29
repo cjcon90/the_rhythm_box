@@ -19,7 +19,8 @@
         </div>
         <div class="product-info__reviews">
             {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
-            <div class="product-info__reviews--count regular t6"><p>{{product.get_rating_count}}</p></div>
+            <h2 class="product-info__reviews--average t3 bold">{{product.get_average_rating_decimal|floatformat:-1}}</h2>
+            <p class="product-info__reviews--number t7 regular">{{product.get_rating_count}}</p>
         </div>
         <form class="product-info__nums">
             <div class="product-info__nums--quantity">
@@ -34,23 +35,34 @@
             {% endif %}
             <button type="submit" class="product-info__nums--submit btn btn--black bold t6">Add to Cart</button>
         </form>
+        <div class="product-info__description">
+            <h3 class="product-info__description--heading t2 bold">Description</h3>
+            <p class="product-info__description--text regular t6">{{ product.description }}</p>
+
+        </div>
     </div>
     <hr>
 
     {% comment %} PRODUCT REVIEW SECTION {% endcomment %}
-    <div class="reviews">
-        <div class="reviews-nums">
-            {% comment %} AVERAGE RATING {% endcomment %}
-            <h2 class="reviews-nums__average t1 bold">{{product.get_average_rating_decimal}}</h2>
-            {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
-        </div>
-    </div>
 
     {% comment %} WRITE, FILTER & SORT BUTTONS {% endcomment %}
     <div class="reviews-buttons">
-        <div class="reviews-buttons__write">
-            <a href="" class="btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
-        </div>
+        <form class="reviews-buttons__rate star-rate">
+            <fieldset class="rating-group">
+                <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio">
+                <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                <input class="rating__input" name="rating3" id="rating3-1" value="1" type="radio">
+                <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                <input class="rating__input" name="rating3" id="rating3-2" value="2" type="radio">
+                <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                <input class="rating__input" name="rating3" id="rating3-3" value="3" type="radio">
+                <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                <input class="rating__input" name="rating3" id="rating3-4" value="4" type="radio">
+                <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                <input class="rating__input" name="rating3" id="rating3-5" value="5" type="radio">
+            </fieldset>
+            <button type="submit" class="btn btn--white t6 regular dropdown__button"><i class="fas fa-star-half-alt"></i> Submit rating</button>
+        </form>
 
         <div class="reviews-buttons__filter dropdown">
             <button id="reviews-filter-button" class="btn btn--white t6 regular dropdown__button">Filter by rating<i class="fas fa-chevron-down"></i></button>
@@ -86,6 +98,11 @@
                     <p class="review-text regular t7">{{review.content}}</p>
                 </div>
             {% endfor %}
+        {% endif %}
+        {% if not my_review %}
+            <a href="" class="reviews-section__button btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
+        {% else %}
+            <a href="" class="reviews-section__button btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Edit review</a>
         {% endif %}
     </div>
 

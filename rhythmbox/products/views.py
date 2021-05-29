@@ -7,5 +7,6 @@ def product_page(request, category=None, subcategory=None, type=None, product=No
     context = {}
     context['product'] = product
     context['reviews'] = Review.objects.filter(rating__product=product)
-
+    if request.user.is_authenticated:
+        context['my_review'] = context['reviews'].filter(rating__user_id=request.user)
     return render(request, 'products/product_page.html', context)

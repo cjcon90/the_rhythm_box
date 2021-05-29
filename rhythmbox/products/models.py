@@ -114,6 +114,10 @@ class Product(models.Model):
         ratings = (Rating.objects.filter(product=self).aggregate(rating_avg=Avg('rating')))
         return ((ratings['rating_avg'])) or 0
 
+    def get_average_rating_decimal(self):
+        ratings = (Rating.objects.filter(product=self).aggregate(rating_avg=Avg('rating')))
+        return self.get_average_rating() / 20
+
     def get_rating_count(self):
         count = Rating.objects.filter(product=self).count()
         return self.return_count('rating', count)
