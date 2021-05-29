@@ -18,8 +18,8 @@
             <h2 class="product-info__title--text bold t2">{{ product.title }}</h2>
         </div>
         <div class="product-info__reviews">
-            {% include 'products/_star-rating.html' %}
-            <div class="product-info__reviews--count regular t6"><p>15 Reviews</p></div>
+            {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
+            <div class="product-info__reviews--count regular t6"><p>{{product.get_rating_count}}</p></div>
         </div>
         <form class="product-info__nums">
             <div class="product-info__nums--quantity">
@@ -41,8 +41,8 @@
     <div class="reviews">
         <div class="reviews-nums">
             {% comment %} AVERAGE RATING {% endcomment %}
-            <h2 class="reviews-nums__average t1 bold">4.8</h2>
-            {% include 'products/_star-rating.html' %}
+            <h2 class="reviews-nums__average t1 bold">{{product.get_average_rating_decimal}}</h2>
+            {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
         </div>
     </div>
 
@@ -74,21 +74,14 @@
 
     {% comment %} PRODUCT REVIEWS {% endcomment %}
     <div class="reviews-section">
-        {% comment %} CORRECTLY FORMAT REVIEW SECTION HEADING {% endcomment %}
-        {% if product.reviews.count == 0 %}
-            <h2 class="reviews-section__heading t5 bold">No Reviews Yet!</h2>
-            {% elif product.reviews.count == 1 %}
-            <h2 class="reviews-section__heading t5 bold">{{product.reviews.count}} Review</h2>
-            {% else %}
-            <h2 class="reviews-section__heading t5 bold">{{product.reviews.count}} Reviews</h2>
-        {% endif %}
+        <h2 class="reviews-section__heading t5 bold">{{product.get_review_count}}</h2>
         {% comment %} DISPLAY EACH REVIEW (IF EXISTS) {% endcomment %}
-        {% if product.reviews.count > 0 %}
-            {% for review in product.reviews.all %}
+        {% if reviews.count > 0 %}
+            {% for review in reviews %}
                 <div class="review">
-                    <p class="review-author regular t8">{{review.author.first_name}} {{ review.author.last_name|first }}.</p>
+                    <p class="review-author regular t8">{{ review.rating.user_id.first_name }} {{ review.rating.user_id.last_name|first }}.</p>
                     <p class="review-date light t7">{{review.date_added|date:'d.m.Y'}}</p>
-                    {% include 'products/_star-rating-sm.html' with rating=review.rating%}
+                    {% include 'products/_star-rating-sm.html' with rating=review.rating.rating %}
                     <p class="review-headline bold t7">{{review.headline}}</p>
                     <p class="review-text regular t7">{{review.content}}</p>
                 </div>

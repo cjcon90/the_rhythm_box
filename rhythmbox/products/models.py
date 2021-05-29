@@ -110,28 +110,52 @@ class Product(models.Model):
         thumbnail = File(thumb_io, name=image.name)
         return thumbnail
 
-    def average_rating(self):
-        reviews = Review.objects.filter(product=self).aggregate(rating_avg=Avg('rating'))
-        return (reviews['rating_avg'])
+    def get_average_rating(self):
+        ratings = (Rating.objects.filter(product=self).aggregate(rating_avg=Avg('rating')))
+        return ((ratings['rating_avg'])) or 0
 
+    def get_rating_count(self):
+        count = Rating.objects.filter(product=self).count()
+        return self.return_count('rating', count)
 
-class Review(models.Model):
-    author = models.ForeignKey(Account, related_name='reviews', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
-    date_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)
+    def get_review_count(self):
+        count = Review.objects.filter(rating__product=self).count()
+        return self.return_count('review', count)
+
+    def return_count(self, str, count):
+        if count == 0: return f'No {str}s yet'
+        elif count == 1: return f'1 {str.title()}'
+        else: return f"{count} {str.title()}s"
+
+class Rating(models.Model):
+    user_id = models.ForeignKey(Account, related_name='ratings', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='ratings', on_delete=models.CASCADE)
     rating = models.IntegerField(validators=[
         MinValueValidator(1),
         MaxValueValidator(5)])
+    date_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Ratings'
+        ordering = ('date_added','user_id')
+
+    def __str__(self):
+        return f"{self.user_id}: {self.product}"
+
+    def save(self, *args, **kwargs):
+        self.rating = self.rating * 20
+        super().save(*args, **kwargs)
+
+
+class Review(models.Model):
+    rating = models.ForeignKey(Rating, related_name='reviews', on_delete=models.CASCADE)
+    date_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)
     headline = models.CharField(max_length=50, blank=False)
     content = models.TextField()
 
     class Meta:
         verbose_name_plural = 'Reviews'
-        ordering = ('date_added','author')
+        ordering = ('date_added',)
     
     def __str__(self):
-        return f"{self.author}: {self.product}"
-
-    def save(self, *args, **kwargs):
-        self.rating = self.rating * 20
-        super().save(*args, **kwargs)
+        return f"{self.rating.user_id}: {self.headline}"
