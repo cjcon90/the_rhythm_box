@@ -6,7 +6,7 @@
 
 {% block content %} 
     <h2 class="section__heading upper bold">Login</h2>
-    <form method="post" class="form" novalidate>
+    <form method="POST" action="{% url 'login' %}" class="form" novalidate>
         {% csrf_token %}
 
         {% for field in login_form %}
@@ -17,6 +17,10 @@
             <span class="form__error t7 bold">{{ error }}</span>
             {% endfor %}
         </fieldset>
+        {% endfor %}
+
+        {% for error in field.errors %}
+            <span class="form__error t7 bold">{{ error }}</span>
         {% endfor %}
 
         <fieldset class="form__group">
