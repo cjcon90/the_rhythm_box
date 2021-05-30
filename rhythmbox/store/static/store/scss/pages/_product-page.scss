@@ -29,9 +29,8 @@
     &__reviews {
         padding: 0 2rem;
         display: flex;
-        gap: 3rem;
         align-items: baseline;
-        justify-content: flex-start;
+        justify-content: space-between;
         color: $color-black-semi;
 
     }

@@ -23,7 +23,7 @@
 
         <div class="product-info__reviews">
             {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
-            <h2 class="product-info__reviews--average t3 bold">{{product.get_average_rating_decimal|floatformat:-1}} / 5</h2>
+            <h2 class="product-info__reviews--average t4 bold">{{product.get_average_rating_decimal|floatformat:-1}} / 5</h2>
             <p class="product-info__reviews--number t7 regular">{{product.get_rating_count}}</p>
         </div>
 

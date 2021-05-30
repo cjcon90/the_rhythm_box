@@ -1,9 +1,8 @@
-from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Product, Rating, Review
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.utils.http import is_safe_url
+from django.contrib import messages
+
 
 
 
@@ -44,4 +43,5 @@ def rate_product(request, product_id):
         r.rating = rating
         r.save()
     # TODO: create success message
+    messages.info(request, f'Rated "{product.title}" {int(rating) // 20} stars')
     return redirect(request.GET.get('next'))

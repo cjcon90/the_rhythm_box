@@ -77,6 +77,15 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags %}
+                {% include 'store/_toast.html' with message=message tag=message.tags %}
+            {% else %}
+                {% include 'store/_toast.html' with message=message %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     <footer class="footer">
         <div class="connect">
             <div class="connect__heading">

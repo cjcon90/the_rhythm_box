@@ -228,7 +228,7 @@ readers do not read off random characters that represent icons */
 // .#{$fa-css-prefix}-chart-bar:before { content: fa-content($fa-var-chart-bar); }
 // .#{$fa-css-prefix}-chart-line:before { content: fa-content($fa-var-chart-line); }
 // .#{$fa-css-prefix}-chart-pie:before { content: fa-content($fa-var-chart-pie); }
-// .#{$fa-css-prefix}-check:before { content: fa-content($fa-var-check); }
+.#{$fa-css-prefix}-check:before { content: fa-content($fa-var-check); }
 // .#{$fa-css-prefix}-check-circle:before { content: fa-content($fa-var-check-circle); }
 // .#{$fa-css-prefix}-check-double:before { content: fa-content($fa-var-check-double); }
 // .#{$fa-css-prefix}-check-square:before { content: fa-content($fa-var-check-square); }

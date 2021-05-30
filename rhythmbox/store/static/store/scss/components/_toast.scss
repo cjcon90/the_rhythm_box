@@ -1,0 +1,42 @@
+.toast {
+    width: 90%;
+    margin: auto;
+    background-color: white;
+    border: solid .1rem $color-black;
+    text-align: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;right:0;
+    bottom: 3rem;
+    display: flex;
+    animation: toast-fade-in 0.5s, toast-fade-out 0.5s 3s forwards;
+
+    &__info{
+        min-width: 5rem;
+        min-height: 100%;
+        padding: 1.5rem 0;
+        font-size: 2rem;
+        display: grid;
+        place-items: center;
+    }
+
+    &-star {
+        background-color: $color-black;
+        color: $color-primary;
+    }
+
+    &-check {
+        background-color: $color-success;
+        color: white;   
+    }
+
+    &__message {
+        color: $color-black;
+        padding: 1.5rem;
+        font-size: 1.8rem;
+        overflow: hidden;
+    }
+}
+
+
+

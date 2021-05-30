@@ -24,3 +24,17 @@
 .nav-list-appear {
     animation: moveInBottom .9s ease-in-out both;
 }
+
+// TOAST ANIMATIONS
+
+
+@keyframes toast-fade-in {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 3rem; opacity: 1;}
+}
+
+
+@keyframes toast-fade-out {
+    from {bottom: 3rem; opacity: 1;}
+    to {bottom: 6rem; opacity: 0;}
+}
