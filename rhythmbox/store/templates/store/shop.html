@@ -70,7 +70,7 @@
                 {% comment %} STAR RATING {% endcomment %}
                 {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
                 {% comment %} REVIEW COUNT {% endcomment %}
-                <div class="product__reviews--count regular t9"><p>{{product.get_rating_count}}</p></div>
+                <div class="product__reviews--count regular t9"><p>{% display_count 'rating' product.get_rating_count %}</p></div>
             </div>
             <div class="product__nums">
                 {% comment %} PRODUCT PRICE AND STOCK {% endcomment %}

@@ -30,6 +30,10 @@
         background-color: $color-success;
         color: white;   
     }
+    &-times-circle {
+        background-color: red;
+        color: white;
+    }
 
     &__message {
         color: $color-black;

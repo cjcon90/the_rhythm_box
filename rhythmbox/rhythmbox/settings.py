@@ -109,7 +109,8 @@ DATABASES = {
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'check',
-    messages.INFO: 'star'
+    messages.INFO: 'star',
+    messages.ERROR: 'times-circle',
 }
 
 

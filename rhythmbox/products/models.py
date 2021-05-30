@@ -84,7 +84,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products',
                                  on_delete=models.CASCADE)
     subcategory = models.ForeignKey(Subcategory, related_name='subcategory',
-                                    blank=True, on_delete=models.CASCADE)
+                                    on_delete=models.CASCADE)
     type = models.ForeignKey(Type, related_name='type', null=True, blank=True,
                              on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
@@ -131,20 +131,10 @@ class Product(models.Model):
         return self.get_average_rating() / 20
 
     def get_rating_count(self):
-        count = Rating.objects.filter(product=self).count()
-        return self.return_count('rating', count)
+        return Rating.objects.filter(product=self).count()
 
     def get_review_count(self):
-        count = Review.objects.filter(rating__product=self).count()
-        return self.return_count('review', count)
-
-    def return_count(self, count_type, count):
-        if count == 0:
-            return f'No {count_type}s yet'
-        elif count == 1:
-            return f'1 {count_type.title()}'
-        else:
-            return f"{count} {count_type.title()}s"
+        return Review.objects.filter(rating__product=self).count()
 
 
 class Rating(models.Model):
@@ -154,11 +144,11 @@ class Rating(models.Model):
                                 on_delete=models.CASCADE)
 
     class Stars(models.IntegerChoices):
-        one_star = 20
-        two_star = 40
-        three_star = 60
-        four_star = 80
-        five_star = 100
+        ONE = 20, '⭐'
+        TWO = 40, '⭐⭐'
+        THREE = 60, '⭐⭐⭐'
+        FOUR = 80, '⭐⭐⭐⭐'
+        FIVE = 100, '⭐⭐⭐⭐⭐'
 
     rating = models.IntegerField(choices=Stars.choices)
     date_added = models.DateTimeField(verbose_name='date added',
@@ -178,10 +168,10 @@ class Rating(models.Model):
 class Review(models.Model):
     rating = models.ForeignKey(Rating, related_name='reviews',
                                on_delete=models.CASCADE)
+    headline = models.CharField(max_length=50)
+    content = models.TextField(max_length=500)
     date_added = models.DateTimeField(verbose_name='date added',
                                       auto_now_add=True)
-    headline = models.CharField(max_length=50, blank=False)
-    content = models.TextField()
 
     class Meta:
         verbose_name_plural = 'Reviews'

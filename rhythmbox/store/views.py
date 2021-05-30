@@ -23,7 +23,7 @@ def shop(request, category=None, subcategory=None, type=None):
     elif category:
         q &= Q(category__slug=category)
 
-    order = request.GET.get('order_by') or 'rating' # '?order_by=*param'
+    order = request.GET.get('order_by') or '-date_added' # '?order_by=*param'
     if order == 'rating':
         products = sorted(Product.objects.filter(q), key=lambda p: p.get_average_rating(), reverse=True)
     else:

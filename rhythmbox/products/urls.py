@@ -2,6 +2,7 @@ from django.urls import path
 from .views import (
     product_page,
     rate_product,
+    review_product
 )
 
 urlpatterns = [
@@ -12,5 +13,7 @@ urlpatterns = [
         'shop/<slug:category>/<slug:subcategory>/<slug:type>/<slug:product>',
         product_page, name="product_page"),
     path(
-        'rate/<int:product_id>', rate_product, name="rate_product")
+        'rate/<int:product_id>', rate_product, name="rate_product"),
+    path(
+        'review/<slug:product_slug>', review_product, name="review_product")
 ]

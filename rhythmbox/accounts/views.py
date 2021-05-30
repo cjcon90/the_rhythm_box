@@ -16,8 +16,7 @@ def registration_view(request):
             account = authenticate(email=email, password=raw_password)
             login(request, account)
             messages.success(request, mark_safe(
-                f'Thanks for registering, {request.user.first_name}!<br/>'
-                f'You are now logged in 🙂'))
+                f'Thanks for registering, {request.user.first_name}!<br/>You are now logged in 🙂'))
             return redirect('home')
         else:
             context['registration_form'] = form
@@ -33,28 +32,31 @@ def logout_view(request):
 
 
 def login_view(request):
+
     context = {}
 
     user = request.user
     if user.is_authenticated:
         return redirect("home")
 
-    if request.method == 'POST':
+    if request.POST:
         form = AccountAuthenticationForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
             password = request.POST['password']
             user = authenticate(email=email, password=password)
-            if user is not None:
+            if user:
                 login(request, user)
                 messages.success(request, mark_safe(
                     f'Welcome back, {request.user.first_name}! 🙂'))
                 return redirect("home")
         else:
-            messages.error(request, "Whoops! Something doesn't seem "
-                                    "right. Please check your login "
-                                    "details.")
+            messages.error(request, mark_safe(
+                f"Incorrect login details"))
+            return redirect('login')
+
     else:
         form = AccountAuthenticationForm()
+
     context['login_form'] = form
     return render(request, 'accounts/login.html', context)
