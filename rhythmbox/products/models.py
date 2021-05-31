@@ -21,6 +21,9 @@ class Category(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        """
+        Overwrite default save and create product slug
+        """
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
@@ -136,6 +139,14 @@ class Product(models.Model):
     def get_review_count(self):
         return Review.objects.filter(rating__product=self).count()
 
+    def get_product_url(self):
+        """
+        Creates a redirect url for product
+        based on whether products has a set type or not
+        """
+        url = f"/shop/{self.category.slug}/{self.subcategory.slug}/"
+        return url + f"{self.slug}" if not self.type else url + f"{self.type.slug}/{self.slug}"
+
 
 class Rating(models.Model):
     user_id = models.ForeignKey(Account, related_name='ratings',
@@ -144,11 +155,11 @@ class Rating(models.Model):
                                 on_delete=models.CASCADE)
 
     class Stars(models.IntegerChoices):
-        ONE = 20, '⭐'
-        TWO = 40, '⭐⭐'
-        THREE = 60, '⭐⭐⭐'
-        FOUR = 80, '⭐⭐⭐⭐'
-        FIVE = 100, '⭐⭐⭐⭐⭐'
+        ONE = 20, '★☆☆☆☆'
+        TWO = 40, '★★☆☆☆'
+        THREE = 60, '★★★☆☆'
+        FOUR = 80, '★★★★☆'
+        FIVE = 100, '★★★★★'
 
     rating = models.IntegerField(choices=Stars.choices)
     date_added = models.DateTimeField(verbose_name='date added',
@@ -160,9 +171,6 @@ class Rating(models.Model):
 
     def __str__(self):
         return f"{self.user_id}: {self.product}"
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
 
 
 class Review(models.Model):

@@ -58,8 +58,8 @@ def rate_product(request, product_id):
 def review_product(request, product_slug):
     """
     view for creating or updating product
-    ratings and associated reviews within
-    one single form
+    reviews, along with associated rating,
+    within one single form
     """
 
     context = {}
@@ -82,16 +82,18 @@ def review_product(request, product_slug):
             headline = review_form.cleaned_data['headline']
             content = review_form.cleaned_data['content']
 
+            # Create rating or update if exists
             rating_update_values = {'rating':rating}
             rating_obj, created = Rating.objects.update_or_create(
                 user_id=request.user, product=product,defaults=rating_update_values)
 
+            # Create review or update if exists
             review_update_values = {'headline':headline, 'content':content}
             review_obj, created = Review.objects.update_or_create(
                 rating=rating_obj,defaults=review_update_values)
 
-            # TODO: success message
-            return redirect('home')
+            messages.info(request, f'Review submitted!')
+            return redirect(product.get_product_url())
         else:
             context['rating_form'] = rating_form
             context['review_form'] = review_form

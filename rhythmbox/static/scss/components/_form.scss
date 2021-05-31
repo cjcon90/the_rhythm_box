@@ -1,12 +1,15 @@
 .form {
+    display: flex;
+    flex-direction: column;
+    
     &__group {
         display: flex;
         flex-direction: column;
         border: none;
         padding: 0 1.5rem 2rem 1.5rem;
         gap: .5rem;
-
     }
+
     &__label {
         letter-spacing: 1.5px;
         &--radio {
@@ -18,7 +21,6 @@
         padding: 1rem;
         outline: none;
         background-color: white;
-
         &:active, &:focus {
             border-color: $color-black;
         }

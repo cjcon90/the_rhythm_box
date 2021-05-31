@@ -16,3 +16,6 @@ class ProductReviewForm(forms.ModelForm):
             'headline': 'Review Headline',
             'content': 'Your Review'
         }
+        widgets = {
+          'content': forms.Textarea(attrs={'rows':10, 'cols':'auto'}),
+        }

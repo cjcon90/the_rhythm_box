@@ -54,7 +54,7 @@
 
     {% comment %} ============ PRODUCT REVIEW SECTION ========== {% endcomment %}
 
-    {% comment %} STAR RATING BUTTONS {% endcomment %}
+    {% comment %} STAR RATING {% endcomment %}
     <div class="reviews-buttons">
         <form action="{% url 'rate_product' product.pk %}?next={{ request.path }}" class="reviews-buttons__rate star-rate" method='POST'>
         {% csrf_token %}
@@ -68,8 +68,11 @@
             <button type="submit" class="btn btn--white t6 regular dropdown__button"><i class="fas fa-star-half-alt"></i> Submit rating</button>
         </form>
 
-        {% comment %} SORT & FILTER REVIEWS {% endcomment %}
+        {% comment %} SORT & FILTER REVIEWS - OPTIONAL FEATURE {% endcomment %}
+        {% comment %} TODO: fix grid settings if not including this feature {% endcomment %}
+
         <div class="reviews-buttons__filter dropdown">
+        {% comment %}
             <button id="reviews-filter-button" class="btn btn--white t6 regular dropdown__button">Filter by rating<i class="fas fa-chevron-down"></i></button>
             <div id="reviews-filter-list" class="filters__sort--list dropdown__list">
                 <a href="#" class="dropdown__list--link regular t7">Highest Rated</a>
@@ -77,9 +80,10 @@
                 <a href="#" class="dropdown__list--link regular t7">Price (High to Low)</a>
                 <a href="#" class="dropdown__list--link regular t7">Newest Items</a>
             </div>
+        {% endcomment %}
         </div>
-
         <div class="reviews-buttons__sort dropdown">
+        {% comment %}
             <button id="reviews-sort-button" class="btn btn--white t6 regular dropdown__button">Sort Reviews<i class="fas fa-chevron-down"></i></button>
             <div id="reviews-sort-list" class="filters__sort--list dropdown__list">
                 <a href="#" class="dropdown__list--link regular t7">Highest Rated</a>
@@ -87,7 +91,9 @@
                 <a href="#" class="dropdown__list--link regular t7">Price (High to Low)</a>
                 <a href="#" class="dropdown__list--link regular t7">Newest Items</a>
             </div>
+        {% endcomment %}
         </div>
+
     </div>
 
     {% comment %} PRODUCT REVIEWS {% endcomment %}
@@ -95,7 +101,7 @@
         <h2 class="reviews-section__heading t5 bold">{% display_count 'review' product.get_review_count %}</h2>
         
         {% if reviews.count > 0 %}
-        {% comment %} DISPLAY EACH REVIEW (IF EXISTS) {% endcomment %}
+        {% comment %} display each review (if exists) {% endcomment %}
             {% for review in reviews %}
                 <div class="review">
                     <p class="review-author regular t8">{{ review.rating.user_id.first_name }} {{ review.rating.user_id.last_name|first }}.</p>
@@ -106,14 +112,14 @@
                 </div>
 
                 {% if review.rating.user_id == request.user %}
-                {% comment %} ADD AN EDIT REVIEW BUTTON IF REVIEW BELONGS TO USER {% endcomment %}
+                {% comment %} add 'edit review' button if review belongs to user {% endcomment %}
                     <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Edit review</a>
                 {% endif %}
             {% endfor %}
         {% endif %}
 
         {% if not user_review %}
-        {% comment %} ADD REVIEW BUTTON IF NONE BY USER {% endcomment %}
+        {% comment %} add 'write review' button if user has not yet reviewed {% endcomment %}
             <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
         {% endif %}
     </div>
@@ -121,5 +127,5 @@
 
 
 {% block js %}
-<script type="module" src="{% static 'store/scripts/productPage.js' %}"></script>
+<script type="module" src="{% static 'scripts/productPage.js' %}"></script>
 {% endblock js %}
