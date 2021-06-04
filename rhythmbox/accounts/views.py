@@ -11,24 +11,26 @@ def registration_view(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            email = form.cleaned_data.get('email')
-            raw_password = form.cleaned_data.get('password1')
+            email = form.cleaned_data.get("email")
+            raw_password = form.cleaned_data.get("password1")
             account = authenticate(email=email, password=raw_password)
             login(request, account)
-            messages.success(request,
-                f'Thanks for registering, {request.user.first_name}! You are now logged in 🙂')
-            return redirect('home')
+            messages.success(
+                request,
+                f"Thanks for registering, {request.user.first_name}! You are now logged in 🙂",
+            )
+            return redirect("home")
         else:
-            context['registration_form'] = form
+            context["registration_form"] = form
     else:  # GET request
         form = RegistrationForm()
-        context['registration_form'] = form
-    return render(request, 'accounts/register.html', context)
+        context["registration_form"] = form
+    return render(request, "accounts/register.html", context)
 
 
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return redirect("/")
 
 
 def login_view(request):
@@ -42,20 +44,21 @@ def login_view(request):
     if request.POST:
         form = AccountAuthenticationForm(request.POST)
         if form.is_valid():
-            email = request.POST['email']
-            password = request.POST['password']
+            email = request.POST["email"]
+            password = request.POST["password"]
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
-                messages.success(request,
-                f'Welcome back, {request.user.first_name}! 🙂')
+                messages.success(
+                    request, f"Welcome back, {request.user.first_name}! 🙂"
+                )
                 return redirect("home")
         else:
             messages.error(request, f"Incorrect login details")
-            return redirect('login')
+            return redirect("login")
 
     else:
         form = AccountAuthenticationForm()
 
-    context['login_form'] = form
-    return render(request, 'accounts/login.html', context)
+    context["login_form"] = form
+    return render(request, "accounts/login.html", context)

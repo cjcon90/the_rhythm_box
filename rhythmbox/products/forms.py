@@ -8,14 +8,12 @@ class ProductRatingForm(forms.ModelForm):
         model = Rating
         fields = ("rating",)
 
+
 class ProductReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ("headline", "content")
-        labels = {
-            'headline': 'Review Headline',
-            'content': 'Your Review'
-        }
+        labels = {"headline": "Review Headline", "content": "Your Review"}
         widgets = {
-          'content': forms.Textarea(attrs={'rows':10, 'cols':'auto'}),
+            "content": forms.Textarea(attrs={"rows": 10, "cols": "auto"}),
         }
