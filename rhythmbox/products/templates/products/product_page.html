@@ -28,10 +28,11 @@
             <p class="product-info__reviews--number t7 regular">{% display_count 'rating' product.get_rating_count %}</p>
         </div>
 
-        <form class="product-info__nums">
+        <form class="product-info__nums" action="{% url 'add_to_cart' product.id %}" method="POST">
+            {% csrf_token %}
             <div class="product-info__nums--quantity">
                 <span class="input-number-decrement">–</span>
-                <input disabled class="input-number" type="text" value="1" max="{{product.stock}}">
+                <input class="input-number" type="text" name="quantity" value="1" max="{{product.stock}}">
                 <span class="input-number-increment">+</span>
             </div>
 
@@ -40,8 +41,8 @@
             {% else %}
             <p class="product__nums--stock--out t7 bold upper">Out of stock</p>
             {% endif %}
-
             <button type="submit" class="product-info__nums--submit btn btn--black bold t6">Add to Cart</button>
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </form>
 
         <div class="product-info__description">

@@ -56,6 +56,10 @@
             grid-column: 1 / 3;
             padding: .7rem 0;
         }
+
+        &--quantity input {
+            pointer-events: none;
+        }
     }
 
     &__description {
