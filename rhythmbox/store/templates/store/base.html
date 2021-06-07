@@ -188,7 +188,11 @@
             <p class="contact__email">therhythmbox@gmail.com</p>
         </div>
     </footer>
-    <script src="{% static 'scripts/app.js' %}"></script>
+    <script>
+        const user = '{{ request.user }}'
+    </script>
+    <script type="module" src="{% static 'scripts/app.js' %}"></script>
     {% block js %}{% endblock js %}
+
 </body>
 </html>

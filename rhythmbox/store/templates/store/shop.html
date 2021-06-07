@@ -92,11 +92,11 @@
 
             {% else %}
             {% comment %} PRODUCT LINK (for items with a type) {% endcomment %}
-                <a href=
-                "{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
+                <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
                 class="product__buttons--info btn btn--white t5 bold">Product Info</a>
             {% endif %}
-                <a href="#" class="product__buttons--cart btn btn--black t5 regular">Add to Cart</a>
+                <a data-product="{{ product.pk }}" data-action="add" href="#"
+                class="product__buttons--cart btn btn--black t5 regular update-cart">Add to Cart</a>
             </div>
         </div>
     {% endfor %}

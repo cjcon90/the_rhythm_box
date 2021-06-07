@@ -1,4 +1,4 @@
-import { dropdownMenu } from './modules/dropdown.js'
+// import { dropdownMenu } from './modules/dropdown.js'
 
 const numberInput = document.querySelector('.input-number');
 const numberDecrement = document.querySelector('.input-number-decrement');
@@ -29,6 +29,7 @@ if(!stock) {
 
 // REVIEW BUTTON DROPDOWNS
 
-dropdownMenu(reviewsFilterButton, reviewsFilterList)
-dropdownMenu(reviewsSortButton, reviewsSortList)
+// dropdownMenu(reviewsFilterButton, reviewsFilterList)
+// dropdownMenu(reviewsSortButton, reviewsSortList)
+// TODO: delete if not using
 
