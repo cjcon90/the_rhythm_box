@@ -44,13 +44,43 @@
 
     <div class="cart-summary">
         <h3 class="cart-summary__heading light t4">Summary</h3>
-        <p class="cart-summary-check t7 regular">
-        <i class="fas fa-check cart-summary-check--success"></i>
-        <span>Your order qualifies for free delivery</span>
-        </p>
-        <p class="cart-summary-check cart-summary-check-stock">
-        
-        </p>
+        {% if free_delivery_delta == 0 %}
+        <div class="cart-summary-check">
+            <i class="fas fa-check cart-summary-check__icon--success t3"></i>
+            <p class="cart-summary-check__text t7 regular">Your order qualifies for free delivery</p>
+        </div>
+
+        {% else %}
+        <div class="cart-summary-check">
+            <i class="fas fa-times cart-summary-check__icon--error t3"></i>
+            <span class="cart-summary-check__text t7 regular">
+            You must spend <strong>€{{ free_delivery_delta }}</strong> more in order to qualify for free delivery.
+            </span>
+        </div>
+        {% endif %}
+
+        <div class="cart-summary-check">
+        <i class="fas fa-check cart-summary-check__icon--success t4"></i>
+            <p class="cart-summary-check__text t7 regular">All items are in stock</p>
+        </div>
+
+
+
+        <div class="cart-summary-pricing">
+            <div class="cart-summary-pricing--items t6 regular">
+                <p>Items Total</p>
+                <p>€{{ total|floatformat:"-2"|intcomma   }}</p>
+            </div>
+            <div class="cart-summary-pricing--delivery t6 regular">
+                <p>Delivery</p>
+                <p>€{{ delivery|floatformat:"-2"|intcomma   }}</p>
+            </div>
+            <div class="cart-summary-pricing--total t5 bold">
+                <p>Total</p>
+                <p>€{{ grand_total|floatformat:"-2"|intcomma   }}</p>
+            </div>
+        </div>
+        <a href="#" class="cart-summary-checkout btn btn--black t4 bold">Checkout</a>
     </div>
 {% endblock content %}
 

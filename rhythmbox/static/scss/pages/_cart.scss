@@ -60,13 +60,40 @@
     flex-direction: column;
     gap: 2rem;
     &-check {
-        &--success {
-            color: green;
-            margin-right: 1rem;
+        display: grid;
+        grid-template-columns: 5rem 1fr;
+
+        & > i {
+            text-align: center;
         }
-        &--error {
-            color: red;
-            margin-right: 1rem;
+
+        &__icon {
+            &--success {
+                color: green;
+                margin-right: 1rem;
+            }
+            &--error {
+                color: red;
+                margin-right: 1rem;
+            }
         }
+
+    }
+    &-pricing {
+        padding-top: 2rem;
+        border-top: 1px solid $color-black-semi;
+        color: $color-black-semi;
+        & > * {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+        }
+        &--total {
+            color: $color-black;
+        }
+    }
+    &-checkout {
+        padding: 1rem;
+        text-align: center;
     }
 }

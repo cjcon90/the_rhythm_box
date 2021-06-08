@@ -1271,7 +1271,7 @@ readers do not read off random characters that represent icons */
 // .#{$fa-css-prefix}-thumbtack:before { content: fa-content($fa-var-thumbtack); }
 // .#{$fa-css-prefix}-ticket-alt:before { content: fa-content($fa-var-ticket-alt); }
 // .#{$fa-css-prefix}-tiktok:before { content: fa-content($fa-var-tiktok); }
-// .#{$fa-css-prefix}-times:before { content: fa-content($fa-var-times); }
+.#{$fa-css-prefix}-times:before { content: fa-content($fa-var-times); }
  .#{$fa-css-prefix}-times-circle:before { content: fa-content($fa-var-times-circle); }
 // .#{$fa-css-prefix}-tint:before { content: fa-content($fa-var-tint); }
 // .#{$fa-css-prefix}-tint-slash:before { content: fa-content($fa-var-tint-slash); }
