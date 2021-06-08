@@ -15,6 +15,12 @@
             border: .3rem solid $color-primary;
             color: $color-primary;
         }
+
+        &--disabled {
+            opacity: 50%;
+            pointer-events: none;
+            user-select: none;
+        }
     }
     &--white {
         background-color: transparent;

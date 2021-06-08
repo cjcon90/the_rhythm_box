@@ -1,7 +1,59 @@
 {% extends 'store/base.html' %}
 
+{% load static %}
+{% load humanize %}
+{% load widget_tweaks %}
+
 {% block title %}Shopping Cart{% endblock title %}
 
-{% block content %}
-    <h1>FREE DELIVERY ON ORDERS OVER €{{free_delivery_threshold}} </h1>
+
+{% block content %} 
+    <h2 class="section__heading upper bold">Cart</h2>
+    {% if cart_items %}
+        {% for cart_item in cart_items %}
+        <hr class="cart-item__line">
+
+            <div class="cart-item">
+                <img class="cart-item__image" src="{{ cart_item.product.thumbnail.url }}" alt="Thumbnail image of {{ cart_item.product.title }}">
+                <a href="" class="cart-item__remove light t6">Remove Item</a>
+                <h2 class="cart-item__name regular t6 bold">{{ cart_item.product.title }}</h2>
+
+                <form class="cart-item__quantity" action="{% url 'add_to_cart' cart_item.product.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="cart-item__quantity--select">
+                        <p class="cart-item__quantity--stock t7 bold">Quantity:</p>
+                        <span class="input-number-decrement">–</span>
+                        <input class="input-number" type="text" name="quantity" value="{{ cart_item.quantity }}"
+                        max={% if cart_item.product.stock == 0 %}"{{ cart_item.quantity }}"{% else %}"{{ cart_item.product.stock }}"{% endif %}>
+                        <span class="input-number-increment">+</span>
+                    </div>
+
+                    {% if cart_item.product.stock %}
+                    <p class="cart-item__quantity--stock t7 bold">{{cart_item.product.stock}} in stock</p>
+                    {% else %}
+                    <p class="cart-item__quantity--stock--out t7 bold upper">Out of stock</p>
+                    {% endif %}
+                    <button type="submit" class="cart-item__quantity--submit btn btn--black bold t6">Update</button>
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                </form>
+
+                <p class="cart-item__price t4 bold">€{{ cart_item.price|floatformat:"-2"|intcomma  }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="cart-summary">
+        <h3 class="cart-summary__heading light t4">Summary</h3>
+        <p class="cart-summary-check t7 regular">
+        <i class="fas fa-check cart-summary-check--success"></i>
+        <span>Your order qualifies for free delivery</span>
+        </p>
+        <p class="cart-summary-check cart-summary-check-stock">
+        
+        </p>
+    </div>
 {% endblock content %}
+
+{% block js %}
+<script type="module" src="{% static 'scripts/quantitySelect.js' %}"></script>
+{% endblock js %}

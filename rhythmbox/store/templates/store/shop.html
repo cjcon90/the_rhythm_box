@@ -95,8 +95,8 @@
                 <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
                 class="product__buttons--info btn btn--white t5 bold">Product Info</a>
             {% endif %}
-                <a data-product="{{ product.pk }}" data-action="add" href="#"
-                class="product__buttons--cart btn btn--black t5 regular update-cart">Add to Cart</a>
+                <a data-product="{{ product.pk }}" data-action="add" href="{% url 'add_to_cart' product.id %}"
+                class="product__buttons--cart btn btn--black t5 regular update-cart {% if product.stock == 0 %}btn--black--disabled{% endif %}">Add to Cart</a>
             </div>
         </div>
     {% endfor %}

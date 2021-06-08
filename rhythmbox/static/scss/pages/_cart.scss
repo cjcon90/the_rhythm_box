@@ -1,0 +1,72 @@
+.cart-item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, min-content);
+    grid-template-areas:
+    "remove image"
+    "name image"
+    "quantity image"
+    "quantity price";
+    max-width: 90%;
+    margin: 0 auto 4rem auto;
+    gap: 1.5rem 3rem;
+
+    &__line {
+        max-width: 90%;
+        margin-bottom: 3rem;
+        color: $color-black-light;
+    }
+    &__image {
+        grid-area: image;
+        max-width: 90%;
+    }
+    &__name {
+        grid-area: name;
+        color: $color-black;
+    }
+    &__quantity {
+        grid-area: quantity;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        &--stock {
+            color: $color-black-semi;
+            padding-bottom: .5rem;
+
+            &--out {
+                color: $color-warning-dark;
+            }
+        }
+    }
+    &__remove {
+        grid-area: remove;
+        text-decoration: underline;
+        color: $color-black;
+    }
+    &__price {
+        grid-area: price;
+        text-align: center;
+        color: $color-black-semi;
+    }
+}
+
+.cart-summary {
+    max-width: 90%;
+    border: solid 1px $color-black-semi;
+    margin: 3rem auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    &-check {
+        &--success {
+            color: green;
+            margin-right: 1rem;
+        }
+        &--error {
+            color: red;
+            margin-right: 1rem;
+        }
+    }
+}

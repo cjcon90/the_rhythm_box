@@ -40,4 +40,5 @@
     .disabled {
         color: $color-black-light;
         pointer-events: none;
+        user-select: none;
     }
