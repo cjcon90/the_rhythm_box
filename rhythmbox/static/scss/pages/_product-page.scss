@@ -78,10 +78,7 @@
 
     &-buttons {
         display: grid;
-        // grid-template-columns: 1fr 1fr;
-        // grid-template-rows: repeat(2, min-content);
         place-items: center;
-        // gap: 3rem 0;
 
         &__rate {
             grid-column: 1 / 3;
