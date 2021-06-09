@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load humanize %}
+{% load cart_tags %}
 {% load widget_tweaks %}
 
 {% block title %}Shopping Cart{% endblock title %}
@@ -15,8 +16,8 @@
 
             <div class="cart-item">
                 <img class="cart-item__image" src="{{ cart_item.product.thumbnail.url }}" alt="Thumbnail image of {{ cart_item.product.title }}">
-                <a href="" class="cart-item__remove light t6">Remove Item</a>
-                <h2 class="cart-item__name regular t6 bold">{{ cart_item.product.title }}</h2>
+                <a href="" class="cart-item__remove light t5">Remove Item</a>
+                <h2 class="cart-item__name regular t4 bold">{{ cart_item.product.title }}</h2>
 
                 <form class="cart-item__quantity" action="{% url 'add_to_cart' cart_item.product.id %}" method="POST">
                     {% csrf_token %}
@@ -37,7 +38,7 @@
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 </form>
 
-                <p class="cart-item__price t4 bold">€{{ cart_item.price|floatformat:"-2"|intcomma  }}</p>
+                <p class="cart-item__price t3 bold">€{{ cart_item.price|floatformat:"-2"|intcomma  }}</p>
             </div>
         {% endfor %}
     {% endif %}
@@ -52,18 +53,24 @@
 
         {% else %}
         <div class="cart-summary-check">
-            <i class="fas fa-times cart-summary-check__icon--error t3"></i>
+            <i class="fas fa-check cart-summary-check__icon--grey t4"></i>
             <span class="cart-summary-check__text t7 regular">
             You must spend <strong>€{{ free_delivery_delta }}</strong> more in order to qualify for free delivery.
             </span>
         </div>
         {% endif %}
-
+        {% cart_in_stock cart_items as items_in_stock %}
+        {% if  items_in_stock%}
         <div class="cart-summary-check">
         <i class="fas fa-check cart-summary-check__icon--success t4"></i>
             <p class="cart-summary-check__text t7 regular">All items are in stock</p>
         </div>
-
+        {% else %}
+        <div class="cart-summary-check">
+        <i class="fas fa-times-circle cart-summary-check__icon--error t4"></i>
+            <p class="cart-summary-check__text t7 regular">One or more of your cart items are out of stock. Please modify your shopping basket.</p>
+        </div>
+        {% endif %}
 
 
         <div class="cart-summary-pricing">
@@ -80,7 +87,7 @@
                 <p>€{{ grand_total|floatformat:"-2"|intcomma   }}</p>
             </div>
         </div>
-        <a href="#" class="cart-summary-checkout btn btn--black t4 bold">Checkout</a>
+        <a href="#" class="cart-summary-checkout btn btn--black t4 bold {% if not items_in_stock %}btn--black--disabled{% endif %}">Checkout</a>
     </div>
 {% endblock content %}
 

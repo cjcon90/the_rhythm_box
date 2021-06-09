@@ -3,13 +3,14 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, min-content);
     grid-template-areas:
-    "remove image"
     "name image"
-    "quantity image"
-    "quantity price";
+    "name image"
+    "quantity price"
+    "quantity remove";
     max-width: 90%;
     margin: 0 auto 4rem auto;
     gap: 1.5rem 3rem;
+    align-items: end;
 
     &__line {
         max-width: 90%;
@@ -23,6 +24,7 @@
     &__name {
         grid-area: name;
         color: $color-black;
+        align-self: center;
     }
     &__quantity {
         grid-area: quantity;
@@ -46,8 +48,7 @@
     }
     &__price {
         grid-area: price;
-        text-align: center;
-        color: $color-black-semi;
+        color: $color-black;
     }
 }
 
@@ -61,7 +62,9 @@
     gap: 2rem;
     &-check {
         display: grid;
-        grid-template-columns: 5rem 1fr;
+        grid-template-columns: min-content 1fr;
+        align-items: center;
+        gap: 2rem;
 
         & > i {
             text-align: center;
@@ -70,13 +73,15 @@
         &__icon {
             &--success {
                 color: green;
-                margin-right: 1rem;
+            }
+            &--grey {
+                color: $color-black-light;
             }
             &--error {
-                color: red;
-                margin-right: 1rem;
+                color: $color-warning-dark;
             }
         }
+
 
     }
     &-pricing {
