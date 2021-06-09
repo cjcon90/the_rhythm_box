@@ -12,6 +12,9 @@ def index(request):
 
 
 def shop(request, category=None, subcategory=None, type=None):
+    """
+    Main shop page page list of available products
+    """
     context = {}
     q = Q()
     if request.GET.get("brand"):  # ?brand=*slug
@@ -32,6 +35,7 @@ def shop(request, category=None, subcategory=None, type=None):
         )
     else:
         products = Product.objects.filter(q).order_by(order)
+
     paginator = Paginator(products, 9)
     page_num = request.GET.get("page")
     context["page_obj"] = paginator.get_page(page_num)

@@ -5,7 +5,9 @@ from products.models import Product
 
 
 def cart_contents(request):
-
+    """
+    Cart object to be stored in user session
+    """
     cart_items = []
     total = 0
     product_count = 0
@@ -17,7 +19,12 @@ def cart_contents(request):
         total += price
         product_count += quantity
         cart_items.append(
-            {"item_id": item_id, "quantity": quantity, "product": product, 'price': price}
+            {
+                "item_id": item_id,
+                "quantity": quantity,
+                "product": product,
+                "price": price,
+            }
         )
 
     if total < settings.FREE_DELIVERY_THRESHOLD:

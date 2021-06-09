@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     "store",
     "products",
     "cart",
-    # 3rd Party
-    "widget_tweaks",
     # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -52,6 +50,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    # 3rd Party
+    "widget_tweaks",
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "cart.contexts.cart_contents"
+                "cart.contexts.cart_contents",
             ],
         },
     },

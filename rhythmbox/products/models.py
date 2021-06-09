@@ -109,7 +109,7 @@ class Product(models.Model):
     stock = models.IntegerField(default=15)
     date_added = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="products/", blank=True, null=True)
-    thumbnail = models.ImageField(upload_to="products/", blank=True, null=True)
+    thumbnail = models.ImageField(upload_to="products/thumbnails/", blank=True, null=True)
 
     class Meta:
         ordering = ("-date_added",)
@@ -129,8 +129,8 @@ class Product(models.Model):
 
         thumb_io = BytesIO()
         img.save(thumb_io, "JPEG", quality=85)
-
-        thumbnail = File(thumb_io, name=image.name)
+        # img_path = image.name.replace('products', 'thumbnails')
+        thumbnail = File(thumb_io, name=image.name.replace('products/', ''))
         return thumbnail
 
     def get_average_rating(self):
