@@ -40,6 +40,9 @@
                 color: $color-warning-dark;
             }
         }
+        &--select input {
+            pointer-events: none;
+        }
     }
     &__remove {
         grid-area: remove;

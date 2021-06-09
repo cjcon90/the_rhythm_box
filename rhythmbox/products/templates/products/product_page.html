@@ -28,7 +28,7 @@
             <p class="product-info__reviews--number t7 regular">{% display_count 'rating' product.get_rating_count %}</p>
         </div>
 
-        <form class="product-info__nums quantity-form" action="{% url 'add_to_cart' product.id %}" method="POST">
+        <form class="product-info__nums add-to-cart-form" action="{% url 'add_to_cart' product.id %}" method="POST">
             {% csrf_token %}
             <div class="product-info__nums--quantity number-select">
                 <span class="input-number-decrement">–</span>
