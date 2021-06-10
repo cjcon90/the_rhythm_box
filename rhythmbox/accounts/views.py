@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, AccountAuthenticationForm
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 
+@login_required
+def account_details(request):
+    context = {}
+    user = request.user
+    return render(request, "accounts/account_details.html", context)
 
-def registration_view(request):
+def register_user(request):
     context = {}
     if request.POST:
         form = RegistrationForm(request.POST)
@@ -28,12 +34,12 @@ def registration_view(request):
     return render(request, "accounts/register.html", context)
 
 
-def logout_view(request):
+def logout_user(request):
     logout(request)
     return redirect("/")
 
 
-def login_view(request):
+def login_user(request):
 
     context = {}
 

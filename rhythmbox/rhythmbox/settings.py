@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "store",
     "products",
     "cart",
+    "checkout",
     # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     # 3rd Party
     "widget_tweaks",
     "django_cleanup.apps.CleanupConfig",
+    "django_countries"
 ]
 
 MIDDLEWARE = [

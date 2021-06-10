@@ -36,7 +36,7 @@
                     </div>
 
                     {% if cart_item.product.stock %}
-                    <p class="cart-item__quantity--stock t7 bold">{% display_stock cart_item.product.stock %} in stock</p>
+                    <p class="cart-item__quantity--stock t7 bold">{{ cart_item.product.stock | display_stock }} in stock</p>
                     {% else %}
                     <p class="cart-item__quantity--stock--out t7 bold upper">Out of stock</p>
                     {% endif %}
@@ -54,7 +54,7 @@
             <h3 class="cart-summary__heading light t4">Summary</h3>
             {% if free_delivery_delta == 0 %}
             <div class="cart-summary-check">
-                <i class="fas fa-check cart-summary-check__icon--success t3"></i>
+                <i class="fas fa-check cart-summary-check__icon--success t4"></i>
                 <p class="cart-summary-check__text t7 regular">Your order qualifies for free delivery</p>
             </div>
 

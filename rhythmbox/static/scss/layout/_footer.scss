@@ -68,9 +68,17 @@
                 align-items: center;
             }
 
-            &--icon {
+            &--link {
                 color: $color-primary;
                 font-size: 5rem;
+
+                &:hover, &:active, &:focus {
+                    color: white;
+                }
+            }
+
+            &--icon {
+
             }
         }
     }

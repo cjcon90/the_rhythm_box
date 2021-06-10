@@ -24,7 +24,7 @@ def display_count(count_type, count):
         return f"{count} {count_type.title()}s"
 
 
-@register.simple_tag
+@register.filter(name="display_stock")
 def display_stock(count):
     """
     Tag for displaying items such as

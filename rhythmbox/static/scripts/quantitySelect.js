@@ -3,21 +3,24 @@
 const addToCartForms = document.querySelectorAll(".add-to-cart-form");
 const updateCartForms = document.querySelectorAll(".update-cart-form");
 
-function quantitySelectForm(form, type) {
-  form.forEach((div) => {
-    const numberInput = div.querySelector(".input-number");
-    const numberDecrement = div.querySelector(".input-number-decrement");
-    const numberIncrement = div.querySelector(".input-number-increment");
+function quantitySelectForm(forms, type) {
+  forms.forEach((form) => {
+    // identify input field, increment, decrement & max value (based on current stock)
+    const numberInput = form.querySelector(".input-number");
+    const numberDecrement = form.querySelector(".input-number-decrement");
+    const numberIncrement = form.querySelector(".input-number-increment");
     const stock = +numberInput.getAttribute("max");
     let min = 0;
 
     if (!stock) {
       numberInput.value = 0;
     } else {
+      // if adding to cart (and there are products currently in stock), then set minimum value to 1
       if (type === "add") {
         min = stock > 0 ? 1 : 0;
       }
 
+      // increment & decrement number functionality
       function quantitySelect(num, inc, dec) {
         dec.addEventListener("click", () => {
           if (+num.value > min) {

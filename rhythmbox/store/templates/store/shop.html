@@ -76,7 +76,7 @@
                 {% comment %} PRODUCT PRICE AND STOCK {% endcomment %}
                 <h3 class="product__nums--price t3 bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
                 {% if product.stock %}
-                <p class="product__nums--stock t7 bold">{% display_stock product.stock %} in stock</p>
+                <p class="product__nums--stock t7 bold">{{ product.stock | display_stock }} in stock</p>
                 {% else %}
                 <p class="product__nums--stock--out t7 bold upper">Out of stock</p>
                 {% endif %}
