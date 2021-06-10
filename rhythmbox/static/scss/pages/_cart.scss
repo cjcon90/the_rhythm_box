@@ -105,3 +105,19 @@
         text-align: center;
     }
 }
+
+.cart-empty {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3rem;
+
+    &__return {
+        padding: 1rem;
+    }
+}
