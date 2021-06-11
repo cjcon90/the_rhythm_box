@@ -1,0 +1,76 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load cart_tags %}
+{% load store_tags %}
+{% load widget_tweaks %}
+
+{% block title %}Checkout{% endblock title %}
+
+
+
+{% block content %} 
+    <h2 class="section__heading upper bold">Checkout</h2>
+    <div class="checkout">
+        <div class="checkout-form">
+            <h3 class="checkout-form__heading t4 light">Delivery Details</h3>
+            <form method="POST" action="#" class="form" novalidate>
+                {% csrf_token %}
+                {% for field in order_form %}
+                <fieldset class="form__group">
+                    <label for="{{ field.id_for_label }}" class="form__label t6 bold">{{ field.label }}</label>
+                    {{ field|add_class:'form__input t5 regular' }}
+                    {% for error in field.errors %}
+                    <span class="form__error t7 bold">{{ error }}</span>
+                    {% endfor %}
+                </fieldset>
+                {% endfor %}
+                {% for error in field.errors %}
+                    <span class="form__error t7 bold">{{ error }}</span>
+                {% endfor %}
+                <fieldset class="form__group">
+                    <button type="submit" class="form__submit btn btn--black t3 upper bold">Complete Order</button>
+                </fieldset>
+            </form>
+        </div>
+        <div class="checkout-summary">
+            <h3 class="checkout-summary__heading t4 light">Order Items ({{ product_count }})</h3>
+            <table class="checkout-summary__table">
+                <tr class="checkout-summary__table__headings bold t7">
+                    <th class="checkout-summary__table__headings--image"></th>
+                    <th class="checkout-summary__table__headings--item">Item</th>
+                    <th class="checkout-summary__table__headings--quantity">Quantity</th>
+                    <th class="checkout-summary__table__headings--subtotal">Price</th>
+                </tr>
+                {% for item in cart_items %}
+                <tr class="checkout-summary__table__data">
+                    <td class="checkout-summary__table__data--image"><img src="{{ item.product.image.url }}" alt=""></td>
+                    <td class="checkout-summary__table__data--title">{{ item.product.title }}</td>
+                    <td class="checkout-summary__table__data--quantity">{{ item.quantity }}</td>
+                    <td class="checkout-summary__table__data--price">€{{ item.price|floatformat:"-2"|intcomma }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="checkout-summary-totals">
+                <div class="checkout-summary-totals--order">
+                    <p class="checkout-summary-totals__label regular t6">Order Total:</p>
+                    <p class="checkout-summary-totals__data regular t6">€{{ total|floatformat:"-2"|intcomma }}</p>
+                </div>
+                <div class="checkout-summary-totals--delivery">
+                    <p class="checkout-summary-totals__label regular t6">Delivery:</p>
+                    <p class="checkout-summary-totals__data regular t6">€{{ delivery|floatformat:"-2"|intcomma }}</p>
+                </div>
+                <div class="checkout-summary-totals--grand">
+                    <p class="checkout-summary-totals__label bold t5">Grand Total:</p>
+                    <p class="checkout-summary-totals__data bold t5">€{{ grand_total|floatformat:"-2"|intcomma }}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+<script type="module" src="{% static 'scripts/quantitySelect.js' %}"></script>
+{% endblock js %}

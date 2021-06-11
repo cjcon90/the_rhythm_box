@@ -3,7 +3,6 @@ from .models import Review, Rating
 
 
 class ProductRatingForm(forms.ModelForm):
-    # rating = forms.ChoiceField(choices=Rating.Stars.choices)
     class Meta:
         model = Rating
         fields = ("rating",)

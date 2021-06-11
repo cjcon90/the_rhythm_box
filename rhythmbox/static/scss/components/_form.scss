@@ -8,6 +8,13 @@
         border: none;
         padding: 0 1.5rem 2rem 1.5rem;
         gap: .5rem;
+
+        & > select {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 
     &__label {
@@ -21,6 +28,7 @@
         padding: 1rem;
         outline: none;
         background-color: white;
+
         &:active, &:focus {
             border-color: $color-black;
         }

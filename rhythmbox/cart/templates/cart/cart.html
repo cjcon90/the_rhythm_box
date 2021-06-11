@@ -103,7 +103,7 @@
                 </div>
             </div>
             
-            <a href="#" class="cart-summary-checkout btn btn--black t4 bold {% if not items_in_stock %}btn--black--disabled{% endif %}">Checkout</a>
+            <a href="{% url 'checkout' %}" class="cart-summary-checkout btn btn--black t4 bold {% if not items_in_stock %}btn--black--disabled{% endif %}">Checkout</a>
         </div>
     {% else %}
         <hr class="cart-item__line">
