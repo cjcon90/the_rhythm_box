@@ -14,8 +14,8 @@
     <h2 class="section__heading upper bold">Checkout</h2>
     <div class="checkout">
         <div class="checkout-form">
-            <h3 class="checkout-form__heading t4 light">Delivery Details</h3>
-            <form method="POST" action="#" class="form" novalidate>
+            <h3 class="checkout-form__heading t3 light">Delivery Details</h3>
+            <form method="POST" action="" class="form" novalidate>
                 {% csrf_token %}
                 {% for field in order_form %}
                 <fieldset class="form__group">
@@ -29,6 +29,11 @@
                 {% for error in field.errors %}
                     <span class="form__error t7 bold">{{ error }}</span>
                 {% endfor %}
+                <fieldset class="form__group">
+                    <label for="card-element" class="t3 light">Payment</label>
+                    <!-- A Stripe card element will go here -->
+                    <div id="card-element"></div>
+                </fieldset>
                 <fieldset class="form__group">
                     <button type="submit" class="form__submit btn btn--black t3 upper bold">Complete Order</button>
                 </fieldset>
@@ -54,16 +59,16 @@
             </table>
             <div class="checkout-summary-totals">
                 <div class="checkout-summary-totals--order">
-                    <p class="checkout-summary-totals__label regular t6">Order Total:</p>
-                    <p class="checkout-summary-totals__data regular t6">€{{ total|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__label regular t7">Order Total:</p>
+                    <p class="checkout-summary-totals__data regular t7">€{{ total|floatformat:"-2"|intcomma }}</p>
                 </div>
                 <div class="checkout-summary-totals--delivery">
-                    <p class="checkout-summary-totals__label regular t6">Delivery:</p>
-                    <p class="checkout-summary-totals__data regular t6">€{{ delivery|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__label regular t7">Delivery:</p>
+                    <p class="checkout-summary-totals__data regular t7">€{{ delivery|floatformat:"-2"|intcomma }}</p>
                 </div>
                 <div class="checkout-summary-totals--grand">
-                    <p class="checkout-summary-totals__label bold t5">Grand Total:</p>
-                    <p class="checkout-summary-totals__data bold t5">€{{ grand_total|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__label bold t6">Grand Total:</p>
+                    <p class="checkout-summary-totals__data bold t6">€{{ grand_total|floatformat:"-2"|intcomma }}</p>
                 </div>
 
             </div>
@@ -73,4 +78,8 @@
 
 {% block js %}
 <script type="module" src="{% static 'scripts/quantitySelect.js' %}"></script>
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+<script src="{% static 'scripts/stripeElements.js' %}"></script>
 {% endblock js %}

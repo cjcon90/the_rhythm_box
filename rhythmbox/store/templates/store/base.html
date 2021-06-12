@@ -23,6 +23,8 @@
     <meta property="twitter:title" content="The RhythmBox">
     <meta property="twitter:description" content="The RhythmBox is an ecommerce store for professional-grade drums, cymbals and drumming equipment">
     {% comment %} <meta property="twitter:image" content="https://res.cloudinary.com/cjcon90/image/upload/v1616015377/hot_dogz/og_preview_image.png"> {% endcomment %}
+    {% comment %} TODO: complete meta tags {% endcomment %}
+    <script src="https://js.stripe.com/v3/"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 <body>
@@ -190,10 +192,8 @@
             <p class="contact__email">therhythmbox@gmail.com</p>
         </div>
     </footer>
-    <script>
-        const user = '{{ request.user }}'
-    </script>
     <script type="module" src="{% static 'scripts/app.js' %}"></script>
+    {% comment %} Load other page specific scripts {% endcomment %}
     {% block js %}{% endblock js %}
 
 </body>

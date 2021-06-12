@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     # 3rd Party
     "widget_tweaks",
     "django_cleanup.apps.CleanupConfig",
-    "django_countries"
+    "django_countries",
 ]
 
 MIDDLEWARE = [
@@ -165,3 +165,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 FREE_DELIVERY_THRESHOLD = 250
 STANDARD_DELIVERY_PERCENTAGE = 12.5
+
+STRIPE_PUBLIC_KEY = os.environ["STRIPE_PUBLIC_KEY"]
+STRIPE_SECRET_KEY = os.environ["STRIPE_SECRET_KEY"]

@@ -5,7 +5,7 @@
 
   &-form {
     &__heading {
-        padding: 3rem 2rem;
+        padding: 3rem 1.5rem;
     }
 
   }
@@ -42,14 +42,14 @@
     }
 
     &-totals {
-        width: 60vw;
         margin-left: auto;
         & > * {
             display: grid;
-            grid-template-columns: 1fr 33%;
+            grid-template-columns: 1fr 20%;
             justify-content: end;
             text-align: right;
             padding: .5rem 1rem;
+            gap: 2rem;
         }
 
         &--grand {
