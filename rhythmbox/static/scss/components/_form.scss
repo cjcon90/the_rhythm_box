@@ -51,3 +51,12 @@
         margin: 2rem 0;
     }
 }
+
+.card-errors {
+    color: $color-warning-dark;
+    &__error {
+        &--icon {
+            padding-right: 1rem;
+        }
+    }
+}

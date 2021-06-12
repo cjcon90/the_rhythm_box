@@ -15,7 +15,7 @@
     <div class="checkout">
         <div class="checkout-form">
             <h3 class="checkout-form__heading t3 light">Delivery Details</h3>
-            <form method="POST" action="" class="form" novalidate>
+            <form id="payment-form" method="POST" action="{% url 'checkout' %}" class="form" novalidate>
                 {% csrf_token %}
                 {% for field in order_form %}
                 <fieldset class="form__group">
@@ -33,6 +33,7 @@
                     <label for="card-element" class="t3 light">Payment</label>
                     <!-- A Stripe card element will go here -->
                     <div id="card-element"></div>
+                    <div class="card-errors t7 bold"></div>
                 </fieldset>
                 <fieldset class="form__group">
                     <button type="submit" class="form__submit btn btn--black t3 upper bold">Complete Order</button>
