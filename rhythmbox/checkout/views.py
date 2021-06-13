@@ -67,7 +67,6 @@ def checkout(request):
                     Did you forget to set it in your environ?",
             )
 
-    context["order_form"] = OrderForm()
     context["stripe_public_key"] = settings.STRIPE_PUBLIC_KEY
     context["client_secret"] = intent.client_secret
     return render(request, "checkout/checkout.html", context)

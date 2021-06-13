@@ -13,12 +13,16 @@
     <div class="checkout">
         <div class="checkout-form">
             <h3 class="checkout-form__heading t3 light">Delivery Details</h3>
-            <form id="payment-form" method="POST" action="{% url 'checkout' %}" class="form" novalidate>
+            <form id="payment-form" method="POST" action="{% url 'checkout' %}" class="form">
                 {% csrf_token %}
                 {% for field in order_form %}
                 <fieldset class="form__group">
                     <label for="{{ field.id_for_label }}" class="form__label t6 bold">{{ field.label }}</label>
-                    {{ field|add_class:'form__input t5 regular' }}
+                    {% if field.id_for_label == "id_phone_number" %}
+                        {{ field|add_class:'form__input t5 regular'|attr:"type:tel"|attr:"pattern:^(\+)?([ 0-9]){10,16}$" }}
+                    {% else %}
+                        {{ field|add_class:'form__input t5 regular' }}
+                    {% endif %}
                     {% for error in field.errors %}
                     <span class="form__error t7 bold">{{ error }}</span>
                     {% endfor %}
