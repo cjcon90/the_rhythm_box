@@ -58,3 +58,16 @@
     }
   }
 }
+
+.order-confirmation-text {
+  text-align: center;
+  color: $color-black-semi;
+  line-height: 5rem;
+
+  &--info {
+    text-align: center;
+  }
+}
+.order-confirmation-summary {
+  padding-bottom: 4rem;
+}

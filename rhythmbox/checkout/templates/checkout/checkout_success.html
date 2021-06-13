@@ -2,6 +2,8 @@
 
 {% load static %}
 {% load humanize %}
+{% load cart_tags %}
+{% load store_tags %}
 {% load widget_tweaks %}
 
 {% block title %}Checkout{% endblock title %}
@@ -9,35 +11,14 @@
 
 
 {% block content %} 
-    <h2 class="section__heading upper bold">Checkout</h2>
-    <div class="checkout">
-        <div class="checkout-form">
-            <h3 class="checkout-form__heading t3 light">Delivery Details</h3>
-            <form id="payment-form" method="POST" action="{% url 'checkout' %}" class="form" novalidate>
-                {% csrf_token %}
-                {% for field in order_form %}
-                <fieldset class="form__group">
-                    <label for="{{ field.id_for_label }}" class="form__label t6 bold">{{ field.label }}</label>
-                    {{ field|add_class:'form__input t5 regular' }}
-                    {% for error in field.errors %}
-                    <span class="form__error t7 bold">{{ error }}</span>
-                    {% endfor %}
-                </fieldset>
-                {% endfor %}
-                {% for error in field.errors %}
-                    <span class="form__error t7 bold">{{ error }}</span>
-                {% endfor %}
-                <fieldset class="form__group">
-                    <label for="card-element" class="t3 light">Payment</label>
-                    <!-- A Stripe card element will go here -->
-                    <div id="card-element"></div>
-                    <div class="card-errors t7 bold"></div>
-                </fieldset>
-                <fieldset class="form__group">
-                    <button type="submit" class="form__submit btn btn--black t3 upper bold">Complete Order</button>
-                </fieldset>
-            </form>
-        </div>
+    <h2 class="section__heading upper bold">Thank You</h2>
+    <div class="order-confirmation-text regular t6">
+        <p>Your order has been completed!</p>
+        <p>Your order number is<br><strong>{{ order.order_number }}</strong></p>
+        <p>A confirmation email has been sent to<br><strong>{{ order.email }}</strong></p>
+        <p class="checkout-form__heading order-confirmation-text--info t3 light">Your order information is below</p>
+    </div>
+    <div class="checkout order-confirmation-summary">
         <div class="checkout-summary">
             <h3 class="checkout-summary__heading t4 light">Order Items ({{ product_count }})</h3>
             <table class="checkout-summary__table">
@@ -73,9 +54,11 @@
             </div>
         </div>
     </div>
+    </div>
 {% endblock content %}
 
 {% block js %}
+<script type="module" src="{% static 'scripts/quantitySelect.js' %}"></script>
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
