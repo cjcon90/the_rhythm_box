@@ -25,7 +25,7 @@
     }
     &__input {
         border: solid $color-black-semi .1rem;
-        padding: 1rem;
+        padding: 1.1rem;
         outline: none;
         background-color: white;
 
@@ -42,7 +42,8 @@
             margin-top: .5rem;
         }
         &:focus {
-            border-width: 2px;
+            padding: 1rem;
+            border-width: .2rem;
         }
         &:focus:invalid {
             border-color: red;

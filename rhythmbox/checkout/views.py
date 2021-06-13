@@ -77,9 +77,7 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
     messages.success(
         request,
-        mark_safe(f"Order successfully processed!</br>\
-            Your order number is <strong>{order_number}</strong>.</br>\
-                A confirmation email will be sent to <strong>{order.email}</strong>."),
+        mark_safe(f"Order Complete! 🙂"),
     )
     context["order"] = order
     return render(request, "checkout/checkout_success.html", context)
