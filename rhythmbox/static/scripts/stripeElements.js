@@ -9,6 +9,7 @@ const stripeClientSecret = document
 const cardElement = document.getElementById("card-element");
 const errorDiv = document.querySelector(".card-errors");
 const submitButton = document.querySelector('.form__submit')
+const loadingOverlay = document.querySelector('.loading-overlay')
 
 if (stripePublicKey && stripeClientSecret) {
   // create card element with basic styling
@@ -46,6 +47,8 @@ if (stripePublicKey && stripeClientSecret) {
     e.preventDefault();
     card.update({ disabled: true });
     submitButton.setAttribute('disabled', '')
+    loadingOverlay.classList.remove('no-display')
+    loadingOverlay.classList.add('grid-center', 'loading-overlay-appear')
     stripe
       .confirmCardPayment(stripeClientSecret, {
         payment_method: {
@@ -57,6 +60,8 @@ if (stripePublicKey && stripeClientSecret) {
           displayError(result, errorDiv);
           card.update({ disabled: false });
           submitButton.removeAttribute('disabled')
+          loadingOverlay.classList.remove('grid-center', 'loading-overlay-appear')
+          loadingOverlay.classList.add('no-display')
         } else {
           if (result.paymentIntent.status === "succeeded") {
             form.submit();
@@ -67,6 +72,7 @@ if (stripePublicKey && stripeClientSecret) {
 
   // function to display any errors in stripe process
   function displayError(error, div) {
+    div.textContent = '' // initially reset div to prevent error messages stacking
     const errorSpan = document.createElement("span");
     errorSpan.classList.add("card-errors__error");
     const i = document.createElement("i");
