@@ -8,8 +8,9 @@ const stripeClientSecret = document
 // credit card input
 const cardElement = document.getElementById("card-element");
 const errorDiv = document.querySelector(".card-errors");
-const submitButton = document.querySelector('.form__submit')
-const loadingOverlay = document.querySelector('.loading-overlay')
+const submitButton = document.querySelector(".form__submit");
+const loadingOverlay = document.querySelector(".loading-overlay");
+const paymentForm = document.querySelector("#payment-form");
 
 if (stripePublicKey && stripeClientSecret) {
   // create card element with basic styling
@@ -44,35 +45,89 @@ if (stripePublicKey && stripeClientSecret) {
   const form = document.getElementById("payment-form");
 
   form.addEventListener("submit", (e) => {
+    const fd = new FormData(paymentForm);
     e.preventDefault();
     card.update({ disabled: true });
-    submitButton.setAttribute('disabled', '')
-    loadingOverlay.classList.remove('no-display')
-    loadingOverlay.classList.add('grid-center', 'loading-overlay-appear')
-    stripe
-      .confirmCardPayment(stripeClientSecret, {
-        payment_method: {
-          card: card,
-        },
-      })
-      .then((result) => {
-        if (result.error) {
-          displayError(result, errorDiv);
-          card.update({ disabled: false });
-          submitButton.removeAttribute('disabled')
-          loadingOverlay.classList.remove('grid-center', 'loading-overlay-appear')
-          loadingOverlay.classList.add('no-display')
-        } else {
-          if (result.paymentIntent.status === "succeeded") {
-            form.submit();
-          }
-        }
-      });
+    submitButton.setAttribute("disabled", "");
+    loadingOverlay.classList.remove("no-display");
+    loadingOverlay.classList.add("grid-center", "loading-overlay-appear");
+
+    const csrftoken = document.querySelector(
+      "[name=csrfmiddlewaretoken]"
+    ).value;
+    console.log(`CSRF${csrftoken}`);
+    const url = "/checkout/cache_checkout_data/";
+    const postData = {
+      csrfmiddlewaretoken: csrftoken,
+      client_secret: stripeClientSecret,
+    };
+
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function () {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        stripe
+          .confirmCardPayment(stripeClientSecret, {
+            payment_method: {
+              card: card,
+              billing_details: {
+                name: `${getTrim(fd, "first_name")} ${getTrim(
+                  fd,
+                  "last_name"
+                )}`,
+                phone: getTrim(fd, "phone_number"),
+                email: getTrim(fd, "email"),
+                address: {
+                  line1: getTrim(fd, "street_address_1"),
+                  line2: getTrim(fd, "street_address_2"),
+                  city: getTrim(fd, "town_or_city"),
+                  country: getTrim(fd, "country"),
+                  state: getTrim(fd, "county"),
+                },
+              },
+            },
+            shipping: {
+              name: `${getTrim(fd, "first_name")} ${getTrim(fd, "last_name")}`,
+              phone: getTrim(fd, "phone_number"),
+              address: {
+                line1: getTrim(fd, "street_address_1"),
+                line2: getTrim(fd, "street_address_2"),
+                city: getTrim(fd, "town_or_city"),
+                country: getTrim(fd, "country"),
+                postal_code: getTrim(fd, "postcode"),
+                state: getTrim(fd, "county"),
+              },
+            },
+          })
+          .then((result) => {
+            if (result.error) {
+              displayError(result, errorDiv);
+              card.update({ disabled: false });
+              submitButton.removeAttribute("disabled");
+              loadingOverlay.classList.remove(
+                "grid-center",
+                "loading-overlay-appear"
+              );
+              loadingOverlay.classList.add("no-display");
+            } else {
+              if (result.paymentIntent.status === "succeeded") {
+                form.submit();
+              }
+            }
+          });
+      }
+    };
+    httpRequest.open("POST", url);
+    httpRequest.setRequestHeader(
+      "Content-Type",
+      "application/json"
+    );
+    httpRequest.setRequestHeader("X-CSRFToken", csrftoken);
+    httpRequest.send(JSON.stringify(postData));
   });
 
   // function to display any errors in stripe process
   function displayError(error, div) {
-    div.textContent = '' // initially reset div to prevent error messages stacking
+    div.textContent = ""; // initially reset div to prevent error messages stacking
     const errorSpan = document.createElement("span");
     errorSpan.classList.add("card-errors__error");
     const i = document.createElement("i");
@@ -82,5 +137,10 @@ if (stripePublicKey && stripeClientSecret) {
     textSpan.textContent = error.error.message;
     div.appendChild(errorSpan);
     div.appendChild(textSpan);
+  }
+
+  function getTrim(form, formField) {
+    // Return trimmed user input from formData
+    return form.get(formField).trim();
   }
 }

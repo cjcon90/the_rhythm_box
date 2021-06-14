@@ -1,13 +1,44 @@
 from products.models import Product
 from .models import OrderLineItem, Order
-from django.shortcuts import render, redirect, reverse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import (
+    render,
+    redirect,
+    reverse,
+    get_object_or_404,
+    HttpResponse,
+)
+from django.views.decorators.http import require_POST
 from .forms import OrderForm
 from django.conf import settings
 from cart.contexts import cart_contents
 from django.contrib import messages
 from django.utils.safestring import mark_safe
+from django.http import QueryDict
 import stripe
+import json
+
+
+@require_POST
+def cache_checkout(request):
+    try:
+        data = json.loads(request.body)
+        # Payment intent ID = pid
+        pid = data["client_secret"].split("_secret")[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(
+            pid,
+            metadata={
+                "cart": json.dumps(request.session.get("cart", {})),
+                "username": request.user,
+            },
+        )
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(
+            request,
+            "Sorry, your payment cannot be processes right now. Please try again later",
+        )
+        return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
@@ -44,7 +75,20 @@ def checkout(request):
         else:
             context["order_form"] = form
     else:  # GET request
-        form = OrderForm()
+        form = OrderForm(
+            {
+                "first_name": "Ciaran",
+                "last_name": "Concannon",
+                "email": "cjcon90@pm.me",
+                "phone_number": "0876723100",
+                "town_or_city": "Dublin 6",
+                "country": "IE",
+                "street_address_1": "Apartment 41",
+                "street_address_2": "Rathmines Town Center",
+                "postcode": "D06 E221",
+                "county": "Dublin",
+            }
+        )
         context["order_form"] = form
         # Load Cart
         cart = request.session.get("cart", {})
