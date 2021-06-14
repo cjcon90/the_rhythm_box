@@ -55,7 +55,6 @@ if (stripePublicKey && stripeClientSecret) {
     const csrftoken = document.querySelector(
       "[name=csrfmiddlewaretoken]"
     ).value;
-    console.log(`CSRF${csrftoken}`);
     const url = "/checkout/cache_checkout_data/";
     const postData = {
       csrfmiddlewaretoken: csrftoken,

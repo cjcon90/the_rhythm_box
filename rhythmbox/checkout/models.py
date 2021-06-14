@@ -40,6 +40,8 @@ class Order(models.Model):
     grand_total = models.DecimalField(
         max_digits=12, decimal_places=2, default=0
     )
+    original_cart = models.TextField()
+    stripe_pid = models.CharField(max_length=254)
 
     def update_total(self):
         """
