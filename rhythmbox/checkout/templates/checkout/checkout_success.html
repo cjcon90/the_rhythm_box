@@ -28,27 +28,27 @@
                     <th class="checkout-summary__table__headings--quantity">Quantity</th>
                     <th class="checkout-summary__table__headings--subtotal">Price</th>
                 </tr>
-                {% for item in cart_items %}
+                {% for item in order.lineitems.all %}
                 <tr class="checkout-summary__table__data">
                     <td class="checkout-summary__table__data--image"><img src="{{ item.product.image.url }}" alt=""></td>
                     <td class="checkout-summary__table__data--title">{{ item.product.title }}</td>
                     <td class="checkout-summary__table__data--quantity">{{ item.quantity }}</td>
-                    <td class="checkout-summary__table__data--price">€{{ item.price|floatformat:"-2"|intcomma }}</td>
+                    <td class="checkout-summary__table__data--price">€{{ item.product.price|floatformat:"-2"|intcomma }}</td>
                 </tr>
                 {% endfor %}
             </table>
             <div class="checkout-summary-totals">
                 <div class="checkout-summary-totals--order">
                     <p class="checkout-summary-totals__label regular t7">Order Total:</p>
-                    <p class="checkout-summary-totals__data regular t7">€{{ total|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__data regular t7">€{{ order.order_total|floatformat:"-2"|intcomma }}</p>
                 </div>
                 <div class="checkout-summary-totals--delivery">
                     <p class="checkout-summary-totals__label regular t7">Delivery:</p>
-                    <p class="checkout-summary-totals__data regular t7">€{{ delivery|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__data regular t7">€{{ order.delivery_cost|floatformat:"-2"|intcomma }}</p>
                 </div>
                 <div class="checkout-summary-totals--grand">
                     <p class="checkout-summary-totals__label bold t6">Grand Total:</p>
-                    <p class="checkout-summary-totals__data bold t6">€{{ grand_total|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__data bold t6">€{{ order.grand_total|floatformat:"-2"|intcomma }}</p>
                 </div>
 
             </div>

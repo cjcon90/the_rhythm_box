@@ -72,6 +72,12 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect("cart")
+            for item in OrderLineItem.objects.filter(order=order):
+            # if complete order is successful, reduce stock of each item purchased by quantity
+                item.product.stock -= item.quantity
+                item.product.save()
+            # reset cart
+            del request.session['cart']
             return redirect(
                 reverse("checkout_success", args=[order.order_number])
             )
@@ -86,9 +92,8 @@ def checkout(request):
                 "phone_number": "0876723100",
                 "town_or_city": "Dublin 6",
                 "country": "IE",
-                "street_address_1": "Apartment 41",
-                "street_address_2": "Rathmines Town Center",
-                "postcode": "D06 E221",
+                "street_address_1": "Rathmines Town Center",
+                "postcode": "D06 1234",
                 "county": "Dublin",
             }
         )
