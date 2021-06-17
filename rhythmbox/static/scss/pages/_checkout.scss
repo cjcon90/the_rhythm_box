@@ -21,7 +21,7 @@
     &__table {
       & tr {
         display: grid;
-        grid-template-columns: 15% 35% 12.5% 1fr;
+        grid-template-columns: 17.5% 32.5% 10% 1fr;
         align-items: center;
         justify-content: end;
         gap: 2rem;
@@ -37,7 +37,7 @@
         }
       }
       &__data {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         &--title {
           text-align: center;
         }
@@ -52,7 +52,7 @@
         grid-template-columns: 1fr 20%;
         justify-content: end;
         text-align: right;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem;
         gap: 2rem;
       }
 
@@ -80,8 +80,9 @@
   line-height: 5rem;
 
   &--info {
-    font-size: 2.75rem;
+    font-size: 2.5rem;
     text-align: center;
+    padding-top: 0;
   }
 }
 .order-confirmation-summary {

@@ -21,7 +21,7 @@ class ProductAdmin(admin.ModelAdmin):
         "brand__name",
         "description",
     )
-    readonly_fields = ("date_added",)
+    readonly_fields = ("slug", "thumbnail","date_added")
 
 
 class CategoryAdmin(admin.ModelAdmin):

@@ -40,7 +40,7 @@
                     {% else %}
                     <p class="cart-item__quantity--stock--out bold upper">Out of stock</p>
                     {% endif %}
-                    <button type="submit" class="cart-item__quantity--submit btn btn--black bold t6">Update</button>
+                    <button type="submit" class="cart-item__quantity--submit btn btn--black bold">Update</button>
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 </form>
                 {% comment %} TOTAL PRICE OF ITEM * QUANTITY {% endcomment %}
@@ -116,6 +116,6 @@
 
 {% endblock content %}
 
-{% block js %}
+{% block post_js %}
 <script type="module" src="{% static 'scripts/quantitySelect.js' %}"></script>
-{% endblock js %}
+{% endblock post_js %}

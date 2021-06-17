@@ -66,7 +66,7 @@
                         <input class="rating__input" name="star-rating" id="star-rating-{{i}}" value="{{i}}" type="radio" {% if i == user_rating.rating %}checked{% endif %}>
                     {% endfor %}
             </fieldset>
-            <button type="submit" class="btn btn--white t6 regular dropdown__button"><i class="fas fa-star-half-alt"></i> Submit rating</button>
+            <button type="submit" class="btn btn--white regular dropdown__button"><i class="fas fa-star-half-alt"></i> Submit rating</button>
         </form>
         <div class="reviews-buttons__filter dropdown">
         </div>
@@ -92,19 +92,19 @@
 
                 {% if review.rating.user_id == request.user %}
                 {% comment %} add 'edit review' button if review belongs to user {% endcomment %}
-                    <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Edit review</a>
+                    <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white regular dropdown__button"><i class="fas fa-pencil-alt"></i> Edit review</a>
                 {% endif %}
             {% endfor %}
         {% endif %}
 
         {% if not user_review %}
         {% comment %} add 'write review' button if user has not yet reviewed {% endcomment %}
-            <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white t6 regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
+            <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
         {% endif %}
     </div>
 {% endblock content %}
 
 
-{% block js %}
+{% block post_js %}
 <script type="module" src="{% static 'scripts/quantitySelect.js' %}"></script>
-{% endblock js %}
+{% endblock post_js %}

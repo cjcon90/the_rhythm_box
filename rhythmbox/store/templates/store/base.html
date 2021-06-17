@@ -24,7 +24,7 @@
     <meta property="twitter:description" content="The RhythmBox is an ecommerce store for professional-grade drums, cymbals and drumming equipment">
     {% comment %} <meta property="twitter:image" content="https://res.cloudinary.com/cjcon90/image/upload/v1616015377/hot_dogz/og_preview_image.png"> {% endcomment %}
     {% comment %} TODO: complete meta tags {% endcomment %}
-    <script src="https://js.stripe.com/v3/"></script>
+    {% block pre_js %}{% endblock pre_js %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 <body>
@@ -93,12 +93,12 @@
     <footer class="footer">
         <div class="connect">
             <div class="connect__heading">
-                <h3 class="connect__heading--main bold upper">Stay Connected</h3>
-                <h4 class="connect__heading--sub regular upper">Sign Up To Our Newsletter</h4>
+                <p class="connect__heading--main bold upper">Stay Connected</p>
+                <p class="connect__heading--sub regular upper">Sign Up To Our Newsletter</p>
             </div>
             <div class="connect__newsletter">
                 <input type="text" class="connect__newsletter--input input-text" placeholder="Enter your email">
-                <button type="submit" class="connect__newsletter--button btn btn--primary t6 upper bold">Sign Up</button>
+                <button type="submit" class="connect__newsletter--button btn btn--primary upper bold">Sign Up</button>
             </div>
             <div class="connect__social">
                 <a href="https://facebook.com" rel="nooopener" target="_blank" class="connect__social--link"><i class="connect__social--icon fab fa-facebook-square"></i></a>
@@ -194,7 +194,7 @@
     </footer>
     <script type="module" src="{% static 'scripts/app.js' %}"></script>
     {% comment %} Load other page specific scripts {% endcomment %}
-    {% block js %}{% endblock js %}
+    {% block post_js %}{% endblock post_js %}
 
 </body>
 </html>

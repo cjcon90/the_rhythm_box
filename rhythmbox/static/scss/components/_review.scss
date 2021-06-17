@@ -20,8 +20,6 @@
         grid-area: author;
     }
     &-date {
-    font-size: 1.5rem;
-
         grid-area: date;
         justify-self: end;
     }
@@ -36,8 +34,9 @@
     }
     &-text {
         grid-area: review;
-        line-height: 2rem;
+        line-height: 2.25rem;
         letter-spacing: 1px;
+        font-size: 1.6rem;
     }
     &-helpful {
         grid-area: helpful;

@@ -48,7 +48,7 @@
         border: solid $color-black 0.1rem;
         outline: none;
         padding: 0.5rem;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
 
         &::placeholder {
           color: rgb(100, 100, 100);
@@ -62,6 +62,7 @@
       }
       &--button {
         min-width: max-content;
+        font-size: 1.8rem;
       }
     }
 
@@ -83,9 +84,6 @@
         &:focus {
           color: white;
         }
-      }
-
-      &--icon {
       }
     }
   }
@@ -117,14 +115,14 @@
       gap: 1rem;
       &--heading {
         color: $color-primary;
-        font-size: 1.75rem;
+        font-size: 1.85rem;
       }
       &--text {
         display: flex;
         align-items: flex-end;
         gap: 2rem;
         color: white;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
       }
     }
   }
@@ -135,7 +133,6 @@
     flex-direction: column;
     color: white;
     font-size: 1.25rem;
-
     letter-spacing: 0.2rem;
     gap: 1rem;
     padding: 2rem 0;

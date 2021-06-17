@@ -6,6 +6,7 @@ from PIL import Image
 from django.template.defaultfilters import slugify
 from django.core.validators import MinValueValidator, MaxValueValidator
 from accounts.models import Account
+from smart_selects.db_fields import ChainedForeignKey
 
 
 class Category(models.Model):
@@ -109,7 +110,9 @@ class Product(models.Model):
     stock = models.IntegerField(default=15)
     date_added = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="products/", blank=True, null=True)
-    thumbnail = models.ImageField(upload_to="products/thumbnails/", blank=True, null=True)
+    thumbnail = models.ImageField(
+        upload_to="products/thumbnails/", blank=True, null=True
+    )
 
     class Meta:
         ordering = ("-date_added",)
@@ -118,7 +121,16 @@ class Product(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.thumbnail = self.make_thumbnail(self.image)
+        """
+        Modified save method to update thumbnail only if object is
+        new, or the object image has been updated
+        """
+        if self.pk is None:
+            self.thumbnail = self.make_thumbnail(self.image)
+        else:
+            original = Product.objects.get(id=self.pk)
+            if original.image != self.image:
+                self.thumbnail = self.make_thumbnail(self.image)
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
@@ -129,7 +141,7 @@ class Product(models.Model):
 
         thumb_io = BytesIO()
         img.save(thumb_io, "JPEG", quality=85)
-        thumbnail = File(thumb_io, name=image.name.replace('products/', ''))
+        thumbnail = File(thumb_io, name=image.name.replace("products/", ""))
         return thumbnail
 
     def get_average_rating(self):

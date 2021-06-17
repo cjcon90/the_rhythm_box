@@ -21,7 +21,7 @@
     <div class="checkout order-confirmation-summary">
         <div class="checkout-summary">
             <h3 class="checkout-summary__heading light">Order Items ({{ order.lineitems.all|length }})</h3>
-            <table class="checkout-summary__table">
+            <table class="checkout-summary__table regular">
                 <tr class="checkout-summary__table__headings bold">
                     <th class="checkout-summary__table__headings--image"></th>
                     <th class="checkout-summary__table__headings--item">Item</th>
@@ -57,10 +57,10 @@
     </div>
 {% endblock content %}
 
-{% block js %}
+{% block post_js %}
 <script type="module" src="{% static 'scripts/quantitySelect.js' %}"></script>
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'scripts/stripeElements.js' %}"></script>
-{% endblock js %}
+{% endblock post_js %}

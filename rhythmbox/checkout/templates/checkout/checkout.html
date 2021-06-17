@@ -6,7 +6,9 @@
 
 {% block title %}Checkout{% endblock title %}
 
-
+{% block pre_js %}
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock pre_js %}
 
 {% block content %} 
     <h2 class="section__heading upper bold">Checkout</h2>
@@ -45,19 +47,19 @@
         </div>
         <div class="checkout-summary">
             <h3 class="checkout-summary__heading light">Order Items ({{ product_count }})</h3>
-            <table class="checkout-summary__table">
-                <tr class="checkout-summary__table__headings bold">
-                    <th class="checkout-summary__table__headings--image"></th>
-                    <th class="checkout-summary__table__headings--item">Item</th>
-                    <th class="checkout-summary__table__headings--quantity">Quantity</th>
-                    <th class="checkout-summary__table__headings--subtotal">Price</th>
+            <table class="checkout-summary__table regular">
+                <tr class="checkout-summary__table regular__headings bold">
+                    <th class="checkout-summary__table regular__headings--image"></th>
+                    <th class="checkout-summary__table regular__headings--item">Item</th>
+                    <th class="checkout-summary__table regular__headings--quantity">Quantity</th>
+                    <th class="checkout-summary__table regular__headings--subtotal">Price</th>
                 </tr>
                 {% for item in cart_items %}
-                <tr class="checkout-summary__table__data">
-                    <td class="checkout-summary__table__data--image"><img src="{{ item.product.image.url }}" alt=""></td>
-                    <td class="checkout-summary__table__data--title">{{ item.product.title }}</td>
-                    <td class="checkout-summary__table__data--quantity">{{ item.quantity }}</td>
-                    <td class="checkout-summary__table__data--price">€{{ item.price|floatformat:"-2"|intcomma }}</td>
+                <tr class="checkout-summary__table regular__data">
+                    <td class="checkout-summary__table regular__data--image"><img src="{{ item.product.image.url }}" alt=""></td>
+                    <td class="checkout-summary__table regular__data--title">{{ item.product.title }}</td>
+                    <td class="checkout-summary__table regular__data--quantity">{{ item.quantity }}</td>
+                    <td class="checkout-summary__table regular__data--price">€{{ item.price|floatformat:"-2"|intcomma }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -79,15 +81,15 @@
         </div>
     </div>
     <div class="loading-overlay no-display">
-        <h1 class="bold t1 loading__spinner">
+        <h1 class="bold loading__spinner">
                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>
         </h1>
     </div>
 {% endblock content %}
 
-{% block js %}
+{% block post_js %}
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'scripts/stripeElements.js' %}"></script>
-{% endblock js %}
+{% endblock post_js %}
