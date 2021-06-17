@@ -12,17 +12,17 @@
 
 {% block content %} 
     <h2 class="section__heading upper bold">Thank You</h2>
-    <div class="order-confirmation-text regular t6">
+    <div class="order-confirmation-text regular">
         <p>Your order has been completed!</p>
         <p>Your order number is<br><strong>{{ order.order_number }}</strong></p>
-        <p>A confirmation email has been sent to<br><strong>{{ order.email }}</strong></p>
-        <p class="checkout-form__heading order-confirmation-text--info t3 light">Your order information is below</p>
+        <p>A confirmation email has been sent to<br><strong>{{ request.user }}</strong></p>
+        <p class="checkout-form__heading order-confirmation-text--info light">Your order information is below:</p>
     </div>
     <div class="checkout order-confirmation-summary">
         <div class="checkout-summary">
-            <h3 class="checkout-summary__heading t4 light">Order Items ({{ product_count }})</h3>
+            <h3 class="checkout-summary__heading light">Order Items ({{ order.lineitems.all|length }})</h3>
             <table class="checkout-summary__table">
-                <tr class="checkout-summary__table__headings bold t7">
+                <tr class="checkout-summary__table__headings bold">
                     <th class="checkout-summary__table__headings--image"></th>
                     <th class="checkout-summary__table__headings--item">Item</th>
                     <th class="checkout-summary__table__headings--quantity">Quantity</th>
@@ -39,16 +39,16 @@
             </table>
             <div class="checkout-summary-totals">
                 <div class="checkout-summary-totals--order">
-                    <p class="checkout-summary-totals__label regular t7">Order Total:</p>
-                    <p class="checkout-summary-totals__data regular t7">€{{ order.order_total|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__label regular">Order Total:</p>
+                    <p class="checkout-summary-totals__data regular">€{{ order.order_total|floatformat:"-2"|intcomma }}</p>
                 </div>
                 <div class="checkout-summary-totals--delivery">
-                    <p class="checkout-summary-totals__label regular t7">Delivery:</p>
-                    <p class="checkout-summary-totals__data regular t7">€{{ order.delivery_cost|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__label regular">Delivery:</p>
+                    <p class="checkout-summary-totals__data regular">€{{ order.delivery_cost|floatformat:"-2"|intcomma }}</p>
                 </div>
                 <div class="checkout-summary-totals--grand">
-                    <p class="checkout-summary-totals__label bold t6">Grand Total:</p>
-                    <p class="checkout-summary-totals__data bold t6">€{{ order.grand_total|floatformat:"-2"|intcomma }}</p>
+                    <p class="checkout-summary-totals__label bold">Grand Total:</p>
+                    <p class="checkout-summary-totals__data bold">€{{ order.grand_total|floatformat:"-2"|intcomma }}</p>
                 </div>
 
             </div>

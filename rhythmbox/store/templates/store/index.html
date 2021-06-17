@@ -5,11 +5,11 @@
 {% block header %}
     <header class="header">
         <div class="header__heading">
-            <h1 class="header__heading--main t1 bold upper">The Rhythm Box</h1>
-            <h1 class="header__heading--sub subtitle t2 light upper">Professional Drums For Studio and Stage</h1>
+            <h1 class="header__heading--main bold upper">The Rhythm Box</h1>
+            <h1 class="header__heading--sub subtitle light upper">Professional Drums For Studio and Stage</h1>
         </div>
         <div class="header__link">
-            <a href="{% url 'shop' %}" class="header__link--text t6 upper regular">Shop All Products</a>
+            <a href="{% url 'shop' %}" class="header__link--text upper regular">Shop All Products</a>
         </div>
     </header>
 {% endblock header %}
@@ -17,16 +17,16 @@
 {% block content %}
     <div class="categories">
         <div class="category category--acoustic">
-            <a href="{% url 'shop' 'acoustic-drums' %}" class="category__text t2 bold upper">Acoustic</a>
+            <a href="{% url 'shop' 'acoustic-drums' %}" class="category__text bold upper">Acoustic</a>
         </div>
         <div class="category category--electric">
-            <a href="{% url 'shop' 'electronic-drums' %}" class="category__text t2 bold upper">Electric</a>
+            <a href="{% url 'shop' 'electronic-drums' %}" class="category__text bold upper">Electric</a>
         </div>
         <div class="category category--cymbals">
-            <a href="{% url 'shop' 'cymbals' %}" class="category__text t2 bold upper">Cymbals</a>
+            <a href="{% url 'shop' 'cymbals' %}" class="category__text bold upper">Cymbals</a>
         </div>
         <div class="category category--accessories">
-            <a href="{% url 'shop' 'accessories' %}" class="category__text t2 bold upper">Accessories</a>
+            <a href="{% url 'shop' 'accessories' %}" class="category__text bold upper">Accessories</a>
         </div>
     </div>
 

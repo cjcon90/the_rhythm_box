@@ -12,28 +12,32 @@
 <div class="filters">
     {% comment %} SEARCH BAR {% endcomment %}
     <form class="filters__search">
-        <input type="text" class="filters__search--input form__input t6 regular" placeholder="Search products...">
-        <button class="filters__search--button btn btn--black t6 regular">Search</button>
+        <input type="text" class="filters__search--input form__input regular" placeholder="Search products...">
+        <button class="filters__search--button btn btn--black regular">Search</button>
     </form>
 
     {% comment %} FILTER BUTTON - MOBILE {% endcomment %}
-    <button class="filters__button btn btn--black t6 regular">Filter</button>
+    <button class="filters__button btn btn--black regular">Filter</button>
 
     {% comment %} FILTER MENU {% endcomment %}
     <div class="filters__menu closed">
-        <h2 class="filters__menu--heading t2 bold upper">Filter</h2>
+        <h2 class="filters__menu--heading bold upper">Filter</h2>
         <hr>
-        <a class="filters__list--link regular t5 bold" href="{% url 'shop' %}">All Products</a>
+        <ul class="filters__list level-0">
+            <li>
+                <a class="filters__list--link regular bold" href="{% url 'shop' %}">All Products</a>
+            </li>
+        </ul>
         {% for category in categories %}
             <ul class="filters__list level-1">
             <hr>
-                <li><a class="filters__list--link regular t5 bold" href="{% url 'shop' category.slug %}">{{ category.title }}</a></li>
+                <li><a class="filters__list--link regular bold" href="{% url 'shop' category.slug %}">{{ category.title }}</a></li>
                 {% for subcategory in category.subcategories.all %}
                     <ul class="filters__list level-2">
-                        <li><a class="filters__list--link regular t6" href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a></li>
+                        <li><a class="filters__list--link regular" href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a></li>
                         {% for type in subcategory.types.all %}
                             <ul class="filters__list level-3">
-                                <li><a class="filters__list--link regular t7" href="{% url 'shop' category.slug subcategory.slug type.slug %}">{{ type.title }}</a></li>
+                                <li><a class="filters__list--link regular" href="{% url 'shop' category.slug subcategory.slug type.slug %}">{{ type.title }}</a></li>
                             </ul>
                         {% endfor %}
                     </ul>
@@ -44,12 +48,12 @@
 
     {% comment %} SORT OPTION {% endcomment %}
     <div class="filters__sort dropdown">
-        <button id="product-sort-button" class="filters__sort--button btn btn--white t6 regular dropdown__button">Sort Products<i class="fas fa-chevron-down"></i></button>
+        <button id="product-sort-button" class="filters__sort--button btn btn--white regular dropdown__button">Sort Products<i class="fas fa-chevron-down"></i></button>
         <div id="product-sort-list" class="filters__sort--list dropdown__list">
-            <a href="?{% url_replace request 'order_by' 'rating' %}" class="dropdown__list--link regular t7">Highest Rated</a>
-            <a href="?{% url_replace request 'order_by' 'price' %}" class="dropdown__list--link regular t7">Price (Low to High)</a>
-            <a href="?{% url_replace request 'order_by' '-price' %}" class="dropdown__list--link regular t7">Price (High to Low)</a>
-            <a href="?{% url_replace request 'order_by' '-date_added' %}" class="dropdown__list--link regular t7">Newest Items</a>
+            <a href="?{% url_replace request 'order_by' 'rating' %}" class="dropdown__list--link regular">Highest Rated</a>
+            <a href="?{% url_replace request 'order_by' 'price' %}" class="dropdown__list--link regular">Price (Low to High)</a>
+            <a href="?{% url_replace request 'order_by' '-price' %}" class="dropdown__list--link regular">Price (High to Low)</a>
+            <a href="?{% url_replace request 'order_by' '-date_added' %}" class="dropdown__list--link regular">Newest Items</a>
         </div>
     </div>
 </div>
@@ -64,21 +68,21 @@
                 <img src="{{ product.brand.logo.url }}" alt="" class="product__images--brand">
             </div>
             <div class="product__title">
-                <h2 class="product__title--text bold t3">{{ product.title }}</h2>
+                <h2 class="product__title--text bold">{{ product.title }}</h2>
             </div>
             <div class="product__reviews">
                 {% comment %} STAR RATING {% endcomment %}
                 {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
                 {% comment %} REVIEW COUNT {% endcomment %}
-                <div class="product__reviews--count regular t9"><p>{% display_count 'rating' product.get_rating_count %}</p></div>
+                <div class="product__reviews--count regular"><p>{% display_count 'rating' product.get_rating_count %}</p></div>
             </div>
             <div class="product__nums">
                 {% comment %} PRODUCT PRICE AND STOCK {% endcomment %}
-                <h3 class="product__nums--price t3 bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
+                <h3 class="product__nums--price bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
                 {% if product.stock %}
-                <p class="product__nums--stock t7 bold">{{ product.stock | display_stock }} in stock</p>
+                <p class="product__nums--stock bold">{{ product.stock | display_stock }} in stock</p>
                 {% else %}
-                <p class="product__nums--stock--out t7 bold upper">Out of stock</p>
+                <p class="product__nums--stock--out bold upper">Out of stock</p>
                 {% endif %}
             </div>
 
@@ -88,15 +92,15 @@
             {% comment %} PRODUCT LINK (for items without a type) {% endcomment %}
                 <a href=
                 "{% url 'product_page' product.category.slug product.subcategory.slug product.type.slug product.slug %}"
-                class="product__buttons--info btn btn--white t5 bold">Product Info</a>
+                class="product__buttons--info btn btn--white bold">Product Info</a>
 
             {% else %}
             {% comment %} PRODUCT LINK (for items with a type) {% endcomment %}
                 <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
-                class="product__buttons--info btn btn--white t5 bold">Product Info</a>
+                class="product__buttons--info btn btn--white bold">Product Info</a>
             {% endif %}
                 <a data-product="{{ product.pk }}" data-action="add" href="{% url 'add_to_cart' product.id %}"
-                class="product__buttons--cart btn btn--black t5 regular update-cart {% if product.stock == 0 %}btn--black--disabled{% endif %}">Add to Cart</a>
+                class="product__buttons--cart btn btn--black regular update-cart {% if product.stock == 0 %}btn--black--disabled{% endif %}">Add to Cart</a>
             </div>
         </div>
     {% endfor %}

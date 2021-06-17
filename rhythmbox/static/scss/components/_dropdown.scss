@@ -1,36 +1,41 @@
 .dropdown {
-    position: relative;
-    display: inline-block;
-    &__button {
-        cursor: pointer;
-        border: solid rgba(2,6,9,0.7) 0.1rem;
-        padding: 1rem;
-        & > * {
-            padding: 0 .5rem;
-        }
+  position: relative;
+  display: inline-block;
+  &__button {
+    cursor: pointer;
+    border: solid rgba(2, 6, 9, 0.7) 0.1rem;
+    font-size: 1.75rem;
+    padding: 1rem;
+    & > * {
+      padding: 0 0.5rem;
     }
+  }
 
-    &__list {
-        display: none;
-        position: absolute;
-        overflow: auto;
-        z-index: 1;
-        background-color: white;
-        border: solid rgba(2,6,9,0.7) 0.1rem;
-        border-top: none;
+  &__list {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    z-index: 1;
+    background-color: white;
+    border: solid rgba(2, 6, 9, 0.7) 0.1rem;
+    border-top: none;
 
-        &--link {
-            color: black;
-            text-decoration: none;
-            display: block;
-            padding: 1rem;
+    &--link {
+      color: black;
+      text-decoration: none;
+      display: block;
+      padding: 1rem;
+      font-size: 1.5rem;
 
-            &:hover, &:focus {
-                color: white;
-                background-color: black;
-            }
-        }
+      &:hover,
+      &:focus {
+        color: white;
+        background-color: black;
+      }
     }
+  }
 }
 
-.show {display: block;}
+.show {
+  display: block;
+}

@@ -8,16 +8,15 @@ class OrderForm(forms.ModelForm):
         fields = (
             "first_name",
             "last_name",
-            "email",
-            "phone_number",
             "street_address_1",
             "street_address_2",
             "town_or_city",
             "county",
             "postcode",
             "country",
+            "phone_number",
         )
         labels = {
-            'street_address_1': 'Address Line 1',
-            'street_address_2': 'Address Line 2 (optional)',
+            "street_address_1": "Address Line 1",
+            "street_address_2": "Address Line 2 (optional)",
         }

@@ -22,7 +22,7 @@ if (stripePublicKey && stripeClientSecret) {
     },
     style: {
       base: {
-        fontSize: "20px",
+        fontSize: "18px",
       },
       invalid: {
         color: "#ad0000",
@@ -74,7 +74,6 @@ if (stripePublicKey && stripeClientSecret) {
                   "last_name"
                 )}`,
                 phone: getTrim(fd, "phone_number"),
-                email: getTrim(fd, "email"),
                 address: {
                   line1: getTrim(fd, "street_address_1"),
                   line2: getTrim(fd, "street_address_2"),

@@ -88,7 +88,6 @@ def checkout(request):
             {
                 "first_name": "Ciaran",
                 "last_name": "Concannon",
-                "email": "cjcon90@pm.me",
                 "phone_number": "0876723100",
                 "town_or_city": "Dublin 6",
                 "country": "IE",

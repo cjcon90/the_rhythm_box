@@ -18,14 +18,14 @@
         </div>
 
         <div class="product-info__title">
-            <h3 class="product-info__title--price t2 bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
-            <h2 class="product-info__title--text bold t2">{{ product.title }}</h2>
+            <h3 class="product-info__title--price bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
+            <h2 class="product-info__title--text bold">{{ product.title }}</h2>
         </div>
 
         <div class="product-info__reviews">
             {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
-            <h2 class="product-info__reviews--average t4 bold">{{product.get_average_rating_decimal|floatformat:-1}} / 5</h2>
-            <p class="product-info__reviews--number t7 regular">{% display_count 'rating' product.get_rating_count %}</p>
+            <h2 class="product-info__reviews--average bold">{{product.get_average_rating_decimal|floatformat:-1}} / 5</h2>
+            <p class="product-info__reviews--number regular">{% display_count 'rating' product.get_rating_count %}</p>
         </div>
 
         <form class="product-info__nums add-to-cart-form" action="{% url 'add_to_cart' product.id %}" method="POST">
@@ -37,17 +37,17 @@
             </div>
 
             {% if product.stock %}
-            <p class="product__nums--stock t7 bold">{{ product.stock | display_stock }} in stock</p>
+            <p class="product-info__nums--stock bold">{{ product.stock | display_stock }} in stock</p>
             {% else %}
-            <p class="product__nums--stock--out t7 bold upper">Out of stock</p>
+            <p class="product-info__nums--stock--out bold upper">Out of stock</p>
             {% endif %}
-            <button type="submit" class="product-info__nums--submit btn btn--black bold t6 {% if product.stock == 0 %}btn--black--disabled{% endif %}">Add to Cart</button>
+            <button type="submit" class="product-info__nums--submit btn btn--black bold {% if product.stock == 0 %}btn--black--disabled{% endif %}">Add to Cart</button>
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </form>
 
         <div class="product-info__description">
-            <h3 class="product-info__description--heading t2 bold">Description</h3>
-            <p class="product-info__description--text regular t6">{{ product.description }}</p>
+            <h3 class="product-info__description--heading bold">Description</h3>
+            <p class="product-info__description--text regular">{{ product.description }}</p>
         </div>
 
     </div>
@@ -77,17 +77,17 @@
 
     {% comment %} PRODUCT REVIEWS {% endcomment %}
     <div class="reviews-section">
-        <h2 class="reviews-section__heading t5 bold">{% display_count 'review' product.get_review_count %}</h2>
+        <h2 class="reviews-section__heading bold">{% display_count 'review' product.get_review_count %}</h2>
         
         {% if reviews.count > 0 %}
         {% comment %} display each review (if exists) {% endcomment %}
             {% for review in reviews %}
                 <div class="review">
-                    <p class="review-author regular t8">{{ review.rating.user_id.first_name }} {{ review.rating.user_id.last_name|first }}.</p>
-                    <p class="review-date light t7">{{review.date_added|date:'d.m.Y'}}</p>
+                    <p class="review-author regular">{{ review.rating.user_id.first_name }} {{ review.rating.user_id.last_name|first }}.</p>
+                    <p class="review-date light">{{review.date_added|date:'d.m.Y'}}</p>
                     {% include 'products/_star-rating-sm.html' with rating=review.rating.rating %}
-                    <p class="review-headline bold t7">{{review.headline}}</p>
-                    <p class="review-text regular t7">{{review.content}}</p>
+                    <p class="review-headline bold">{{review.headline}}</p>
+                    <p class="review-text regular">{{review.content}}</p>
                 </div>
 
                 {% if review.rating.user_id == request.user %}

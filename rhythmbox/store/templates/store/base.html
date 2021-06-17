@@ -40,39 +40,39 @@
             </div>
             <a href="{% url 'cart' %}" class="nav__cart">
                 <div class="nav__cart--cart">
-                    <i class="fas fa-shopping-cart t3"></i>
+                    <i class="fas fa-shopping-cart"></i>
                 </div>
                 {% if product_count %}
                     <div class="nav__cart--count">
-                        <p class="t8 bold">{{ product_count }}</p>
+                        <p class="bold">{{ product_count }}</p>
                     </div>
                 {% endif %}
             </a>
             <div class="nav-menu hidden">
                 <ul class="nav-menu__list">
-                    <li class="nav-menu__list--category  upper regular"><a href="{% url 'shop' %}">Shop</a></li>
+                    <li class="nav-menu__list--category upper regular"><a href="{% url 'shop' %}">Shop</a></li>
                     <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory  regular"><a href="{% url 'shop' 'acoustic-drums' %}">Acoustic</a></li>
-                        <li class="nav-menu__list--subcategory  regular"><a href="{% url 'shop' 'electronic-drums' %}">Electric</a></li>
-                        <li class="nav-menu__list--subcategory  regular"><a href="{% url 'shop' 'cymbals' %}">Cymbals</a></li>
-                        <li class="nav-menu__list--subcategory  regular"><a href="{% url 'shop' 'accessories' %}">Accessories</a></li>
+                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'acoustic-drums' %}">Acoustic</a></li>
+                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'electronic-drums' %}">Electric</a></li>
+                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'cymbals' %}">Cymbals</a></li>
+                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'accessories' %}">Accessories</a></li>
                     </ul>
                     {% if request.user.is_authenticated %}
-                    <li class="nav-menu__list--category  upper regular"><a href="#">Account</a></li>
+                    <li class="nav-menu__list--category upper regular"><a href="#">Account</a></li>
                     <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory  regular"><a href="#">My Details</a></li>
-                        <li class="nav-menu__list--subcategory  regular"><a href="#">My Orders</a></li>
-                        <li class="nav-menu__list--subcategory  regular"><a href="#">Change Password</a></li>
+                        <li class="nav-menu__list--subcategory regular"><a href="#">My Details</a></li>
+                        <li class="nav-menu__list--subcategory regular"><a href="#">My Orders</a></li>
+                        <li class="nav-menu__list--subcategory regular"><a href="#">Change Password</a></li>
                     </ul>
                     {% else %}
-                    <li class="nav-menu__list--category  upper regular"><a href="{% url 'register' %}">Register</a></li>
-                    <li class="nav-menu__list--category  upper regular"><a href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-menu__list--category upper regular"><a href="{% url 'register' %}">Register</a></li>
+                    <li class="nav-menu__list--category upper regular"><a href="{% url 'login' %}">Login</a></li>
                     
                     {% endif %}
                 
-                    <li class="nav-menu__list--category  upper regular"><a href="#">Contact Us</a></li>
+                    <li class="nav-menu__list--category upper regular"><a href="#">Contact Us</a></li>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-menu__list--category  upper regular"><a href="{% url 'logout' %}">Logout</a></li>                    
+                        <li class="nav-menu__list--category upper regular"><a href="{% url 'logout' %}">Logout</a></li>                    
                     {% endif %}
                 </ul>
             </div>
@@ -93,11 +93,11 @@
     <footer class="footer">
         <div class="connect">
             <div class="connect__heading">
-                <h3 class="connect__heading--main bold upper t4">Stay Connected</h3>
-                <h4 class="connect__heading--sub regular upper t7">Sign Up To Our Newsletter</h4>
+                <h3 class="connect__heading--main bold upper">Stay Connected</h3>
+                <h4 class="connect__heading--sub regular upper">Sign Up To Our Newsletter</h4>
             </div>
             <div class="connect__newsletter">
-                <input type="text" class="connect__newsletter--input input-text t7" placeholder="Enter your email">
+                <input type="text" class="connect__newsletter--input input-text" placeholder="Enter your email">
                 <button type="submit" class="connect__newsletter--button btn btn--primary t6 upper bold">Sign Up</button>
             </div>
             <div class="connect__social">
@@ -109,84 +109,84 @@
             </div>
         </div>
         <div class="navigate">
-            <h3 class="navigate__heading bold upper t4">Navigate</h3>
+            <h3 class="navigate__heading bold upper">Navigate</h3>
             <div class="navigate__sections">
                 <div class="navigate__section">
-                    <p class="navigate__section--heading t6 regular">Department</p>
-                    <div class="navigate__section--text t7 regular">
+                    <p class="navigate__section--heading regular">Department</p>
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-                <div class="navigate__section">
-                    <p class="navigate__section--heading t6 regular">Department</p>
-                    <div class="navigate__section--text t7 regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text t7 regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text t7 regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text t7 regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
                 <div class="navigate__section">
-                    <p class="navigate__section--heading t6 regular">Department</p>
-                    <div class="navigate__section--text t7 regular">
+                    <p class="navigate__section--heading regular">Department</p>
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
                 <div class="navigate__section">
-                    <p class="navigate__section--heading t6 regular">Department</p>
-                    <div class="navigate__section--text t7 regular">
+                    <p class="navigate__section--heading regular">Department</p>
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
-                    <div class="navigate__section--text t7 regular">
+                    <div class="navigate__section--text regular">
+                        <p>Section</p><i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="navigate__section">
+                    <p class="navigate__section--heading regular">Department</p>
+                    <div class="navigate__section--text regular">
+                        <p>Section</p><i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="navigate__section--text regular">
+                        <p>Section</p><i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="navigate__section--text regular">
+                        <p>Section</p><i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="navigate__section--text regular">
+                        <p>Section</p><i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="navigate__section--text regular">
                         <p>Section</p><i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="contact regular t8">
-            <p class="contact__heading upper t7">Rhythmbox Stores</p>
+        <div class="contact regular">
+            <p class="contact__heading upper">Rhythmbox Stores</p>
             <p class="contact__address">14 South Dock Avenue, Grand Canal Dock, Dublin 4, Ireland</p>
             <p class="contact__number">+353 01 1234 567</p>
             <p class="contact__email">therhythmbox@gmail.com</p>

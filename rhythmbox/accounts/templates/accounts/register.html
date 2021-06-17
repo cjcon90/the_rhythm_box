@@ -12,7 +12,7 @@
         {% for field in registration_form %}
         <fieldset class="form__group">
             {% if field.name == 'newsletter' %}
-                <label for="{{ field.id_for_label }}" class="form__label--radio t7 regular">Would you like to receive updates on products, news and offers from Rhythm Box via our newsletter?
+                <label for="{{ field.id_for_label }}" class="form__label--radio regular">Would you like to receive updates on products, news and offers from Rhythm Box via our newsletter?
                 <div class="form__input--radio">
                     {% for radio in field %}
                         <label class="radio-btn" for="{{ radio.id_for_label }}">
@@ -28,17 +28,17 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <label for="{{ field.id_for_label }}" class="form__label t6 bold">{{ field.label }}</label>
-                {{ field|add_class:'form__input t5 regular' }}
+                <label for="{{ field.id_for_label }}" class="form__label bold">{{ field.label }}</label>
+                {{ field|add_class:'form__input regular' }}
             {% endif %}
             {% for error in field.errors %}
-                <span class="form__error t7 bold">{{ error }}</span>
+                <span class="form__error bold">{{ error }}</span>
             {% endfor %}
         </fieldset>
         {% endfor %}
 
         <fieldset class="form__group">
-            <button type="submit" class="form__submit btn btn--black t3 upper bold">Register</button>
+            <button type="submit" class="form__submit btn btn--black upper bold">Register</button>
         </fieldset>
     </form>
 {% endblock content %}

@@ -1,10 +1,12 @@
 .review {
     padding: 3rem 0;
+    font-size: 1.5rem;
     border-top: dashed .1rem $color-black-light;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, min-content);
     align-items: baseline;
+    gap: .5rem;
     grid-template-areas: 
     "author date"
     "stars stars"
@@ -13,9 +15,13 @@
     "helpful helpful";
 
     &-author {
+    font-size: 1.25rem;
+
         grid-area: author;
     }
     &-date {
+    font-size: 1.5rem;
+
         grid-area: date;
         justify-self: end;
     }
@@ -30,7 +36,7 @@
     }
     &-text {
         grid-area: review;
-        line-height: 2.5rem;
+        line-height: 2rem;
         letter-spacing: 1px;
     }
     &-helpful {

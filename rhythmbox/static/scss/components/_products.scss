@@ -1,73 +1,79 @@
 .product {
-    border: solid .1rem $color-black-light;
-    margin: auto;
-    width: 35rem;
-    max-width: 95vw;
+  border: solid 0.1rem $color-black-light;
+  margin: auto;
+  width: 35rem;
+  max-width: 95vw;
 
-    &__images {
-        padding: 0 2rem;
-        &--product {
-            height: 20rem;
-            width: auto;
-            display: block;
-            margin: auto;
-        }
-        &--brand {
-            max-height: 4rem;
-            max-width: 12rem;
+  &__images {
+    padding: 0 2rem;
+    &--product {
+      height: 20rem;
+      width: auto;
+      display: block;
+      margin: auto;
+    }
+    &--brand {
+      max-height: 4rem;
+      max-width: 12rem;
+    }
+  }
 
-        }
+  &__title {
+    padding: 1rem 2rem;
+    color: $color-black-semi;
+    font-size: 2.75rem;
+  }
+
+  &__reviews {
+    padding: 0 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    &--count {
+      padding: 0.5rem;
+      color: $color-black-semi;
+      font-size: 1.2rem;
+    }
+  }
+
+  &__nums {
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $color-black-semi;
+    font-size: 1.6rem;
+
+    & > * {
+      padding: 1rem 0.5rem;
     }
 
-    &__title {
-        padding: 1rem 2rem;
-        color: $color-black-semi;
+    &--price {
+      letter-spacing: 0.2rem;
+      font-size: 2.75rem;
     }
 
-    &__reviews {
-        padding: 0 2rem;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
+    &--stock {
+      &--out {
+        color: $color-warning-dark;
+      }
+    }
+  }
 
-        &--count {
-            padding: .5rem;
-            color: $color-black-semi;
-        }
+  &__buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    font-size: 2rem;
+
+    & > * {
+      padding: 1rem 0;
+      text-align: center;
     }
 
-    &__nums {
-        padding: 0 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: $color-black-semi;
-
-        & > * {
-            padding: 1rem .5rem;
-        }
-
-        &--price {
-            letter-spacing: .2rem;
-        }
-
-        &--stock {
-
-            &--out {
-                color: $color-warning-dark;
-            }
-        }
-
+    &--info {
+      border-width: 0.1rem 0 0 0;
     }
-
-    &__buttons {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 50%);
-
-        & > * {
-            padding: 1rem 0;
-            text-align: center;
-        }
-    }
+  }
 }
