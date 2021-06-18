@@ -1,11 +1,11 @@
 .account {
-    &__paths {
+    &__links {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, min-content);
         gap: 1rem;
         text-align: center;
-        padding: 1rem;
+        padding: 0 1rem;
         font-size: 1.8rem;
 
         &--link {
@@ -14,6 +14,48 @@
 
         &--current {
 
+        }
+    }
+
+    &__details {
+        padding: 0 1rem;
+
+        &--heading {
+            font-size: 3rem;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        &--table {
+            text-align: left;
+            width: 75%;
+            margin: auto;
+            font-size: 1.6rem;
+            & > tbody {
+                & > tr {
+                    display: grid;
+                    grid-template-columns: repeat(2, 50%);
+                    padding: .5rem 0;
+                }
+            }
+        }
+
+        &--edit {
+            display: block;
+            margin: 2rem auto;
+            width: max-content;
+            font-size: 1.8rem;
+            padding: 1rem;
+
+            & > i {
+                padding: 0 .5rem;
+            }
+        }
+        &--no_address {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.6rem;
+            margin: -1rem 0 2rem 0;
         }
     }
 }

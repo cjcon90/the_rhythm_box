@@ -1,5 +1,6 @@
 from products.models import Product
 from .models import OrderLineItem, Order
+from accounts.models import Account, Address
 from django.shortcuts import (
     render,
     redirect,
@@ -16,6 +17,7 @@ from django.utils.safestring import mark_safe
 from django.http import QueryDict
 import stripe
 import json
+from django.forms.models import model_to_dict
 
 
 @require_POST
@@ -84,18 +86,15 @@ def checkout(request):
         else:
             context["order_form"] = form
     else:  # GET request
-        form = OrderForm(
-            {
-                "first_name": "Ciaran",
-                "last_name": "Concannon",
-                "phone_number": "0876723100",
-                "town_or_city": "Dublin 6",
-                "country": "IE",
-                "street_address_1": "Rathmines Town Center",
-                "postcode": "D06 1234",
-                "county": "Dublin",
-            }
-        )
+        # Add user name to form by default
+        details = {'first_name':request.user.first_name,'last_name':request.user.last_name}
+        try:
+            # add user address (if exists)
+            details.update(model_to_dict(request.user.address))
+        except Address.DoesNotExist: 
+            pass
+        finally:
+            form = OrderForm(initial=details)
         context["order_form"] = form
         # Load Cart
         cart = request.session.get("cart", {})

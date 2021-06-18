@@ -59,15 +59,13 @@
       letter-spacing: 0.2rem;
     }
 
-    &--stock,
-    &--stock-out {
-      font-size: 1.6rem;
-    }
     &--stock {
       color: $color-black-semi;
+      font-size: 1.6rem;
     }
     &--stock--out {
       color: $color-warning-dark;
+      font-size: 1.4rem;
     }
 
     &--submit {

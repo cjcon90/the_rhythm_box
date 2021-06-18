@@ -6,7 +6,6 @@ from PIL import Image
 from django.template.defaultfilters import slugify
 from django.core.validators import MinValueValidator, MaxValueValidator
 from accounts.models import Account
-from smart_selects.db_fields import ChainedForeignKey
 
 
 class Category(models.Model):

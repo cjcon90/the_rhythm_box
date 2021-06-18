@@ -1,8 +1,23 @@
 from django.contrib import admin
-from .models import Account
+from .models import Account, Address
+
+
+class AddressAdminInline(admin.StackedInline):
+    model = Address
+    list_display = (
+        "street_address_1",
+        "street_address_2",
+        "town_or_city",
+        "county",
+        "postcode",
+        "country",
+        "phone_number",
+    )
 
 
 class AccountAdmin(admin.ModelAdmin):
+    inlines = (AddressAdminInline,)
+
     list_display = (
         "email",
         "first_name",

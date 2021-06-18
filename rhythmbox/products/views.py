@@ -7,7 +7,7 @@ from .forms import ProductRatingForm, ProductReviewForm
 
 
 def product_page(
-    request, category=None, subcategory=None, type=None, product=None
+    request, category, subcategory, product, type=None
 ):
     """
     View for handling individual product pages

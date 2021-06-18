@@ -1,5 +1,7 @@
-from django.db import models
+from django.db import models, transaction
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django_countries.fields import CountryField
+
 
 
 class MyAccountManager(BaseUserManager):
@@ -76,3 +78,14 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Address(models.Model):
+    user = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="address")
+    street_address_1 = models.CharField(max_length=80)
+    street_address_2 = models.CharField(max_length=80, null=True, blank=True)
+    town_or_city = models.CharField(max_length=40)
+    county = models.CharField(max_length=80)
+    postcode = models.CharField(max_length=20)
+    country = CountryField(blank=False, default="IE")
+    phone_number = models.CharField(max_length=20)

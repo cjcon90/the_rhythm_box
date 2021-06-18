@@ -11,6 +11,7 @@ from accounts.models import Account
 from products.models import Product
 
 
+
 class Order(models.Model):
     order_number = models.CharField(max_length=32, editable=False)
     user = models.ForeignKey(
@@ -22,13 +23,13 @@ class Order(models.Model):
     )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=20)
-    country = CountryField(blank=False, default="IE")
-    postcode = models.CharField(max_length=20)
-    town_or_city = models.CharField(max_length=40)
     street_address_1 = models.CharField(max_length=80)
     street_address_2 = models.CharField(max_length=80, null=True, blank=True)
+    town_or_city = models.CharField(max_length=40)
     county = models.CharField(max_length=80)
+    postcode = models.CharField(max_length=20)
+    country = CountryField(blank=False, default="IE")
+    phone_number = models.CharField(max_length=20)
     date = models.DateTimeField(auto_now_add=True)
     delivery_cost = models.DecimalField(
         max_digits=8, decimal_places=2, default=0

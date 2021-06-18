@@ -7,12 +7,69 @@
 <h1 class="section__heading upper bold">My Account</h1>
 
 <div class="account">
-    <div class="account__paths">
-        <a href="#" class="account__paths--link btn btn--white regular">My Orders</a>
-        <a href="#" class="account__paths--link btn btn--white regular">Change Password</a>
-
+    <div class="account__links">
+        <a href="#" class="account__links--link btn btn--white regular">My Orders</a>
+        <a href="#" class="account__links--link btn btn--white regular">Change Password</a>
     </div>
-
+    <div class="account__details">
+        <div class="account__details--user">
+            <h3 class="account__details--heading light upper">My Details</h3>
+            <table class="account__details--table regular">
+                <tr>
+                    <th>First Name</th>
+                    <td>{{ request.user.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{{ request.user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ request.user.email }}</td>
+                </tr>
+            </table>
+            <a href="#" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Account Details</a>
+        </div>
+        <div class="account__details--address">
+            <h3 class="account__details--heading light upper">Default Address</h3>
+            {% if request.user.address %}
+                <table class="account__details--table regular">
+                    <tr>
+                        <th>Address Line 1</th>
+                        <td>{{ request.user.address.street_address_1 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address Line 2</th>
+                        <td>{{ request.user.address.street_address_2 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Town / City</th>
+                        <td>{{ request.user.address.town_or_city }}</td>
+                    </tr>
+                    <tr>
+                        <th>County</th>
+                        <td>{{ request.user.address.county }}</td>
+                    </tr>
+                    <tr>
+                        <th>Postal Code</th>
+                        <td>{{ request.user.address.postcode }}</td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td>{{ request.user.address.country }}</td>
+                    </tr>
+                    <tr>
+                        <th>Mobile Number</th>
+                        <td>{{ request.user.address.phone_number }}</td>
+                    </tr>
+                </table>
+            <a href="#" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Default Address</a>
+            {% else %}
+            <p class="account__details--no_address bold"><em>You have no saved addresses!</em></p>
+            <a href="#" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Add Default Address</a>
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
