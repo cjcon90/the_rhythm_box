@@ -17,8 +17,18 @@ def shop(request, category=None, subcategory=None, type=None):
     """
     context = {}
     q = Q()
-    if request.GET.get("brand"):  # ?brand=*slug
+    
+    if "brand" in request.GET:
         q &= Q(brand=Brand.objects.get(slug=request.GET.get("brand")).id)
+    elif "q" in request.GET:
+        query = request.GET.get("q")
+        q &= (
+            Q(title__icontains=query)
+            | Q(category__title__icontains=query)
+            | Q(subcategory__title__icontains=query)
+            | Q(type__title__icontains=query)
+            | Q(brand__name__icontains=query)
+        )
     if type:
         q &= Q(type__slug=type)
     elif subcategory:
