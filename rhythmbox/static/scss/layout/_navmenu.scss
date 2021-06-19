@@ -16,7 +16,7 @@
         
         &--category {
             padding: 2rem 0 .5rem 0;
-            letter-spacing: .1rem;
+            letter-spacing: 1px;
             font-size: 3rem;
             @include respond(md) {
                 font-size: 4rem;

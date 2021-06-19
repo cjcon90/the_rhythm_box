@@ -1,0 +1,36 @@
+.orders {
+padding: 0 1.5rem 3rem 1.5rem;
+}
+.order {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, min-content);
+    color: $color-black;
+    border: $color-black-light 1px dashed;
+    margin: 3rem auto;
+    padding: 1.5rem;
+    letter-spacing: 1px;
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+        padding: .5rem 0;
+        gap: .5rem;
+    }
+    
+    &__label {
+        font-size: 1.8rem;
+
+    }
+    &__text {
+        font-size: 1.6rem;
+    }
+    &-image {
+        grid-column: 2 / 3;
+        grid-row: 1 / 4;
+        align-self: center;
+    }
+    &-items {
+        grid-column: 1 / 3;
+    }
+}

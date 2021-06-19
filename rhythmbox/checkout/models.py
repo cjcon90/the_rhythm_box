@@ -1,4 +1,4 @@
-import uuid
+import secrets
 from decimal import Decimal
 
 from django.db import models
@@ -11,9 +11,8 @@ from accounts.models import Account
 from products.models import Product
 
 
-
 class Order(models.Model):
-    order_number = models.CharField(max_length=32, editable=False)
+    order_number = models.CharField(max_length=32, editable=False, unique=True)
     user = models.ForeignKey(
         Account,
         on_delete=models.SET_NULL,
@@ -65,9 +64,12 @@ class Order(models.Model):
 
     def _generate_order_number(self):
         """
-        Generate a random, unique order number using UUID
+        Generate a random 12 digit order number
+        using UUID and based on user details
         """
-        return uuid.uuid4().hex.upper()
+        secret = secrets.token_hex(6)
+        chunks = [secret[i : i + 4] for i in range(0, len(secret), 4)]
+        return "-".join(chunks).upper()
 
     def save(self, *args, **kwargs):
         """
@@ -75,6 +77,10 @@ class Order(models.Model):
         order number if it hasn't been set already.
         """
         if not self.order_number:
+            num = self._generate_order_number()
+            # generate new number if previous order number already exists
+            while Order.objects.filter(order_number=num).exists():
+                num = self._generate_order_number()
             self.order_number = self._generate_order_number()
         super().save(*args, **kwargs)
 

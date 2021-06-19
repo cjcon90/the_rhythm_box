@@ -6,7 +6,8 @@ from .views import (
     account_details,
     edit_account_details,
     add_address,
-    edit_address
+    edit_address,
+    my_orders
 )
 
 urlpatterns = [
@@ -21,4 +22,5 @@ urlpatterns = [
     ),
     path("account/address/new/", add_address, name="add_address"),
     path("account/address/edit/", edit_address, name="edit_address"),
+    path("account/orders/", my_orders, name="my_orders"),
 ]

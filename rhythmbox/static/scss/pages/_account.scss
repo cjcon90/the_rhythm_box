@@ -1,78 +1,81 @@
 .account {
-    padding-bottom: 2rem;
+  padding-bottom: 3rem;
+  &__links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, min-content);
+    gap: 1rem;
+    text-align: center;
+    padding: 0 1rem;
     font-size: 1.6rem;
-    &__links {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, min-content);
-        gap: 1rem;
-        text-align: center;
-        padding: 0 1rem;
 
-        &--link {
-            padding: 1rem 0;
-        }
+    &--link {
+      padding: 1rem 0;
+    }
+  }
+
+  &__details {
+    padding: 0 1rem;
+
+    &--heading {
+      font-size: 3rem;
+      text-align: center;
+      padding: 3rem 0;
     }
 
-    &__details {
-        padding: 0 1rem;
+    &--table {
+      font-size: 1.6rem;
+      width: 85%;
+      margin: auto;
+      border-collapse: collapse;
+      & > tbody {
+        & > tr {
+          display: grid;
+          grid-template-columns: 40% 60%;
+          border: 1px dashed $color-black-light;
 
-        &--heading {
-            font-size: 3rem;
-            text-align: center;
-            padding: 3rem 0;
+          & > * {
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 0.5rem;
+          }
+
+          & > th {
+            text-align: right;
+            padding-right: 1rem;
+            border-right: 1px solid $color-black-light;
+          }
+          & > td {
+            text-align: left;
+            padding-left: 1rem;
+          }
         }
-
-        &--table {
-            width: 85%;
-            margin: auto;
-            border-collapse: collapse;
-            & > tbody {
-                & > tr {
-                    display: grid;
-                    grid-template-columns: 40% 60%;
-                    border: .1rem solid $color-black-light;
-
-                    & > * {
-                        max-width: 100%;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        padding: .5rem;
-                    }
-
-                    & > th {
-                        text-align: right;
-                        padding-right: 1rem;
-                        border-right: .1rem solid $color-black-light;
-                    }
-                    & > td {
-                        text-align: left;
-                        padding-left: 1rem;
-                    }
-                }
-                @include not-last-child(tr) {
-                    // prevent borders from doubling up in table rows
-                    border-bottom: none;
-                  }
-            }
+        @include not-last-child(tr) {
+          // prevent borders from doubling up in table rows
+          border-bottom: none;
         }
-
-        &--edit {
-            display: block;
-            margin: 2rem auto;
-            width: 85%;
-            padding: 1rem;
-            text-align: center;
-
-            & > i {
-                padding: 0 .5rem;
-            }
-        }
-        &--no_address {
-            text-align: center;
-            font-style: italic;
-            margin: -1rem 0 2rem 0;
-        }
+      }
     }
+
+    &--edit {
+      font-size: 1.6rem;
+      display: block;
+      margin: 2rem auto;
+      width: 85%;
+      padding: 1rem;
+      text-align: center;
+
+      & > i {
+        padding: 0 0.5rem;
+      }
+    }
+    &--no_address {
+      font-size: 1.6rem;
+      text-align: center;
+      font-style: italic;
+      margin: -1rem 0 2rem 0;
+    }
+  }
 }

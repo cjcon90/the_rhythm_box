@@ -3,7 +3,7 @@
   display: inline-block;
   &__button {
     cursor: pointer;
-    border: solid rgba(2, 6, 9, 0.7) 0.1rem;
+    border: solid rgba(2, 6, 9, 0.7) 01px;
     font-size: 1.75rem;
     padding: 1rem;
     & > * {
@@ -17,7 +17,7 @@
     overflow: auto;
     z-index: 1;
     background-color: white;
-    border: solid rgba(2, 6, 9, 0.7) 0.1rem;
+    border: solid rgba(2, 6, 9, 0.7) 01px;
     border-top: none;
 
     &--link {

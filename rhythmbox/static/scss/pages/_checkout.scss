@@ -26,17 +26,17 @@
         justify-content: end;
         gap: 2rem;
         padding: 1rem 0;
-        border-bottom: solid 0.1rem $color-black-light;
+        border-bottom: solid 01px $color-black-light;
         text-align: right;
       }
-      &__headings {
+      &-headings {
         font-size: 1.5rem;
         color: $color-black;
         &--item {
           text-align: center;
         }
       }
-      &__data {
+      &-data {
         font-size: 1.5rem;
         &--title {
           text-align: center;

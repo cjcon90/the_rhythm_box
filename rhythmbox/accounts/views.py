@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.utils.safestring import mark_safe
 from django.forms.models import model_to_dict
 from .models import Address
+from checkout.models import Order
 
 
 @login_required
@@ -76,6 +77,13 @@ def edit_address(request):
         context["address_form"] = form
         context["type"] = "Edit"
     return render(request, "accounts/address.html", context)
+
+@login_required
+def my_orders(request):
+    context = {}
+    context["orders"] = Order.objects.filter(user=request.user)
+    return render(request, "accounts/my_orders.html", context)
+
 
 
 def register_user(request):
