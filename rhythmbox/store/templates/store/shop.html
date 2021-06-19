@@ -42,6 +42,12 @@
                         {% endfor %}
                     </ul>
                 {% endfor %}
+                <li class="filters__list--link filters__list--brand regular bold">Brands</li>
+                <ul class="filters__list level-2">
+                    {% for brand in category_brands|key:category %}
+                        <li><a class="filters__list--link regular" href="{% url 'shop' %}?brand={{ brand.lower }}">{{ brand }}</a></li>
+                    {% endfor %}
+                </ul>
             </ul>
         {% endfor %}
     </div>

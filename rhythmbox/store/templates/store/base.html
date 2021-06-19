@@ -1,5 +1,6 @@
 {% load static %}
-<!DOCTYPE html>
+{% load store_tags %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -111,78 +112,16 @@
         <div class="navigate">
             <h3 class="navigate__heading bold upper">Navigate</h3>
             <div class="navigate__sections">
+            {% for category in categories %}
                 <div class="navigate__section">
-                    <p class="navigate__section--heading regular">Department</p>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
+                    <a class="navigate__section--heading regular">{{ category.title }}</a>
+                    {% for brand in category_brands|key:category %}
+                    <a href="{% url 'shop' %}?brand={{ brand }}" class="navigate__section--text regular">
+                        {{ brand }}<i class="fas fa-chevron-right"></i>
+                    </a>
+                    {% endfor %}
                 </div>
-                <div class="navigate__section">
-                    <p class="navigate__section--heading regular">Department</p>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-                <div class="navigate__section">
-                    <p class="navigate__section--heading regular">Department</p>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-                <div class="navigate__section">
-                    <p class="navigate__section--heading regular">Department</p>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                    <div class="navigate__section--text regular">
-                        <p>Section</p><i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
+            {% endfor %}
             </div>
         </div>
         <div class="contact regular">

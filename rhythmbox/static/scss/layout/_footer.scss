@@ -101,8 +101,9 @@
 
     &__sections {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      grid-template-rows: repeat(2, min-content);
+      grid-auto-flow: column;
+      gap: 2rem 0;
       @include respond(md) {
         display: flex;
         justify-content: space-between;
@@ -110,8 +111,10 @@
     }
 
     &__section {
+      width: 50%;
       display: flex;
       flex-direction: column;
+      white-space: nowrap;
       gap: 1rem;
       &--heading {
         color: $color-primary;

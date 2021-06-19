@@ -38,3 +38,6 @@ def display_stock(count):
         return f"10+"
     else:
         return f"{count}"
+
+@register.filter(name="key")
+def get_item(dictionary, key): return dictionary.get(key)
