@@ -30,24 +30,32 @@
         </ul>
         {% for category in categories %}
             <ul class="filters__list level-1">
-            <hr>
+            <li>
+                <hr>
+            </li>
                 <li><a class="filters__list--link regular bold" href="{% url 'shop' category.slug %}">{{ category.title }}</a></li>
                 {% for subcategory in category.subcategories.all %}
-                    <ul class="filters__list level-2">
-                        <li><a class="filters__list--link regular" href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a></li>
-                        {% for type in subcategory.types.all %}
-                            <ul class="filters__list level-3">
-                                <li><a class="filters__list--link regular" href="{% url 'shop' category.slug subcategory.slug type.slug %}">{{ type.title }}</a></li>
-                            </ul>
-                        {% endfor %}
-                    </ul>
+                    <li>
+                        <ul class="filters__list level-2">
+                            <li><a class="filters__list--link regular" href="{% url 'shop' category.slug subcategory.slug %}">{{ subcategory.title }}</a></li>
+                            {% for type in subcategory.types.all %}
+                                <li>
+                                    <ul class="filters__list level-3">
+                                        <li><a class="filters__list--link regular" href="{% url 'shop' category.slug subcategory.slug type.slug %}">{{ type.title }}</a></li>
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                 {% endfor %}
                 <li class="filters__list--link filters__list--brand regular bold">Brands</li>
-                <ul class="filters__list level-2">
-                    {% for brand in category_brands|key:category %}
-                        <li><a class="filters__list--link regular" href="{% url 'shop' %}?brand={{ brand.lower }}">{{ brand }}</a></li>
-                    {% endfor %}
-                </ul>
+                <li>
+                    <ul class="filters__list level-2">
+                        {% for brand in category_brands|key:category %}
+                            <li><a class="filters__list--link regular" href="{% url 'shop' %}?brand={{ brand.lower|urlencode }}">{{ brand }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
             </ul>
         {% endfor %}
     </div>
@@ -117,7 +125,7 @@
             {% include 'store/pagination.html' %}
         {% endblock pagination %}
     {% else %}
-        <p class="products-none__text bold">No products matching your query!</p>
+        <p class="products-none__text regular">No products matching your query!</p>
         <a href="{% url 'shop' %}" class="products-none__button btn btn--black regular">Back to All Products</a>
     {% endif %}
 

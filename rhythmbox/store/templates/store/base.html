@@ -1,6 +1,6 @@
 {% load static %}
 {% load store_tags %}
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,19 +52,23 @@
             <div class="nav-menu hidden">
                 <ul class="nav-menu__list">
                     <li class="nav-menu__list--category upper regular"><a href="{% url 'shop' %}">Shop</a></li>
-                    <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'acoustic-drums' %}">Acoustic</a></li>
-                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'electronic-drums' %}">Electric</a></li>
-                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'cymbals' %}">Cymbals</a></li>
-                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'accessories' %}">Accessories</a></li>
-                    </ul>
+                    <li>
+                        <ul class="nav-menu__list--inner">
+                            <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'acoustic-drums' %}">Acoustic</a></li>
+                            <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'electronic-drums' %}">Electric</a></li>
+                            <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'cymbals' %}">Cymbals</a></li>
+                            <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'accessories' %}">Accessories</a></li>
+                        </ul>
+                    </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-menu__list--category upper regular"><a href="{% url 'account_details' %}">Account</a></li>
-                    <ul class="nav-menu__list--inner">
-                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'account_details' %}">My Details</a></li>
-                        <li class="nav-menu__list--subcategory regular"><a href="{% url 'my_orders' %}">My Orders</a></li>
-                        <li class="nav-menu__list--subcategory regular"><a href="#">Change Password</a></li>
-                    </ul>
+                    <li>
+                        <ul class="nav-menu__list--inner">
+                            <li class="nav-menu__list--subcategory regular"><a href="{% url 'account_details' %}">My Details</a></li>
+                            <li class="nav-menu__list--subcategory regular"><a href="{% url 'my_orders' %}">My Orders</a></li>
+                            <li class="nav-menu__list--subcategory regular"><a href="#">Change Password</a></li>
+                        </ul>
+                    </li>
                     {% else %}
                     <li class="nav-menu__list--category upper regular"><a href="{% url 'register' %}">Register</a></li>
                     <li class="nav-menu__list--category upper regular"><a href="{% url 'login' %}">Login</a></li>
@@ -116,7 +120,7 @@
                 <div class="navigate__section">
                     <a class="navigate__section--heading regular">{{ category.title }}</a>
                     {% for brand in category_brands|key:category %}
-                    <a href="{% url 'shop' %}?brand={{ brand }}" class="navigate__section--text regular">
+                    <a href="{% url 'shop' %}?brand={{ brand.lower|urlencode }}" class="navigate__section--text regular">
                         {{ brand }}<i class="fas fa-chevron-right"></i>
                     </a>
                     {% endfor %}
