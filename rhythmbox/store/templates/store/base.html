@@ -58,7 +58,7 @@
                         <li class="nav-menu__list--subcategory regular"><a href="{% url 'shop' 'accessories' %}">Accessories</a></li>
                     </ul>
                     {% if request.user.is_authenticated %}
-                    <li class="nav-menu__list--category upper regular"><a href="#">Account</a></li>
+                    <li class="nav-menu__list--category upper regular"><a href="{% url 'account_details' %}">Account</a></li>
                     <ul class="nav-menu__list--inner">
                         <li class="nav-menu__list--subcategory regular"><a href="{% url 'account_details' %}">My Details</a></li>
                         <li class="nav-menu__list--subcategory regular"><a href="#">My Orders</a></li>

@@ -28,19 +28,19 @@
                     <td>{{ request.user.email }}</td>
                 </tr>
             </table>
-            <a href="#" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Account Details</a>
+            <a href="{% url 'edit_account_details' %}" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Account Details</a>
         </div>
         <div class="account__details--address">
             <h3 class="account__details--heading light upper">Default Address</h3>
             {% if request.user.address %}
                 <table class="account__details--table regular">
                     <tr>
-                        <th>Address Line 1</th>
+                        <th>Address 1</th>
                         <td>{{ request.user.address.street_address_1 }}</td>
                     </tr>
                     <tr>
-                        <th>Address Line 2</th>
-                        <td>{{ request.user.address.street_address_2 }}</td>
+                        <th>Address 2</th>
+                        <td>{{ request.user.address.street_address_2|default_if_none:"" }}</td>
                     </tr>
                     <tr>
                         <th>Town / City</th>
@@ -56,17 +56,17 @@
                     </tr>
                     <tr>
                         <th>Country</th>
-                        <td>{{ request.user.address.country }}</td>
+                        <td>{{ request.user.address.country.name }}</td>
                     </tr>
                     <tr>
-                        <th>Mobile Number</th>
+                        <th>Phone</th>
                         <td>{{ request.user.address.phone_number }}</td>
                     </tr>
                 </table>
-            <a href="#" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Default Address</a>
+            <a href="{% url 'edit_address' %}" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Default Address</a>
             {% else %}
             <p class="account__details--no_address bold"><em>You have no saved addresses!</em></p>
-            <a href="#" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Add Default Address</a>
+            <a href="{% url 'add_address' %}" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Add Default Address</a>
             {% endif %}
         </div>
     </div>
