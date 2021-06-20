@@ -8,12 +8,7 @@ def index(request):
     """
     Landing/Welcome page for website.
     """
-    context = {}
-
-    # Categories and brand per category objects
-    context["categories"] = Category.objects.all()
-    context["category_brands"] = brands_per_category(context["categories"])
-    return render(request, "store/index.html", context)
+    return render(request, "store/index.html")
 
 
 def shop(request, category=None, subcategory=None, type=None):
@@ -62,26 +57,7 @@ def shop(request, category=None, subcategory=None, type=None):
     page_num = request.GET.get("page")
     context["page_obj"] = paginator.get_page(page_num)
 
-    # Categories and brand per category objects
-    context["categories"] = Category.objects.all()
-    context["category_brands"] = brands_per_category(context["categories"])
-
     # Product List
     context["products"] = products
 
     return render(request, "store/shop.html", context)
-
-
-def brands_per_category(category_list):
-    """
-    function to list brands associated with each
-    product category, for shop page and footer sitemap
-    """
-    obj = {}
-    for category in category_list:
-        obj[category] = sorted(set(
-            Product.objects.filter(category=category).values_list(
-                "brand__name", flat=True
-            )
-        ))
-    return obj
