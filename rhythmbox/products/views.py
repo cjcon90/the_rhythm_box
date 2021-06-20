@@ -135,3 +135,9 @@ def review_product(request, product_slug):
             context["review_form"] = ProductReviewForm()
 
     return render(request, "products/review_product.html", context)
+
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, pk=review_id)
+    review.rating.delete()
+    messages.info(request, f"Review deleted!")
+    return redirect(request.GET.get("next"))

@@ -117,5 +117,24 @@
       margin: auto;
       text-align: center;
     }
+    &__buttons {
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      & > * {
+        width: 100%;
+      }
+      &--delete {
+        &:link, &:visited {
+          color: $color-warning-dark;
+          border-color: $color-warning-dark;
+      }
+        &:hover, &:focus {
+          background-color: $color-warning-dark;
+          color: white;
+      }
+      }
+    }
   }
 }
