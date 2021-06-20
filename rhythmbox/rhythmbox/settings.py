@@ -33,7 +33,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['therhythmbox.heroku.app.com', 'localhost']
+ALLOWED_HOSTS = ["therhythmbox.heroku.app.com", "localhost"]
 
 # Application definition
 
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "django_cleanup.apps.CleanupConfig",
     "django_countries",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -102,10 +103,8 @@ WSGI_APPLICATION = "rhythmbox.wsgi.application"
 #         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ['DATABASE_URL'])
-    }
+if "DATABASE_URL" in os.environ:
+    DATABASES = {"default": dj_database_url.parse(os.environ["DATABASE_URL"])}
 else:
     DATABASES = {
         "default": {
@@ -171,6 +170,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # how image will be accessed in the browser
 MEDIA_URL = "/media/"
 
+if 'USE_AWS' in os.environ:
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'therhythmbox'
+    AWS_S3_REGION_NAME = 'eu-west-1'
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f"hrrps://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}"
+    MEDIA_URL = f"hrrps://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -184,13 +201,13 @@ STANDARD_DELIVERY_PERCENTAGE = 12.5
 STRIPE_PUBLIC_KEY = os.environ["STRIPE_PUBLIC_KEY"]
 STRIPE_SECRET_KEY = os.environ["STRIPE_SECRET_KEY"]
 STRIPE_WH_SECRET = os.environ["STRIPE_WH_SECRET"]
-STRIPE_CURRENCY = 'EUR'
+STRIPE_CURRENCY = "EUR"
 
 # Email
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ['EMAIL_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASS']
+EMAIL_HOST_USER = os.environ["EMAIL_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASS"]
