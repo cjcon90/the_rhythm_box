@@ -1,1 +1,1 @@
-web: gunicorn rhythmbox.wsgi:application
+web: gunicorn rhythmbox.wsgi
