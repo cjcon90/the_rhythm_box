@@ -31,7 +31,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "DEVELOPMENT" in os.environ
+DEBUG = os.environ["DEVELOPMENT"]
 
 ALLOWED_HOSTS = ["therhythmbox.herokuapp.com", "127.0.0.1", "localhost"]
 

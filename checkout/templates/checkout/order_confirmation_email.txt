@@ -1,0 +1,27 @@
+{% load humanize %}
+Hello {{ order.user.first_name}}
+Thank you for shopping with RhythmBox. Your order (#{{ order.order_number }}) is as follows:
+
+-----------------------
+{% for item in items %}
+Item: {{ item.product.title }}
+Price: €{{ item.product.price }}
+-----------------------
+{% endfor %}
+Total Cost: €{{ order.order_total|floatformat:"-2"|intcomma }}</td>
+Delivery: €{{ order.delivery_cost|floatformat:"-2"|intcomma }}</td>
+Grand Total:€{{ order.grand_total|floatformat:"-2"|intcomma }}</td>
+
+Delivery:
+{{ order.street_address_1 }}, 
+{% if order.street_address_2 %}{{order.street_address_2 }},{% endif %}
+{{ order.town_or_city }},
+{{ order.county }}, 
+{{ order.postcode }}, 
+{{ order.country }}
+
+If you have any questions, feel free to contact us at {{ contact_email }}</strong
+
+Happy drumming!
+
+The RhythmBox Team

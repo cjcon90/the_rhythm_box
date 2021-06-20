@@ -1,0 +1,60 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body style="font-family: Arial, Helvetica, sans-serif">
+    <h2>Hello {{ order.user.first_name}},</h2>
+    <h4>Thank you for shopping with RhythmBox. Your order (#{{ order.order_number }}) is as follows:</h4>
+    <hr>
+    <table style="text-align: left;">
+      <tr style="width: 500px; font-weight: 700">
+        <th style="width: 350px">Item</th>
+        <th style="width: 150px;">Price</th>
+      </tr>
+      {% for item in items %}
+      <tr style="width: 350px">
+        <td style="width: 350px">{{ item.product.title }}</td>
+        <td style="width: 150px;">€{{ item.product.price|floatformat:"-2"|intcomma }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <hr>
+    <table>
+      <tr>
+        <th style="width: 150px; font-weight: 700">Total Cost:</th>
+        <td style="width: 350px">€{{ order.order_total|floatformat:"-2"|intcomma }}</td>
+      </tr>
+      <tr>
+        <th style="width: 150px; font-weight: 700">Delivery:</th>
+        <td style="width: 350px">€{{ order.delivery_cost|floatformat:"-2"|intcomma }}</td>
+      </tr>
+      <tr>
+        <th style="width: 150px; font-weight: 700">Grand Total:</th>
+        <td style="width: 350px">€{{ order.grand_total|floatformat:"-2"|intcomma }}</td>
+      </tr>
+      <tr>
+        <th style="width: 150px; font-weight: 700">Delivery:</th>
+        <td style="width: 350px">
+          {{ order.street_address_1 }}, 
+          {% if order.street_address_2 %}{{order.street_address_2 }}, {% endif %}
+          {{ order.town_or_city }},
+          {{order.county }}, 
+          {{ order.postcode }}, 
+          {{ order.country }}
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      If you have any questions, feel free to contact us at<strong>
+        {{ contact_email }}</strong
+      >.
+    </p>
+
+    <p>Happy drumming!</p>
+
+    <h3>
+      <strong><em>The RhythmBox Team</em></strong>
+    </h3>
+  </body>
+</html>

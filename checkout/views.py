@@ -18,6 +18,10 @@ from django.http import QueryDict
 import stripe
 import json
 from django.forms.models import model_to_dict
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template.loader import render_to_string
+import os
 
 
 @require_POST
@@ -52,7 +56,7 @@ def checkout(request):
         if form.is_valid():
             order = form.save(commit=False)
             order.user = request.user
-            pid = request.POST.get('client_secret').split("_secret")[0]
+            pid = request.POST.get("client_secret").split("_secret")[0]
             order.stripe_pid = pid
             order.original_cart = json.dumps(cart)
             order.save()
@@ -76,11 +80,39 @@ def checkout(request):
                     order.delete()
                     return redirect("cart")
             for item in OrderLineItem.objects.filter(order=order):
-            # if complete order is successful, reduce stock of each item purchased by quantity
+                # if complete order is successful, reduce stock of each item purchased by quantity
                 item.product.stock -= item.quantity
                 item.product.save()
             # reset cart
-            del request.session['cart']
+            del request.session["cart"]
+
+            # Email Order Confirmation
+            msg_content = {
+                "order": order,
+                "items": [item for item in order.lineitems.all()],
+                "contact_email": os.environ["EMAIL_USER"],
+            }
+            msg_plain = render_to_string(
+                "checkout/order_confirmation_email.txt",
+                msg_content,
+            )
+            msg_html = render_to_string(
+                "checkout/order_confirmation_email.html",
+                msg_content,
+            )
+            subject = f"RhythmBox Order Confirmation: #{order.order_number}"
+            from_email = os.environ["EMAIL_USER"]
+            try:
+                send_mail(
+                    subject,
+                    msg_plain,
+                    from_email,
+                    [order.user.email],
+                    fail_silently=True,
+                    html_message=msg_html,
+                )
+            except BadHeaderError:
+                return HttpResponse("Invalid header found.")
             return redirect(
                 reverse("checkout_success", args=[order.order_number])
             )
@@ -88,11 +120,14 @@ def checkout(request):
             context["order_form"] = form
     else:  # GET request
         # Add user name to form by default
-        details = {'first_name':request.user.first_name,'last_name':request.user.last_name}
+        details = {
+            "first_name": request.user.first_name,
+            "last_name": request.user.last_name,
+        }
         try:
             # add user address (if exists)
             details.update(model_to_dict(request.user.address))
-        except Address.DoesNotExist: 
+        except Address.DoesNotExist:
             pass
         finally:
             form = OrderForm(initial=details)
