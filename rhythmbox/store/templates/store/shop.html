@@ -12,7 +12,7 @@
 <div class="filters">
     {% comment %} SEARCH BAR {% endcomment %}
     <form action="{% url 'shop' %}" method="GET" class="filters__search">
-        <input type="text" name="q" class="filters__search--input form__input regular" placeholder="Search products...">
+        <input type="text" name="q" class="filters__search--input form__input regular" placeholder="Search products..." required>
         <button class="filters__search--button btn btn--black regular">Search</button>
     </form>
 

@@ -51,7 +51,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(
         verbose_name="last name", max_length=30, unique=False
     )
-    newsletter = models.BooleanField(default=False)
+    newsletter = models.BooleanField(default=True)
     date_joined = models.DateTimeField(
         verbose_name="date joined", auto_now_add=True
     )
@@ -89,3 +89,16 @@ class Address(models.Model):
     postcode = models.CharField(max_length=20)
     country = CountryField(blank=False, default="IE")
     phone_number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"Address:{self.street_address_1} ({self.user.email}) "
+
+
+class NewsletterSub(models.Model):
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+    subscription_date = models.DateTimeField(
+        verbose_name="date subscribed", auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.email}"

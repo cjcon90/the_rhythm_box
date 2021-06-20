@@ -6,6 +6,12 @@
 
     &--primary {
         background-color: $color-primary;
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: white;
+          color: $color-black;
+        }
     }
 
     &--black {

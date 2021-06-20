@@ -75,7 +75,7 @@
                     
                     {% endif %}
                 
-                    <li class="nav-menu__list--category upper regular"><a href="#">Contact Us</a></li>
+                    <li class="nav-menu__list--category upper regular"><a href="{% url 'contact' %}">Contact Us</a></li>
                     {% if request.user.is_authenticated %}
                         <li class="nav-menu__list--category upper regular"><a href="{% url 'logout' %}">Logout</a></li>                    
                     {% endif %}
@@ -101,10 +101,12 @@
                 <p class="connect__heading--main bold upper">Stay Connected</p>
                 <p class="connect__heading--sub regular upper">Sign Up To Our Newsletter</p>
             </div>
-            <div class="connect__newsletter">
-                <input type="text" class="connect__newsletter--input input-text" placeholder="Enter your email">
+            <form class="connect__newsletter" method="POST" action="{% url 'newsletter_subscribe' %}?next={{ request.path }}">
+                {% csrf_token %}
+                <input type="email" name="email" class="connect__newsletter--input input-text" placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required
+                {% if request.user.is_authenticated %}value="{{ request.user.email }}" readonly{% endif %}>
                 <button type="submit" class="connect__newsletter--button btn btn--primary upper bold">Sign Up</button>
-            </div>
+            </form> 
             <div class="connect__social">
                 <a href="https://facebook.com" rel="nooopener" target="_blank" class="connect__social--link"><i class="connect__social--icon fab fa-facebook-square"></i></a>
                 <a href="https://twitter.com" rel="nooopener" target="_blank" class="connect__social--link"><i class="connect__social--icon fab fa-twitter-square"></i></a>
@@ -118,7 +120,7 @@
             <div class="navigate__sections">
             {% for category in categories %}
                 <div class="navigate__section">
-                    <a class="navigate__section--heading regular">{{ category.title }}</a>
+                    <a href="{% url 'shop' category=category.slug %}" class="navigate__section--heading regular">{{ category.title }}</a>
                     {% for brand in category_brands|key:category %}
                     <a href="{% url 'shop' %}?brand={{ brand.lower|urlencode }}" class="navigate__section--text regular">
                         {{ brand }}<i class="fas fa-chevron-right"></i>
@@ -132,7 +134,7 @@
             <p class="contact__heading upper">Rhythmbox Stores</p>
             <p class="contact__address">14 South Dock Avenue, Grand Canal Dock, Dublin 4, Ireland</p>
             <p class="contact__number">+353 01 1234 567</p>
-            <p class="contact__email">therhythmbox@gmail.com</p>
+            <a href="mailto:therhythmbox@gmail.com" class="contact__email">therhythmbox@gmail.com</a>
         </div>
     </footer>
     <script type="module" src="{% static 'scripts/app.js' %}"></script>

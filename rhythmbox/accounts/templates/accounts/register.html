@@ -19,9 +19,9 @@
                             <span class="radio-btn__label">{{radio.choice_label}}</span>
                                 {% comment %} Set False selected by default and set correct values {% endcomment %}
                                 {% if radio.id_for_label == 'id_newsletter_0' %}
-                                    <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='True'>
+                                    <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='True' checked>
                                 {% else %}
-                                    <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='False' checked>
+                                    <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='False'>
                                 {% endif %}
                             <span class="checkmark"></span>
                         </label>

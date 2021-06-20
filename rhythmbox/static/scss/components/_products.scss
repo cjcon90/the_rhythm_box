@@ -1,5 +1,5 @@
 .product {
-  border: solid 01px $color-black-light;
+  border: solid 1px $color-black-light;
   margin: auto;
   width: 35rem;
   max-width: 95vw;
@@ -73,7 +73,7 @@
     }
 
     &--info {
-      border-width: 01px 0 0 0;
+      border-width: 1px 0 0 0;
     }
   }
 }

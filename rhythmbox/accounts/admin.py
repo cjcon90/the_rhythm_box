@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Account, Address
+from .models import Account, Address, NewsletterSub
 
 
 class AddressAdminInline(admin.StackedInline):
@@ -39,5 +39,15 @@ class AccountAdmin(admin.ModelAdmin):
     list_filter = ()
     fieldsets = ()
 
+class NewsletterSubAdmin(admin.ModelAdmin):
+    list_display = (
+        "email",
+        "subscription_date"
+    )
+    search_fields = (
+        "email",
+    )
+
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(NewsletterSub, NewsletterSubAdmin)

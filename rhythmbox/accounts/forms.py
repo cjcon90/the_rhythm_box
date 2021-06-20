@@ -13,7 +13,7 @@ class RegistrationForm(UserCreationForm):
             (False, "No thank you"),
         ),
         widget=forms.RadioSelect,
-        initial=False,
+        initial=True,
     )
 
     class Meta:
@@ -46,7 +46,6 @@ class AccountAuthenticationForm(forms.ModelForm):
 class EditAccountForm(forms.ModelForm):
     email = forms.EmailField(max_length=60)
 
-
     class Meta:
         model = Account
         fields = (
@@ -54,6 +53,7 @@ class EditAccountForm(forms.ModelForm):
             "last_name",
             "email",
         )
+
 
 class AddressForm(forms.ModelForm):
     class Meta:
@@ -70,5 +70,31 @@ class AddressForm(forms.ModelForm):
         labels = {
             "street_address_1": "Address 1",
             "street_address_2": "Address 2 (optional)",
-            "town_or_city": "Town / City"
+            "town_or_city": "Town / City",
         }
+
+
+class ContactForm(forms.Form):
+    from_name = forms.CharField(
+        required=True,
+        label="Name",
+        widget=forms.EmailInput(attrs={"placeholder": "What's your name?"}),
+    )
+    from_email = forms.EmailField(
+        required=True,
+        label="Email",
+        widget=forms.EmailInput(
+            attrs={"placeholder": "Enter your email address"}
+        ),
+    )
+    subject = forms.CharField(
+        max_length=60,
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Email subject / title"}),
+    )
+    message = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={"placeholder": "What can we help you with?"}
+        ),
+    )

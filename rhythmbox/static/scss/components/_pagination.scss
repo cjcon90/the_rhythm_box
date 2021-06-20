@@ -8,9 +8,9 @@
         display: inline-block;
         border: solid $color-black-light 1px;
         padding: .5rem 0;
+        font-size: 2rem;
         width: 4rem;
         text-align: center;
-        font-size: 2rem;
         font-family: 'Roboto', sans-serif;
 
             &:link, &:visited {
@@ -23,9 +23,7 @@
 
             &--chevron {
                 color: $color-black-semi;
-                padding: .5rem 2rem;
                 width: 6rem;
-                font-size: 2.35rem;
             }
 
     

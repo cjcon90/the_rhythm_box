@@ -6,12 +6,15 @@ from .forms import (
     AccountAuthenticationForm,
     EditAccountForm,
     AddressForm,
+    ContactForm
 )
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 from django.forms.models import model_to_dict
-from .models import Address
+from .models import Account, Address, NewsletterSub
 from checkout.models import Order
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 @login_required
@@ -60,6 +63,7 @@ def add_address(request):
         context["type"] = "Add"
     return render(request, "accounts/address.html", context)
 
+
 @login_required
 def edit_address(request):
     context = {}
@@ -68,9 +72,6 @@ def edit_address(request):
         form = AddressForm(request.POST, instance=address)
         if form.is_valid():
             form.save()
-            messages.success(request, f"Address updated")
-            return redirect("account_details")
-        else:
             context["address_form"] = form
     else:
         form = AddressForm(initial=model_to_dict(address))
@@ -78,12 +79,14 @@ def edit_address(request):
         context["type"] = "Edit"
     return render(request, "accounts/address.html", context)
 
+
 @login_required
 def my_orders(request):
     context = {}
-    context["orders"] = Order.objects.filter(user=request.user)
+    context["orders"] = Order.objects.filter(user=request.user).order_by(
+        "-date"
+    )
     return render(request, "accounts/my_orders.html", context)
-
 
 
 def register_user(request):
@@ -93,6 +96,8 @@ def register_user(request):
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get("email")
+            if NewsletterSub.objects.filter(email=email).exists():
+                NewsletterSub.objects.get(email=email).delete()
             raw_password = form.cleaned_data.get("password1")
             account = authenticate(email=email, password=raw_password)
             login(request, account)
@@ -143,3 +148,50 @@ def login_user(request):
 
     context["login_form"] = form
     return render(request, "accounts/login.html", context)
+
+
+def newsletter_subscribe(request):
+    email = request.POST["email"]
+    already_registered = Account.objects.filter(email=email).exists()
+    already_subbed = NewsletterSub.objects.filter(email=email).exists()
+    if already_subbed:
+        pass
+    elif already_registered:
+        user = Account.objects.get(email=email)
+        user.newsletter = True
+        user.save()
+    else:
+        sub = NewsletterSub(email=email)
+        sub.save()
+    messages.success(request, "Thank you for subscribing to our newsletter!")
+    return redirect(request.GET.get("next"))
+
+def contact(request):
+    context = {}
+
+    if request.POST:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            from_name = form.cleaned_data['from_name']
+            mail_msg = f"Message from: {from_name}\n\n{message}\n\nReturn email address: {from_email}"
+            try:
+                send_mail(subject, mail_msg, from_email, ['cjcon90@pm.me'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            messages.success(request, "Message successfully sent!\nThanks for getting in touch 🙂")
+            return redirect('contact_success')
+        else:
+            context["contact_form"] = form
+    else:
+        if request.user.is_authenticated:
+            form = ContactForm(initial={'from_email':request.user.email, 'from_name': request.user.first_name})
+        else:
+            form = ContactForm()
+    context["contact_form"] = form
+    return render(request, "accounts/contact.html", context)
+
+def contact_success(request):
+    return render(request, "accounts/contact_success.html")

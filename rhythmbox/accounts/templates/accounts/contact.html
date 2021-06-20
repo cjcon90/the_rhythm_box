@@ -1,0 +1,30 @@
+{% extends 'store/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Contact Us{% endblock title %}
+
+{% block content %} 
+    <h2 class="section__heading upper bold">Contact Us</h2>
+    <form method="POST" action="{% url 'contact' %}" class="form" novalidate>
+        {% csrf_token %}
+
+        {% for field in contact_form %}
+        <fieldset class="form__group">
+            <label for="{{ field.id_for_label }}" class="form__label bold">{{ field.label }}</label>
+            {{ field|add_class:'form__input regular' }}
+            {% for error in field.errors %}
+            <span class="form__error bold">{{ error }}</span>
+            {% endfor %}
+        </fieldset>
+        {% endfor %}
+
+        {% for error in field.errors %}
+            <span class="form__error bold">{{ error }}</span>
+        {% endfor %}
+
+        <fieldset class="form__group">
+            <button type="submit" class="form__submit btn btn--black upper bold">Submit</button>
+        </fieldset>
+    </form>
+{% endblock content %}

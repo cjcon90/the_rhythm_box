@@ -45,7 +45,7 @@
       &--input {
         width: 100%;
         border-radius: 0px;
-        border: solid $color-black 01px;
+        border: solid $color-black 1px;
         outline: none;
         padding: 0.5rem;
         font-size: 1.6rem;
@@ -53,11 +53,13 @@
         &::placeholder {
           color: rgb(100, 100, 100);
         }
-
-        &:focus,
-        &:active {
+        &:focus:invalid {
+          border-color: $color-warning-dark;
+          outline: solid 1px $color-warning-dark;
+        }
+        &:focus:valid {
           border-color: $color-primary;
-          outline: solid 01px $color-primary;
+          outline: solid 1px $color-primary;
         }
       }
       &--button {
@@ -119,13 +121,30 @@
       &--heading {
         color: $color-primary;
         font-size: 1.85rem;
+        &:link,
+        &:visited {
+          color: $color-primary;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          color: white;
+        }
       }
       &--text {
         display: flex;
         align-items: flex-end;
         gap: 2rem;
-        color: white;
         font-size: 1.6rem;
+        &:link,
+        &:visited {
+          color: white;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          color: $color-primary;
+        }
       }
     }
   }
@@ -143,6 +162,17 @@
     &__heading {
       color: $color-primary;
       font-size: 1.5rem;
+    }
+    &__email {
+      &:link,
+      &:visited {
+        color: white;
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        color: $color-primary;
+      }
     }
   }
 }
