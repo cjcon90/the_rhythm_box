@@ -9,7 +9,7 @@
 <h1 class="section__heading upper bold">My Orders</h1>
 <div class="account__links">
     <a href="{% url 'account_details' %}" class="account__links--link btn btn--white regular">Account Details</a>
-    <a href="#" class="account__links--link btn btn--white regular">Change Password</a>
+    <a href="{% url 'password_reset' %}" class="account__links--link btn btn--white regular">Change Password</a>
 </div>
 <div class="orders">
     {% for order in orders %}
