@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 import dotenv
 import dj_database_url
-import django_on_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,9 +31,9 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ["therhythmbox.heroku.app.com", "localhost"]
+ALLOWED_HOSTS = ["therhythmbox.herokuapp.com", "localhost"]
 
 # Application definition
 
@@ -191,8 +190,8 @@ if "USE_AWS" in os.environ:
     MEDIAFILES_LOCATION = "media"
 
     # Override static and media URLs in production
-    STATIC_URL = f"hrrps://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}"
-    MEDIA_URL = f"hrrps://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}"
+    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/"
+    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -217,5 +216,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ["EMAIL_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASS"]
-
-django_on_heroku.settings(locals())
