@@ -22,6 +22,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 import os
+from django.contrib.auth.decorators import login_required
 
 
 @require_POST
@@ -47,6 +48,7 @@ def cache_checkout(request):
         return HttpResponse(content=e, status=400)
 
 
+@login_required
 def checkout(request):
     context = {}
     # Submit form if valid
@@ -83,8 +85,25 @@ def checkout(request):
                 # if complete order is successful, reduce stock of each item purchased by quantity
                 item.product.stock -= item.quantity
                 item.product.save()
-            # reset cart
+
+            # Empty Cart
             del request.session["cart"]
+
+            # Add default shipping address, if ticked
+            if request.POST.get("make_default_shipping"):
+                address_info = model_to_dict(order)
+                # Update existing address or create new one
+                address_obj, created = Address.objects.update_or_create(
+                    user=request.user,
+                    defaults={
+                        "street_address_1": order.street_address_1,
+                        "street_address_2": order.street_address_2,
+                        "town_or_city": order.town_or_city,
+                        "county": order.county,
+                        "postcode": order.postcode,
+                        "phone_number": order.phone_number,
+                    },
+                )
 
             # Email Order Confirmation
             msg_content = {

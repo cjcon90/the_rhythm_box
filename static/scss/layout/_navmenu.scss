@@ -10,7 +10,7 @@
     transition: all .4s;
 
     &__list {
-        @include absCenter;
+        padding-top: 10vh;
         text-align: center;
         white-space: nowrap;
         

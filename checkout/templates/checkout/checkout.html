@@ -33,6 +33,13 @@
                 {% for error in field.errors %}
                     <span class="form__error bold">{{ error }}</span>
                 {% endfor %}
+                <fieldset class="form__group form__group--checkbox">
+                    <div class="checkbox-outer">
+                        <input id="make_default_shipping" name="make_default_shipping" type="checkbox" />
+                        <label for="make_default_shipping" class="checkbox-inner"></label>
+                    </div>
+                    <label for="checkbox" class="form__label regular">Make this my default shipping address</label>
+                </fieldset>
                 <fieldset class="form__group">
                     <label for="card-element" class="card-element__label light">Payment</label>
                     <!-- A Stripe card element will go here -->

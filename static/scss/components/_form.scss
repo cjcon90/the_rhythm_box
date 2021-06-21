@@ -9,6 +9,12 @@
         padding: 0 1.5rem 2rem 1.5rem;
         gap: .5rem;
 
+        &--checkbox {
+            flex-direction: row;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+
         & > select {
             width: 100%;
             white-space: nowrap;
