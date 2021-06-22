@@ -8,10 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 90;
-
-  @include not-last-child("div") {
-    // keep nav bar items visible over menu
+  & > * {
     z-index: 100;
   }
 
@@ -23,6 +20,9 @@
     transform: rotate(0deg);
     transition: 0.5s ease-in-out;
     cursor: pointer;
+    @include respond(lg) {
+      display: none;
+    }
 
     span {
       display: block;

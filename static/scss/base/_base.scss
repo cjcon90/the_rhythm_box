@@ -2,8 +2,9 @@ html {
     box-sizing: border-box;
     font-size: 62.5%;
     @include respond(md) {
-      font-size: 70%;
+      font-size: 67.5%;
   }
+
   }
   
   *, *:before, *:after {

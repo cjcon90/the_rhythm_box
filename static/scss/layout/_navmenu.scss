@@ -1,64 +1,134 @@
 // NAV MENU FOLLOWING HAMBURGER OPEN (MOBILE AND TABLET ONLY)
 
 .nav-menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: $color-black;
-    transition: all .4s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: $color-black;
+  transition: all 0.4s;
+  z-index: 90;
 
-    &__list {
-        padding-top: 17.5vh;
-        text-align: center;
-        white-space: nowrap;
-        
-        &--category {
-            padding: 2rem 0 .5rem 0;
-            letter-spacing: 1px;
-            font-size: 3rem;
-            @include respond(md) {
-                font-size: 4rem;
-            }
-            & > a {
-                &:link, &:visited {
-                    color: $color-primary;
-                }
-                &:hover, &:focus, &:active {
-                    color: white;
-                }
-            }
-        }
+  @include respond(lg) {
+    position: relative;
+    height: auto;
+    width: auto;
+    margin: 0 auto 0 2rem;
+    align-self: flex-end;
+  }
 
-        &--subcategory {
-            color: white;
-            padding: .6rem;
-            font-size: 2rem;
-
-            @include respond(md) {
-                font-size: 2.5rem;
-            }
-
-            & > a {
-                &:link, &:visited {
-                    color: white;
-                }
-                &:hover, &:focus, &:active {
-                    color: $color-primary;
-                }
-            }
-        }
-
-        &--inner {
-            padding-bottom: 1rem;
-        }
+  &__list {
+    padding-top: 15vh;
+    text-align: center;
+    white-space: nowrap;
+    @include respond(ls) {
+      padding-top: 10vh;
+    }
+    @include respond(lg) {
+      padding: 0;
+      display: block;
+      list-style: none;
+      position: relative;
+      align-self: flex-end;
     }
 
+    &--category {
+      padding: 2rem 0 0.5rem 0;
+      letter-spacing: 1px;
+      font-size: 3rem;
+      text-transform: uppercase;
+      @include respond(md) {
+        font-size: 4rem;
+      }
+      @include respond(lg) {
+        position: relative;
+        display: inline-block;
+        font-size: 2.75rem;
+        padding: 0 1.5rem;
+        &:hover > ul {
+          display: inherit;
+        }
+      }
+      &-sibling {
+        position: relative;
+      }
+      & > a {
+        margin: 2rem;
+        &:link,
+        &:visited {
+          color: $color-primary;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          color: white;
+        }
+      }
+    }
 
+    &--subcategory {
+      color: white;
+      padding: 0.5rem;
+      font-size: 2rem;
+      text-transform: capitalize;
+      padding: 0.75rem 0;
+
+      @include respond(md) {
+        font-size: 2.5rem;
+      }
+      @include respond(lg) {
+        position: relative;
+        text-align: left;
+        font-size: 1.8rem;
+        &:first-child {
+            padding-top: 2rem;
+        }
+      }
+
+      & > a {
+        &:link,
+        &:visited {
+          color: white;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          color: $color-primary;
+        }
+      }
+    }
+
+    &--inner {
+      @include respond(lg) {
+        background-color: $color-black;
+        box-shadow: 0 0 .1rem rgba(black, .3);
+        padding: 1rem;
+        position: absolute;
+        top: 3rem;
+        left: 2rem;
+      }
+    }
+  }
 }
 
-.hidden {
-    visibility: hidden;
-    opacity: 0;
+.nav-hidden {
+  visibility: hidden;
+  opacity: 0;
+  @include respond(lg) {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.nav-desk-hidden {
+  @include respond(lg) {
+    display: none;
+  }
+}
+
+.nav-desk-appear {
+    @include respond(lg) {
+        display: inline-block;
+      }
 }

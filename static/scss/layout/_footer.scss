@@ -6,6 +6,8 @@
 
   // NEWSLETTER SIGN UP AND SOCIAL MEDIA ICONS
   .connect {
+    max-width: 72.5rem;
+    margin: auto;
     @include respond(md) {
       display: grid;
       grid-template-columns: 55% 1fr;
@@ -92,6 +94,8 @@
 
   // SITEMAP NAVIGATION LINKS
   .navigate {
+    max-width: 72.5rem;
+    margin: auto;
     &__heading {
       color: $color-primary;
       font-size: 2.25rem;

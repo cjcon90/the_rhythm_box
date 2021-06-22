@@ -1,4 +1,4 @@
-@mixin position-absolute ($top: null, $left: null, $right: null, $bottom: null) {
+@mixin position-absolute($top: null, $left: null, $right: null, $bottom: null) {
   position: absolute;
   top: $top;
   left: $left;
@@ -13,7 +13,12 @@
   transform: translate(-50%, -50%);
 }
 
-@mixin transition-mix($property: all, $duration: 0.2s, $timing: linear, $delay: 0s) {
+@mixin transition-mix(
+  $property: all,
+  $duration: 0.2s,
+  $timing: linear,
+  $delay: 0s
+) {
   transition-property: $property;
   transition-duration: $duration;
   transition-timing-function: $timing;
@@ -31,15 +36,18 @@
 
 @mixin respond($breakpoint) {
   @if $breakpoint == md {
-      @media only screen and (min-width: 43.75em) { @content };    //700px
+    @media only screen and (min-width: 43.75em) {
+      @content;
+    } //700px (Tablet Portrait)
   }
-  // @if $breakpoint == md {
-  //     @media only screen and (max-width: 56.25em) { @content };     //900px
-  // }
-  // @if $breakpoint == lg {
-  //     @media only screen and (max-width: 75em) { @content };    //1200px
-  // }
-  // @if $breakpoint == xl {
-  //     @media only screen and (min-width: 112.5em) { @content };    //1800
-  // }
+  @if $breakpoint == lg {
+    @media only screen and (min-width: 75em) {
+      @content;
+    } //1200px (Small desktop)
+  }
+  @if $breakpoint == ls {
+    @media only screen and (orientation: landscape) {
+      @content;
+    } //Landscape Orientation
+  }
 }

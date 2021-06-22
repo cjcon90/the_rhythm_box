@@ -16,18 +16,11 @@
 
 {% block content %}
     <div class="categories">
-        <div class="category category--acoustic">
-            <a href="{% url 'shop' 'acoustic-drums' %}" class="category__text bold upper">Acoustic</a>
-        </div>
-        <div class="category category--electric">
-            <a href="{% url 'shop' 'electronic-drums' %}" class="category__text bold upper">Electric</a>
-        </div>
-        <div class="category category--cymbals">
-            <a href="{% url 'shop' 'cymbals' %}" class="category__text bold upper">Cymbals</a>
-        </div>
-        <div class="category category--accessories">
-            <a href="{% url 'shop' 'accessories' %}" class="category__text bold upper">Accessories</a>
-        </div>
+    {% for category in categories %}
+        <div class="category category--{{ category.title|cut:' Drums'|lower }}">
+            <a href="{% url 'shop' category.slug %}" class="category__text bold upper">{{ category.title|cut:' Drums' }}</a>
+        </div>  
+    {% endfor %}
     </div>
 
 {% endblock content %}
