@@ -20,13 +20,7 @@
     width: 4rem;
     height: 3rem;
     position: relative;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: 0.5s ease-in-out;
-    -moz-transition: 0.5s ease-in-out;
-    -o-transition: 0.5s ease-in-out;
     transition: 0.5s ease-in-out;
     cursor: pointer;
 
@@ -102,6 +96,7 @@
       width: 2.25rem;
       border-radius: 50%;
       background-color: $color-primary;
+      color: $color-black;
       display: flex;
       justify-content: center;
       align-items: center;

@@ -1,9 +1,23 @@
+.shop {
+    @include respond(md) {
+        display: grid;
+        grid-template-columns: 25rem 1fr;
+    }
+
+    &-main {
+        @include respond(md) {
+            max-height: 100vh;
+            overflow-y: scroll;
+        }
+    }
+}
 .filters {
     width: 35rem;
     max-width: 95vw;
     margin: 2rem auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 0 2rem;
     &__search {
         display: flex;
         justify-content: space-between;
@@ -25,16 +39,24 @@
 
     &__button {
         padding: .5rem;
+        @include respond(md) {
+            display: none;
+              }
     }
 
     &__sort {
         width: 100%;
         grid-column: 2 / 4;
         grid-row:2 / 3;
+        @include respond(md) {
+        grid-column: 1 / 4;
+        margin: 0;
+        width: 100%;
+          }
 
         & > * {
-            margin: 0 2rem;
-            width: calc(100% - 2rem);
+            // margin: 0 2rem;
+            width: 100%;
         }
         &--button {
             display: flex;
@@ -49,6 +71,7 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     place-items: center;
+    
 
     &-none {
         &__text {

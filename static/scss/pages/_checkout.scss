@@ -2,6 +2,10 @@
   color: $color-black-semi;
   display: flex;
   flex-direction: column-reverse;
+  @include respond(md) {
+    max-width: 60rem;
+    margin: auto;
+  }
 
   &-form {
     &__heading {
@@ -36,9 +40,10 @@
           text-align: center;
         }
       }
-      &__data {
-        font-size: 1.5rem;
+      &-data {
+        font-size: 1.6rem;
         &--title {
+          font-size: 1.4rem;
           text-align: center;
         }
       }

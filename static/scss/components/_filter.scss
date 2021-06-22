@@ -1,58 +1,81 @@
 .filters {
-    &__search, &__button, &__search--button {
+  &__search,
+  &__button,
+  &__search--button {
     font-size: 1.75rem;
-    }
-    &__menu {
+  }
+  &__menu {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-left: solid 0.2rem $color-black-semi;
+    z-index: 5;
+    transition: all 0.5s;
+    overflow-y: scroll;
+
+    &--mobile {
         position: fixed;
         right: 0;
         top: 0;
         height: 100vh;
         width: 100%;
         max-width: 25rem;
-        background-color: rgba(255, 255, 255, .92);
-        border-left: solid .2rem $color-black-semi;
-        z-index: 5;
-        transition: all .5s;
-        overflow-y: scroll;
         padding: 8rem 1rem;
-
-        @for $i from 0 through 4 {
-            ul.level-#{$i} .filters__list--link {
-                padding-left: 3rem * ($i - 1);
-                font-size: 2.25rem - ($i / 5)
-            }
-        }
-
-        &--heading {
-            text-align: center;
-            letter-spacing: 1px;
-            color: $color-black-semi;
-            font-size: 3.5rem;
-            padding: 1rem 0;
+        @include respond(md) {
+            display: none;
         }
     }
 
-    .closed {
-        transform: translateX(200%);
-    }
-
-    &__list {
-
-        &--link {
-            padding: 1rem 0;
-    
-            &:link, &:visited {
-                display: block;
-                color: $color-black-semi;
-                text-decoration: none;
-            }
-    
-            &:hover {
-                color: $color-black;
-            }
-        }
-        &--brand {
-            color: $color-black-semi;
+    &--desktop {
+        display: none;
+        max-height: 100vh;
+        padding: 2rem 3rem;
+        border-right: solid 1px $color-black-light;
+        @include respond(md) {
+            display: block;
         }
     }
+
+    @for $i from 0 through 4 {
+      ul.level-#{$i} .filters__list--link {
+        padding-left: 3rem * ($i - 1);
+        font-size: 2.25rem - ($i / 5);
+      }
+    }
+
+    &--heading {
+      text-align: center;
+      letter-spacing: 1px;
+      color: $color-black-semi;
+      font-size: 3.5rem;
+      padding: 1rem 0;
+    }
+
+  }
+
+  .closed {
+    transform: translateX(200%);
+  }
+
+  &__list {
+    &--link {
+      padding: 1rem 0;
+
+      &:link,
+      &:visited {
+        display: block;
+        color: $color-black-semi;
+        text-decoration: none;
+      }
+
+      &:hover {
+        color: $color-black;
+      }
+    }
+    &--brand {
+      color: $color-black-semi;
+    }
+  }
+}
+
+.test {
+    display: none;
 }

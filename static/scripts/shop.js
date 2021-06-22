@@ -5,7 +5,7 @@ import { dropdownMenu } from "./modules/dropdown.js";
 const productSortButton = document.getElementById("product-sort-button");
 const productSortList = document.getElementById("product-sort-list");
 const filtersMenuButton = document.querySelector(".filters__button");
-const filtersMenu = document.querySelector(".filters__menu");
+const filtersMenu = document.querySelector(".filters__menu--mobile");
 
 filtersMenuButton.addEventListener("click", () => {
   filtersMenu.classList.toggle("closed");

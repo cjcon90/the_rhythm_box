@@ -12,11 +12,11 @@
 
 {% block content %} 
     <h2 class="section__heading upper bold">Cart</h2>
+
     {% comment %} CART ITEMS & SUMMARY IF USER HAS ITEMS IN CART {% endcomment %}
     {% if cart_items %}
         {% comment %} LIST CART ITEMS {% endcomment %}
         {% for cart_item in cart_items %}
-        <hr class="cart-item__line">
 
             <div class="cart-item">
                 <img class="cart-item__image" src="{{ cart_item.product.thumbnail.url }}" alt="Thumbnail image of {{ cart_item.product.title }}">

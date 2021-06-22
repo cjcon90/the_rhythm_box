@@ -38,6 +38,7 @@
     align-items: baseline;
     justify-content: space-between;
     color: $color-black-semi;
+    max-width: 40rem;
     &--average {
       font-size: 2.25rem;
     }
@@ -106,6 +107,7 @@
   }
   &-section {
     padding: 3rem 2rem;
+
     &__heading {
       font-size: 2rem;
       text-align: center;
@@ -116,6 +118,9 @@
       display: block;
       margin: auto;
       text-align: center;
+      @include respond(md) {
+        max-width: 50%;
+    }
     }
     &__buttons {
       text-align: center;

@@ -1,6 +1,10 @@
 .form {
     display: flex;
     flex-direction: column;
+    @include respond(md) {
+        max-width: 60rem;
+        margin: auto;
+    }
     
     &__group {
         display: flex;
