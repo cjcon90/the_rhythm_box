@@ -121,49 +121,49 @@
         <div class="products">
     
             {% if page_obj %}
-                {% for product in page_obj %}
-                    <div class="product">
-                        <div class="product__images">
-                            <img src="{{ product.thumbnail.url }}" alt="" class="product__images--product">
-                            <img src="{{ product.brand.logo.url }}" alt="" class="product__images--brand">
-                        </div>
-                        <div class="product__title">
-                            <h2 class="product__title--text bold">{{ product.title }}</h2>
-                        </div>
-                        <div class="product__reviews">
-                            {% comment %} STAR RATING {% endcomment %}
-                            {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
-                            {% comment %} REVIEW COUNT {% endcomment %}
-                            <div class="product__reviews--count regular"><p>{% display_count 'rating' product.get_rating_count %}</p></div>
-                        </div>
-                        <div class="product__nums">
-                            {% comment %} PRODUCT PRICE AND STOCK {% endcomment %}
-                            <h3 class="product__nums--price bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
-                            {% if product.stock %}
-                            <p class="product__nums--stock bold">{{ product.stock | display_stock }} in stock</p>
+                <div class="products__grid">
+                    {% for product in page_obj %}
+                        <div class="product">
+                            <div class="product__images">
+                                <img src="{{ product.thumbnail.url }}" alt="" class="product__images--product">
+                                <img src="{{ product.brand.logo.url }}" alt="" class="product__images--brand">
+                            </div>
+                            <div class="product__title">
+                                <h2 class="product__title--text bold">{{ product.title }}</h2>
+                            </div>
+                            <div class="product__reviews">
+                                {% comment %} STAR RATING {% endcomment %}
+                                {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
+                                {% comment %} REVIEW COUNT {% endcomment %}
+                                <div class="product__reviews--count regular"><p>{% display_count 'rating' product.get_rating_count %}</p></div>
+                            </div>
+                            <div class="product__nums">
+                                {% comment %} PRODUCT PRICE AND STOCK {% endcomment %}
+                                <h3 class="product__nums--price bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
+                                {% if product.stock %}
+                                <p class="product__nums--stock bold">{{ product.stock | display_stock }} in stock</p>
+                                {% else %}
+                                <p class="product__nums--stock--out bold upper">Out of stock</p>
+                                {% endif %}
+                            </div>
+                            {% comment %} PRODUCT INFO & ADD TO CART BUTTONS {% endcomment %}
+                            <div class="product__buttons">
+                            {% if product.type %}
+                            {% comment %} PRODUCT LINK (for items without a type) {% endcomment %}
+                                <a href=
+                                "{% url 'product_page' product.category.slug product.subcategory.slug product.type.slug product.slug %}"
+                                class="product__buttons--info btn btn--white bold">Product Info</a>
                             {% else %}
-                            <p class="product__nums--stock--out bold upper">Out of stock</p>
+                            {% comment %} PRODUCT LINK (for items with a type) {% endcomment %}
+                                <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
+                                class="product__buttons--info btn btn--white bold">Product Info</a>
                             {% endif %}
+                                <a data-product="{{ product.pk }}" data-action="add" href="{% url 'add_to_cart' product.id %}"
+                                class="product__buttons--cart btn btn--black regular update-cart {% if product.stock == 0 %}btn--black--disabled{% endif %}">Add to Cart</a>
+                            </div>
                         </div>
-    
-                        {% comment %} PRODUCT INFO & ADD TO CART BUTTONS {% endcomment %}
-                        <div class="product__buttons">
-                        {% if product.type %}
-                        {% comment %} PRODUCT LINK (for items without a type) {% endcomment %}
-                            <a href=
-                            "{% url 'product_page' product.category.slug product.subcategory.slug product.type.slug product.slug %}"
-                            class="product__buttons--info btn btn--white bold">Product Info</a>
-    
-                        {% else %}
-                        {% comment %} PRODUCT LINK (for items with a type) {% endcomment %}
-                            <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
-                            class="product__buttons--info btn btn--white bold">Product Info</a>
-                        {% endif %}
-                            <a data-product="{{ product.pk }}" data-action="add" href="{% url 'add_to_cart' product.id %}"
-                            class="product__buttons--cart btn btn--black regular update-cart {% if product.stock == 0 %}btn--black--disabled{% endif %}">Add to Cart</a>
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
                 {% comment %} PAGINATION {% endcomment %}
                 {% block pagination %}
                     {% include 'store/pagination.html' %}

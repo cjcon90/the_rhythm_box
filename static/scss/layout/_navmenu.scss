@@ -30,7 +30,7 @@
       display: block;
       list-style: none;
       position: relative;
-      align-self: flex-end;
+      align-self: center;
     }
 
     &--category {
@@ -80,7 +80,7 @@
       @include respond(lg) {
         position: relative;
         text-align: left;
-        font-size: 1.8rem;
+        font-size: 2rem;
         &:first-child {
             padding-top: 2rem;
         }

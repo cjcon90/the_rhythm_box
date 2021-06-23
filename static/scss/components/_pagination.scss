@@ -1,43 +1,50 @@
 .pagination {
-    display: flex;
-    margin: 4rem auto;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  margin: 4rem auto;
+  justify-content: center;
+  align-items: center;
 
-    &__link {
-        display: inline-block;
-        border: solid $color-black-light 1px;
-        padding: .5rem 0;
-        font-size: 2rem;
-        width: 4rem;
-        text-align: center;
-        font-family: 'Roboto', sans-serif;
-
-            &:link, &:visited {
-                color: $color-black-semi;
-            }
-            &:hover, &:focus {
-                background-color: $color-black;
-                color: $color-primary;
-            }
-
-            &--chevron {
-                color: $color-black-semi;
-                width: 6rem;
-            }
-
-    
-            &--current {
-                background-color: $color-black;
-                color: $color-primary;
-                font-weight: 700;
-            }
-
-        }
+  &__link {
+    display: inline-block;
+    border: solid $color-black-light 1px;
+    padding: 0.5rem 0;
+    font-size: 2rem;
+    width: 4rem;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    @include respond(lg) {
+      font-size: 3rem;
+      width: 6rem;
     }
 
-    .disabled {
-        color: $color-black-light;
-        pointer-events: none;
-        user-select: none;
+    &:link,
+    &:visited {
+      color: $color-black-semi;
     }
+    &:hover,
+    &:focus {
+      background-color: $color-black;
+      color: $color-primary;
+    }
+
+    &--chevron {
+      color: $color-black-semi;
+      width: 6rem;
+      @include respond(lg) {
+        width: 8rem;
+      }
+    }
+
+    &--current {
+      background-color: $color-black;
+      color: $color-primary;
+      font-weight: 700;
+    }
+  }
+}
+
+.disabled {
+  color: $color-black-light;
+  pointer-events: none;
+  user-select: none;
+}

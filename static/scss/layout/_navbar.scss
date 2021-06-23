@@ -11,6 +11,9 @@
   & > * {
     z-index: 100;
   }
+  @include respond(lg) {
+    padding: 1rem 3vw;
+  }
 
   &__hamburger {
     z-index: 100;
@@ -78,9 +81,13 @@
     position: relative;
     width: 4rem;
     height: 100%;
+    
 
     &--cart {
       font-size: 3.25rem;
+      @include respond(lg) {
+        font-size: 4rem;
+      }
 
       i {
         color: white;
@@ -102,6 +109,9 @@
       align-items: center;
       text-align: center;
       font-size: 1.25rem;
+      @include respond(lg) {
+        font-size: 2rem;
+      }
     }
   }
 

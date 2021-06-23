@@ -10,28 +10,50 @@
     z-index: 5;
     transition: all 0.5s;
     overflow-y: scroll;
+    @include respond(lg) {
+      border-left: none;
+      margin: 2rem;
+
+      &::-webkit-scrollbar {
+        width: 1.5rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: white;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-black-light;
+        border-radius: 20px;
+      }
+    }
 
     &--mobile {
-        position: fixed;
-        right: 0;
-        top: 0;
-        height: 100vh;
-        width: 100%;
-        max-width: 25rem;
-        padding: 8rem 1rem;
-        @include respond(md) {
-            display: none;
-        }
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      max-width: 25rem;
+      padding: 8rem 1rem;
+      @include respond(md) {
+        display: none;
+      }
     }
 
     &--desktop {
-        display: none;
-        max-height: 100vh;
-        padding: 2rem 3rem;
-        border-right: solid 1px $color-black-light;
-        @include respond(md) {
-            display: block;
-        }
+      display: none;
+      max-height: 100vh;
+      padding: 2rem 3rem;
+      border-right: solid 1px $color-black-light;
+      @include respond(md) {
+        display: block;
+      }
+      @include respond(lg) {
+        max-height: calc(100vh - 10rem);
+        border: none;
+        padding-top: 0;
+      }
     }
 
     @for $i from 0 through 4 {
@@ -48,7 +70,6 @@
       font-size: 3.5rem;
       padding: 1rem 0;
     }
-
   }
 
   .closed {
@@ -77,5 +98,5 @@
 }
 
 .test {
-    display: none;
+  display: none;
 }
