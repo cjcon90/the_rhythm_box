@@ -45,13 +45,22 @@ class AccountAuthenticationForm(forms.ModelForm):
 
 class EditAccountForm(forms.ModelForm):
     email = forms.EmailField(max_length=60)
-
+    newsletter = forms.TypedChoiceField(
+        coerce=lambda x: x == "True",
+        choices=(
+            (True, "Yes, subscribe me to the list"),
+            (False, "No thank you"),
+        ),
+        widget=forms.RadioSelect,
+        initial=True,
+    )
     class Meta:
         model = Account
         fields = (
             "first_name",
             "last_name",
             "email",
+            "newsletter"
         )
 
 

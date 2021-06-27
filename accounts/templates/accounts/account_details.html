@@ -27,6 +27,16 @@
                     <th>Email</th>
                     <td>{{ request.user.email }}</td>
                 </tr>
+                <tr>
+                    <th>Newsletter</th>
+                    <td>
+                    {% if request.user.newsletter %}
+                    <i class="fas fa-check cart-summary-check__icon--success"></i>
+                    {% else %}
+                    <i class="fas fa-times-circle cart-summary-check__icon--error"></i>
+                    {% endif %}
+                    </td>
+                </tr>
             </table>
             <a href="{% url 'edit_account_details' %}" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Account Details</a>
         </div>

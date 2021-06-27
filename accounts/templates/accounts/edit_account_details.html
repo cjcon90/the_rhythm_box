@@ -11,10 +11,28 @@
         {% csrf_token %}
         {% for field in edit_account_form %}
         <fieldset class="form__group">
-            <label for="{{ field.id_for_label }}" class="form__label bold">{{ field.label }}</label>
-            {{ field|add_class:'form__input regular' }}
+            {% if field.name == 'newsletter' %}
+                <label for="{{ field.id_for_label }}" class="form__label bold">Subscribe to our newsletter?
+                <div class="form__input--radio">
+                    {% for radio in field %}
+                        <label class="radio-btn" for="{{ radio.id_for_label }}">
+                            <span class="radio-btn__label">{{radio.choice_label}}</span>
+                                {% comment %} Set False selected by default and set correct values {% endcomment %}
+                                {% if radio.id_for_label == 'id_newsletter_0' %}
+                                    <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='True' {% if request.user.newsletter %}checked{% endif %}>
+                                {% else %}
+                                    <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='False' {% if not request.user.newsletter %}checked{% endif %}>
+                                {% endif %}
+                            <span class="checkmark"></span>
+                        </label>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <label for="{{ field.id_for_label }}" class="form__label bold">{{ field.label }}</label>
+                {{ field|add_class:'form__input regular' }}
+            {% endif %}
             {% for error in field.errors %}
-            <span class="form__error bold">{{ error }}</span>
+                <span class="form__error bold">{{ error }}</span>
             {% endfor %}
         </fieldset>
         {% endfor %}
