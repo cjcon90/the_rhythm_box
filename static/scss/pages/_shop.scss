@@ -10,7 +10,7 @@
 
   &-main {
     @include respond(md) {
-      max-height: 100vh;
+      max-height: 95vh;
       overflow-y: scroll;
     }
     &::-webkit-scrollbar {
