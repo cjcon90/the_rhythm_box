@@ -41,7 +41,7 @@
                 <li>
                     <ul class="filters__list level-2">
                         {% for brand in category_brands|key:category %}
-                            <li><a class="filters__list--link regular" href="{% url 'shop' %}?brand={{ brand.lower|urlencode }}">{{ brand }}</a></li>
+                            <li><a class="filters__list--link regular" href="{% url 'shop' category.slug %}?brand={{ brand.lower|urlencode }}">{{ brand }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>

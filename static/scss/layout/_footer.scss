@@ -5,6 +5,7 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(2, min-content);
+    gap: 2rem 0;
   }
 
   // NEWSLETTER SIGN UP AND SOCIAL MEDIA ICONS
@@ -181,6 +182,7 @@
       grid-column: 1 / 8;
       grid-row: 2 / 3;
       margin: auto;
+      gap: 3rem;
     }
     &__heading {
       color: $color-primary;

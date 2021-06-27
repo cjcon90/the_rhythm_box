@@ -50,6 +50,11 @@
       @content;
     } //1400px (Large desktop)
   }
+  @if $breakpoint == xxl {
+    @media only screen and (min-width: 137.5em) {
+      @content;
+    } //2200px (Large desktop)
+  }
   @if $breakpoint == ls {
     @media only screen and (orientation: landscape) {
       @content;

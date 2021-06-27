@@ -16,7 +16,6 @@
     background-size: 100% 100%;
   }
   @include respond(lg) {
-    height: 90vw;
     background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/lg/hero.jpg");
     background-size: cover;
     background-position: 100% 25%;
@@ -88,7 +87,11 @@
     gap: 5rem 0;
   }
   @include respond(lg) {
+    display: grid;
+    grid-template-columns: repeat(2, min-content);
     justify-content: center;
+    margin: 5rem auto;
+    gap: 5rem;
   }
 
   .category {
@@ -106,8 +109,8 @@
       height: 42.5vw;
     }
     @include respond(lg) {
-      width: 80rem;
-      height: 65rem;
+      width: 75rem;
+      height: 50rem;
     }
 
     &--acoustic {
