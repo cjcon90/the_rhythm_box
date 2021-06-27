@@ -69,6 +69,10 @@
       @include respond(md) {
         font-size: 2.5rem;
       }
+      @include respond(lg) {
+        font-size: 3rem;
+
+      }
     }
     
   }
@@ -156,6 +160,9 @@
       text-align: center;
       letter-spacing: 0.5rem;
       font-size: 3.5rem;
+      @include respond(lg) {
+        width: 50%;
+      }
     }
   }
 }

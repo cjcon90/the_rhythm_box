@@ -14,19 +14,3 @@ hamburger.addEventListener("click", () => {
     menuList[i].classList.toggle("nav-list-appear");
   }
 });
-
-// Hover dropdown functionality for desktop navbar
-for(let item of menuList) {
-  item.forEach(e => {
-    e.addEventListener('mouseover', () => {
-      makeVisible(e)
-      e.addEventListener('mouseover', () => {
-        makeVisible(e)
-      })
-    })
-  })
-}
-
-function makeVisible(element) {
-  element.setAttribute("style", "display: inline-block;");
-}
