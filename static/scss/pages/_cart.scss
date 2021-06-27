@@ -1,3 +1,14 @@
+.cart {
+  @include respond(lg) {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: auto;
+    & > * {
+      margin: auto;
+    }
+  }
+}
 .cart-item {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -15,6 +26,18 @@
   align-items: end;
   border: 1px dashed $color-black-light;
   padding: 2rem;
+  @include respond(lg) {
+    grid-template-columns: 30rem 20rem 10rem 10rem 20rem;
+    grid-template-rows: repeat(4, min-content);
+    grid-template-areas:
+      "image name name name remove"
+      "image quantity quantity quantity blank1"
+      "image quantity quantity quantity price"
+      "image quantity quantity quantity blank2";
+      width: 100%;
+    max-width: none;
+    align-items: center;
+  }
 
   &__line {
     width: 90%;
@@ -37,6 +60,9 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
+    @include respond(lg) {
+      width: 20rem;
+    }
 
     &--stock,
     &--stock--out {
@@ -58,7 +84,7 @@
     font-size: 2.2rem;
     text-align: center;
     text-decoration: underline;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     grid-area: remove;
     color: $color-black-semi;
   }
@@ -79,9 +105,15 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  @include respond(lg) {
+    margin: 0 auto;
+  }
 
   &__heading {
     font-size: 2.25rem;
+    @include respond(lg) {
+      font-size: 3rem;
+    }
   }
   &-check {
     display: grid;
@@ -92,6 +124,9 @@
     & > i {
       font-size: 2.25rem;
       text-align: center;
+      @include respond(lg) {
+        font-size: 2.75rem;
+      }
     }
 
     &__icon {
@@ -107,6 +142,9 @@
     }
     &__text {
       font-size: 1.5rem;
+      @include respond(lg) {
+        font-size: 1.75rem;
+      }
     }
   }
   &-pricing {
@@ -114,6 +152,9 @@
     border-top: 1px solid $color-black-semi;
     color: $color-black-semi;
     font-size: 1.75rem;
+    @include respond(lg) {
+      font-size: 2rem;
+    }
     & > * {
       display: flex;
       justify-content: space-between;
@@ -122,6 +163,9 @@
     &--total {
       font-size: 2rem;
       color: $color-black;
+      @include respond(lg) {
+        font-size: 2.5rem;
+      }
     }
   }
   &-checkout {

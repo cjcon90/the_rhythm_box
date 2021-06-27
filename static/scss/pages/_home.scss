@@ -15,6 +15,12 @@
     background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/md/hero.jpg");
     background-size: 100% 100%;
   }
+  @include respond(lg) {
+    height: 90vw;
+    background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/lg/hero.jpg");
+    background-size: cover;
+    background-position: 100% 25%;
+  }
 
   @include respond(ls) {
     height: 100vh;
@@ -22,12 +28,18 @@
 
   &__heading {
     padding: 15vh 0 0 1rem;
+    @include respond(lg) {
+      padding-left: 5rem;
+    }
     &--main {
       font-size: 4.25rem;
       color: $color-primary;
       letter-spacing: 0.4rem;
       @include respond(md) {
         font-size: 5rem;
+      }
+      @include respond(lg) {
+        font-size: 7rem;
       }
     }
     &--sub {
@@ -37,6 +49,10 @@
       margin-top: 1rem;
       @include respond(md) {
         font-size: 4.25rem;
+      }
+      @include respond(lg) {
+        max-width: none;
+        font-size: 6.25rem;
       }
     }
   }
@@ -71,6 +87,9 @@
   @include respond(md) {
     gap: 5rem 0;
   }
+  @include respond(lg) {
+    justify-content: center;
+  }
 
   .category {
     width: 90vw;
@@ -86,18 +105,46 @@
       width: 42.5vw;
       height: 42.5vw;
     }
+    @include respond(lg) {
+      width: 80rem;
+      height: 65rem;
+    }
 
     &--acoustic {
       background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/sm/acoustic.webp");
+      @include respond(md) {
+        background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/md/acoustic.webp");
+      }
+      @include respond(lg) {
+        background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/lg/acoustic.webp");
+      }
     }
     &--electronic {
       background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/sm/electric.webp");
+      @include respond(md) {
+        background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/md/electric.webp");
+      }
+      @include respond(lg) {
+        background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/lg/electric.webp");
+      }
     }
     &--cymbals {
       background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/sm/cymbals.webp");
+      @include respond(md) {
+        background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/md/cymbals.webp");
+      }
+      @include respond(lg) {
+        background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/lg/cymbals.webp");
+      }
     }
     &--accessories {
       background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/sm/accessories.webp");
+      @include respond(md) {
+        background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/md/accessories.webp");
+      }
+      @include respond(lg) {
+        background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956726/codeinstitute/the_rhythm_box/lg/accessories.webp");
+      }
     }
 
     &__text {

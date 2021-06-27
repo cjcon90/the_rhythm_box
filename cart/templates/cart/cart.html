@@ -13,106 +13,94 @@
 {% block content %} 
     <h2 class="section__heading upper bold">Cart</h2>
 
-    {% comment %} CART ITEMS & SUMMARY IF USER HAS ITEMS IN CART {% endcomment %}
-    {% if cart_items %}
-        {% comment %} LIST CART ITEMS {% endcomment %}
-        {% for cart_item in cart_items %}
-
-            <div class="cart-item">
-                <img class="cart-item__image" src="{{ cart_item.product.thumbnail.url }}" alt="Thumbnail image of {{ cart_item.product.title }}">
-                <a href="{% url 'remove_cart_item' cart_item.product.id %}" class="cart-item__remove light">Remove Item</a>
-                <h2 class="cart-item__name regular bold">{{ cart_item.product.title }}</h2>
-
-                {% comment %} FORM FOR UPDATING QUANTITY {% endcomment %}
-                <form class="cart-item__quantity update-cart-form" action="{% url 'update_cart' cart_item.product.id %}" method="POST">
-                    {% csrf_token %}
-
-                    <div class="cart-item__quantity--select number-select">
-                        <p class="cart-item__quantity--stock bold">Quantity:</p>
-                        <span class="input-number-decrement">–</span>
-                        <input class="input-number" type="text" name="quantity" value="{{ cart_item.quantity }}"
-                        max={% if cart_item.product.stock == 0 %}"{{ cart_item.quantity }}"{% else %}"{{ cart_item.product.stock }}"{% endif %}>
-                        <span class="input-number-increment">+</span>
+    <div class="cart">
+        {% comment %} CART ITEMS & SUMMARY IF USER HAS ITEMS IN CART {% endcomment %}
+        {% if cart_items %}
+            <div class="cart-items">
+                {% comment %} LIST CART ITEMS {% endcomment %}
+                {% for cart_item in cart_items %}
+                    <div class="cart-item">
+                        <img class="cart-item__image" src="{{ cart_item.product.thumbnail.url }}" alt="Thumbnail image of {{ cart_item.product.title }}">
+                        <a href="{% url 'remove_cart_item' cart_item.product.id %}" class="cart-item__remove light">Remove Item</a>
+                        <h2 class="cart-item__name regular bold">{{ cart_item.product.title }}</h2>
+                        {% comment %} FORM FOR UPDATING QUANTITY {% endcomment %}
+                        <form class="cart-item__quantity update-cart-form" action="{% url 'update_cart' cart_item.product.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="cart-item__quantity--select number-select">
+                                <p class="cart-item__quantity--stock bold">Quantity:</p>
+                                <span class="input-number-decrement">–</span>
+                                <input class="input-number" type="text" name="quantity" value="{{ cart_item.quantity }}"
+                                max={% if cart_item.product.stock == 0 %}"{{ cart_item.quantity }}"{% else %}"{{ cart_item.product.stock }}"{% endif %}>
+                                <span class="input-number-increment">+</span>
+                            </div>
+                            {% if cart_item.product.stock %}
+                            <p class="cart-item__quantity--stock bold">{{ cart_item.product.stock | display_stock }} in stock</p>
+                            {% else %}
+                            <p class="cart-item__quantity--stock--out bold upper">Out of stock</p>
+                            {% endif %}
+                            <button type="submit" class="cart-item__quantity--submit btn btn--black bold">Update</button>
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        </form>
+                        {% comment %} TOTAL PRICE OF ITEM * QUANTITY {% endcomment %}
+                        <p class="cart-item__price bold">€{{ cart_item.price|floatformat:"-2"|intcomma  }}</p>
                     </div>
-
-                    {% if cart_item.product.stock %}
-                    <p class="cart-item__quantity--stock bold">{{ cart_item.product.stock | display_stock }} in stock</p>
-                    {% else %}
-                    <p class="cart-item__quantity--stock--out bold upper">Out of stock</p>
-                    {% endif %}
-                    <button type="submit" class="cart-item__quantity--submit btn btn--black bold">Update</button>
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                </form>
-                {% comment %} TOTAL PRICE OF ITEM * QUANTITY {% endcomment %}
-                <p class="cart-item__price bold">€{{ cart_item.price|floatformat:"-2"|intcomma  }}</p>
+                {% endfor %}
             </div>
-        {% endfor %}
-
-        {% comment %} SUMMARY OF ITEMS IN CART {% endcomment %}
-
-        <div class="cart-summary">
-            <h3 class="cart-summary__heading light">Summary</h3>
-            {% if free_delivery_delta == 0 %}
-            <div class="cart-summary-check">
+            {% comment %} SUMMARY OF ITEMS IN CART {% endcomment %}
+            <div class="cart-summary">
+                <h3 class="cart-summary__heading light">Summary</h3>
+                {% if free_delivery_delta == 0 %}
+                <div class="cart-summary-check">
+                    <i class="fas fa-check cart-summary-check__icon--success"></i>
+                    <p class="cart-summary-check__text regular">Your order qualifies for free delivery</p>
+                </div>
+                {% else %}
+                <div class="cart-summary-check">
+                    <i class="fas fa-check cart-summary-check__icon--grey"></i>
+                    <span class="cart-summary-check__text regular">
+                    You must spend <strong>€{{ free_delivery_delta|floatformat:"-2"|intcomma }}</strong> more in order to qualify for free delivery.
+                    </span>
+                </div>
+                {% endif %}
+                {% cart_in_stock cart_items as items_in_stock %}
+                {% if  items_in_stock%}
+                <div class="cart-summary-check">
                 <i class="fas fa-check cart-summary-check__icon--success"></i>
-                <p class="cart-summary-check__text regular">Your order qualifies for free delivery</p>
-            </div>
-
-            {% else %}
-
-            <div class="cart-summary-check">
-                <i class="fas fa-check cart-summary-check__icon--grey"></i>
-                <span class="cart-summary-check__text regular">
-                You must spend <strong>€{{ free_delivery_delta|floatformat:"-2"|intcomma }}</strong> more in order to qualify for free delivery.
-                </span>
-            </div>
-
-            {% endif %}
-
-            {% cart_in_stock cart_items as items_in_stock %}
-
-            {% if  items_in_stock%}
-
-            <div class="cart-summary-check">
-            <i class="fas fa-check cart-summary-check__icon--success"></i>
-                <p class="cart-summary-check__text regular">All items are in stock</p>
-            </div>
-
-            {% else %}
-
-            <div class="cart-summary-check">
-            <i class="fas fa-times-circle cart-summary-check__icon--error"></i>
-                <p class="cart-summary-check__text regular">One or more of your cart items is not available. Please modify your shopping basket.</p>
-            </div>
-
-            {% endif %}
-
-
-            <div class="cart-summary-pricing">
-                <div class="cart-summary-pricing--items regular">
-                    <p>Items Total</p>
-                    <p>€{{ total|floatformat:"-2"|intcomma   }}</p>
+                    <p class="cart-summary-check__text regular">All items are in stock</p>
                 </div>
-                <div class="cart-summary-pricing--delivery regular">
-                    <p>Delivery</p>
-                    <p>€{{ delivery|floatformat:"-2"|intcomma   }}</p>
+                {% else %}
+                <div class="cart-summary-check">
+                <i class="fas fa-times-circle cart-summary-check__icon--error"></i>
+                    <p class="cart-summary-check__text regular">One or more of your cart items is not available. Please modify your shopping basket.</p>
                 </div>
-                <div class="cart-summary-pricing--total bold">
-                    <p>Total</p>
-                    <p>€{{ grand_total|floatformat:"-2"|intcomma   }}</p>
+                {% endif %}
+                <div class="cart-summary-pricing">
+                    <div class="cart-summary-pricing--items regular">
+                        <p>Items Total</p>
+                        <p>€{{ total|floatformat:"-2"|intcomma   }}</p>
+                    </div>
+                    <div class="cart-summary-pricing--delivery regular">
+                        <p>Delivery</p>
+                        <p>€{{ delivery|floatformat:"-2"|intcomma   }}</p>
+                    </div>
+                    <div class="cart-summary-pricing--total bold">
+                        <p>Total</p>
+                        <p>€{{ grand_total|floatformat:"-2"|intcomma   }}</p>
+                    </div>
                 </div>
-            </div>
-            
-            <a href="{% url 'checkout' %}" class="cart-summary-checkout btn btn--black bold {% if not items_in_stock %}btn--black--disabled{% endif %}">Checkout</a>
-        </div>
-    {% else %}
-        <hr class="cart-item__line">
-        <div class="cart-empty">
-            <h3 class="cart-empty__heading regular">You have no items in your shopping cart!</h3>
-            <a href="{% url 'shop' %}" class="cart-empty__return btn btn--black bold">Browse Items</a>
-        </div>
         
-    {% endif %}
+                <a href="{% url 'checkout' %}" class="cart-summary-checkout btn btn--black bold {% if not items_in_stock %}btn--black--disabled{% endif %}">Checkout</a>
+            </div>
+        {% else %}
+            <div class="cart-empty">
+            <hr class="cart-item__line">
+
+                <h3 class="cart-empty__heading regular">You have no items in your shopping cart!</h3>
+                <a href="{% url 'shop' %}" class="cart-empty__return btn btn--black bold">Browse Items</a>
+            </div>
+        
+        {% endif %}
+    </div>
 
 {% endblock content %}
 
