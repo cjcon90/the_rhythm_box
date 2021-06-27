@@ -14,26 +14,28 @@
 <div class="orders">
     {% for order in orders %}
         <div class="order">
-            <div class="order-date">
-                <p class="order__label bold">Date:</p>
-                <p class="order__text regular">{{ order.date|date:"d.m.Y" }}</p>
-            </div>
-            <div class="order-image">
-                <img src="{% get_primary_item_image order %}" alt="image of {{ item.product.title }}" class="order-image__image">
-            </div>
-            <div class="order-id">
-                <p class="order__label bold">Order ID:</p>
-                <p class="order__text regular">#{{ order.order_number }}</p>
-            </div>
-            <div class="order-price">
-                <p class="order__label bold">Total Cost:</p>
-                <p class="order__text regular">€{{ order.grand_total }}</p>
+            <div class="order-details">
+                <div class="order-date">
+                    <p class="order__label bold">Date:</p>
+                    <p class="order__text regular">{{ order.date|date:"d.m.Y" }}</p>
+                </div>
+                <div class="order-id">
+                    <p class="order__label bold">Order ID:</p>
+                    <p class="order__text regular">#{{ order.order_number }}</p>
+                </div>
+                <div class="order-price">
+                    <p class="order__label bold">Total Cost:</p>
+                    <p class="order__text regular">€{{ order.grand_total }}</p>
+                </div>
             </div>
             <div class="order-items">
                 <p class="order__label bold">Items:</p>
                 {% for item in order.lineitems.all %}
-                    <span class="order__text regular">{{ item.product.title }}{% if not forloop.last %}, {% else %}.{% endif %}</span>
+                    <p class="order__text order__text--item regular">{{ item.product.title }}{% if not forloop.last %}, {% else %}.{% endif %}</p>
                 {% endfor %}
+            </div>
+            <div class="order-image">
+                <img src="{% get_primary_item_image order %}" alt="image of {{ item.product.title }}" class="order-image__image">
             </div>
         </div>
     {% endfor %}
