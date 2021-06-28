@@ -1,0 +1,15 @@
+{% extends "store/base.html" %}
+
+{% block title %}404 - Page not found{% endblock title %}
+
+{% block content %}
+    <header class="header header--error">
+        <div class="header__heading header__heading--error">
+            <h1 class="header__heading--main bold upper">Error: 404</h1>
+            <h2 class="header__heading--sub header__heading--sub--error subtitle light upper">Sorry, we couldn't find that page!</h2>
+        </div>
+        <div class="header__link">
+            <a href="{% url 'shop' %}" class="header__link--text upper regular">Return to shop</a>
+        </div>
+    </header>
+{% endblock content %}

@@ -1,28 +1,38 @@
-// HERO SECTION
+// HERO SECTION (INCLUDING ERROR PAGE STYLING AS MAJORITY OF STYLING IS RECYCLED)
 .header {
   position: relative;
   background-color: $color-black;
   background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/sm/hero.jpg");
-  background-size: 85vh 85vh;
   background-position: left top;
   background-repeat: no-repeat;
-  height: 70vh;
   z-index: 80;
-  margin-bottom: -5rem;
-
   @include respond(md) {
-    height: 90vw;
     background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/md/hero.jpg");
-    background-size: 100% 100%;
   }
   @include respond(lg) {
     background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/lg/hero.jpg");
-    background-size: cover;
-    background-position: 100% 25%;
   }
 
-  @include respond(ls) {
-    height: 100vh;
+  &--error {
+    background-size: cover;
+    height: calc(100vh - 6rem);
+  }
+
+  &--home {
+    background-size: 85vh 85vh;
+    height: 70vh;
+    @include respond(md) {
+      height: 90vw;
+      background-size: 100% 100%;
+    }
+    @include respond(lg) {
+      background-size: cover;
+      background-position: 100% 25%;
+    }
+
+    @include respond(ls) {
+      height: 100vh;
+    }
   }
 
   &__heading {
@@ -50,8 +60,12 @@
         font-size: 4.25rem;
       }
       @include respond(lg) {
-        max-width: none;
+        max-width: 60%;
         font-size: 6.25rem;
+      }
+
+      &--error {
+        max-width: 60%;
       }
     }
   }
@@ -66,15 +80,17 @@
     &--text {
       font-size: 1.75rem;
       padding: 1.5rem 2.5rem;
+
+      &--error {
+        font-size: 2.5rem;
+      }
       @include respond(md) {
         font-size: 2.5rem;
       }
       @include respond(lg) {
         font-size: 3rem;
-
       }
     }
-    
   }
 }
 
@@ -85,6 +101,7 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 2.5rem;
+  margin-top: -2.5rem;
   gap: 2.5rem 0;
 
   @include respond(md) {

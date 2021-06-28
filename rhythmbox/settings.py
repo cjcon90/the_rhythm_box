@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "products",
     "cart",
     "checkout",
+    "errors",
     # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
