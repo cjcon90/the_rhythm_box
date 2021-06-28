@@ -1,8 +1,24 @@
 .product-info {
   margin: auto;
+  border-bottom: 1px solid $color-black-light;
+  @include respond(lg) {
+    padding: 1rem 3vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, min-content);
+    grid-template-areas:
+      "images price"
+      "images title"
+      "images reviews"
+      "images nums"
+      "images description";
+  }
   &__images {
     padding-top: 6rem;
     position: relative;
+    @include respond(lg) {
+      grid-area: images;
+    }
     &--product {
       max-height: 30rem;
       width: auto;
@@ -24,6 +40,9 @@
   &__title {
     margin: 2rem 2rem 0rem 2rem;
     color: $color-black-semi;
+    @include respond(lg) {
+      grid-area: title;
+    }
     &--text {
       font-size: 3rem;
     }
@@ -39,6 +58,9 @@
     justify-content: space-between;
     color: $color-black-semi;
     max-width: 40rem;
+    @include respond(lg) {
+      grid-area: reviews;
+    }
     &--average {
       font-size: 2.25rem;
     }
@@ -55,6 +77,9 @@
     width: 25rem;
     align-items: center;
     gap: 1.5rem 1.5rem;
+    @include respond(lg) {
+      grid-area: nums;
+    }
 
     &--price {
       letter-spacing: 0.2rem;
@@ -83,6 +108,9 @@
 
   &__description {
     padding: 0 2rem;
+    @include respond(lg) {
+      grid-area: description;
+    }
     &--heading {
       font-size: 3.5rem;
       color: $color-black-semi;
@@ -94,9 +122,12 @@
       line-height: 3rem;
     }
   }
+
 }
 
 .reviews {
+  margin: auto;
+  max-width: 80rem;
   &-buttons {
     display: grid;
     place-items: center;
@@ -120,7 +151,7 @@
       text-align: center;
       @include respond(md) {
         max-width: 50%;
-    }
+      }
     }
     &__buttons {
       text-align: center;
@@ -131,14 +162,16 @@
         width: 100%;
       }
       &--delete {
-        &:link, &:visited {
+        &:link,
+        &:visited {
           color: $color-warning-dark;
           border-color: $color-warning-dark;
-      }
-        &:hover, &:focus {
+        }
+        &:hover,
+        &:focus {
           background-color: $color-warning-dark;
           color: white;
-      }
+        }
       }
     }
   }

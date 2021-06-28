@@ -51,65 +51,62 @@
         </div>
 
     </div>
-    <hr>
 
     {% comment %} ============ PRODUCT REVIEW SECTION ========== {% endcomment %}
 
     {% comment %} STAR RATING {% endcomment %}
-    <div class="reviews-buttons">
-        <form action="{% url 'rate_product' product.pk %}?next={{ request.path }}" class="reviews-buttons__rate star-rate" method='POST'>
-        {% csrf_token %}
-            <fieldset class="rating-group">
-                <input disabled class="rating__input rating__input--none" name="star-rating" id="star-rating-none" value="0" type="radio" {% if not user_rating %}checked{% endif %}>
-                    {% for i in rating_options %}
-                        <label aria-label="{{i}} star" class="rating__label" for="star-rating-{{i}}"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                        <input class="rating__input" name="star-rating" id="star-rating-{{i}}" value="{{i}}" type="radio" {% if i == user_rating.rating %}checked{% endif %}>
-                    {% endfor %}
-            </fieldset>
-            <button type="submit" class="btn btn--white regular dropdown__button"><i class="fas fa-star-half-alt"></i> Submit rating</button>
-        </form>
-        <div class="reviews-buttons__filter dropdown">
+    <div class="reviews">
+        <div class="reviews-buttons">
+            <form action="{% url 'rate_product' product.pk %}?next={{ request.path }}" class="reviews-buttons__rate star-rate" method='POST'>
+            {% csrf_token %}
+                <fieldset class="rating-group">
+                    <input disabled class="rating__input rating__input--none" name="star-rating" id="star-rating-none" value="0" type="radio" {% if not user_rating %}checked{% endif %}>
+                        {% for i in rating_options %}
+                            <label aria-label="{{i}} star" class="rating__label" for="star-rating-{{i}}"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                            <input class="rating__input" name="star-rating" id="star-rating-{{i}}" value="{{i}}" type="radio" {% if i == user_rating.rating %}checked{% endif %}>
+                        {% endfor %}
+                </fieldset>
+                <button type="submit" class="btn btn--white regular dropdown__button"><i class="fas fa-star-half-alt"></i> Submit rating</button>
+            </form>
+            <div class="reviews-buttons__filter dropdown">
+            </div>
+            <div class="reviews-buttons__sort dropdown">
+            </div>
         </div>
-        <div class="reviews-buttons__sort dropdown">
-        </div>
-
-    </div>
-
-    {% comment %} PRODUCT REVIEWS {% endcomment %}
-    <div class="reviews-section">
-        <h2 class="reviews-section__heading bold">{% display_count 'review' product.get_review_count %}</h2>
+        {% comment %} PRODUCT REVIEWS {% endcomment %}
+        <div class="reviews-section">
+            <h2 class="reviews-section__heading bold">{% display_count 'review' product.get_review_count %}</h2>
         
-        {% if reviews.count > 0 %}
-        {% comment %} display each review (if exists) {% endcomment %}
-            {% for review in reviews %}
-                <div class="review">
-                    <p class="review-author regular">{{ review.rating.user_id.first_name }} {{ review.rating.user_id.last_name|first }}.</p>
-                    <p class="review-date light">{{review.date_added|date:'d.m.Y'}}</p>
-                    {% include 'products/_star-rating-sm.html' with rating=review.rating.rating %}
-                    <p class="review-headline bold">{{review.headline}}</p>
-                    <p class="review-text regular">{{review.content}}</p>
-                </div>
-
-                {% if review.rating.user_id == request.user %}
-                {% comment %} add 'edit review' button if review belongs to user {% endcomment %}
-                    <div class="reviews-section__buttons">
-                        <a href="{% url 'review_product' product.slug %}"
-                            class="reviews-section__buttons--edit btn btn--white regular dropdown__button">
-                            <i class="fas fa-pencil-alt"></i> Edit review
-                        </a>
-                        <a href="{% url 'delete_review' review.id %}?next={{ request.path }}"
-                            class="reviews-section__buttons--delete btn  regular dropdown__button">
-                            <i class="fas fa-times"></i> Delete review
-                        </a>
+            {% if reviews.count > 0 %}
+            {% comment %} display each review (if exists) {% endcomment %}
+                {% for review in reviews %}
+                    <div class="review">
+                        <p class="review-author regular">{{ review.rating.user_id.first_name }} {{ review.rating.user_id.last_name|first }}.</p>
+                        <p class="review-date light">{{review.date_added|date:'d.m.Y'}}</p>
+                        {% include 'products/_star-rating-sm.html' with rating=review.rating.rating %}
+                        <p class="review-headline bold">{{review.headline}}</p>
+                        <p class="review-text regular">{{review.content}}</p>
                     </div>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-
-        {% if not user_review %}
-        {% comment %} add 'write review' button if user has not yet reviewed {% endcomment %}
-            <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
-        {% endif %}
+                    {% if review.rating.user_id == request.user %}
+                    {% comment %} add 'edit review' button if review belongs to user {% endcomment %}
+                        <div class="reviews-section__buttons">
+                            <a href="{% url 'review_product' product.slug %}"
+                                class="reviews-section__buttons--edit btn btn--white regular dropdown__button">
+                                <i class="fas fa-pencil-alt"></i> Edit review
+                            </a>
+                            <a href="{% url 'delete_review' review.id %}?next={{ request.path }}"
+                                class="reviews-section__buttons--delete btn  regular dropdown__button">
+                                <i class="fas fa-times"></i> Delete review
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if not user_review %}
+            {% comment %} add 'write review' button if user has not yet reviewed {% endcomment %}
+                <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
+            {% endif %}
+        </div>
     </div>
 {% endblock content %}
 

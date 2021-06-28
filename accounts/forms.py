@@ -9,7 +9,7 @@ class RegistrationForm(UserCreationForm):
     newsletter = forms.TypedChoiceField(
         coerce=lambda x: x == "True",
         choices=(
-            (True, "Yes, subscribe me to the list"),
+            (True, "Yes, subscribe me to the newsletter"),
             (False, "No thank you"),
         ),
         widget=forms.RadioSelect,
@@ -48,7 +48,7 @@ class EditAccountForm(forms.ModelForm):
     newsletter = forms.TypedChoiceField(
         coerce=lambda x: x == "True",
         choices=(
-            (True, "Yes, subscribe me to the list"),
+            (True, "Yes, subscribe me to the newsletter"),
             (False, "No thank you"),
         ),
         widget=forms.RadioSelect,
