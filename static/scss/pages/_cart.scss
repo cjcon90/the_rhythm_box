@@ -34,9 +34,8 @@
       "image quantity quantity quantity blank1"
       "image quantity quantity quantity price"
       "image quantity quantity quantity blank2";
-      width: 100%;
+    width: 100%;
     max-width: none;
-    align-items: center;
   }
 
   &__line {
@@ -47,6 +46,11 @@
   &__image {
     grid-area: image;
     width: 90%;
+    @include respond(lg) {
+      height: 20rem;
+      width: auto;
+      place-self: center;
+    }
   }
   &__name {
     font-size: 2.5rem;

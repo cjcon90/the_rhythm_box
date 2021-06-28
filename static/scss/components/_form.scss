@@ -55,10 +55,6 @@
             padding: 1rem;
             margin-top: .5rem;
         }
-        &:focus {
-            padding: 1rem;
-            border-width: .2rem;
-        }
         &:focus:invalid {
             border-color: red;
         }
