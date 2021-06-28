@@ -6,7 +6,7 @@ from .forms import (
     AccountAuthenticationForm,
     EditAccountForm,
     AddressForm,
-    ContactForm
+    ContactForm,
 )
 from django.contrib import messages
 from django.utils.safestring import mark_safe
@@ -166,32 +166,42 @@ def newsletter_subscribe(request):
     messages.success(request, "Thank you for subscribing to our newsletter!")
     return redirect(request.GET.get("next"))
 
+
 def contact(request):
     context = {}
 
     if request.POST:
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
-            from_name = form.cleaned_data['from_name']
+            subject = form.cleaned_data["subject"]
+            from_email = form.cleaned_data["from_email"]
+            message = form.cleaned_data["message"]
+            from_name = form.cleaned_data["from_name"]
             mail_msg = f"Message from: {from_name}\n\n{message}\n\nReturn email address: {from_email}"
             try:
-                send_mail(subject, mail_msg, from_email, ['cjcon90@pm.me'])
+                send_mail(subject, mail_msg, from_email, ["cjcon90@pm.me"])
             except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            messages.success(request, "Message successfully sent!\nThanks for getting in touch 🙂")
-            return redirect('contact_success')
+                return HttpResponse("Invalid header found.")
+            messages.success(
+                request,
+                "Message successfully sent!\nThanks for getting in touch 🙂",
+            )
+            return redirect("contact_success")
         else:
             context["contact_form"] = form
     else:
         if request.user.is_authenticated:
-            form = ContactForm(initial={'from_email':request.user.email, 'from_name': request.user.first_name})
+            form = ContactForm(
+                initial={
+                    "from_email": request.user.email,
+                    "from_name": request.user.first_name,
+                }
+            )
         else:
             form = ContactForm()
     context["contact_form"] = form
     return render(request, "accounts/contact.html", context)
+
 
 def contact_success(request):
     return render(request, "accounts/contact_success.html")

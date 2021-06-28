@@ -54,14 +54,10 @@ class EditAccountForm(forms.ModelForm):
         widget=forms.RadioSelect,
         initial=True,
     )
+
     class Meta:
         model = Account
-        fields = (
-            "first_name",
-            "last_name",
-            "email",
-            "newsletter"
-        )
+        fields = ("first_name", "last_name", "email", "newsletter")
 
 
 class AddressForm(forms.ModelForm):

@@ -14,16 +14,16 @@
     <h2 class="section__heading upper bold">Cart</h2>
 
     <div class="cart">
-        {% comment %} CART ITEMS & SUMMARY IF USER HAS ITEMS IN CART {% endcomment %}
+        <!-- CART ITEMS & SUMMARY IF USER HAS ITEMS IN CART -->
         {% if cart_items %}
             <div class="cart-items">
-                {% comment %} LIST CART ITEMS {% endcomment %}
+                <!-- LIST CART ITEMS -->
                 {% for cart_item in cart_items %}
                     <div class="cart-item">
                         <img class="cart-item__image" src="{{ cart_item.product.thumbnail.url }}" alt="Thumbnail image of {{ cart_item.product.title }}">
                         <a href="{% url 'remove_cart_item' cart_item.product.id %}" class="cart-item__remove light">Remove Item</a>
                         <h2 class="cart-item__name regular bold">{{ cart_item.product.title }}</h2>
-                        {% comment %} FORM FOR UPDATING QUANTITY {% endcomment %}
+                        <!-- FORM FOR UPDATING QUANTITY -->
                         <form class="cart-item__quantity update-cart-form" action="{% url 'update_cart' cart_item.product.id %}" method="POST">
                             {% csrf_token %}
                             <div class="cart-item__quantity--select number-select">
@@ -41,14 +41,17 @@
                             <button type="submit" class="cart-item__quantity--submit btn btn--black bold">Update</button>
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         </form>
-                        {% comment %} TOTAL PRICE OF ITEM * QUANTITY {% endcomment %}
+                        <!-- TOTAL PRICE OF ITEM * QUANTITY -->
                         <p class="cart-item__price bold">€{{ cart_item.price|floatformat:"-2"|intcomma  }}</p>
                     </div>
                 {% endfor %}
             </div>
-            {% comment %} SUMMARY OF ITEMS IN CART {% endcomment %}
+
+            <!-- SUMMARY OF ITEMS IN CART -->
             <div class="cart-summary">
                 <h3 class="cart-summary__heading light">Summary</h3>
+
+                <!-- FREE DELIVERY CHECK -->
                 {% if free_delivery_delta == 0 %}
                 <div class="cart-summary-check">
                     <i class="fas fa-check cart-summary-check__icon--success"></i>
@@ -62,6 +65,8 @@
                     </span>
                 </div>
                 {% endif %}
+
+                <!-- CHECK ITEMS IN STOCK BEFORE PURCHASE -->
                 {% cart_in_stock cart_items as items_in_stock %}
                 {% if  items_in_stock%}
                 <div class="cart-summary-check">
@@ -92,6 +97,8 @@
                 <a href="{% url 'checkout' %}" class="cart-summary-checkout btn btn--black bold {% if not items_in_stock %}btn--black--disabled{% endif %}">Checkout</a>
             </div>
         {% else %}
+
+            <!-- EMPTY CART -->
             <div class="cart-empty">
             <hr class="cart-item__line">
 

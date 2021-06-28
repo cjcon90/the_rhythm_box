@@ -30,6 +30,7 @@ def add_to_cart(request, item_id):
     messages.success(request, f"{product.title} (x{quantity}) added to cart!")
     return redirect("cart")
 
+
 def update_cart(request, item_id):
     """
     Adjust quantity of items in shopping cart
@@ -46,6 +47,7 @@ def update_cart(request, item_id):
     request.session["cart"] = cart
     messages.success(request, f"Shopping cart updated")
     return redirect("cart")
+
 
 def remove_cart_item(request, item_id):
     """

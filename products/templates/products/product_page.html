@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    {% comment %} ============ PRODUCT INFO SECTION ========== {% endcomment %}
+    <!-- ========== PRODUCT INFO SECTION ========== -->
 
     <div class="product-info">
 
@@ -52,9 +52,9 @@
 
     </div>
 
-    {% comment %} ============ PRODUCT REVIEW SECTION ========== {% endcomment %}
+    <!-- ========== PRODUCT REVIEW SECTION ========== -->
 
-    {% comment %} STAR RATING {% endcomment %}
+    <!-- STAR RATING -->
     <div class="reviews">
         <div class="reviews-buttons">
             <form action="{% url 'rate_product' product.pk %}?next={{ request.path }}" class="reviews-buttons__rate star-rate" method='POST'>
@@ -73,12 +73,12 @@
             <div class="reviews-buttons__sort dropdown">
             </div>
         </div>
-        {% comment %} PRODUCT REVIEWS {% endcomment %}
+        <!-- PRODUCT REVIEWS -->
         <div class="reviews-section">
             <h2 class="reviews-section__heading bold">{% display_count 'review' product.get_review_count %}</h2>
         
             {% if reviews.count > 0 %}
-            {% comment %} display each review (if exists) {% endcomment %}
+            <!-- display each review (if exists) -->
                 {% for review in reviews %}
                     <div class="review">
                         <p class="review-author regular">{{ review.rating.user_id.first_name }} {{ review.rating.user_id.last_name|first }}.</p>
@@ -88,7 +88,7 @@
                         <p class="review-text regular">{{review.content}}</p>
                     </div>
                     {% if review.rating.user_id == request.user %}
-                    {% comment %} add 'edit review' button if review belongs to user {% endcomment %}
+                    <!-- add 'edit review' button if review belongs to user -->
                         <div class="reviews-section__buttons">
                             <a href="{% url 'review_product' product.slug %}"
                                 class="reviews-section__buttons--edit btn btn--white regular dropdown__button">
@@ -103,7 +103,7 @@
                 {% endfor %}
             {% endif %}
             {% if not user_review %}
-            {% comment %} add 'write review' button if user has not yet reviewed {% endcomment %}
+            <!-- add 'write review' button if user has not yet reviewed -->
                 <a href="{% url 'review_product' product.slug %}" class="reviews-section__button btn btn--white regular dropdown__button"><i class="fas fa-pencil-alt"></i> Write a review</a>
             {% endif %}
         </div>

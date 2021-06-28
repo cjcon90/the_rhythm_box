@@ -11,11 +11,15 @@ from .views import (
     my_orders,
     newsletter_subscribe,
     contact,
-    contact_success
+    contact_success,
 )
 
 urlpatterns = [
-    path("newsletter_subscribe/", newsletter_subscribe, name="newsletter_subscribe"),
+    path(
+        "newsletter_subscribe/",
+        newsletter_subscribe,
+        name="newsletter_subscribe",
+    ),
     path("register/", register_user, name="register"),
     path("login/", login_user, name="login"),
     path("logout/", logout_user, name="logout"),

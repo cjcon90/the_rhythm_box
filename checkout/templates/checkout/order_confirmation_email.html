@@ -6,6 +6,8 @@
     <h2>Hello {{ order.user.first_name}},</h2>
     <h4>Thank you for shopping with RhythmBox. Your order (#{{ order.order_number }}) is as follows:</h4>
     <hr>
+
+    <!-- Order Summary -->
     <table style="text-align: left;">
       <tr style="width: 500px; font-weight: 700">
         <th style="width: 350px">Item</th>
@@ -19,6 +21,8 @@
       {% endfor %}
     </table>
     <hr>
+
+    <!-- Cost & Delivery -->
     <table>
       <tr>
         <th style="width: 150px; font-weight: 700">Total Cost:</th>

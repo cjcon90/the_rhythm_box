@@ -51,7 +51,7 @@ class StripeWH_Handler:
                     county__iexact=shipping_details.address.state,
                     grand_total=grand_total,
                     original_cart=cart,
-                    stripe_pid=pid
+                    stripe_pid=pid,
                 )
                 order_exists = True
                 break
@@ -77,7 +77,7 @@ class StripeWH_Handler:
                     street_address_2=shipping_details.address.line2,
                     county=shipping_details.address.state,
                     original_cart=cart,
-                    stripe_pid=pid
+                    stripe_pid=pid,
                 )
                 for item_id, quantity in json.loads(cart).items():
                     product = Product.objects.get(id=item_id)
@@ -95,7 +95,8 @@ class StripeWH_Handler:
                     status=500,
                 )
         return HttpResponse(
-            content=f"Webhook received: {event['type']} | SUCCESS: Created order in webhook", status=200
+            content=f"Webhook received: {event['type']} | SUCCESS: Created order in webhook",
+            status=200,
         )
 
     def handle_payment_intent_failed(self, event):

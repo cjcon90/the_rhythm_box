@@ -13,25 +13,28 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    {% comment %} <meta property="og:url" content="https://www.cjcon90.dev/"> {% endcomment %}
+    <meta property="og:url" content="https://therhythmbox.herokuapp.com/">
     <meta property="og:title" content="The RhythmBox">
     <meta property="og:description" content="The RhythmBox is an ecommerce store for professional-grade drums, cymbals and drumming equipment">
-    {% comment %} <meta property="og:image" content="https://res.cloudinary.com/cjcon90/image/upload/v1616015377/hot_dogz/og_preview_image.png"> {% endcomment %}
+    <meta property="og:image" content="https://res.cloudinary.com/cjcon90/image/upload/v1624905692/codeinstitute/the_rhythm_box/preview_image.png">
 
     <!-- Twitter -->
-    {% comment %} <meta property="twitter:card" content="summary_large_image"> {% endcomment %}
-    {% comment %} <meta property="twitter:url" content="https://hot-dogz.herokuapp.com/"> {% endcomment %}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://therhythmbox.herokuapp.com/">
     <meta property="twitter:title" content="The RhythmBox">
     <meta property="twitter:description" content="The RhythmBox is an ecommerce store for professional-grade drums, cymbals and drumming equipment">
-    {% comment %} <meta property="twitter:image" content="https://res.cloudinary.com/cjcon90/image/upload/v1616015377/hot_dogz/og_preview_image.png"> {% endcomment %}
-    {% comment %} TODO: complete meta tags {% endcomment %}
+    <meta property="twitter:image" content="https://res.cloudinary.com/cjcon90/image/upload/v1624905692/codeinstitute/the_rhythm_box/preview_image.png">
+    <!-- Favicon Ico -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <!-- Essential preload JS -->
     {% block pre_js %}{% endblock pre_js %}
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 <body>
         <nav class="nav">
             <div class="nav__hamburger">
-            {% comment %} Hamburger design inspired by Jesse Couch: https://codepen.io/designcouch/pen/Atyop {% endcomment %}
+            <!-- Hamburger design inspired by Jesse Couch: https://codepen.io/designcouch/pen/Atyop -->
                 <span></span>
                 <span></span>
                 <span></span>
@@ -70,7 +73,9 @@
                     {% endif %}
                 </ul>
             </div>
-            <a href="{% url 'cart' %}" class="nav__cart">
+            
+            <!-- Shopping Cart -->
+            <a href="{% url 'cart' %}" class="nav__cart" aria-label="Shopping Cart">
                 <div class="nav__cart--cart">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
@@ -80,12 +85,17 @@
                     </div>
                 {% endif %}
             </a>
-
         </nav>
-        {% block header %}{% endblock header %}
+
+    <!-- Load Header Content -->
+    {% block header %}{% endblock header %}
+
     <main>
+    <!-- Main website content -->
         {% block content %}{% endblock %}
     </main>
+
+    <!-- Load any user messages -->
     {% if messages %}
         {% for message in messages %}
             {% if message.tags %}
@@ -95,6 +105,8 @@
             {% endif %}
         {% endfor %}
     {% endif %}
+
+    <!-- Footer -->
     <footer class="footer">
             <div class="connect">
                 <div class="connect__heading">
@@ -108,10 +120,10 @@
                     <button type="submit" class="connect__newsletter--button btn btn--primary upper bold">Sign Up</button>
                 </form>
                 <div class="connect__social">
-                    <a href="https://facebook.com" rel="noreferrer nooopener" target="_blank" class="connect__social--link"><i class="connect__social--icon fab fa-facebook-square"></i></a>
-                    <a href="https://twitter.com" rel="noreferrer nooopener" target="_blank" class="connect__social--link"><i class="connect__social--icon fab fa-twitter-square"></i></a>
-                    <a href="https://instagram.com" rel="noreferrer nooopener" target="_blank" class="connect__social--link"><i class="connect__social--icon fab fa-instagram-square"></i></a>
-                    <a href="https://www.whatsapp.com" rel="noreferrer nooopener" target="_blank" class="connect__social--link"><i class="connect__social--icon fab fa-whatsapp-square"></i></a>
+                    <a href="https://facebook.com" rel="noreferrer nooopener" target="_blank" class="connect__social--link" aria-label="Facebook Page"><i class="connect__social--icon fab fa-facebook-square"></i></a>
+                    <a href="https://twitter.com" rel="noreferrer nooopener" target="_blank" class="connect__social--link" aria-label="Twitter Page"><i class="connect__social--icon fab fa-twitter-square"></i></a>
+                    <a href="https://instagram.com" rel="noreferrer nooopener" target="_blank" class="connect__social--link" aria-label="Instagram Page"><i class="connect__social--icon fab fa-instagram-square"></i></a>
+                    <a href="https://www.whatsapp.com" rel="noreferrer nooopener" target="_blank" class="connect__social--link" aria-label="Whatsapp Page"><i class="connect__social--icon fab fa-whatsapp-square"></i></a>
                 </div>
             </div>
             <div class="navigate">
@@ -136,8 +148,11 @@
                 <a href="mailto:therhythmbox@gmail.com" class="contact__email">therhythmbox@gmail.com</a>
             </div>
     </footer>
+
+    <!-- Main JS file -->
     <script type="module" src="{% static 'scripts/app.js' %}"></script>
-    {% comment %} Load other page specific scripts {% endcomment %}
+
+    <!-- Load other page specific scripts -->
     {% block post_js %}{% endblock post_js %}
 
 </body>

@@ -50,18 +50,18 @@
     </div>
     
     <div class="shop-main">
-        {% comment %} PRODUCT SEARCH, SORT & FILTER {% endcomment %}
+        <!-- PRODUCT SEARCH, SORT & FILTER -->
         <div class="filters">
-            {% comment %} SEARCH BAR {% endcomment %}
+            <!-- SEARCH BAR -->
             <form action="{% url 'shop' %}" method="GET" class="filters__search">
                 <input type="text" name="q" class="filters__search--input form__input regular" placeholder="Search products..." required>
                 <button class="filters__search--button btn btn--black regular">Search</button>
             </form>
     
-            {% comment %} FILTER BUTTON - MOBILE {% endcomment %}
+            <!-- FILTER BUTTON - MOBILE -->
             <button class="filters__button btn btn--black regular">Filter</button>
     
-            {% comment %} FILTER MENU MOBILE {% endcomment %}
+            <!-- FILTER MENU MOBILE -->
     
             <div class="filters__menu filters__menu--mobile closed">
                 <h2 class="filters__menu--heading bold upper">Filter</h2>
@@ -104,7 +104,7 @@
             </div>
     
     
-            {% comment %} SORT OPTION {% endcomment %}
+            <!-- SORT OPTION -->
             <div class="filters__sort dropdown">
                 <button id="product-sort-button" class="filters__sort--button btn btn--white regular dropdown__button">Sort Products<i class="fas fa-chevron-down"></i></button>
                 <div id="product-sort-list" class="filters__sort--list dropdown__list">
@@ -116,7 +116,7 @@
             </div>
         </div>
     
-        {% comment %} DISPLAYED PRODUCTS {% endcomment %}
+        <!-- DISPLAYED PRODUCTS -->
     
         <div class="products">
     
@@ -132,13 +132,13 @@
                                 <h2 class="product__title--text bold">{{ product.title }}</h2>
                             </div>
                             <div class="product__reviews">
-                                {% comment %} STAR RATING {% endcomment %}
+                                <!-- STAR RATING -->
                                 {% include 'products/_star-rating.html' with rating=product.get_average_rating %}
-                                {% comment %} REVIEW COUNT {% endcomment %}
+                                <!-- REVIEW COUNT -->
                                 <div class="product__reviews--count regular"><p>{% display_count 'rating' product.get_rating_count %}</p></div>
                             </div>
                             <div class="product__nums">
-                                {% comment %} PRODUCT PRICE AND STOCK {% endcomment %}
+                                <!-- PRODUCT PRICE AND STOCK -->
                                 <h3 class="product__nums--price bold">€{{ product.price|floatformat:"-2"|intcomma }}</h3>
                                 {% if product.stock %}
                                 <p class="product__nums--stock bold">{{ product.stock | display_stock }} in stock</p>
@@ -146,15 +146,15 @@
                                 <p class="product__nums--stock--out bold upper">Out of stock</p>
                                 {% endif %}
                             </div>
-                            {% comment %} PRODUCT INFO & ADD TO CART BUTTONS {% endcomment %}
+                            <!-- PRODUCT INFO & ADD TO CART BUTTONS -->
                             <div class="product__buttons">
                             {% if product.type %}
-                            {% comment %} PRODUCT LINK (for items without a type) {% endcomment %}
+                            <!-- PRODUCT LINK (for items without a type) -->
                                 <a href=
                                 "{% url 'product_page' product.category.slug product.subcategory.slug product.type.slug product.slug %}"
                                 class="product__buttons--info btn btn--white bold">Product Info</a>
                             {% else %}
-                            {% comment %} PRODUCT LINK (for items with a type) {% endcomment %}
+                            <!-- PRODUCT LINK (for items with a type) -->
                                 <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
                                 class="product__buttons--info btn btn--white bold">Product Info</a>
                             {% endif %}
@@ -164,7 +164,7 @@
                         </div>
                     {% endfor %}
                 </div>
-                {% comment %} PAGINATION {% endcomment %}
+                <!-- PAGINATION -->
                 {% block pagination %}
                     {% include 'store/pagination.html' %}
                 {% endblock pagination %}

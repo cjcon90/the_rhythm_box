@@ -13,6 +13,7 @@
 {% block content %} 
     <h2 class="section__heading upper bold">Checkout</h2>
     <div class="checkout">
+        <!-- Delivery Details Form -->
         <div class="checkout-form">
             <h3 class="checkout-form__heading light">Delivery Details</h3>
             <form id="payment-form" method="POST" action="{% url 'checkout' %}" class="form">
@@ -33,6 +34,8 @@
                 {% for error in field.errors %}
                     <span class="form__error bold">{{ error }}</span>
                 {% endfor %}
+
+                <!-- 'Make Default Shipping Address Checkbox' -->
                 <fieldset class="form__group form__group--checkbox">
                     <div class="checkbox-outer">
                         <input id="make_default_shipping" name="make_default_shipping" type="checkbox" />
@@ -42,7 +45,8 @@
                 </fieldset>
                 <fieldset class="form__group">
                     <label for="card-element" class="card-element__label light">Payment</label>
-                    <!-- A Stripe card element will go here -->
+
+                    <!-- Stripe Card Element -->
                     <div id="card-element"></div>
                     <div class="card-errors bold form-error bold"></div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
@@ -52,6 +56,8 @@
                 </fieldset>
             </form>
         </div>
+
+        <!-- Checkout Summary -->
         <div class="checkout-summary">
             <h3 class="checkout-summary__heading light">Order Items ({{ product_count }})</h3>
             <table class="checkout-summary__table regular">
@@ -87,6 +93,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Spinner animation for purchase processing -->
     <div class="loading-overlay no-display">
         <h1 class="bold loading__spinner">
                 <i class="fas fa-3x fa-sync-alt fa-spin"></i>

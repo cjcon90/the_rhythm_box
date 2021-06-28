@@ -17,7 +17,7 @@
                     {% for radio in field %}
                         <label class="radio-btn" for="{{ radio.id_for_label }}">
                             <span class="radio-btn__label">{{radio.choice_label}}</span>
-                                {% comment %} Set False selected by default and set correct values {% endcomment %}
+                                <!-- Set False selected by default and set correct values -->
                                 {% if radio.id_for_label == 'id_newsletter_0' %}
                                     <input type="radio" name="newsletter" id="{{ radio.id_for_label }}"  value='True' {% if request.user.newsletter %}checked{% endif %}>
                                 {% else %}

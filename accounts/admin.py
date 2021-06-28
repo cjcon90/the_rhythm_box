@@ -39,14 +39,10 @@ class AccountAdmin(admin.ModelAdmin):
     list_filter = ()
     fieldsets = ()
 
+
 class NewsletterSubAdmin(admin.ModelAdmin):
-    list_display = (
-        "email",
-        "subscription_date"
-    )
-    search_fields = (
-        "email",
-    )
+    list_display = ("email", "subscription_date")
+    search_fields = ("email",)
 
 
 admin.site.register(Account, AccountAdmin)

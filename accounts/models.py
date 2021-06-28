@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django_countries.fields import CountryField
 
 
-
 class MyAccountManager(BaseUserManager):
     def create_user(
         self, email, first_name, last_name, newsletter, password=None
@@ -81,7 +80,9 @@ class Account(AbstractBaseUser):
 
 
 class Address(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="address")
+    user = models.OneToOneField(
+        Account, on_delete=models.CASCADE, related_name="address"
+    )
     street_address_1 = models.CharField(max_length=80)
     street_address_2 = models.CharField(max_length=80, null=True, blank=True)
     town_or_city = models.CharField(max_length=40)
