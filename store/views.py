@@ -62,7 +62,3 @@ def shop(request, category=None, subcategory=None, type=None):
     context["products"] = products
 
     return render(request, "store/shop.html", context)
-
-
-def test(request):
-    return render(request, "errors/404.html")
