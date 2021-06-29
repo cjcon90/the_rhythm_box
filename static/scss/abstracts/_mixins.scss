@@ -35,6 +35,11 @@
 // Media Queries
 
 @mixin respond($breakpoint) {
+  @if $breakpoint == xs {
+    @media only screen and (max-width: 21.25em) {
+      @content;
+    } //340px (Extra small / Legacy phones)
+  }
   @if $breakpoint == md {
     @media only screen and (min-width: 43.75em) {
       @content;

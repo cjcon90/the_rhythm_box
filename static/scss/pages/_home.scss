@@ -2,14 +2,11 @@
 .header {
   position: relative;
   background-color: $color-black;
-  background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/sm/hero.jpg");
-  background-position: left top;
+  background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/md/hero.jpg");
+  background-position: 15% 0;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   z-index: 80;
-  @include respond(md) {
-    background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/md/hero.jpg");
-  }
   @include respond(lg) {
     background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/lg/hero.jpg");
     background-size: cover;
@@ -33,8 +30,8 @@
   }
 
   &__heading {
-    padding: 15vh 0 0 1rem;
-    @include respond(lg) {
+    padding: 12.5vh 0 0 1rem;
+    @include respond(md) {
       padding-left: 5rem;
     }
     &--main {
