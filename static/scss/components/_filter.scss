@@ -56,7 +56,7 @@
       }
     }
 
-    @for $i from 0 through 4 {
+    @for $i from 1 through 4 {
       ul.level-#{$i} .filters__list--link {
         padding-left: 3rem * ($i - 1);
         font-size: 2.25rem - ($i / 5);

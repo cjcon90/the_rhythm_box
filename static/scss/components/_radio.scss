@@ -1,7 +1,6 @@
 .radio-btn {
-  --size: 2rem;
-  min-width: var(--size);
-  height: var(--size);
+  min-width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   padding-left: 3rem;
   display: flex;
@@ -13,19 +12,20 @@
     display: none;
 
     &:checked ~ .checkmark {
-        /* changes from the video  */
-      
-        /*  content box origin will make sure the bg-image only stays inside content area in between padding  */
-        background-origin: content-box;
-        background-repeat: no-repeat;
-        background-image: radial-gradient(
-          circle at center, 
-          $color-black 
-           /* the size of the check mark is determined by subtracting from the size of the circle
+      /* changes from the video  */
+
+      /*  content box origin will make sure the bg-image only stays inside content area in between padding  */
+      background-origin: content-box;
+      background-repeat: no-repeat;
+      background-image: radial-gradient(
+        circle at center,
+        $color-black
+          /* the size of the check mark is determined by subtracting from the size of the circle
            the border(both sides) and the gap(both sides) than dividing it by 2 to get the radius of the circle        */
-             calc((var(--size) - (var(--border) * 2) - (var(--gap) * 2)) / 2), 
-          rgba(255, 255, 255, 0) 0);
-      }
+          calc((2rem - (0.2rem * 2) - (0.3rem * 2)) / 2),
+        rgba(255, 255, 255, 0) 0
+      );
+    }
   }
 
   &__label {
@@ -40,18 +40,15 @@
   }
 
   & .checkmark {
-    --gap: .3rem;
-    --border: .2rem;
-    --check-color: $color-black;
-    width: var(--size);
-    height: var(--size);
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     display: inline-block;
     transition: opacity 0.3s ease;
     /* changes from the video  */
-    
-    border: var(--border) solid $color-black-semi;
-    padding: var(--gap);
+
+    border: 0.2rem solid $color-black-semi;
+    padding: 0.3rem;
     position: absolute;
     top: 0;
     left: 0;
