@@ -122,13 +122,13 @@ def logout_user(request):
 def login_user(request):
 
     context = {}
-
     user = request.user
     if user.is_authenticated:
         return redirect("home")
 
     if request.POST:
         form = AccountAuthenticationForm(request.POST)
+        redirect_url = request.POST.get("next") or "home"
         if form.is_valid():
             email = request.POST["email"]
             password = request.POST["password"]
@@ -138,15 +138,18 @@ def login_user(request):
                 messages.success(
                     request, f"Welcome back, {request.user.first_name}! 🙂"
                 )
-                return redirect("home")
+                return redirect(redirect_url)
         else:
             messages.error(request, f"Incorrect login details")
-            return redirect("login")
+            context["login_form"] = form
 
     else:
         form = AccountAuthenticationForm()
-
-    context["login_form"] = form
+        if request.POST.get("next"):
+            messages.error(
+                request, f"You must be logged in to access this page"
+            )
+        context["login_form"] = form
     return render(request, "accounts/login.html", context)
 
 

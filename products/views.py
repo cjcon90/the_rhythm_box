@@ -6,9 +6,7 @@ from django.utils.safestring import mark_safe
 from .forms import ProductRatingForm, ProductReviewForm
 
 
-def product_page(
-    request, category, subcategory, product, type=None
-):
+def product_page(request, category, subcategory, product, type=None):
     """
     View for handling individual product pages
     """
@@ -37,7 +35,6 @@ def product_page(
 
     return render(request, "products/product_page.html", context)
 
-
 @login_required
 def rate_product(request, product_id):
     """
@@ -47,15 +44,16 @@ def rate_product(request, product_id):
 
     product = Product.objects.get(pk=product_id)
     rating = request.POST.get("star-rating")
-
-    # Update existing rating or create new one
-    rating_update_values = {"rating": rating}
-    rating_obj, created = Rating.objects.update_or_create(
-        user_id=request.user, product=product, defaults=rating_update_values
-    )
-
-    # INFO messages redefined as a'star' in settings.py
-    messages.info(request, f"Rated {int(rating) // 20} / 5 Stars!")
+    if rating:
+        # Update existing rating or create new one
+        rating_update_values = {"rating": rating}
+        rating_obj, created = Rating.objects.update_or_create(
+            user_id=request.user,
+            product=product,
+            defaults=rating_update_values,
+        )
+        # INFO messages redefined as a'star' in settings.py
+        messages.info(request, f"Rated {int(rating) // 20} / 5 Stars!")
     return redirect(request.GET.get("next"))
 
 
@@ -135,6 +133,7 @@ def review_product(request, product_slug):
             context["review_form"] = ProductReviewForm()
 
     return render(request, "products/review_product.html", context)
+
 
 def delete_review(request, review_id):
     review = get_object_or_404(Review, pk=review_id)

@@ -6,7 +6,8 @@
 
 {% block content %} 
     <h2 class="section__heading upper bold">Login</h2>
-    <form method="POST" action="{% url 'login' %}" class="form" novalidate>
+    <form method="POST" action="{% url 'login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="form" novalidate>
+    {% comment %}  {% endcomment %}
         {% csrf_token %}
 
         {% for field in login_form %}
@@ -22,7 +23,7 @@
         {% for error in field.errors %}
             <span class="form__error bold">{{ error }}</span>
         {% endfor %}
-
+        <input type="hidden" name="next" value="{{ request.GET.next }}" />
         <fieldset class="form__group">
             <button type="submit" class="form__submit btn btn--black upper bold">Login</button>
         </fieldset>
