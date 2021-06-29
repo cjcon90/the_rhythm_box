@@ -9,7 +9,7 @@
     padding: 0 1rem;
     font-size: 1.6rem;
     @include respond(md) {
-      max-width: calc(60rem * .85);
+      max-width: calc(60rem * 0.85);
       gap: 5rem;
       justify-content: space-between;
       margin: auto;
@@ -89,5 +89,25 @@
       font-style: italic;
       margin: -1rem 0 2rem 0;
     }
+  }
+}
+
+.auth-redirect {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 0 1.5rem 3rem 1.5rem;
+  text-align: center;
+  @include respond(md) {
+    max-width: 60rem;
+    margin: auto;
+  }
+  &__text {
+    font-size: 2rem;
+    color: $color-black;
+  }
+  &__btn {
+    font-size: 2rem;
+    padding: 1.5rem;
   }
 }

@@ -41,4 +41,8 @@
             <button type="submit" class="form__submit btn btn--black upper bold">Register</button>
         </fieldset>
     </form>
+        <div class="auth-redirect">
+        <p class="auth-redirect__text regular">Already have an account?</p>
+        <a href="{% url 'login' %}" class="auth-redirect__btn btn btn--white dropdown-button regular">Log In Here</a>
+    </div>
 {% endblock content %}

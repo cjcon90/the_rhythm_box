@@ -28,4 +28,8 @@
             <button type="submit" class="form__submit btn btn--black upper bold">Login</button>
         </fieldset>
     </form>
+    <div class="auth-redirect">
+        <p class="auth-redirect__text regular">Not yet registered?</p>
+        <a href="{% url 'register' %}" class="auth-redirect__btn btn btn--white dropdown-button regular">Sign Up Here</a>
+    </div>
 {% endblock content %}
