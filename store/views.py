@@ -1,7 +1,8 @@
-from products.models import Product, Category, Brand
 from django.db.models import Q
 from django.shortcuts import render
 from django.core.paginator import Paginator
+
+from products.models import Product, Category, Brand
 
 
 def index(request):
@@ -61,3 +62,7 @@ def shop(request, category=None, subcategory=None, type=None):
     context["products"] = products
 
     return render(request, "store/shop.html", context)
+
+
+def test(request):
+    return render(request, "errors/404.html")

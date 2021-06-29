@@ -1,11 +1,11 @@
 import secrets
 from decimal import Decimal
 
+from django_countries.fields import CountryField
+
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
-
-from django_countries.fields import CountryField
 
 from accounts.models import Account
 from products.models import Product

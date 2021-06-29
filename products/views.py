@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Product, Rating, Review
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.safestring import mark_safe
+
 from .forms import ProductRatingForm, ProductReviewForm
+from .models import Product, Rating, Review
 
 
 def product_page(request, category, subcategory, product, type=None):
@@ -34,6 +35,7 @@ def product_page(request, category, subcategory, product, type=None):
         )
 
     return render(request, "products/product_page.html", context)
+
 
 @login_required
 def rate_product(request, product_id):

@@ -5,29 +5,26 @@
   background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/sm/hero.jpg");
   background-position: left top;
   background-repeat: no-repeat;
+  background-size: 100% 100%;
   z-index: 80;
   @include respond(md) {
     background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/md/hero.jpg");
   }
   @include respond(lg) {
     background-image: url("https://res.cloudinary.com/cjcon90/image/upload/v1621956727/codeinstitute/the_rhythm_box/lg/hero.jpg");
+    background-size: cover;
+    background-position: 100% 25%;
   }
 
   &--error {
-    background-size: cover;
-    height: calc(100vh - 6rem);
+    margin-top: -6rem;
+    height: 100vh;
   }
 
   &--home {
-    background-size: 85vh 85vh;
     height: 70vh;
     @include respond(md) {
       height: 90vw;
-      background-size: 100% 100%;
-    }
-    @include respond(lg) {
-      background-size: cover;
-      background-position: 100% 25%;
     }
 
     @include respond(ls) {

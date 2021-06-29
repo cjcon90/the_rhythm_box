@@ -1,6 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils.safestring import mark_safe
+from django.forms.models import model_to_dict
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+
+from checkout.models import Order
+from .models import Account, Address, NewsletterSub
 from .forms import (
     RegistrationForm,
     AccountAuthenticationForm,
@@ -8,13 +16,6 @@ from .forms import (
     AddressForm,
     ContactForm,
 )
-from django.contrib import messages
-from django.utils.safestring import mark_safe
-from django.forms.models import model_to_dict
-from .models import Account, Address, NewsletterSub
-from checkout.models import Order
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, HttpResponseRedirect
 
 
 @login_required

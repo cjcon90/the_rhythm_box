@@ -1,6 +1,17 @@
-from products.models import Product
-from .models import OrderLineItem, Order
-from accounts.models import Account, Address
+import os, json
+
+import stripe
+
+from django.contrib import messages
+from django.utils.safestring import mark_safe
+from django.http import QueryDict
+from django.forms.models import model_to_dict
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.http import require_POST
+from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from django.shortcuts import (
     render,
     redirect,
@@ -8,21 +19,13 @@ from django.shortcuts import (
     get_object_or_404,
     HttpResponse,
 )
-from django.views.decorators.http import require_POST
-from .forms import OrderForm
-from django.conf import settings
+
 from cart.contexts import cart_contents
-from django.contrib import messages
-from django.utils.safestring import mark_safe
-from django.http import QueryDict
-import stripe
-import json
-from django.forms.models import model_to_dict
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template.loader import render_to_string
-import os
-from django.contrib.auth.decorators import login_required
+from products.models import Product
+from accounts.models import Account, Address
+from .models import OrderLineItem, Order
+from .forms import OrderForm
+
 
 
 @require_POST

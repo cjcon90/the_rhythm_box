@@ -1,7 +1,9 @@
 from django.urls import path
+
 from .views import (
     index,
     shop,
+    test
 )
 
 urlpatterns = [
@@ -14,4 +16,5 @@ urlpatterns = [
         shop,
         name="shop",
     ),
+    path("test/", test)
 ]

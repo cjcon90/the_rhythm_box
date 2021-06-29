@@ -1,10 +1,12 @@
 from io import BytesIO
+from PIL import Image
+
 from django.core.files import File
 from django.db import models
 from django.db.models import Avg
-from PIL import Image
 from django.template.defaultfilters import slugify
 from django.core.validators import MinValueValidator, MaxValueValidator
+
 from accounts.models import Account
 
 
