@@ -101,6 +101,6 @@ class ContactForm(forms.Form):
     message = forms.CharField(
         required=True,
         widget=forms.Textarea(
-            attrs={"placeholder": "What can we help you with?"}
+            attrs={"placeholder": "What can we help you with?", "rows": 10, "cols": "auto"}
         ),
     )

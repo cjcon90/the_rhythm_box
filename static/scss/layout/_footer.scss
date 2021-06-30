@@ -95,8 +95,7 @@
         font-size: 5rem;
 
         &:hover,
-        &:active,
-        &:focus {
+        &:active {
           color: white;
         }
       }
@@ -146,7 +145,6 @@
           color: $color-primary;
         }
         &:hover,
-        &:focus,
         &:active {
           color: white;
         }
@@ -161,7 +159,6 @@
           color: white;
         }
         &:hover,
-        &:focus,
         &:active {
           color: $color-primary;
         }
@@ -196,7 +193,6 @@
         color: white;
       }
       &:hover,
-      &:focus,
       &:active {
         color: $color-primary;
       }
