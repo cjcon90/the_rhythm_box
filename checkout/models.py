@@ -85,7 +85,7 @@ class Order(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.order_number
+        return f"{self.user}:{self.order_number}"
 
 
 class OrderLineItem(models.Model):
