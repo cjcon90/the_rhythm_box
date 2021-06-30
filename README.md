@@ -227,3 +227,54 @@ A custom user manager is defined as per [the Django documentation](https://docs.
 | Product         | product          | ForeignKey 'Product' | on_delete=models.CASCADE                                  |
 | Quantity        | quantity         | IntegerField         | default=0                                                 |
 | Line Item Total | lineitem_total   | DecimalField         | max_digits=12,<br />decimal_places=2,<br />editable=False |
+
+
+
+## Design
+
+### Color Scheme
+
+The app was inspired primarily by two existing websites:
+* [Thomann.de](https://www.thomann.de/)
+* [John Lewis](https://www.johnlewis.com/)
+
+In the same vein as these two e-commerce websites, the main design of the website would be plain monochrome colors with products being the main feature. This design choice is also why I chose to source white-background product images from thomann.de, for use in RhythmBox
+
+As opposed to these two websites however, I wanted a more striking, large hero image landing page to greet users visiting the website. The landing page design, whereby categories were split into boxes was inspired by [SisuGuard](https://www.sisuguard.com/) (who have since changed their landing page design)
+
+To help create an exciting and engaging landing page and site elements, I chose a bright, brilliant primary colour to help achieve this:
+
+![color palette](docs/color_palette.png)
+
+As the background of the website is white throughout, shades of grey were achieved via opacity modificiations on the primary black color
+
+### Typography
+
+I used two fonts throughout the project, both chosen for their legibility and clean, professional appearance
+
+* [Roboto](https://fonts.google.com/specimen/Roboto) - This was the font used throughout the website for paragraph text, form inputs, and general medium weight texts
+* [Open Sans Condensed](https://fonts.google.com/specimen/Open+Sans+Condensed?query=open+sans+con) - This font was used for text with both light and heavy weights throughout the website - primarily for headings
+
+### Logo
+
+For the main RhythmBox logo, I purchased an SVG set from [MAKStudion on Etsy](https://www.etsy.com/uk/listing/857133805/drumsticks-svg-drumsticks-dxf-drummer?transaction_id=2424341602)
+
+I then customised the SVG in [Canva](https://www.canva.com/), adding the TRB text to the original drumstick image and colored it in the website's primary yellow colour.
+
+![Custom RhythmBox Logo](https://res.cloudinary.com/cjcon90/image/upload/v1621514847/codeinstitute/the_rhythm_box/logo.webp)
+
+### Icons
+
+[Fontawesome](https://fontawesome.com/) icons were used throughout the website. To enhance website performance, the entire Sass file was downloaded and any unused icons or elements commented out, rather than having to preload the FontAwesome CDN
+
+### Images
+
+As noted, all of the project images were sourced from [https://thomann.de](thomann.de)
+
+Other images used on the landing page were sourced from:
+* [Ryan Bruce at Burst](https://burst.shopify.com/photos/microphone-on-snare-drum) - Landing page hero image
+* [David Jdt at Unsplash](https://unsplash.com/photos/PlNxD7LalW4) - Acoustic Category image
+* [kickstartyourdrumming.com](https://www.kickstartyourdrumming.com/roland-td-1kv-review/) - Electronic Category image
+* [Ryan Bruce at Burst](https://burst.shopify.com/photos/ride-cymbal-overhead) - Cymbals Category image
+* [Samuel Woods at Unsplash](https://unsplash.com/photos/I6lGrfTB1eU) - Accessories Category image
+
