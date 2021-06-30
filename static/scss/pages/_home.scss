@@ -94,19 +94,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin: 2.5rem;
-  margin-top: -2.5rem;
-  gap: 2.5rem 0;
+  margin: -2rem auto 4rem auto;
+  gap: 4rem 0;
 
   @include respond(md) {
+    margin: -1rem auto 5rem auto;
     gap: 5rem 0;
   }
   @include respond(lg) {
     display: grid;
     grid-template-columns: repeat(2, min-content);
     justify-content: center;
-    margin: 5rem auto;
-    gap: 5rem;
+    gap: 3vw 3vw;
   }
 
   .category {
@@ -124,8 +123,8 @@
       height: 42.5vw;
     }
     @include respond(lg) {
-      width: 75rem;
-      height: 50rem;
+      max-width: 75rem;
+      max-height: 50rem;
     }
 
     &--acoustic {
