@@ -86,7 +86,7 @@ class Address(models.Model):
     street_address_1 = models.CharField(max_length=80)
     street_address_2 = models.CharField(max_length=80, null=True, blank=True)
     town_or_city = models.CharField(max_length=40)
-    county = models.CharField(max_length=80)
+    county = models.CharField(max_length=40)
     postcode = models.CharField(max_length=20)
     country = CountryField(blank=False, default="IE")
     phone_number = models.CharField(max_length=20)
