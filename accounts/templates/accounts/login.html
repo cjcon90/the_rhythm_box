@@ -30,6 +30,6 @@
     </form>
     <div class="auth-redirect">
         <p class="auth-redirect__text regular">Not yet registered?</p>
-        <a href="{% url 'register' %}" class="auth-redirect__btn btn btn--white dropdown-button regular">Sign Up Here</a>
+        <a href="{% url 'register' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="auth-redirect__btn btn btn--white dropdown-button regular">Sign Up Here</a>
     </div>
 {% endblock content %}

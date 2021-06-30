@@ -94,6 +94,7 @@ def register_user(request):
     context = {}
     if request.POST:
         form = RegistrationForm(request.POST)
+        redirect_url = request.POST.get("next") or "home"
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get("email")
@@ -106,7 +107,7 @@ def register_user(request):
                 request,
                 f"Thanks for registering, {request.user.first_name}! You are now logged in 🙂",
             )
-            return redirect("home")
+            return redirect(redirect_url)
         else:
             context["registration_form"] = form
     else:  # GET request
