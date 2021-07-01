@@ -7,7 +7,6 @@
 {% block content %} 
     <h2 class="section__heading upper bold">Login</h2>
     <form method="POST" action="{% url 'login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="form" novalidate>
-    {% comment %}  {% endcomment %}
         {% csrf_token %}
 
         {% for field in login_form %}

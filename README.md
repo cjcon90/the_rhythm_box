@@ -197,7 +197,7 @@ A custom user manager is defined as per [the Django documentation](https://docs.
 | Date Added | date_added | DateTimeField | auto_now_add=True |
 
 
-`Order` model
+##### `Order` model
 
 | **Name**   | **Database Key**   | **Field Type**   | **Type Validation**   |
 | ---------- | ------------------ | ---------------- | --------------------- |
@@ -219,7 +219,7 @@ A custom user manager is defined as per [the Django documentation](https://docs.
 | Original Cart | original_cart | TextField |  |
 | Stripe PID | stripe_pid | CharField | max_length=254 |
 
-`OrderLineItem` model
+##### `OrderLineItem` model
 
 | **Name**        | **Database Key** | **Field Type**       | **Type Validation**                                       |
 | --------------- | ---------------- | -------------------- | --------------------------------------------------------- |
@@ -282,7 +282,7 @@ Other images used on the landing page were sourced from:
 
 ## Features
 
-### Main / Shop
+### Main
 
 #### Landing Page
 
@@ -293,11 +293,170 @@ Other images used on the landing page were sourced from:
 
 - The navigation bar is always present at the top of the page so users can access key navigation links no matter where they are on the page
 - The RhythmBox logo is visible in the navbar at all times, and serves as a link back to the home page
-- 
+- The Cart icon serves as a link to the user's current cart and displays how many items are currently in the cart
 - If user is logged in, navigation links display:
 	- `SHOP` - `ACCOUNT` - `CONTACT US` - `LOGOUT`
 - If user is not logged in, navigation links display:
 	- `SHOP` - `REGISTER` - `LOGIN` - `CONTACT US`
 - Navigation links are compressed into a hamburger menu on mobile and tablet devices so that the main focus of the user is the shopping cart in the top right corner at all times
 - On pressing the hamburger button, a full page menu appears to the user with a visually pleasing animation:
-  ![navigation menu gif](docs/screenshots/navigation.gif)
+![navigation menu gif](docs/screenshots/navigation.gif)
+
+#### Footer
+
+- The footer contains an email input for users to sign up to the website newsletter
+	- if users are logged in then this is prepopulated with the logged in user's email and set to readonly
+-  There are social media buttons linking to facebook, twitter, instagram and whatsapp (would normallly link to a phone number but as it is just a test site it links to whatsapp.com)
+-  There is a site navigation section featuring each of the categories of products and their direct subcategories, so users can quickly and easily navigate to the type of product they want
+-  There are full contact details listed below with an email address, so users can contact site admin directly from their preferred email application
+
+#### Messages
+
+- Messages flash on screen for all key actions such as logging in / registering / adding items to cart / rating and reviewing products / completing purchases / errors
+- SUCCESS, INFO and ERROR messages are used, and these have been tagges with 'check', 'star' and 'time-circle' respectively, to correspond with their icon and color coding within the app:
+
+Success            |  Error |  Star
+:-------------------------:|:-------------------------:|:-------------------------:
+![success message](docs/screenshots/messages_success.png)  |  ![error message](docs/screenshots/messages_error.png) |  ![star message](docs/screenshots/messages_star.png)
+
+
+### Shop
+
+- The main shop page features a grid of up to 9 items per page, with pagination at the bottom to navigate through pages. Each product card displays the product:
+	- Image
+	- Brand
+	- Name
+	- Average rating & number of ratings
+	- Price
+	- Stock levels 
+- Users can filter products based on their category, subcategory, type or brand
+	- On desktop this filter is fixed on the left of the screen, however on mobile it is hidden off screen and is toggles with a filter button 
+- Alternatively, users can search products with a text search, that will  search through the above filters as well as the product title
+- The user can sort items based on
+	- Most expensive
+	- Least Expensive
+	- Most recent items
+	- Highest rated
+- Using the sorting functionality will not undo any existing filter applied on the products shown
+- Users can add a single item to the cart from the main shop view, or click into the product page for more actions
+
+### Product Page
+
+#### Product Info
+- Product page features all the information from the cards in the shop page as well as two additional features:
+	- A detailed item description 
+	- A quantitiy selector, to add multiple items to the cart
+
+#### Review Section
+- Users can give items a star rating by using the star selector
+- Additionally users can leave a written review for a product
+	- Reviews are linked to ratings, so if a user has already rated an item then the review form is pre-populated with the previous rating
+- If a user has left a review previously then the 'write a review' button is hidden (as a user has no need to write two reviews) and is instead replaced by dual 'edit review' and 'delete review' buttons
+	- Deleting a written review will also delete the associated rating
+
+### Cart
+
+- Cart will display a message to the user if empty and prompt them to return to the store to view available items
+
+#### Cart Items
+- Cart will display each item in the cart (with multiple of the same item being grouped into one card). The information shown on each cart item card is:
+	- Product image
+	- Product title
+	- Quantity selected
+	- Total price of item cost * quantity selected
+
+- User can also update the quantity from within the cart item card and the price will update accordingly
+	- If user sets the quantity to 0, the item will be removed from the cart
+	- Alternatively, the user can use the 'Remove Item'
+
+#### Cart Summary
+- Summary will display whether User qualifies for free delivery based on cost of cart items (currently set at €250)
+	- If user does not qualify for free delivery, it will display how much more needs to be spent
+	- Otherwise, delivery is calculated at 12.5% of item cost
+- Cart will display whether all the items in the cart are currently in stock
+	- If a user has previously added an item to the cart and returns later to buy it, but the quantity selected no longer exists in the store, this will display an error message and will also disable the button to proceed to checkout, to prevent errors on purchase
+Free Delivery & In Stock            |  No Free Delivery & Out of stock
+:-------------------------:|:-------------------------:
+![](docs/screenshots/cart_summary_pass.png)  |  ![](docs/screenshots/cart_summary_fail.png)
+
+### Checkout
+
+- Checkout screen consists of an order summary and delivery information form
+
+- Delivery name is prepopulated by User details
+	- If a user has a saved default address, form is also prepopulated with this
+	- If a user is entering an address for the first time, or has changed their address, an option to save address as default is presented within the form
+	
+- The checkout app uses the Stripe API to manage payments
+
+- On loading the checkout screen, a Stripe payment intent is created. The [Stripe payment intent API](https://stripe.com/docs/payments/payment-intents):
+
+> tracks a payment from creation through checkout, and triggers additional authentication steps when required. Some of the advantages of using the Payment Intents API include:
+  - Automatic authentication handling
+  - No double charges
+  - No idempotency key issues
+  - Support for Strong Customer Authentication (SCA) and similar regulatory changes
+
+- A webhook is also implemented within the checkout app, so that the order is successfully processed in case the checkout process gets interrupted; for example - if the user closes the browser window early, or there is an interruption to their internet connection.
+
+- If there are any exceptions in the payment Http request, an error will display stating that *"Sorry, your payment cannot be processes right now. Please try again later"*
+
+#### Checkout Success
+
+- On completion of an order, the user is presented with a screen again summarising their order and displaying their order confirmation number
+- A HTML email is also sent to the user with full details of their order
+Order Confirmation Email            |
+:-------------------------:|
+![](docs/screenshots/order_email.png)  |
+
+### Account
+
+#### Login / Register
+
+- Login and Register pages each have full form validation with user notified of any errors
+- Both pages have a link navigating to each other
+- If a User has been redirected to the login page due to a view requiring them to be logged in, they are then redirected back to the **'next'** page they were attempting to access after a successful login
+	- If a user enters incorrect details, or navigates to the register page via the login page instead, this **'next'** page is carried along with the request, and they are still redirected back to the appropriate page successful login/registration
+- If a User signs up that previously only existed as a Newsletter Subscriber, the NewsLetterSub object is deleted upon creating the new Account object 
+
+> **Note:** For this project I chose to log users in immediately after registration rather than requiring email validation. This is because it is a test/portfolio project, and my aim is to maximise user engagement and make it is as easy as possible for users to quickly test the full flow of the website
+
+#### Account Details
+
+- Account details page is a quick page to view and edit all associated account information.
+	- First Name
+	- Last Name
+	- Email
+	- Whether User is Subscribed to the Newsletter
+- There is also a separate display where user can add/edit their default address
+
+#### Account Details
+
+- Users can see a complete list of all orders associated with their account. the information shown is:
+	- Order date
+	- Order Number
+	- Total Cost
+	- Order Items
+	- Image of the most expensive purchase in the order 
+
+#### Password Reset
+
+- Password Rest screen is accessible for both authenticated and anonymous users
+- The password reset functionality comes directly from [django.contrib.auth](https://docs.djangoproject.com/en/3.2/ref/contrib/auth/) and consists of 4 stages, each with their own corresponding template
+	1. Password Reset form, where user enters their email
+	2. Confirmation that email has been sent
+	3. Form to select a new password, once users have followed the link sent to them via email
+	4. Confirmation that their password has been changed 
+
+Password Reset Email           |
+:-------------------------:|
+![](docs/screenshots/password_reset_email.png)  |
+
+#### Contact Us
+
+- As with other forms in the website, if a user is logged in then the form is prepopulated with the user information 
+- Users can send a simple email to the site admin, which will display:
+	- User's name
+	- User's return email address
+	- Email subject
+	- Message body
