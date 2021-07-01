@@ -500,6 +500,7 @@ Admin Types Object Example           |
 	- **404**: *"Sorry, we couldn't find that page!"*
 	- **500**: *"Sorry, there is an issue with our servers - Please try again soon!"*
 - The custom error pages match the home page in design, except on mobile browsers they take up the full viewport height of the page
+
 404 Error Page           |
 :-------------------------:|
 ![](docs/screenshots/404_error_page.png)  |
