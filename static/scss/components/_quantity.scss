@@ -2,9 +2,11 @@
     width: 5rem;
     vertical-align: top;
     text-align: center;
-    padding-left: 1.4rem;
     outline: none;
     font-size: 1.5rem;
+    @include respond(lg) {
+      padding-left: 1.4rem;
+    }
   }
   .input-number,
   .input-number-decrement,

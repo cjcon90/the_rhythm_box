@@ -29,12 +29,12 @@
 
 
 @keyframes toast-fade-in {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 2rem; opacity: 1;}
+    from {transform: translateY(100%); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
 }
 
 
 @keyframes toast-fade-out {
-    from {bottom: 2rem; opacity: 1;}
-    to {bottom: 5rem; opacity: 0;}
+    from {transform: translateY(0); opacity: 1;}
+    to {transform: translateY(-100%); opacity: 0;}
 }

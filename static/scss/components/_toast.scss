@@ -12,6 +12,13 @@
     display: flex;
     animation: toast-fade-in 0.5s, toast-fade-out 0.5s 3s forwards;
 
+    @include respond(md) {
+        bottom: 5rem;
+    }
+    @include respond(lg) {
+        bottom: 10rem;
+    }
+
     &__info{
         min-width: 5rem;
         min-height: 100%;
@@ -19,6 +26,9 @@
         font-size: 2rem;
         display: grid;
         place-items: center;
+        @include respond(md) {
+            font-size: 2.5rem; 
+        }
     }
 
     &-star {
@@ -43,6 +53,9 @@
         letter-spacing: 1px;
         overflow: hidden;
         text-align-last: center;
+        @include respond(md) {
+            font-size: 2.25rem; 
+        }
     }
 }
 
