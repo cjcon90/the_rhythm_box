@@ -89,6 +89,12 @@ Purchases can be made with the Stripe test credit card:
 	+ to get a record/confirmation of a successful purchase
 	+ for purchases to be completed securely
 	+ be able to contact the website owners when necessary
+* The website owner would like:
+	+ To be able to add new stock or update existing stock easily
+	+ users to be able to easily recover their account if they have lost their login details
+	+ for the website to appear clean, professional and high quality
+	+ for the website to work on all viewports, so customers can shop from any device
+	+ for the payment system to be secure and free of errors, such as orders going through without payment or payments being taken multiple times
 
 ### Wireframes
 
