@@ -29,7 +29,7 @@
                             <div class="cart-item__quantity--select number-select">
                                 <p class="cart-item__quantity--stock bold">Quantity:</p>
                                 <span class="input-number-decrement">–</span>
-                                <input class="input-number" type="text" name="quantity" value="{{ cart_item.quantity }}"
+                                <input class="input-number" type="number" name="quantity" value="{{ cart_item.quantity }}"
                                 max={% if cart_item.product.stock == 0 %}"{{ cart_item.quantity }}"{% else %}"{{ cart_item.product.stock }}"{% endif %}>
                                 <span class="input-number-increment">+</span>
                             </div>

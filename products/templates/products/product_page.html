@@ -32,7 +32,7 @@
             {% csrf_token %}
             <div class="product-info__nums--quantity number-select">
                 <span class="input-number-decrement">–</span>
-                <input class="input-number" type="text" name="quantity" value="1" max="{{product.stock}}">
+                <input class="input-number" type="number" name="quantity" value="1" max="{{product.stock}}">
                 <span class="input-number-increment">+</span>
             </div>
 
