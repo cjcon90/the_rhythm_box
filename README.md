@@ -52,7 +52,7 @@ Desktop and mobile wireframes were designed in Figma, with tablet and mid-sized 
 
 [PDF Wireframes](docs/wireframes.pdf)
 
-#### Changes from wireframes
+#### Changes from Wireframes
 
 While the designs of the final website followed the original Figma designs extremely closely, there are a few small changes.
 
@@ -244,7 +244,9 @@ As opposed to these two websites however, I wanted a more striking, large hero i
 
 To help create an exciting and engaging landing page and site elements, I chose a bright, brilliant primary colour to help achieve this:
 
-![color palette](docs/color_palette.png)
+Color Palette           |
+:-------------------------:|
+![](docs/color_palette.png)  |
 
 As the background of the website is white throughout, shades of grey were achieved via opacity modificiations on the primary black color
 
@@ -261,7 +263,9 @@ For the main RhythmBox logo, I purchased an SVG set from [MAKStudion on Etsy](ht
 
 I then customised the SVG in [Canva](https://www.canva.com/), adding the TRB text to the original drumstick image and colored it in the website's primary yellow colour.
 
-![Custom RhythmBox Logo](https://res.cloudinary.com/cjcon90/image/upload/v1621514847/codeinstitute/the_rhythm_box/logo.webp)
+Custom RhythmBox Logo           |
+:-------------------------:|
+![](https://res.cloudinary.com/cjcon90/image/upload/v1621514847/codeinstitute/the_rhythm_box/logo.webp)  |
 
 ### Icons
 
@@ -300,7 +304,10 @@ Other images used on the landing page were sourced from:
 	- `SHOP` - `REGISTER` - `LOGIN` - `CONTACT US`
 - Navigation links are compressed into a hamburger menu on mobile and tablet devices so that the main focus of the user is the shopping cart in the top right corner at all times
 - On pressing the hamburger button, a full page menu appears to the user with a visually pleasing animation:
-![navigation menu gif](docs/screenshots/navigation.gif)
+
+Navbar Mobile Animation           |
+:-------------------------:|
+![navigation menu gif](docs/screenshots/navigation.gif)  |
 
 #### Footer
 
@@ -375,9 +382,10 @@ Success            |  Error |  Star
 	- Otherwise, delivery is calculated at 12.5% of item cost
 - Cart will display whether all the items in the cart are currently in stock
 	- If a user has previously added an item to the cart and returns later to buy it, but the quantity selected no longer exists in the store, this will display an error message and will also disable the button to proceed to checkout, to prevent errors on purchase
-Free Delivery & In Stock            |  No Free Delivery & Out of stock
-:-------------------------:|:-------------------------:
-![](docs/screenshots/cart_summary_pass.png)  |  ![](docs/screenshots/cart_summary_fail.png)
+
+Free Delivery & In Stock | No Free Delivery & Out of stock
+--- | ---
+![](docs/screenshots/cart_summary_pass.png) | ![](docs/screenshots/cart_summary_fail.png)
 
 ### Checkout
 
@@ -405,7 +413,8 @@ Free Delivery & In Stock            |  No Free Delivery & Out of stock
 
 - On completion of an order, the user is presented with a screen again summarising their order and displaying their order confirmation number
 - A HTML email is also sent to the user with full details of their order
-Order Confirmation Email            |
+
+Order Confirmation Email           |
 :-------------------------:|
 ![](docs/screenshots/order_email.png)  |
 
@@ -460,3 +469,146 @@ Password Reset Email           |
 	- User's return email address
 	- Email subject
 	- Message body
+
+### Admin
+
+- All tasks in terms of adding / editing / deleting objects is done through the admin panel
+- Each model has search fields and ordering, where appropriate. For example, `Type` objects have their own ordering set, but are also grouped by their parent subcategory when displayed in the admin, which the themselves are grouped by *their* parent category ordering:
+
+Admin Types Object Example           |
+:-------------------------:|
+![](docs/screenshots/admin_types.png)  |
+
+#### Product Upload and Editing
+
+- On uploading a new product, certain fields are readonly - as these are automatically generated, such as:
+	- Slug
+	- Thumbnail
+	- Date Added
+- Image thumbnails are created using the [pillow](https://pillow.readthedocs.io/en/stable/#) library and the [BytesIO](https://docs.python.org/3/library/io.html#io.BytesIO) method from the io library.
+	- To help with this tool I followed this [CodeWithStein tutorial on the freeCodeCamp YouTube channel](https://www.youtube.com/watch?v=Yg5zkd9nm6w) 
+- To reduce new images needing to be processed by the server and saved to AWS, I created a custom save() method, which only creates a new thumbnail if it is:
+	1. A new Product
+	2. The product image has been changed
+- the 3rd party package [django_cleanup](https://pypi.org/project/django-cleanup/) then deletes any unused images from the media folder automatically
+
+### Custom Error Pages
+
+- The website has custom error pages for the following errors with the corresponding error messages:
+	- **400**: *"Your browser sent a request the server couldn't understand. Please contact us for assistance."*
+	- **403**: *"Sorry, you don't have permission to access this page."*
+	- **404**: *"Sorry, we couldn't find that page!"*
+	- **500**: *"Sorry, there is an issue with our servers - Please try again soon!"*
+- The custom error pages match the home page in design, except on mobile browsers they take up the full viewport height of the page
+404 Error Page           |
+:-------------------------:|
+![](docs/screenshots/404_error_page.png)  |
+
+### Features Left to Implement
+
+- As noted in [Changes from Wireframes](#changes-from-wireframes), a number of more advances of complex features were left out to achieve a minimum viable product, which could be added in at a later date - namely:
+	- Sorting and filtering reviews on products and rating product reviews on 'helpfulness'
+	- Navigation breadcrumbs on the desktop version of the site
+	- Saving and storing payment information (could also be extended to multiple addresses)
+	- A multi-select filter to search within multiple categories/subcategories at once
+- I would also like to add the ability to keep items in the cart after logging out or (if a user is authenticated) maintain cart items across browsers, or after clearing the browser cache. 
+- For a real project with real purchases, I would also enable email verification so that orders were always linked to the currect email account
+
+## Technologies used.
+
+### Main Technologies
+1. [HTML](https://en.wikipedia.org/wiki/HTML) - for creating the layout and the structure of the website
+1. [Sass](https://sass-lang.com/) - A CSS pre-processor used for creating and compiling minified, prefixed and organised CSS
+1. [JavaScript](https://en.wikipedia.org/wiki/JavaScript) - for frontend interactivity
+1. [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) - for backed logic and structure
+1. [Jinja](https://jinja.palletsprojects.com/en/2.11.x/) - for displaying backend information in frontend
+1. [Django](https://www.djangoproject.com/) - high-level Python web framework
+1. [Heroku](https://www.heroku.com/) - cloud platform where the web app is deployed
+1. [SQLite](https://www.sqlite.org/index.html) - default Django's database used in development
+1. [PostgreSQL](https://www.postgresql.org/) - production database through Heroku
+1. [AWS S3](https://aws.amazon.com/) - for hosting media and static files on cloud
+1. [Git](https://git-scm.com/) - for version control
+1. [Stripe](https://stripe.com/en-gb-de) - for managing (test) transactions
+
+### Other tools
+
+1. [VSCode](https://code.visualstudio.com/) - for writing, editing and live previewing the code
+1. [GitHub](https://github.com/) - for hosting the project's repository
+1. [Google Fonts](https://fonts.google.com/) - for selecting the fonts
+1. [Figma](https://www.figma.com/) - for creating wireframes
+1. [Canva](https://www.canva.com/) - for creating the site logo
+1. [Favicon](https://favicon.io/) - for creating browser tab icon
+
+### IDE (VSCode) Extensions
+
+1. [Django](https://marketplace.visualstudio.com/items?itemName=batisteo.vscode-django) - for quickly writing django/jinja template language
+1. [Live Sass Compiler](https://marketplace.visualstudio.com/items?itemName=glenn2223.live-sass) - for automatically compiling SCSS code into CSS on save
+1. [Black](https://github.com/psf/black) - while not a VSCode extension, I after installing Black via `pip`, I set Black as the default Python code formatter within my VSCode settings, in order to write readable code that followed PEP 8 guidelines
+
+## Testing
+
+**[Please see TESTING.md](TESTING.md)**
+
+## Deployment
+
+- All instructions regarding deployment are following process of deploying application on Linux. Some commands, particularly relating to Python or Pip will likely have some differences on MacOS / Windows. As always, look into the documentation for each program/environment mentioned if any uncertainty or issues.
+## Local
+Instructions to run the project on your local device
+
+### Pre-requisites
+- [Python 3](https://www.python.org/downloads/) - used to write the code and to run the project
+- [PIP](https://pypi.org/project/pip/) - used to install packages
+- [Git](https://git-scm.com/downloads) - used for version control
+- [Visual Studio Code](https://code.visualstudio.com/) or any IDE of your choice - used to compile the code.
+- [Stripe](https://stripe.com/en-ie) Account
+
+### Recommended
+- A virtual environment of your choice - used to contain all installations and packages and prevents clashing projects that might use the same package but different versions. Python 3 has a built-in virtual environment [venv](https://docs.python.org/3/tutorial/venv.html). This can be initialised using the command:
+
+		python3 -m venv .venv
+
+where `venv` is the name/path you are giving to the virtual environment
+
+### Steps
+1. Go to the project [repository](https://github.com/cjcon90/the_rhythm_box)
+1. Get the files used by using ***one*** of the methods below:
+    i. Clone the repository by running the following command from your terminal: 
+		git clone git@github.com:cjcon90/the_rhythm_box.git
+	ii. Download the files used by clicking the 'Code' button located in the top section of the repository. Then select 'Download ZIP' and unzip the files in the directory of your choice.
+
+    Github Zip Download           |
+    :-------------------------:|
+    ![](docs/screenshots/github_zip_download.png)  |
+
+1. Within your IDE/Terminal, navigate to the project directory where you located downloaded files/cloned the repo using (where `path/to/` is the files structure leading to the project folder)
+
+		cd path/to/the_rhythm_box
+
+1. Activate your virtual environment. If using Python's venv:
+
+		source venv/bin/activate
+
+1. Install all reqauirements from [requirements.txt](requrements.txt) file
+
+		pip install -r requirements.txt
+
+1. Create a file `env.py` to store environment variables
+1. Add environment variable in the format as shown below and also demonstrated in the [sample_env.py](sample_env.py) file
+
+		os.environ.setdefault('SECRET_KEY', '<your-key>')
+		os.environ.setdefault('DEVELOPMENT', '1')
+		os.environ.setdefault('EMAIL_USER', '<your-key>')
+		os.environ.setdefault('EMAIL_PASS', '<your-key>')
+		os.environ.setdefault('STRIPE_PUBLIC_KEY', '<your-key>')
+		os.environ.setdefault('STRIPE_SECRET_KEY', '<your-key>')
+		os.environ.setdefault('STRIPE_WH_SECRET', '<your-key>')
+
+	- `SECRET_KEY` value is a key of your choice, to ensure appropriate seccurity measures, this can be generated using [Django Secret Key Generator](https://miniwebtool.com/django-secret-key-generator/)
+	- `DEVELOPMENT` is set to `1` and is used in settings.py logic to ensure file is dynamic between local and remote setups
+	- `EMAIL_USER` and `EMAIL_PASS` are used to send emails from the site admin email profile
+	- `STRIPE_PUBLIC_KEY`, `STRIPE_SECRET_KEY` and `STRIPE_WH_SECRET` values are obtained from the [Stripe](https://stripe.com/en-ie) website
+1. Run the application
+
+        python3 manage.py runserver
+
+1. Website should be accessible on either `http://127.0.0.1:8000` or `http://localhost:8000`
