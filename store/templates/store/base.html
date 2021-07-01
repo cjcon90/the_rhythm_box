@@ -131,9 +131,9 @@
                 <div class="navigate__sections">
                 {% for category in categories %}
                     <div class="navigate__section">
-                        <a href="{% url 'shop' category=category.slug %}" class="navigate__section--heading regular">{{ category.title|cut:' Drums' }}</a>
+                        <a href="{% url 'shop' category.slug %}" class="navigate__section--heading regular">{{ category.title|cut:' Drums' }}</a>
                         {% for subcategory in category.subcategories.all %}
-                        <a href="{% url 'shop' %} subcategory=subcategory.slug" class="navigate__section--text regular">
+                        <a href="{% url 'shop' category.slug subcategory.slug %}" class="navigate__section--text regular">
                             {{ subcategory }}<i class="fas fa-chevron-right"></i>
                         </a>
                         {% endfor %}
