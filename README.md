@@ -278,3 +278,26 @@ Other images used on the landing page were sourced from:
 * [Ryan Bruce at Burst](https://burst.shopify.com/photos/ride-cymbal-overhead) - Cymbals Category image
 * [Samuel Woods at Unsplash](https://unsplash.com/photos/I6lGrfTB1eU) - Accessories Category image
 
+
+
+## Features
+
+### Main / Shop
+
+#### Landing Page
+
+- There are clear visible links on the the landing page to the main shop, both in the navigation bar and link within the hero image
+- Users can also quickly search within specific categories via the navigation bar or via scrolling through homepage and selecting category of choice
+
+#### Navbar
+
+- The navigation bar is always present at the top of the page so users can access key navigation links no matter where they are on the page
+- The RhythmBox logo is visible in the navbar at all times, and serves as a link back to the home page
+- 
+- If user is logged in, navigation links display:
+	- `SHOP` - `ACCOUNT` - `CONTACT US` - `LOGOUT`
+- If user is not logged in, navigation links display:
+	- `SHOP` - `REGISTER` - `LOGIN` - `CONTACT US`
+- Navigation links are compressed into a hamburger menu on mobile and tablet devices so that the main focus of the user is the shopping cart in the top right corner at all times
+- On pressing the hamburger button, a full page menu appears to the user with a visually pleasing animation:
+  ![navigation menu gif](docs/screenshots/navigation.gif)
