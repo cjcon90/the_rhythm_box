@@ -552,7 +552,8 @@ Admin Types Object Example           |
 
 ## Deployment
 
-- All instructions regarding deployment are following process of deploying application on Linux. Some commands, particularly relating to Python or Pip will likely have some differences on MacOS / Windows. As always, look into the documentation for each program/environment mentioned if any uncertainty or issues.
+- All instructions regarding deployment are following process of deploying application on Linux. Some commands, particularly relating to Python or Pip will likely have some differences on MacOS / Windows (such as requiring `python3` or `pip3` while inside your virtual environment, as opposed to just `python` or `pip`)
+- As always, look into the documentation for each program/environment mentioned if any uncertainty or issues.
 ## Local
 Instructions to run the project on your local device
 
@@ -574,12 +575,10 @@ where `venv` is the name/path you are giving to the virtual environment
 1. Go to the project [repository](https://github.com/cjcon90/the_rhythm_box)
 1. Get the files used by using ***one*** of the methods below:
     i. Clone the repository by running the following command from your terminal: 
-		git clone git@github.com:cjcon90/the_rhythm_box.git
-	ii. Download the files used by clicking the 'Code' button located in the top section of the repository. Then select 'Download ZIP' and unzip the files in the directory of your choice.
 
-    Github Zip Download           |
-    :-------------------------:|
-    ![](docs/screenshots/github_zip_download.png)  |
+		git clone git@github.com:cjcon90/the_rhythm_box.git
+
+	ii. Download the files used by clicking the 'Code' button located in the top section of the repository. Then select 'Download ZIP' and unzip the files in the directory of your choice.
 
 1. Within your IDE/Terminal, navigate to the project directory where you located downloaded files/cloned the repo using (where `path/to/` is the files structure leading to the project folder)
 
@@ -593,16 +592,19 @@ where `venv` is the name/path you are giving to the virtual environment
 
 		pip install -r requirements.txt
 
+1. Migrate the models to create a database
+		python manage.py makemigrations
+		python manage.py migrate
 1. Create a file `env.py` to store environment variables
-1. Add environment variable in the format as shown below and also demonstrated in the [sample_env.py](sample_env.py) file
+1. Add environment variable in the format as shown below
 
-		os.environ.setdefault('SECRET_KEY', '<your-key>')
-		os.environ.setdefault('DEVELOPMENT', '1')
-		os.environ.setdefault('EMAIL_USER', '<your-key>')
-		os.environ.setdefault('EMAIL_PASS', '<your-key>')
-		os.environ.setdefault('STRIPE_PUBLIC_KEY', '<your-key>')
-		os.environ.setdefault('STRIPE_SECRET_KEY', '<your-key>')
-		os.environ.setdefault('STRIPE_WH_SECRET', '<your-key>')
+		SECRET_KEY=<your-key>
+		DEVELOPMENT=1
+		STRIPE_PUBLIC_KEY=<your-key>
+		STRIPE_SECRET_KEY=<your-key>
+		STRIPE_WH_SECRET=<your-key>
+		EMAIL_USER=<your-email>
+		EMAIL_PASS=<your-email-password>
 
 	- `SECRET_KEY` value is a key of your choice, to ensure appropriate seccurity measures, this can be generated using [Django Secret Key Generator](https://miniwebtool.com/django-secret-key-generator/)
 	- `DEVELOPMENT` is set to `1` and is used in settings.py logic to ensure file is dynamic between local and remote setups
@@ -610,6 +612,121 @@ where `venv` is the name/path you are giving to the virtual environment
 	- `STRIPE_PUBLIC_KEY`, `STRIPE_SECRET_KEY` and `STRIPE_WH_SECRET` values are obtained from the [Stripe](https://stripe.com/en-ie) website
 1. Run the application
 
-        python3 manage.py runserver
+        python manage.py runserver
 
 1. Website should be accessible on either `http://127.0.0.1:8000` or `http://localhost:8000`
+
+### Heroku Deployment
+
+1. Create a `requirements.txt` file by pasting the following command into the terminal:
+
+		pip freeze > requirements.txt
+
+1. Create a `Procfile`  in the root directory and add the following code into it:
+
+		web: gunicorn rhythmbox.wsgi:application
+
+1. Push the code to GitHub by adding in the terminal:
+
+		git add -A
+		git commit -m "<commit message>"
+		git push
+
+1. Within Heroku, click on 'New' > 'Create new app' - give it a unique name and select the region closest to you
+
+1. Set Heroku Postgres by going  to 'Resources' tab, search for 'Heroku Postgres' and select the 'Hobby Dev' free plan
+
+1. Set config variables in Heroku
+
+    | **Key**   | **Value**   |
+    | --------- | ----------- |
+    | AWS_ACCESS_KEY_ID | < your AWS access key ID > |
+    | AWS_SECRET_ACCESS_KEY | < your AWS secret access key > |
+    | DATABASE_URL | < your postgres database URL > |
+    | EMAIL_HOST_PASS | < 16-character password from Gmail > |
+    | EMAIL_HOST_USER | < your Gmail > |
+    | SECRET_KEY | < your secret key > |
+    | STRIPE_PUBLIC_KEY | < your stripe public key > |
+    | STRIPE_SECRET_KEY | < your stripe secret key > |
+    | STRIPE_WH_SECRET | < your stripe webhook key > |
+    | USE_AWS | True |
+
+1. Set up new database by
+	- adding `import dj_database_url` within your `settings.py`:
+	- locate `DATABASES` constant variable replace with following code:
+
+
+```python
+	if "DATABASE_URL" in os.environ:
+DATABASES = {"default": dj_database_url.parse(os.environ["DATABASE_URL"])}
+	else:
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+```
+
+
+8. Backup current SQLite database by typing in the terminal:
+
+		./manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
+
+1. Migrate the models to Postgres database
+
+		python manage.py makemigrations
+		python manage.py migrate
+
+1. Then use this command to load your data from the db.json file into postgres:
+
+		./manage.py loaddata db.json
+
+1. Create a superuser (user with admin rights)
+
+		`python manage.py createsuperuser`
+
+	- enter an e-mail, username and password for the superuser
+
+1. Add the hostname of Heroku app to allowed ALLOWED_HOSTS in `settings.py`:
+
+		ALLOWED_HOSTS = ['<your Heroku app URL>', 'localhost]
+
+1. Push the code to GitHub
+
+		git add -A
+		git commit -m "<commit message>"
+		git push
+
+1. Push the code to Heroku
+
+		git push heroku main
+
+1. Your site should be visible at your chosen Heroku URL
+
+
+## Credits
+
+Any code examples listed below were adapted by me to fit seamlessly into the existing codebase, particularly the CSS examples which had to fit into my existing Sass setup, with consistent sizing and variables
+
+### Code
+- [Nulldev on GitHub](https://gist.github.com/NullDev/464b08135138f1c1a135053a898b1a79) for their star rating display example code
+- [Andrea Crawford on Codepen](https://codepen.io/andreacrawford/pen/NvqJXW) for their star rating system code
+- [CodingWithMitch on YouTube](https://www.youtube.com/watch?v=eCeRC7E8Z7Y) for their tutorial on creating a custom user model code
+- [Jesse Couch on CodePen] (https://codepen.io/designcouch/pen/Atyop) for their Hamburger menu button with transition code
+- [Peter Stoyanov on CodePen](https://codepen.io/petsto/pen/mwwGwK) for their automatically indented Sass nested lists code
+- [Before Semicolon on CodePen](https://codepen.io/beforesemicolon/pen/MWyyvPX) for their custom radio button code
+- [Juro Jurinovic on CodePen](https://codepen.io/dj_jaro/pen/rmdEMQ) for their custom checkbox code
+- [mpaf on StackOverflow](https://stackoverflow.com/a/16609591) for their `url_replace` tag code
+- [Nakul Narayanan on StackOverflow](https://stackoverflow.com/a/55369752) for their code on overriding the default Django authentication forms
+
+### Tutorials
+- [The Corey Schafer Django Tutorial](https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p)
+- [CodingWithMitch](https://www.youtube.com/playlist?list=PLgCYzUzKIBE_dil025VAJnDjNZHHHR9mW)
+- [CodeWithStein / freeCodeCamp](https://www.youtube.com/watch?v=Yg5zkd9nm6w)
+- The CodeInstitute Boutique Ado video tutorials
+
+### Acknowledgements
+- Everyone in the Slack channel who took the time to test and provide excellent feedback on their experience using the app
+- My mentor, Maranatha, for his help and encouragement throughout my course experience
+- Friends and family for every kind of support they gave along my coding journey
