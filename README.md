@@ -20,6 +20,52 @@ Purchases can be made with the Stripe test credit card:
 
 ## Table of Contents
 
+- [The RhythmBox - E-Commerce Web App for Professional Drums, Cymbals and Drumming Equipment](#the-rhythmbox---e-commerce-web-app-for-professional-drums--cymbals-and-drumming-equipment)
+  * [Table of Contents](#table-of-contents)
+  * [User Experience](#user-experience)
+    + [User Stories](#user-stories)
+    + [Wireframes](#wireframes)
+  * [Information Architecture](#information-architecture)
+    + [Data Models](#data-models)
+      - [User Model](#user-model)
+      - [Accounts App](#accounts-app)
+      - [Products App](#products-app)
+      - [Checkout App](#checkout-app)
+  * [Design](#design)
+    + [Color Scheme](#color-scheme)
+    + [Typography](#typography)
+    + [Logo](#logo)
+    + [Icons](#icons)
+    + [Images](#images)
+  * [Features](#features)
+    + [Main](#main)
+    + [Shop](#shop)
+    + [Product Page](#product-page)
+    + [Cart](#cart)
+    + [Checkout](#checkout)
+    + [Account](#account)
+    + [Admin](#admin)
+    + [Custom Error Pages](#custom-error-pages)
+    + [Features Left to Implement](#features-left-to-implement)
+  * [Technologies used.](#technologies-used)
+    + [Main Technologies](#main-technologies)
+    + [Other tools](#other-tools)
+    + [IDE (VSCode) Extensions](#ide--vscode--extensions)
+  * [Testing](#testing)
+  * [Deployment](#deployment)
+  * [Local](#local)
+    + [Pre-requisites](#pre-requisites)
+    + [Recommended](#recommended)
+    + [Steps](#steps)
+    + [Heroku Deployment](#heroku-deployment)
+  * [Credits](#credits)
+    + [Code](#code)
+    + [Tutorials](#tutorials)
+    + [Acknowledgements](#acknowledgements)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 ## User Experience
 
 ### User Stories
@@ -196,6 +242,7 @@ A custom user manager is defined as per [the Django documentation](https://docs.
 | Content | content | TextField | max_length=500 |
 | Date Added | date_added | DateTimeField | auto_now_add=True |
 
+#### Checkout App
 
 ##### `Order` model
 
@@ -713,7 +760,7 @@ Any code examples listed below were adapted by me to fit seamlessly into the exi
 - [Nulldev on GitHub](https://gist.github.com/NullDev/464b08135138f1c1a135053a898b1a79) for their star rating display example code
 - [Andrea Crawford on Codepen](https://codepen.io/andreacrawford/pen/NvqJXW) for their star rating system code
 - [CodingWithMitch on YouTube](https://www.youtube.com/watch?v=eCeRC7E8Z7Y) for their tutorial on creating a custom user model code
-- [Jesse Couch on CodePen] (https://codepen.io/designcouch/pen/Atyop) for their Hamburger menu button with transition code
+- [Jesse Couch on CodePen](https://codepen.io/designcouch/pen/Atyop) for their Hamburger menu button with transition code
 - [Peter Stoyanov on CodePen](https://codepen.io/petsto/pen/mwwGwK) for their automatically indented Sass nested lists code
 - [Before Semicolon on CodePen](https://codepen.io/beforesemicolon/pen/MWyyvPX) for their custom radio button code
 - [Juro Jurinovic on CodePen](https://codepen.io/dj_jaro/pen/rmdEMQ) for their custom checkbox code
