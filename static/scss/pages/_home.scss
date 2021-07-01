@@ -59,7 +59,10 @@
       }
 
       &--error {
-        max-width: 60%;
+        max-width: 80%;
+        @include respond(lg) {
+          max-width: 60%;
+        }
       }
     }
   }
