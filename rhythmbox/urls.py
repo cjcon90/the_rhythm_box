@@ -18,7 +18,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404, handler500, handler403, handler400
+from django.views.generic.base import TemplateView
 from errors import views as error_views
+
 
 handler400 = error_views.error_400
 handler403 = error_views.error_403
@@ -32,6 +34,11 @@ urlpatterns = [
     path("", include("accounts.urls")),
     path("", include("cart.urls")),
     path("", include("checkout.urls")),
+    path(
+        "robots.txt",
+        TemplateView.as_view(template_name="store/robots.txt",
+        content_type="text/plain"),
+    ),
 ]
 
 
