@@ -453,10 +453,10 @@ Free Delivery & In Stock | No Free Delivery & Out of stock
 - On loading the checkout screen, a Stripe payment intent is created. The [Stripe payment intent API](https://stripe.com/docs/payments/payment-intents):
 
 > tracks a payment from creation through checkout, and triggers additional authentication steps when required. Some of the advantages of using the Payment Intents API include:
-  - Automatic authentication handling
-  - No double charges
-  - No idempotency key issues
-  - Support for Strong Customer Authentication (SCA) and similar regulatory changes
+>	- Automatic authentication handling
+>	- No double charges
+>	- No idempotency key issues
+>	- Support for Strong Customer Authentication (SCA) and similar regulatory changes
 
 - A webhook is also implemented within the checkout app, so that the order is successfully processed in case the checkout process gets interrupted; for example - if the user closes the browser window early, or there is an interruption to their internet connection.
 
@@ -567,6 +567,7 @@ Admin Types Object Example           |
 	- A multi-select filter to search within multiple categories/subcategories at once
 - I would also like to add the ability to keep items in the cart after logging out or (if a user is authenticated) maintain cart items across browsers, or after clearing the browser cache. 
 - For a real project with real purchases, I would also enable email verification so that orders were always linked to the currect email account
+- The navbar currently only shows the main categories on hover, however it could be extended to show subcategories and types horizontally when hovering over categories
 
 ## Technologies used.
 

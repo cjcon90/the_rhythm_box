@@ -47,4 +47,16 @@
       box-shadow: inset 0 0 0.5rem $color-black;
     }
   }
+  &--warning {
+    &:link,
+    &:visited {
+      color: $color-warning-dark;
+      border-color: $color-warning-dark;
+    }
+    &:hover,
+    &:focus {
+      background-color: $color-warning-dark;
+      color: white;
+    }
+  }
 }

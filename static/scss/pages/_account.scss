@@ -71,7 +71,7 @@
       }
     }
 
-    &--edit {
+    &--btn {
       font-size: 1.6rem;
       display: block;
       margin: 2rem auto;
@@ -105,6 +105,11 @@
   &__text {
     font-size: 2rem;
     color: $color-black;
+    &--delete {
+      letter-spacing: .1rem;
+      font-size: 2.5rem;
+      margin-bottom: -2rem;
+    }
   }
   &__btn {
     font-size: 2rem;

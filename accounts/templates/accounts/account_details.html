@@ -38,7 +38,16 @@
                     </td>
                 </tr>
             </table>
-            <a href="{% url 'edit_account_details' %}" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Account Details</a>
+            <a href="{% url 'edit_account_details' %}"
+            class="account__details--btn btn btn--white regular">
+            <i class="fas fa-pencil-alt"></i> 
+            Edit Account Details
+            </a>
+            <a href="{% url 'delete_account' %}"
+            class="account__details--btn btn btn--warning regular">
+            <i class="fas fa-times"></i> 
+            Delete Account
+            </a>
         </div>
         <div class="account__details--address">
             <h3 class="account__details--heading light upper">Default Address</h3>
@@ -73,10 +82,10 @@
                         <td>{{ request.user.address.phone_number }}</td>
                     </tr>
                 </table>
-            <a href="{% url 'edit_address' %}" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Default Address</a>
+            <a href="{% url 'edit_address' %}" class="account__details--btn btn btn--white regular"><i class="fas fa-pencil-alt"></i> Edit Default Address</a>
             {% else %}
             <p class="account__details--no_address bold"><em>You have no saved addresses!</em></p>
-            <a href="{% url 'add_address' %}" class="account__details--edit btn btn--white regular"><i class="fas fa-pencil-alt"></i> Add Default Address</a>
+            <a href="{% url 'add_address' %}" class="account__details--btn btn btn--white regular"><i class="fas fa-pencil-alt"></i> Add Default Address</a>
             {% endif %}
         </div>
     </div>

@@ -13,6 +13,7 @@ from .forms import (
     RegistrationForm,
     AccountAuthenticationForm,
     EditAccountForm,
+    DeleteAccountForm,
     AddressForm,
     ContactForm,
 )
@@ -42,6 +43,31 @@ def edit_account_details(request):
         form = EditAccountForm(initial=model_to_dict(user))
         context["edit_account_form"] = form
     return render(request, "accounts/edit_account_details.html", context)
+
+@login_required
+def delete_account(request):
+    context = {}
+    if request.POST:
+        form = DeleteAccountForm(request.POST)
+        if form.is_valid():
+            email = request.user.email
+            password = request.POST["password"]
+            user = authenticate(email=email, password=password)
+            if user:
+                user.delete()
+                messages.success(
+                    request, f"Your account has been deleted. Sorry to see you go!"
+                )
+                return redirect('home')
+            else:
+                form.add_error('password', 'Incorrect Password')
+                context["delete_account_form"] = form
+        else:
+                context["delete_account_form"] = form
+    else:
+        form = DeleteAccountForm()
+        context["delete_account_form"] = form
+    return render(request, "accounts/delete_account.html", context)
 
 
 @login_required

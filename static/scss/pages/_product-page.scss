@@ -1,6 +1,7 @@
 .product-info {
   margin: auto;
   border-bottom: 1px solid $color-black-light;
+  max-width: 150rem;
   @include respond(lg) {
     padding: 1rem 3vw;
     display: grid;

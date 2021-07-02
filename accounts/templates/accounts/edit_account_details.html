@@ -7,7 +7,7 @@
 {% block content %} 
     <h2 class="section__heading upper bold">Edit Account</h2>
 
-    <form method="POST" action="#" class="form" novalidate>
+    <form method="POST" action="{% url 'edit_account_details' %}" class="form" novalidate>
         {% csrf_token %}
         {% for field in edit_account_form %}
         <fieldset class="form__group">

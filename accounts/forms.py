@@ -60,6 +60,13 @@ class EditAccountForm(forms.ModelForm):
         model = Account
         fields = ("first_name", "last_name", "email", "newsletter")
 
+class DeleteAccountForm(forms.Form):
+    password = forms.CharField(
+        required=True,
+        label="Password",
+        widget=forms.PasswordInput(attrs={"placeholder": "Please confirm your password"}),
+    )
+
 
 class AddressForm(forms.ModelForm):
     class Meta:
