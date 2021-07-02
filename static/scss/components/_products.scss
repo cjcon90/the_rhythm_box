@@ -14,17 +14,15 @@
   &__images {
     padding: 0 2rem;
     &--product {
-      height: 22.5rem;
+      height: 16rem;
+      padding-top: 1rem;
       width: auto;
       display: block;
       margin: auto;
-      @include respond(lg) {
-        height: 15rem;
-      }
     }
     &--brand {
-      max-height: 4rem;
-      max-width: 12rem;
+      max-height: 3rem;
+      max-width: 10rem;
     }
   }
 
