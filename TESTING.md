@@ -200,6 +200,29 @@ Password Reset Email           |
 + for the payment system to be secure and free of errors, such as orders going through without payment or payments being taken multiple times
 	- [x] No issues have been raised during user testing, and as outlined above - the Stripe API and use of webhooks provides a secure and functional payment process
 
+## Lighthouse
+
+- I conducted Lighthouse audits on the 4 main views (and most content filled) on the site: Home, Shop, Product Page and Cart (with three items in the cart)
+- Performance scores suffered somewhat on mobile
+- Future improvements that could improve performance scores for all platforms would be to serve static files using gzip compression
+
+### Desktop
+
+Home            |  Shop |  Product Page |  Cart
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](docs/lighthouse/home_desktop.png)  |  ![](docs/lighthouse/shop_desktop.png) |  ![](docs/lighthouse/product_page_desktop.png) |  ![](docs/lighthouse/cart_desktop.png)
+97 - 100 - 100 - 100  | 93 - 100 - 100 - 100 | 90 - 100 - 100 - 100 | 91 - 100 - 100 - 100 
+[REPORT](docs/lighthouse/home_desktop.pdf)  |  [REPORT](docs/lighthouse/shop_desktop.pdf) |  [REPORT](docs/lighthouse/product_page_desktop.pdf) |  [REPORT](docs/lighthouse/cart_desktop.pdf)
+
+
+### Mobile
+
+Home            |  Shop |  Product Page |  Cart
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](docs/lighthouse/home_mobile.png)  |  ![](docs/lighthouse/shop_mobile.png) |  ![](docs/lighthouse/product_page_mobile.png) |  ![](docs/lighthouse/cart_mobile.png)
+83 - 100 - 100 - 100  | 81 - 100 - 93 - 100 | 89 - 100 - 100 - 100 | 90 - 100 - 100 - 100
+[REPORT](docs/lighthouse/home_mobile.pdf)  |  [REPORT](docs/lighthouse/shop_mobile.pdf) |  [REPORT](docs/lighthouse/product_page_mobile.pdf) |  [REPORT](docs/lighthouse/cart_mobile.pdf)
+
 ## Validators
 
 ### [HTML5](https://validator.w3.org/)
@@ -288,12 +311,12 @@ and then within a `.jshintrc` file within my scripts folder I set the following 
 | Mobile              | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: |
 | Desktop             | :heavy_check_mark: | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: |
 
-- Website was tested personaly on an Android Google Pixel 4a 5g using Brave, Chrome and Firefox browsers
+- Website was tested personally on an Android Google Pixel 4a 5g using Brave, Chrome and Firefox browsers
 - Website was also tested personally on an Ubuntu 20.04 laptop using Brave, Chrome and Firefox browsers
 - Website was tested on Safari desktop and mobile by friends using iPhone 8 and Macbook 13" 
 - Website was also tested by family on Chrome OS
-- Tablet testing was done extensively using Chrome and Firefox dev tools, although no physical hardware testing could be confirmed
-- Website was not made with any consideration to Internet Explorer compatability
+- Tablet testing was done extensively using Chrome and Firefox Dev tools, although no physical hardware testing could be confirmed
+- Website was not made with any consideration to Internet Explorer compatibility
 
 ## Bugs
 
@@ -343,3 +366,4 @@ When moving my site from local SQLite development to Heroku PostgreSQL, I follow
 After much research, the bug was due to me changing the AUTH_USER_MODEL later in the project, and that the `django_admin_log` table still contains a foreign key relation to the old `auth_user` table.
 
 The solution was found in [this post](https://code.djangoproject.com/ticket/23297)
+
