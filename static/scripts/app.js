@@ -2,9 +2,7 @@
 
 const hamburger = document.querySelector(".nav__hamburger");
 const menu = document.querySelector(".nav-menu");
-const menuList = document.querySelectorAll(
-  "li.nav-menu__list--category"
-);
+const menuList = document.querySelectorAll("li.nav-menu__list--category");
 
 // Toggle hamburger menu and add animation to menu items
 hamburger.addEventListener("click", () => {

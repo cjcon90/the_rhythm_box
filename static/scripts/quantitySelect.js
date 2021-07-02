@@ -21,20 +21,17 @@ function quantitySelectForm(forms, type) {
       }
 
       // increment & decrement number functionality
-      function quantitySelect(num, inc, dec) {
-        dec.addEventListener("click", () => {
-          if (+num.value > min) {
-            num.value--;
-          }
-        });
-        inc.addEventListener("click", () => {
-          if (+num.value < stock) {
-            num.value++;
-          }
-        });
-      }
 
-      quantitySelect(numberInput, numberIncrement, numberDecrement);
+      numberDecrement.addEventListener("click", () => {
+        if (+numberInput.value > min) {
+          numberInput.value--;
+        }
+      });
+      numberIncrement.addEventListener("click", () => {
+        if (+numberInput.value < stock) {
+          numberInput.value++;
+        }
+      });
     }
   });
 }

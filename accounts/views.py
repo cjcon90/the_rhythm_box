@@ -44,6 +44,7 @@ def edit_account_details(request):
         context["edit_account_form"] = form
     return render(request, "accounts/edit_account_details.html", context)
 
+
 @login_required
 def delete_account(request):
     context = {}
@@ -56,14 +57,15 @@ def delete_account(request):
             if user:
                 user.delete()
                 messages.success(
-                    request, f"Your account has been deleted. Sorry to see you go!"
+                    request,
+                    f"Your account has been deleted. Sorry to see you go! 👋",
                 )
-                return redirect('home')
+                return redirect("home")
             else:
-                form.add_error('password', 'Incorrect Password')
+                form.add_error("password", "Incorrect Password")
                 context["delete_account_form"] = form
         else:
-                context["delete_account_form"] = form
+            context["delete_account_form"] = form
     else:
         form = DeleteAccountForm()
         context["delete_account_form"] = form
@@ -144,6 +146,9 @@ def register_user(request):
 
 def logout_user(request):
     logout(request)
+    messages.success(
+        request, f"You have successfully logged out 👋"
+    )
     return redirect("/")
 
 

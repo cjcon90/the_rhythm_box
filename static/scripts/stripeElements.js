@@ -67,7 +67,7 @@ if (stripePublicKey && stripeClientSecret) {
         stripe
           .confirmCardPayment(stripeClientSecret, {
             payment_method: {
-              card: card,
+              card,
               billing_details: {
                 name: `${getTrim(fd, "first_name")} ${getTrim(
                   fd,
@@ -106,39 +106,34 @@ if (stripePublicKey && stripeClientSecret) {
                 "loading-overlay-appear"
               );
               loadingOverlay.classList.add("no-display");
-            } else {
-              if (result.paymentIntent.status === "succeeded") {
-                form.submit();
-              }
+            } else if (result.paymentIntent.status === "succeeded") {
+              form.submit();
             }
           });
       }
     };
     httpRequest.open("POST", url);
-    httpRequest.setRequestHeader(
-      "Content-Type",
-      "application/json"
-    );
+    httpRequest.setRequestHeader("Content-Type", "application/json");
     httpRequest.setRequestHeader("X-CSRFToken", csrftoken);
     httpRequest.send(JSON.stringify(postData));
   });
+}
 
+function displayError(error, div) {
   // function to display any errors in stripe process
-  function displayError(error, div) {
-    div.textContent = ""; // initially reset div to prevent error messages stacking
-    const errorSpan = document.createElement("span");
-    errorSpan.classList.add("card-errors__error");
-    const i = document.createElement("i");
-    i.classList.add("fas", "fa-times", "card-errors__error--icon");
-    errorSpan.appendChild(i);
-    const textSpan = document.createElement("span");
-    textSpan.textContent = error.error.message;
-    div.appendChild(errorSpan);
-    div.appendChild(textSpan);
-  }
+  div.textContent = ""; // initially reset div to prevent error messages stacking
+  const errorSpan = document.createElement("span");
+  errorSpan.classList.add("card-errors__error");
+  const i = document.createElement("i");
+  i.classList.add("fas", "fa-times", "card-errors__error--icon");
+  errorSpan.appendChild(i);
+  const textSpan = document.createElement("span");
+  textSpan.textContent = error.error.message;
+  div.appendChild(errorSpan);
+  div.appendChild(textSpan);
+}
 
-  function getTrim(form, formField) {
-    // Return trimmed user input from formData
-    return form.get(formField).trim();
-  }
+function getTrim(form, formField) {
+  // Return trimmed user input from formData
+  return form.get(formField).trim();
 }
