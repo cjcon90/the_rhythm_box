@@ -230,7 +230,7 @@ def contact(request):
             form = ContactForm(
                 initial={
                     "from_email": request.user.email,
-                    "from_name": request.user.first_name,
+                    "from_name": f"{request.user.first_name} {request.user.last_name}",
                 }
             )
         else:

@@ -436,10 +436,6 @@ Success            |  Error |  Star
 - Cart will display whether all the items in the cart are currently in stock
 	- If a user has previously added an item to the cart and returns later to buy it, but the quantity selected no longer exists in the store, this will display an error message and will also disable the button to proceed to checkout, to prevent errors on purchase
 
-Free Delivery & In Stock | No Free Delivery & Out of stock
---- | ---
-![](docs/screenshots/cart_summary_pass.png) | ![](docs/screenshots/cart_summary_fail.png)
-
 ### Checkout
 
 - Checkout screen consists of an order summary and delivery information form
@@ -466,10 +462,6 @@ Free Delivery & In Stock | No Free Delivery & Out of stock
 
 - On completion of an order, the user is presented with a screen again summarising their order and displaying their order confirmation number
 - A HTML email is also sent to the user with full details of their order
-
-Order Confirmation Email           |
-:-------------------------:|
-![](docs/screenshots/order_email.png)  |
 
 ### Account
 
