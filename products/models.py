@@ -136,6 +136,10 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def make_thumbnail(self, image, size=(300, 200)):
+        """
+        Method which automatically makes thumbnail images
+        of the main uploaded image, reducing size to 300x200
+        """
         img = Image.open(image)
         img.convert("RGB")
         img.thumbnail(size)
@@ -146,21 +150,35 @@ class Product(models.Model):
         return thumbnail
 
     def get_average_rating(self):
+        """
+        Returns the average of all ratings existing for
+        this product in their original value (/100)
+        """
         ratings = Rating.objects.filter(product=self).aggregate(
             rating_avg=Avg("rating")
         )
         return (ratings["rating_avg"]) or 0
 
     def get_average_rating_decimal(self):
+        """
+        Returns the average of all ratings existing for
+        this product out of /5 (for use in star ratings)
+        """
         ratings = Rating.objects.filter(product=self).aggregate(
             rating_avg=Avg("rating")
         )
         return self.get_average_rating() / 20
 
     def get_rating_count(self):
+        """
+        counts how many ratings completes on this product
+        """
         return Rating.objects.filter(product=self).count()
 
     def get_review_count(self):
+        """
+        counts how many reviews completes on this product
+        """
         return Review.objects.filter(rating__product=self).count()
 
     def get_product_url(self):

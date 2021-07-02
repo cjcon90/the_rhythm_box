@@ -137,8 +137,15 @@ def review_product(request, product_slug):
     return render(request, "products/review_product.html", context)
 
 
+@login_required()
 def delete_review(request, review_id):
+    """
+    Delete existing user review
+    """
     review = get_object_or_404(Review, pk=review_id)
-    review.rating.delete()
-    messages.info(request, f"Review deleted!")
+    if review.rating.user_id == request.user:
+        review.rating.delete()
+        messages.info(request, f"Review deleted!")
+    else:
+        messages.error(request, f"Cannot delete another user's review")
     return redirect(request.GET.get("next"))

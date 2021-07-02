@@ -498,10 +498,6 @@ Navbar Mobile Animation           |
 	3. Form to select a new password, once users have followed the link sent to them via email
 	4. Confirmation that their password has been changed 
 
-Password Reset Email           |
-:-------------------------:|
-![](docs/screenshots/password_reset_email.png)  |
-
 #### Contact Us
 
 - As with other forms in the website, if a user is logged in then the form is prepopulated with the user information 

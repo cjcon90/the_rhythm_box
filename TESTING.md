@@ -295,3 +295,51 @@ and then within a `.jshintrc` file within my scripts folder I set the following 
 - Tablet testing was done extensively using Chrome and Firefox dev tools, although no physical hardware testing could be confirmed
 - Website was not made with any consideration to Internet Explorer compatability
 
+## Bugs
+
+### Multiple Images
+
+I noticed that within my media folder, the amount of images was rapidly growing and seemed to be adding new images everytime I edited a product in the django admin.
+
+To fix, I installed [jango-cleanup](https://pypi.org/project/django-cleanup/) which deleted any unused images in the media folder, and did so successfully. 
+
+I was still left with the issue of new images being saved and the old ones being deleted, so I edited my `save()` method to only upload a new thumbnail image if a product was either new, or the previous image had been edited
+
+```python
+    def save(self, *args, **kwargs):
+        """
+        Modified save method to update thumbnail only if object is
+        new, or the object image has been updated
+        """
+        if self.pk is None:
+            self.thumbnail = self.make_thumbnail(self.image)
+        else:
+            original = Product.objects.get(id=self.pk)
+            if original.image != self.image:
+                self.thumbnail = self.make_thumbnail(self.image)
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+```
+
+
+
+### IntegrityError on loaddata
+
+When moving my site from local SQLite development to Heroku PostgreSQL, I followed these steps:
+
+1. Backup current SQLite database by typing in the terminal:
+
+		./manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
+
+1. Migrate the models to Postgres database
+
+		python manage.py makemigrations
+		python manage.py migrate
+
+1. Then use this command to load your data from the db.json file into postgres:
+
+		./manage.py loaddata db.json
+
+After much research, the bug was due to me changing the AUTH_USER_MODEL later in the project, and that the `django_admin_log` table still contains a foreign key relation to the old `auth_user` table.
+
+The solution was found in [this post](https://code.djangoproject.com/ticket/23297)

@@ -21,6 +21,10 @@ from .forms import (
 
 @login_required
 def account_details(request):
+    """
+    View listing user email, name, newsletter subscription status
+    and default address
+    """
     context = {}
     user = request.user
     return render(request, "accounts/account_details.html", context)
@@ -28,6 +32,9 @@ def account_details(request):
 
 @login_required
 def edit_account_details(request):
+    """
+    View to edit user email, name, newsletter subscription status
+    """
     context = {}
     user = request.user
     if request.POST:
@@ -47,6 +54,9 @@ def edit_account_details(request):
 
 @login_required
 def delete_account(request):
+    """
+    View to delete account from database
+    """
     context = {}
     if request.POST:
         form = DeleteAccountForm(request.POST)
@@ -74,6 +84,9 @@ def delete_account(request):
 
 @login_required
 def add_address(request):
+    """
+    View to add a default address
+    """
     context = {}
     user = request.user
     if request.POST:
@@ -95,6 +108,9 @@ def add_address(request):
 
 @login_required
 def edit_address(request):
+    """
+    View to edit a saved address
+    """
     context = {}
     address = request.user.address
     if request.POST:
@@ -111,6 +127,9 @@ def edit_address(request):
 
 @login_required
 def my_orders(request):
+    """
+    View to show all orders completed by user
+    """
     context = {}
     context["orders"] = Order.objects.filter(user=request.user).order_by(
         "-date"
@@ -119,6 +138,9 @@ def my_orders(request):
 
 
 def register_user(request):
+    """
+    View to register new users to the website
+    """
     context = {}
     if request.POST:
         form = RegistrationForm(request.POST)
@@ -146,13 +168,18 @@ def register_user(request):
 
 
 def logout_user(request):
+    """
+    View to log users out from the website
+    """
     logout(request)
     messages.success(request, f"You have successfully logged out 👋")
     return redirect("/")
 
 
 def login_user(request):
-
+    """
+    View to log in previously registered users
+    """
     context = {}
     user = request.user
     if user.is_authenticated:
@@ -186,6 +213,9 @@ def login_user(request):
 
 
 def newsletter_subscribe(request):
+    """
+    View to subscribe users to the website newsletter
+    """
     email = request.POST["email"]
     already_registered = Account.objects.filter(email=email).exists()
     already_subbed = NewsletterSub.objects.filter(email=email).exists()
@@ -203,8 +233,10 @@ def newsletter_subscribe(request):
 
 
 def contact(request):
+    """
+    View to send messages to the site's admins
+    """
     context = {}
-
     if request.POST:
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -242,4 +274,7 @@ def contact(request):
 
 
 def contact_success(request):
+    """
+    Confirmation of successful message sent to site admins
+    """
     return render(request, "accounts/contact_success.html")
