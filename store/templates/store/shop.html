@@ -124,7 +124,8 @@
                 <div class="products__grid">
                     {% for product in page_obj %}
                         <div class="product">
-                            <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}">
+                            <a href="{% url 'product_page' product.category.slug product.subcategory.slug product.slug %}"
+                            aria-label="{{ product.title }}">
                                 <div class="product__images">
                                     <img src="{{ product.thumbnail.url }}" alt="" class="product__images--product">
                                     <img src="{{ product.brand.logo.url }}" alt="" class="product__images--brand">

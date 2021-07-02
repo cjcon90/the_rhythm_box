@@ -31,9 +31,9 @@
         <form class="product-info__nums add-to-cart-form" action="{% url 'add_to_cart' product.id %}" method="POST">
             {% csrf_token %}
             <div class="product-info__nums--quantity number-select">
-                <span class="input-number-decrement">–</span>
-                <input class="input-number" type="number" name="quantity" value="1" max="{{product.stock}}">
-                <span class="input-number-increment">+</span>
+                <label for="quantity" class="input-number-decrement">–</label>
+                <input class="input-number" type="number" id="quantity" name="quantity" value="1" max="{{product.stock}}">
+                <label for="quantity" class="input-number-increment">+</label>
             </div>
 
             {% if product.stock %}
