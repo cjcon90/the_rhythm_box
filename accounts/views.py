@@ -133,7 +133,8 @@ def register_user(request):
             login(request, account)
             messages.success(
                 request,
-                f"Thanks for registering, {request.user.first_name}! You are now logged in 🙂",
+                f"Thanks for registering,\
+                    {request.user.first_name}! You are now logged in 🙂",
             )
             return redirect(redirect_url)
         else:
@@ -146,9 +147,7 @@ def register_user(request):
 
 def logout_user(request):
     logout(request)
-    messages.success(
-        request, f"You have successfully logged out 👋"
-    )
+    messages.success(request, f"You have successfully logged out 👋")
     return redirect("/")
 
 
@@ -213,7 +212,9 @@ def contact(request):
             from_email = form.cleaned_data["from_email"]
             message = form.cleaned_data["message"]
             from_name = form.cleaned_data["from_name"]
-            mail_msg = f"Message from: {from_name}\n\n{message}\n\nReturn email address: {from_email}"
+            mail_msg = f"Message from:\
+                 {from_name}\n\n{message}\n\n\
+                     Return email address: {from_email}"
             try:
                 send_mail(subject, mail_msg, from_email, ["cjcon90@pm.me"])
             except BadHeaderError:
@@ -230,7 +231,8 @@ def contact(request):
             form = ContactForm(
                 initial={
                     "from_email": request.user.email,
-                    "from_name": f"{request.user.first_name} {request.user.last_name}",
+                    "from_name": f"{request.user.first_name}\
+                         {request.user.last_name}",
                 }
             )
         else:

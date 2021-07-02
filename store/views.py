@@ -27,11 +27,11 @@ def shop(request, category=None, subcategory=None, type=None):
     elif "q" in request.GET:
         query = request.GET.get("q")
         q &= (
-            Q(title__icontains=query)
-            | Q(category__title__icontains=query)
-            | Q(subcategory__title__icontains=query)
-            | Q(type__title__icontains=query)
-            | Q(brand__name__icontains=query)
+            Q(title__icontains=query) |
+            Q(category__title__icontains=query) |
+            Q(subcategory__title__icontains=query) |
+            Q(type__title__icontains=query) |
+            Q(brand__name__icontains=query)
         )
 
     # URL parameter filters

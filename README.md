@@ -74,7 +74,7 @@ Purchases can be made with the Stripe test credit card:
 	+ to see the content and products on offer without having to register
 	+ to be able to easily register for the site
 	+ to be able to add items to my cart and save them for later
-	+ any items in my cart to remain there I have registered for the site
+	+ any items in my cart to remain there after I have registered for the site
 	+ to quickly and easily filter and search for particular items
 	+ to be able to sort displayed items by price or user rating
 * As a repear visitor, I would like:
@@ -82,7 +82,7 @@ Purchases can be made with the Stripe test credit card:
 	+ for my previously added cart items to remain selected
 	+ to be able to checkout quickly using my previously saved details
 	+ to be able to see my order history
-	+ to be able to review purchased items, and edit and delete my eviews
+	+ to be able to review purchased items, and edit and delete my reviews
 * All users would like:
 	+ to get feedback when I have completed an action on the site
 	+ for the cost and fees involved in an order to be transparent and not confusing in any way
@@ -373,11 +373,7 @@ Navbar Mobile Animation           |
 #### Messages
 
 - Messages flash on screen for all key actions such as logging in / registering / adding items to cart / rating and reviewing products / completing purchases / errors
-- SUCCESS, INFO and ERROR messages are used, and these have been tagges with 'check', 'star' and 'time-circle' respectively, to correspond with their icon and color coding within the app:
-
-Success            |  Error |  Star
-:-------------------------:|:-------------------------:|:-------------------------:
-![success message](docs/screenshots/messages_success.png)  |  ![error message](docs/screenshots/messages_error.png) |  ![star message](docs/screenshots/messages_star.png)
+- SUCCESS, INFO and ERROR messages are used, and these have been tagges with 'check', 'star' and 'time-circle' respectively, to correspond with their icon and color coding within the app
 
 
 ### Shop

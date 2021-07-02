@@ -50,8 +50,7 @@ class Order(models.Model):
         self.order_total = (
             self.lineitems.aggregate(Sum("lineitem_total"))[
                 "lineitem_total__sum"
-            ]
-            or 0
+            ] or 0
         )
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
             self.delivery_cost = self.order_total * Decimal(
@@ -68,7 +67,7 @@ class Order(models.Model):
         using UUID and based on user details
         """
         secret = secrets.token_hex(6)
-        chunks = [secret[i : i + 4] for i in range(0, len(secret), 4)]
+        chunks = [secret[i: i + 4] for i in range(0, len(secret), 4)]
         return "-".join(chunks).upper()
 
     def save(self, *args, **kwargs):

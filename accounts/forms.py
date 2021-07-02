@@ -60,11 +60,14 @@ class EditAccountForm(forms.ModelForm):
         model = Account
         fields = ("first_name", "last_name", "email", "newsletter")
 
+
 class DeleteAccountForm(forms.Form):
     password = forms.CharField(
         required=True,
         label="Password",
-        widget=forms.PasswordInput(attrs={"placeholder": "Please confirm your password"}),
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Please confirm your password"}
+        ),
     )
 
 
@@ -108,6 +111,10 @@ class ContactForm(forms.Form):
     message = forms.CharField(
         required=True,
         widget=forms.Textarea(
-            attrs={"placeholder": "What can we help you with?", "rows": 10, "cols": "auto"}
+            attrs={
+                "placeholder": "What can we help you with?",
+                "rows": 10,
+                "cols": 5,
+            }
         ),
     )

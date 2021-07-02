@@ -8,6 +8,7 @@ from checkout.webhook_handler import StripeWH_Handler
 import stripe
 import json
 
+
 # Using Django
 @csrf_exempt
 def webhook(request):

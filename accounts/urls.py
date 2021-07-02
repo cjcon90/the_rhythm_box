@@ -31,7 +31,7 @@ urlpatterns = [
         edit_account_details,
         name="edit_account_details",
     ),
-        path(
+    path(
         "account/details/delete/",
         delete_account,
         name="delete_account",

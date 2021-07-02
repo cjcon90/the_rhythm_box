@@ -1,4 +1,5 @@
-import os, json
+import os
+import json
 
 import stripe
 
@@ -27,7 +28,6 @@ from .models import OrderLineItem, Order
 from .forms import OrderForm
 
 
-
 @require_POST
 def cache_checkout(request):
     try:
@@ -46,7 +46,8 @@ def cache_checkout(request):
     except Exception as e:
         messages.error(
             request,
-            "Sorry, your payment cannot be processes right now. Please try again later",
+            "Sorry, your payment cannot be processes right now.\
+                Please try again later",
         )
         return HttpResponse(content=e, status=400)
 
@@ -85,7 +86,8 @@ def checkout(request):
                     order.delete()
                     return redirect("cart")
             for item in OrderLineItem.objects.filter(order=order):
-                # if complete order is successful, reduce stock of each item purchased by quantity
+                # if complete order is successful,
+                # reduce stock of each item purchased by quantity
                 item.product.stock -= item.quantity
                 item.product.save()
 
