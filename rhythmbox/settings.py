@@ -33,7 +33,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ["DEVELOPMENT"]
 
-ALLOWED_HOSTS = ["therhythmbox.herokuapp.com", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["therhythmbox.cjcon90.dev", "0.0.0.0", "localhost"]
 
 # Application definition
 
@@ -71,6 +71,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "rhythmbox.urls"
+CSRF_TRUSTED_ORIGINS = ["https://*.cjcon90.dev"]
 
 TEMPLATES = [
     {
