@@ -33,7 +33,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ["DEVELOPMENT"]
 
-ALLOWED_HOSTS = ["therhythmbox.cjcon90.dev", "0.0.0.0", "localhost"]
+ALLOWED_HOSTS = ["therhythmbox.cjcon90.dev", "0.0.0.0", "localhost", "127.0.0.1"]
 
 # Application definition
 
@@ -128,16 +128,13 @@ AUTH_PASSWORD_VALIDATORS = [
         ".UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation."
-        "MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation." "MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation"
-        ".CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation" ".CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation"
-        ".NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation" ".NumericPasswordValidator",
     },
 ]
 

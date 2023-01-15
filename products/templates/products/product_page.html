@@ -3,6 +3,7 @@
 {% load store_tags %}
 {% load humanize %}
 {% load static %}
+{% load product_tags %}
 
 {% block title %}{{ product.title }}{% endblock title %}
 
@@ -47,7 +48,11 @@
 
         <div class="product-info__description">
             <h3 class="product-info__description--heading bold">Description</h3>
-            <p class="product-info__description--text regular">{{ product.description }}</p>
+            <div class="product-info__description--text regular">
+            {% for para in product.description|splitlines %}
+                <p>{{ para }}<p/>
+            {% endfor %} 
+            </div>
         </div>
 
     </div>
