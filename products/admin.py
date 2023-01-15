@@ -1,10 +1,39 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 from .models import Product, Category, Brand, Subcategory, Type, Rating, Review
+from django import forms
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = (
+            "title",
+            "product_code",
+            "category",
+            "subcategory",
+            "type",
+            "brand",
+            "description",
+            "price",
+            "stock",
+            "image",
+        )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields[
+            "subcategory"
+        ].label_from_instance = lambda obj: f"{obj.parent.title}: {obj.title}"
+        self.fields[
+            "type"
+        ].label_from_instance = lambda obj: f"{obj.parent.title}: {obj.title}"
 
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
         "title",
+        "product_code",
         "category",
         "subcategory",
         "type",
@@ -21,7 +50,8 @@ class ProductAdmin(admin.ModelAdmin):
         "brand__name",
         "description",
     )
-    readonly_fields = ("slug", "thumbnail", "date_added")
+    readonly_fields = ("slug", "thumbnail", "date_added", "product_code")
+    form = ProductForm
 
 
 class CategoryAdmin(admin.ModelAdmin):

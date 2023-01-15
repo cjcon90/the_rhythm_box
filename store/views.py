@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
-from products.models import Product, Category, Brand
+from products.models import Product, Brand
 
 
 def index(request):
@@ -27,11 +27,11 @@ def shop(request, category=None, subcategory=None, type=None):
     elif "q" in request.GET:
         query = request.GET.get("q")
         q &= (
-            Q(title__icontains=query) |
-            Q(category__title__icontains=query) |
-            Q(subcategory__title__icontains=query) |
-            Q(type__title__icontains=query) |
-            Q(brand__name__icontains=query)
+            Q(title__icontains=query)
+            | Q(category__title__icontains=query)
+            | Q(subcategory__title__icontains=query)
+            | Q(type__title__icontains=query)
+            | Q(brand__name__icontains=query)
         )
 
     # URL parameter filters
@@ -43,7 +43,7 @@ def shop(request, category=None, subcategory=None, type=None):
         q &= Q(category__slug=category)
 
     # product display ordering
-    order = request.GET.get("order_by") or "-date_added"  # '?order_by=*param'
+    order = request.GET.get("order_by") or "-product_code"  # '?order_by=*param'
     if order == "rating":
         products = sorted(
             Product.objects.filter(q),

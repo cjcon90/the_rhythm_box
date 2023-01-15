@@ -1,5 +1,7 @@
 from io import BytesIO
 from PIL import Image
+import random
+import string
 
 from django.core.files import File
 from django.db import models
@@ -103,9 +105,7 @@ class Product(models.Model):
     )
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, blank=True)
-    brand = models.ForeignKey(
-        "Brand", null=True, blank=True, on_delete=models.SET_NULL
-    )
+    brand = models.ForeignKey("Brand", null=True, blank=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     stock = models.IntegerField(default=15)
@@ -114,6 +114,7 @@ class Product(models.Model):
     thumbnail = models.ImageField(
         upload_to="products/thumbnails/", blank=True, null=True
     )
+    product_code = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         ordering = ("-date_added",)
@@ -133,6 +134,7 @@ class Product(models.Model):
             if original.image != self.image:
                 self.thumbnail = self.make_thumbnail(self.image)
         self.slug = slugify(self.title)
+        self.product_code = self.get_product_code()
         super().save(*args, **kwargs)
 
     def make_thumbnail(self, image, size=(300, 200)):
@@ -193,6 +195,18 @@ class Product(models.Model):
             else url + f"{self.type.slug}/{self.slug}"
         )
 
+    def get_product_code(self):
+        """
+        Create a random product code for each item
+        """
+        # Generate a random 4-character string of letters
+        first_part = "".join(random.choices(string.ascii_uppercase, k=4))
+        # Generate a random 4-digit number
+        second_part = "".join(random.choices(string.digits, k=4))
+        # Concatenate the two parts with a dash
+        product_code = first_part + "-" + second_part
+        return product_code
+
 
 class Rating(models.Model):
     user_id = models.ForeignKey(
@@ -210,9 +224,7 @@ class Rating(models.Model):
         FIVE = 100, "★★★★★"
 
     rating = models.IntegerField(choices=Stars.choices)
-    date_added = models.DateTimeField(
-        verbose_name="date added", auto_now_add=True
-    )
+    date_added = models.DateTimeField(verbose_name="date added", auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Ratings"
@@ -223,14 +235,10 @@ class Rating(models.Model):
 
 
 class Review(models.Model):
-    rating = models.ForeignKey(
-        Rating, related_name="reviews", on_delete=models.CASCADE
-    )
+    rating = models.ForeignKey(Rating, related_name="reviews", on_delete=models.CASCADE)
     headline = models.CharField(max_length=50)
     content = models.TextField(max_length=500)
-    date_added = models.DateTimeField(
-        verbose_name="date added", auto_now_add=True
-    )
+    date_added = models.DateTimeField(verbose_name="date added", auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Reviews"

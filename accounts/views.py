@@ -131,9 +131,7 @@ def my_orders(request):
     View to show all orders completed by user
     """
     context = {}
-    context["orders"] = Order.objects.filter(user=request.user).order_by(
-        "-date"
-    )
+    context["orders"] = Order.objects.filter(user=request.user).order_by("-date")
     return render(request, "accounts/my_orders.html", context)
 
 
@@ -194,9 +192,7 @@ def login_user(request):
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
-                messages.success(
-                    request, f"Welcome back, {request.user.first_name}! 🙂"
-                )
+                messages.success(request, f"Welcome back, {request.user.first_name}! 🙂")
                 return redirect(redirect_url)
         else:
             messages.error(request, f"Incorrect login details")
@@ -205,9 +201,7 @@ def login_user(request):
     else:
         form = AccountAuthenticationForm()
         if request.POST.get("next"):
-            messages.error(
-                request, f"You must be logged in to access this page"
-            )
+            messages.error(request, f"You must be logged in to access this page")
         context["login_form"] = form
     return render(request, "accounts/login.html", context)
 
