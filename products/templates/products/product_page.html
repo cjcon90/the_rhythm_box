@@ -49,7 +49,7 @@
         <div class="product-info__description">
             <h3 class="product-info__description--heading bold">Description</h3>
             <div class="product-info__description--text regular">
-            {% for para in product.description|splitlines %}
+            {% for para in product.description|bullets %}
                 <p>{{ para }}<p/>
             {% endfor %} 
             </div>
