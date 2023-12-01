@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.8
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -13,7 +13,7 @@ EXPOSE 5002
 CMD ["venv/bin/python3", "manage.py", "runserver", "0.0.0.0:5002"]
 
 # base image  
-FROM python
+FROM python:3.8
 # setup environment variable  
 ENV DockerHOME=/var/www/the_rhythm_box
 
