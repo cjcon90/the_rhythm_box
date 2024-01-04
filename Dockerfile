@@ -1,17 +1,3 @@
-FROM python:3.8
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-WORKDIR /var/www/the_rhythm_box
-RUN python -m venv venv
-COPY requirements.txt requirements.txt
-RUN venv/bin/pip install -r requirements.txt
-COPY . /var/www/the_rhythm_box
-
-EXPOSE 5002
-
-CMD ["venv/bin/python3", "manage.py", "runserver", "0.0.0.0:5002"]
-
 # base image  
 FROM python:3.8
 # setup environment variable  
@@ -38,3 +24,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5002  
 # start server  
 CMD python manage.py runserver 0.0.0.0:5002
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:5002"]
