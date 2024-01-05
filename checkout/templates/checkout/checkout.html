@@ -50,6 +50,11 @@
                     <div id="card-element"></div>
                     <div class="card-errors bold form-error bold"></div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                    <label for="card-element" class="form__label regular">
+                        <i>Use a
+                        <a href="https://stripe.com/docs/testing#international-cards">Stripe test card</a>
+                        to test payment functionality</i>
+                    </label>
                 </fieldset>
                 <fieldset class="form__group">
                     <button type="submit" class="form__submit btn btn--black upper bold">Complete Order</button>
